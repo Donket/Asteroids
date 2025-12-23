@@ -1,0 +1,234 @@
+extends Node2D
+
+var deck = Global.asteroidsDeck
+var deckTimes = [3, 3, 3, 3, 3, 3]
+var money = 0: set = changeMoney
+var ended = false
+var asteroids = []
+
+@onready var launchers = $CanvasLayer/launchers/GridContainer
+
+func changeMoney(newMoney):
+	money = newMoney
+	$CanvasLayer/moneyLabel.text = str(money)
+	Global.money = newMoney
+
+func onBounce(asteroid):
+	for child in $rules.get_children():
+		if child.has_method("onBounce"):
+			child.onBounce(asteroid)
+	if $rules.has_method("onBounce"):
+		$rules.onBounce(asteroid)
+	
+
+func onCrash(asteroid):
+	for child in $rules.get_children():
+		if child.has_method("onCrash"):
+			child.onCrash(asteroid)
+	if $rules.has_method("onCrash"):
+		$rules.onCrash(asteroid)
+
+func onSpawn(asteroid):
+	for child in $rules.get_children():
+		if child.has_method("onSpawn"):
+			child.onSpawn(asteroid)
+	if $rules.has_method("onSpawn"):
+		$rules.onSpawn(asteroid)
+	
+
+func onHit(asteroid):
+	for child in $rules.get_children():
+		if child.has_method("onHit"):
+			child.onHit(asteroid)
+	if $rules.has_method("onHit"):
+		$rules.onHit(asteroid)
+
+func onShot(asteroid):
+	for child in $rules.get_children():
+		if child.has_method("onShot"):
+			child.onShot(asteroid)
+	if $rules.has_method("onShot"):
+		$rules.onShot(asteroid)
+
+
+func _on_breach_timer_timeout():
+	if $rules.breachAmount > 0:
+		$rules.hp -= $rules.maxHP*0.01*$rules.breachAmount
+
+
+func _ready():
+	var temp = []
+	var permStatIndices = []
+	for i in range(deck.size()):
+		if deck[i] != null:
+			temp.append(deck[i])
+			permStatIndices.append(i)
+	deck = temp
+	for i in deck.size():
+		$timers.get_child(i).start(deckTimes[i])
+		launchers.get_child(i).max_time = deckTimes[i]
+		launchers.get_child(i).index = permStatIndices[i]
+		launchers.get_child(i).texture = load("res://ART/asteroidArts/" + deck[i] + ".png")
+	for star in Global.starsDeck:
+		var scene = load("res://star.tscn").instantiate()
+		scene.set_script(load("res://stars/" + star + ".gd"))
+		if "main" in scene:
+			scene.main = self
+		$rules.add_child(scene)
+	$ship.attributes = $rules
+
+
+func defeat():
+	if !ended:
+		for child in $timers.get_children():
+			child.stop()
+		ended = true
+		for child in asteroids:
+			if child != null:
+				child.die()
+		$CanvasLayer/defeatLabel.visible = true
+		Global.health -= 3
+		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://healthIcon.png[/img]"+str(Global.health)+"/10"
+		$CanvasLayer/winsLabel.visible = true
+	
+	
+func victory():
+	if !ended:
+		for child in $timers.get_children():
+			child.stop()
+		ended = true
+		for child in asteroids:
+			if child != null:
+				child.die()
+		$CanvasLayer/victoryLabel.visible = true
+		Global.wins += 1
+		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
+		$CanvasLayer/winsLabel.visible = true
+		
+
+
+func _process(delta):
+	if !ended:
+		for i in range(deck.size()):
+			launchers.get_child(i).time = $timers.get_child(i).time_left
+	if $rules.breachAmount > 0:
+		$CanvasLayer/breachLabel.text = "[img]ART/icons/breachIcon.png[/img] " + str($rules.breachAmount)
+	elif $rules.breachAmount <= 0:
+		$CanvasLayer/breachLabel.text = ""
+	if $rules.parasiteAmount > 0:
+		$CanvasLayer/parasiteLabel.text = "[img]ART/icons/parasiteIcon.png[/img] " + str($rules.parasiteAmount)
+	elif $rules.parasiteAmount <= 0:
+		$CanvasLayer/parasiteLabel.text = ""
+
+
+func timeout(index):
+	if index >= deck.size() or ended:
+		return
+	var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
+	scene.get_node("attributes").set_script(load("res://asteroids/" + deck[index] + ".gd"))
+	scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[index] + ".png")
+	var bool1 = false
+	if randi_range(0,2)==0:
+		bool1 = true
+	var bool2 = false
+	if randi_range(0,2)==0:
+		bool2 = true
+	var locations = [bool1, bool2, randi_range(0,6)]
+	
+	if locations[0]:
+		if locations[1]:
+			scene.position = Vector2(-850*(3-locations[2])/4, 80)
+			scene.direction = 90 + randi_range(-10,10)
+		else:
+			scene.position = Vector2(-850*(3-locations[2])/4, -420)
+			scene.direction = -90 + randi_range(-10,10)
+	else:
+		if locations[1]:
+			scene.position = Vector2(530, 370*(3-locations[2])/5-170)
+			scene.direction = 180 + randi_range(-10,10)
+		else:
+			scene.position = Vector2(-530, 370*(3-locations[2])/5-170)
+			scene.direction = 0 + randi_range(-10,10)
+			
+	scene.get_node("attributes").launcher = launchers.get_child(index)
+	scene.get_node("attributes").main = self
+	scene.get_node("attributes").baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
+	scene.get_node("attributes").damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
+	scene.ship = $ship
+	asteroids.append(scene)
+	add_child(scene)
+
+
+func _on_button_pressed():
+	get_tree().change_scene_to_file("res://shop.tscn")
+
+
+func _on_button_mouse_entered():
+	$CanvasLayer/victoryLabel/RichTextLabel3.text = "
+
+
+
+[center][color=yellow]Click to continue"
+	$CanvasLayer/victoryLabel.text = "[center][color=yellow]Victory"
+
+
+
+func _on_button_mouse_exited():
+	$CanvasLayer/victoryLabel/RichTextLabel3.text = "
+
+
+
+[center][color=white]Click to continue"
+	$CanvasLayer/victoryLabel.text = "[center][color=white]Victory"
+
+
+
+
+func _on_parasite_timer_timeout():
+	if $rules.parasiteAmount > 0 and randi_range(0,100) < 5*$rules.parasiteAmount and deck.size() > 0:
+		var scene = load("res://asteroids/asteroid.tscn").instantiate()
+		scene.get_node("attributes").set_script(load("res://asteroids/" + deck[0] + ".gd"))
+		scene.get_node("Sprite2D").texture = load("res://asteroidArts/" + deck[0] + ".png")
+		scene.direction = int(-$ship.rotation + randi_range(-120,120))
+		scene.position = $ship.position
+		scene.parasite()
+		scene.get_node("attributes").launcher = launchers.get_child(0)
+		scene.get_node("attributes").main = self
+		asteroids.append(scene)
+		add_child(scene)
+		$ship.get_node("parasiteParticles").emitting = true
+
+
+func spawn(asteroid, spawned):
+	if !ended:
+		var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
+		scene.get_node("attributes").set_script(load("res://asteroids/" + spawned + ".gd"))
+		scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + spawned + ".png")
+		scene.direction = int(-asteroid.get_parent().direction + randi_range(-120,120))
+		scene.global_position = asteroid.global_position
+		scene.get_node("attributes").launcher = launchers.get_child(0)
+		scene.get_node("attributes").main = self
+		scene.spawned()
+		asteroids.append(scene)
+		call_deferred("add_child",scene)
+		return scene
+
+
+
+
+func _on_defeat_button_mouse_entered():
+	$CanvasLayer/defeatLabel/RichTextLabel3.text = "
+
+
+
+[center][color=yellow]Click to continue"
+	$CanvasLayer/defeatLabel.text = "[center][color=yellow]Defeat"
+
+
+func _on_defeat_button_mouse_exited():
+	$CanvasLayer/defeatLabel/RichTextLabel3.text = "
+
+
+
+[center][color=yellow]Click to continue"
+	$CanvasLayer/defeatLabel.text = "[center][color=yellow]Defeat"

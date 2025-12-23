@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://t2jcpwhwgqjh"]
+
+[ext_resource type="Script" path="res://mainScene/scripts/launcherUI.gd" id="1_d6sig"]
+[ext_resource type="Shader" path="res://ART/resources/allBlack.gdshader" id="2_meq77"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahq23"]
+shader = ExtResource("2_meq77")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+script = ExtResource("1_d6sig")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(30, 30)
+polygon = PackedVector2Array(-30, -30, 120, -30, 120, 80, -30, 80)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 110.0
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_ahq23")
+position = Vector2(73, 54.5)
+scale = Vector2(3, 3)

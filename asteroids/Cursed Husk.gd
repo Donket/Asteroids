@@ -1,0 +1,17 @@
+extends Node2D
+
+var launcher
+var main
+
+var baseSpeed = 300
+var baseAcceleration = 0
+var bounces = 0
+
+var damage = 10
+
+
+func onHit():
+	if randf_range(0,1) > 0.5:
+		main.money += 3
+	else:
+		main.money -= 2

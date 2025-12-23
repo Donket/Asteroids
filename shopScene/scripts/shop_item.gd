@@ -1,0 +1,247 @@
+extends Control
+
+@export var type: Type
+enum Type { ASTEROID, STAR }
+
+var cost: int = 0
+# Use an empty string "" as the initial value instead of null for string properties
+var item: String = "": set = change
+var currentBaseRarity: int = 0
+
+
+
+var itemsToDesc = {
+
+	# Iron Family
+	"Iron Husk": 
+"Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
+
+	"Iron Rock": 
+"On Crash: [img]res://ART/icons/spawnIcon.png[/img] Pebble (25% chance)",
+
+	"Iron Gem": 
+"On Hit: Apply 1 [img]res://ART/icons/breachIcon.png[/img]",
+
+	"Iron Relic": 
+"On Bounce: Gain Acceleration
+
+Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
+
+	"Iron Meteor": 
+"On Hit: [img]res://ART/icons/spawnIcon.png[/img] 2 random Irons",
+
+
+	# Ancient Family
+	"Ancient Husk": 
+"On Hit: Apply [img]res://ART/icons/burnoutIcon.png[/img] (25% chance)",
+
+	"Ancient Rock": 
+"On Hit: Apply 1 [img]res://ART/icons/parasiteIcon.png[/img]",
+
+	"Ancient Gem": 
+"On Hit: Activates [img]res://ART/icons/breachIcon.png[/img]",
+
+	"Ancient Relic": 
+"On Crash: [img]res://ART/icons/spawnIcon.png[/img] random Relic (can't spawn Ancient Relic)",
+
+	"Ancient Meteor": 
+"On Hit: [img]res://ART/icons/spawnIcon.png[/img] 3 Ancients",
+
+
+	# Cursed Family
+	"Cursed Husk": 
+"On Hit: 50% chance + 3 [img]res://ART/icons/moneyIcon.png[/img] 50% chance - 2 [img]res://ART/icons/moneyIcon.png[/img]",
+
+	"Cursed Rock": 
+"On Crash: 50% chance to [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance to gain +1 permanent damage",
+
+	"Cursed Gem": 
+"On Hit: 50% chance to apply 2 [img]res://ART/icons/breachIcon.png[/img], 50% chance to apply 1 [img]res://ART/icons/burnoutIcon.png[/img]",
+
+	"Cursed Relic": 
+"Has: 1 [img]res://ART/icons/bounceIcon.png[/img]
+On Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - 3 damage",
+
+	"Cursed Meteor": 
+"On Hit: [img]res://ART/icons/spawnIcon.png[/img] 4 Cursed. Each has a 50% chance to be destroyed immediately",
+
+	# Gilded Family
+	"Gilded Husk":
+"On Hit: Gain +2 [img]res://ART/icons/moneyIcon.png[/img]",
+
+	"Gilded Rock":
+"Has: 1 [img]res://ART/icons/bounceIcon.png[/img]
+On Bounce: Spend 3 [img]res://ART/icons/moneyIcon.png[/img] to gain + 1 [img]res://ART/icons/bounceIcon.png[/img].",
+
+	"Gilded Gem":
+"On Crash: If you have 100+ [img]res://ART/icons/moneyIcon.png[/img], convert 10 [img]res://ART/icons/moneyIcon.png[/img] into +1 permanent damage and +1 permanent speed",
+
+	"Gilded Relic":
+"On Bounce: Gain +5 [img]res://ART/icons/moneyIcon.png[/img]  
+Has: 2 [img]res://ART/icons/bounceIcon.png[/img]",
+
+	"Gilded Meteor":
+"On Hit: [img]res://ART/icons/moneyIcon.png[/img] +15  
+Lose 1 random asteroid",
+
+
+	# Stars
+	
+	"Dice": 
+"Random chances +10%",
+	"Boot": 
+"Asteroid Acceleration +300",
+	"Backpack": 
+"Asteroids gain 1% speed for each Star you own",
+	"Goop": 
+"Asteroids in slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, they now only trigger On Bounce effects",
+	"Hanger": 
+"Upon spawning an asteroid, 30% chance to not spawn it and instead gain +10 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Hourglass": 
+"Timer is 10% longer.",
+	"Pipe": 
+"On hit effects have a 20% chance of triggering twice (Does not affect star abilities).",
+	"Spider": 
+"All asteroid stats +100%. - 10 [img]res://ART/icons/moneyIcon.png[/img] when destroyed.",
+	"Steak": 
+"Each win gives double victories, and each loss takes double lives.",
+	"Steering Wheel": 
+"Asteroids slightly readjust towards the ship. This effect increases with asteroid acceleration.",
+	"Speedometer": 
+"Gain 1 [img]res://ART/icons/moneyIcon.png[/img] per second, multiplied by 1% of average asteroid acceleration.",
+	"Light Fingers": 
+"On purchasing a shop item, 1% chance to also purchase each star in shop",
+	"Friendly Customer":
+"Each star you obtain reduces the cost of future stars by 5%",
+	"Snowball":
+"As asteroids accelerate, they gain size.",
+	"Lethal":
+"If you will die next loss, all asteroid stats +20%",
+	"Golden Tooth":
+"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +1 extra",
+	"Loose Change":
+"All asteroids 30% chance to drop +2 [img]res://ART/icons/moneyIcon.png[/img] On Crash",
+	"Coupon Book":
+"Items cost 15% less, but rerolls cost 15% more",
+	"Payday":
+"At the start of each round, + 5 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Tip Jar":
+"Each On Hit effect has a 10% chance to grant +1 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Debt Collector":
+"Enemies drop +50% [img]res://ART/icons/moneyIcon.png[/img]. Lose half your [img]res://ART/icons/moneyIcon.png[/img] on loss",
+	"Piggy Bank":
+"Unspent [img]res://ART/icons/moneyIcon.png[/img] grants +1% asteroid stats per 200 money",
+
+}
+
+
+func change(newItem: String):
+	if newItem.is_empty():
+		$Node2D.visible = false
+		$Control.visible = false
+		$RichTextLabel.visible = false
+	else:
+		$Node2D.visible = true
+		$Control.visible = true
+		$RichTextLabel.visible = true
+		
+	item = newItem
+
+
+func randomizeItem():
+	var items
+	var dataArr
+	if type == Type.ASTEROID:
+		items = Global.itemsToData.keys()
+		dataArr = Global.itemsToData
+	else:
+		items = Global.starsToData.keys()
+		dataArr = Global.starsToData
+	var roll = randf()
+	var chosen_rarity = currentBaseRarity
+	
+	if roll < 0.5:
+		chosen_rarity = currentBaseRarity
+	elif roll < 0.9:
+		if currentBaseRarity > 0:
+			chosen_rarity = randi_range(0, currentBaseRarity - 1)
+		else:
+			chosen_rarity = currentBaseRarity
+	else:
+		var max_rarity = 0
+		for data in Global.itemsToData.values():
+			max_rarity = max(max_rarity, data[1])
+			
+		if currentBaseRarity < max_rarity:
+			chosen_rarity = currentBaseRarity + 1
+		else:
+			chosen_rarity = currentBaseRarity
+	
+	var possible_items = []
+	for i in items:
+		if dataArr[i][1] == chosen_rarity:
+			possible_items.append(i)
+	
+	if possible_items.is_empty():
+		item = "" 
+		cost = 0
+		return
+	
+	item = possible_items[randi_range(0, possible_items.size() - 1)]
+	cost = dataArr[item][0]
+	updateData()
+
+func updateData():
+	$Control/RichTextLabel.text = "[center]" + item
+	$Control/RichTextLabel2.text = itemsToDesc[item]
+	if type == Type.ASTEROID:
+		$RichTextLabel.text = "[center]" + str(Global.itemsToData[item][0])
+		$Node2D.texture = load("res://ART/asteroidArts/" + item + ".png")
+	else:
+		$RichTextLabel.text = "[center]" + str(Global.starsToData[item][0])
+		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property($Node2D, "position", Vector2(0,-10), 0.02)
+	tween.tween_property($Node2D, "position", Vector2(0,0), 0.02)
+	await tween.finished
+
+
+func _ready():
+	randomizeItem()
+	if type == Type.ASTEROID:
+		$RichTextLabel.position = Vector2(-168,136)
+	elif type == Type.STAR:
+		$RichTextLabel.position = Vector2(-268,213)
+
+
+func _on_control_2_mouse_entered():
+	if get_parent().get_parent().invOpen != true:
+		$AnimationPlayer.play("open")
+
+
+func _on_control_2_mouse_exited():
+	if get_parent().get_parent().invOpen != true:
+		$AnimationPlayer.play("close")
+
+
+func _on_control_2_pressed():
+	if item.is_empty() or get_parent().get_parent().invOpen == true or get_parent().get_parent().money < cost:
+		return
+	
+	if type == Type.ASTEROID and null in Global.asteroidsDeck:
+		for i in range(Global.asteroidsDeck.size()):
+			if Global.asteroidsDeck[i] == null:
+				Global.asteroidsDeck[i] = item
+				Global.asteroidPermStats[i] = [0,0]
+				break
+		item = ""
+		$CPUParticles2D.emitting = true
+		get_parent().get_parent().money -= cost
+	
+	elif type == Type.STAR:
+		Global.starsDeck.append(item)
+			
+		item = ""
+		$CPUParticles2D.emitting = true
+		get_parent().get_parent().money -= cost

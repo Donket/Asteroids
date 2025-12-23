@@ -1,0 +1,280 @@
+[gd_scene load_steps=11 format=3 uid="uid://cf4dxpqmpy8f2"]
+
+[ext_resource type="Script" path="res://shopScene/scripts/shop.gd" id="1_d4jli"]
+[ext_resource type="Texture2D" uid="uid://gufgyg1kc8ah" path="res://ART/uiArts/shopsprites.png" id="2_30pk5"]
+[ext_resource type="Texture2D" uid="uid://crpuldsxy0bbl" path="res://ART/uiArts/rollbutton.png" id="3_k2owf"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_poi11"]
+[ext_resource type="Texture2D" uid="uid://ihfjmfagdac" path="res://ART/uiArts/sellButton.png" id="5_a6vnd"]
+[ext_resource type="PackedScene" uid="uid://dlvp2kmfksqqn" path="res://shopScene/scenes/shop_inv_ui.tscn" id="6_31cc4"]
+
+[sub_resource type="Animation" id="Animation_pqf0s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shopInvUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shopsprites:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("items:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uh1hk"]
+resource_name = "closeInv"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shopInvUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shopsprites:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.372549, 0.372549, 0.372549, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("items:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.372549, 0.372549, 0.372549, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f7hum"]
+resource_name = "openInv"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shopInvUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shopsprites:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.372549, 0.372549, 0.372549, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("items:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.372549, 0.372549, 0.372549, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rr3in"]
+_data = {
+"RESET": SubResource("Animation_pqf0s"),
+"closeInv": SubResource("Animation_uh1hk"),
+"openInv": SubResource("Animation_f7hum")
+}
+
+[node name="shop" type="Node2D"]
+script = ExtResource("1_d4jli")
+
+[node name="Shopsprites" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("2_30pk5")
+hframes = 3
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="anchors" type="Node2D" parent="."]
+
+[node name="asteroidAnchor1" type="Node2D" parent="anchors"]
+position = Vector2(-710, -315)
+
+[node name="asteroidAnchor2" type="Node2D" parent="anchors"]
+position = Vector2(-355, -315)
+
+[node name="asteroidAnchor3" type="Node2D" parent="anchors"]
+position = Vector2(0, -315)
+
+[node name="asteroidAnchor4" type="Node2D" parent="anchors"]
+position = Vector2(355, -315)
+
+[node name="asteroidAnchor5" type="Node2D" parent="anchors"]
+position = Vector2(710, -315)
+
+[node name="starAnchor1" type="Node2D" parent="anchors"]
+position = Vector2(-380, 210)
+
+[node name="starAnchor2" type="Node2D" parent="anchors"]
+position = Vector2(380, 210)
+
+[node name="starAnchor3" type="Node2D" parent="anchors"]
+
+[node name="starAnchor4" type="Node2D" parent="anchors"]
+
+[node name="specialAnchor" type="Node2D" parent="anchors"]
+
+[node name="items" type="Node2D" parent="."]
+
+[node name="RollButton" type="Button" parent="."]
+offset_left = -928.0
+offset_top = 408.0
+offset_right = -672.0
+offset_bottom = 492.0
+focus_mode = 0
+
+[node name="Rollbutton" type="Sprite2D" parent="RollButton"]
+position = Vector2(128, 42)
+scale = Vector2(4, 4)
+texture = ExtResource("3_k2owf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RollButton"]
+layout_mode = 0
+offset_top = 27.0
+offset_right = 258.0
+offset_bottom = 85.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_poi11")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Roll"
+
+[node name="EndButton" type="Button" parent="."]
+offset_left = 672.0
+offset_top = 408.0
+offset_right = 928.0
+offset_bottom = 492.0
+focus_mode = 0
+flat = true
+
+[node name="Rollbutton2" type="Sprite2D" parent="EndButton"]
+position = Vector2(128, 42)
+scale = Vector2(4, 4)
+texture = ExtResource("3_k2owf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EndButton"]
+layout_mode = 0
+offset_top = 27.0
+offset_right = 258.0
+offset_bottom = 85.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_poi11")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]End Turn"
+
+[node name="SellButton" type="Button" parent="."]
+offset_left = 673.0
+offset_top = 122.0
+offset_right = 929.0
+offset_bottom = 378.0
+
+[node name="Rollbutton3" type="Sprite2D" parent="SellButton"]
+position = Vector2(128, 128)
+scale = Vector2(4, 4)
+texture = ExtResource("5_a6vnd")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SellButton"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 95.0
+offset_right = 259.0
+offset_bottom = 218.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_poi11")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Sell"
+
+[node name="shopInvUI" parent="." instance=ExtResource("6_31cc4")]
+z_index = 1
+scale = Vector2(1e-05, 1e-05)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 673.0
+offset_top = 123.0
+offset_right = 928.0
+offset_bottom = 378.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rr3in")
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -1260.0
+offset_top = 304.0
+offset_right = -376.0
+offset_bottom = 450.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_poi11")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center] [img]res://ART/icons/moneyIcon.png[/img] MONEYS"
+
+[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
+[connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]
+[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]

@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlvp2kmfksqqn"]
+
+[ext_resource type="Script" path="res://shopScene/scripts/shop_inv_ui.gd" id="1_4gg1n"]
+[ext_resource type="Texture2D" uid="uid://r5ebxxg8x4gl" path="res://ART/uiArts/shopInvUI.png" id="1_752e5"]
+[ext_resource type="PackedScene" uid="uid://ds8oq5sb4tjr4" path="res://shopScene/scenes/shop_inv_item.tscn" id="2_rwxri"]
+
+[node name="shopInvUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4gg1n")
+
+[node name="ShopInvUi" type="Sprite2D" parent="."]
+scale = Vector2(6, 6)
+texture = ExtResource("1_752e5")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = -478.0
+offset_top = -99.0
+offset_right = 570.0
+offset_bottom = -6.0
+theme_override_constants/h_separation = 192
+columns = 6
+
+[node name="shopInvItem" parent="GridContainer" instance=ExtResource("2_rwxri")]
+layout_mode = 2
+
+[node name="shopInvItem2" parent="GridContainer" instance=ExtResource("2_rwxri")]
+layout_mode = 2
+slotIndex = 1
+
+[node name="shopInvItem3" parent="GridContainer" instance=ExtResource("2_rwxri")]
+layout_mode = 2
+slotIndex = 2
+
+[node name="shopInvItem4" parent="GridContainer" instance=ExtResource("2_rwxri")]
+layout_mode = 2
+slotIndex = 3
+
+[node name="shopInvItem5" parent="GridContainer" instance=ExtResource("2_rwxri")]
+layout_mode = 2
+slotIndex = 4
+
+[node name="shopInvItem6" parent="GridContainer" instance=ExtResource("2_rwxri")]
+layout_mode = 2
+slotIndex = 5
+
+[node name="GridContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.161
+offset_left = -504.0
+offset_top = 88.0
+offset_right = 504.0
+offset_bottom = -0.880005
+grow_horizontal = 2
+theme_override_constants/separation = 300
+alignment = 1

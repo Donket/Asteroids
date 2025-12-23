@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://fwg7nvvr2rvb"]
+
+[ext_resource type="Script" path="res://ship/scripts/bullet.gd" id="1_xeinb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8no0o"]
+size = Vector2(38, 12)
+
+[node name="bullet" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_xeinb")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(19, -3)
+rotation = 1.5708
+scale = Vector2(1, 1.87264)
+polygon = PackedVector2Array(0, 18, 0, 2, 6, 2.08696, 6, 18.087)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_8no0o")

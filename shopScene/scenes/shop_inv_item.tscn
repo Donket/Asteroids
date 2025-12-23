@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds8oq5sb4tjr4"]
+
+[ext_resource type="Script" path="res://shopScene/scripts/shop_inv_item.gd" id="1_f8hhc"]
+[ext_resource type="Texture2D" uid="uid://cvxs0dunuwos6" path="res://ART/starArts/Dice.png" id="2_3xcv0"]
+
+[node name="shopInvItem" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_f8hhc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_3xcv0")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]

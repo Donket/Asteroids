@@ -1,0 +1,241 @@
+[gd_scene load_steps=9 format=3 uid="uid://dq61aqbals68d"]
+
+[ext_resource type="Script" path="res://mainScene/scripts/main.gd" id="1_aanir"]
+[ext_resource type="Script" path="res://mainScene/scripts/timers.gd" id="2_t1drb"]
+[ext_resource type="Texture2D" uid="uid://c5k4rpc2vcoph" path="res://ART/uiArts/mainUI.png" id="3_8j5i6"]
+[ext_resource type="PackedScene" uid="uid://t2jcpwhwgqjh" path="res://mainScene/scenes/launcherUI.tscn" id="4_xd1qb"]
+[ext_resource type="PackedScene" uid="uid://ddxelv380fj4r" path="res://mainScene/scenes/inventory.tscn" id="5_bryf5"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="6_w4eqt"]
+[ext_resource type="PackedScene" uid="uid://b3llxpelm4eeb" path="res://ship/scenes/ship.tscn" id="7_n35oc"]
+[ext_resource type="Script" path="res://mainScene/scripts/mainruleset.gd" id="8_7gyde"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_aanir")
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+position = Vector2(808, 494)
+scale = Vector2(5, 5)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-600, -370, -600, 370, 630, 370, 630, -370)
+
+[node name="timers" type="Node2D" parent="."]
+script = ExtResource("2_t1drb")
+
+[node name="Timer1" type="Timer" parent="timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="Timer3" type="Timer" parent="timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="Timer4" type="Timer" parent="timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="Timer5" type="Timer" parent="timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="Timer6" type="Timer" parent="timers"]
+wait_time = 100.0
+autostart = true
+
+[node name="breachTimer" type="Timer" parent="timers"]
+autostart = true
+
+[node name="parasiteTimer" type="Timer" parent="timers"]
+wait_time = 0.2
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(960, 537)
+scale = Vector2(5, 5)
+texture = ExtResource("3_8j5i6")
+
+[node name="launchers" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 750.0
+offset_right = 1000.0
+offset_bottom = 790.0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/launchers"]
+z_index = 1
+layout_mode = 0
+offset_left = -525.0
+offset_top = -28.0
+offset_right = 375.0
+offset_bottom = 12.0
+theme_override_constants/h_separation = 180
+columns = 6
+
+[node name="launcher1" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+layout_mode = 2
+
+[node name="launcher2" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+layout_mode = 2
+index = 1
+
+[node name="launcher3" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+layout_mode = 2
+index = 2
+
+[node name="launcher4" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+layout_mode = 2
+index = 3
+
+[node name="launcher5" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+layout_mode = 2
+index = 4
+
+[node name="launcher6" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+layout_mode = 2
+index = 5
+
+[node name="inventory" parent="CanvasLayer" instance=ExtResource("5_bryf5")]
+
+[node name="moneyLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 102.0
+offset_top = 82.0
+offset_right = 370.0
+offset_bottom = 122.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+text = "0"
+
+[node name="timerLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 428.0
+offset_top = 84.0
+offset_right = 781.0
+offset_bottom = 124.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+text = "dfdfd"
+
+[node name="winsLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 1157.0
+offset_top = 73.0
+offset_right = 1490.0
+offset_bottom = 270.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+
+[node name="victoryLabel" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 405.0
+offset_top = 315.0
+offset_right = 1516.0
+offset_bottom = 671.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]Victory
+"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/victoryLabel"]
+layout_mode = 0
+offset_right = 1111.0
+offset_bottom = 356.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "
+
+
+
+[center]Click to continue
+"
+
+[node name="Button" type="Button" parent="CanvasLayer/victoryLabel"]
+layout_mode = 0
+offset_left = 321.0
+offset_top = -10.0
+offset_right = 780.0
+offset_bottom = 180.0
+flat = true
+
+[node name="defeatLabel" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 405.0
+offset_top = 315.0
+offset_right = 1516.0
+offset_bottom = 671.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]Defeat
+"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/defeatLabel"]
+layout_mode = 0
+offset_right = 1111.0
+offset_bottom = 356.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "
+
+
+
+[center]Click to continue
+"
+
+[node name="Button" type="Button" parent="CanvasLayer/defeatLabel"]
+layout_mode = 0
+offset_left = 321.0
+offset_top = -10.0
+offset_right = 780.0
+offset_bottom = 180.0
+flat = true
+
+[node name="breachLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 36.0
+offset_top = 130.0
+offset_right = 360.0
+offset_bottom = 194.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[img]ART/icons/breachIcon.png[/img] 454"
+
+[node name="parasiteLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 36.0
+offset_top = 201.0
+offset_right = 360.0
+offset_bottom = 265.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[img]ART/icons/parasiteIcon.png[/img] 454"
+
+[node name="ship" parent="." instance=ExtResource("7_n35oc")]
+position = Vector2(0, 43)
+
+[node name="rules" type="Node2D" parent="."]
+script = ExtResource("8_7gyde")
+
+[node name="rulesTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="timers/Timer1" to="timers" method="_on_timer_timeout"]
+[connection signal="timeout" from="timers/Timer2" to="timers" method="_on_timer_2_timeout"]
+[connection signal="timeout" from="timers/Timer3" to="timers" method="_on_timer_3_timeout"]
+[connection signal="timeout" from="timers/Timer4" to="timers" method="_on_timer_4_timeout"]
+[connection signal="timeout" from="timers/Timer5" to="timers" method="_on_timer_5_timeout"]
+[connection signal="timeout" from="timers/Timer6" to="timers" method="_on_timer_6_timeout"]
+[connection signal="timeout" from="timers/breachTimer" to="." method="_on_breach_timer_timeout"]
+[connection signal="timeout" from="timers/parasiteTimer" to="." method="_on_parasite_timer_timeout"]
+[connection signal="mouse_entered" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/defeatLabel/Button" to="." method="_on_defeat_button_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/defeatLabel/Button" to="." method="_on_defeat_button_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/defeatLabel/Button" to="." method="_on_button_pressed"]
