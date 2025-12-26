@@ -3,4 +3,4 @@ extends Node2D
 var main
 
 func onSpawn(asteroid):
-	asteroid.acceleration = 300
+	asteroid.acceleration += 30

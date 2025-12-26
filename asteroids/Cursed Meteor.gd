@@ -11,15 +11,11 @@ var damage = 10
 
 
 func onHit():
-	if randf_range(0,1) > 0.5:
-		var arr = []
-		for child in Global.itemsToData.keys():
-			if "Rock" in child:
-				arr.append(child)
-		for i in range(4):
-			var inst = main.spawn(self, arr.pick_random())
-			if randf_range(0,1) < 0.5:
-				inst.die()
-			
-	else:
-		get_parent().die()
+	var arr = []
+	for child in Global.itemsToData.keys():
+		if "Rock" in child:
+			arr.append(child)
+	for i in range(4):
+		var inst = main.spawn(self, arr.pick_random())
+		if Global.randChance(50):
+			inst.die()

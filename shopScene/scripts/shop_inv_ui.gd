@@ -14,7 +14,7 @@ func refresh():
 	
 	var startInd = $GridContainer2.get_child_count()
 	while Global.starsDeck.size() > $GridContainer2.get_child_count():
-		var scene = load("res://shop_inv_item.tscn").instantiate()
+		var scene = load("res://shopScene/scenes/shop_inv_item.tscn").instantiate()
 		scene.type = 1
 		scene.item = Global.starsDeck[startInd]
 		$GridContainer2.add_child(scene)

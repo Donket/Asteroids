@@ -5,7 +5,7 @@ var speed = 0
 var acceleration = 0
 var direction = 45
 var seekRadius = 300
-var turnSpeed = 30
+var turnSpeed = 10
 
 
 var immune = true
@@ -14,6 +14,7 @@ var dead = false
 
 @onready var attributes = $attributes
 var ship
+var slot 
 
 
 func _ready():
@@ -26,10 +27,15 @@ func _physics_process(delta):
 		return
 	if ship:
 		seekShip(delta)
+	if speed < 0:
+		speed = 0
 	velocity = Vector2(speed*cos(-deg_to_rad(direction)), speed*sin(-deg_to_rad(direction)))
 	speed += acceleration*delta
 	edgeCheck()
+	var numOfSnowballs = Global.numOfStars("Snowball")
+	$".".scale += Vector2(0.005*acceleration*delta*numOfSnowballs, 0.005*acceleration*delta*numOfSnowballs)
 	move_and_slide()
+
 
 func edgeCheck():
 	if immune:
@@ -43,6 +49,7 @@ func edgeCheck():
 		hit_edge = true
 	
 	if hit_edge:
+		immune = true
 		if attributes.bounces == 0:
 			if attributes.has_method("onCrash"):
 				attributes.onCrash()
@@ -57,10 +64,12 @@ func edgeCheck():
 			
 			if abs(position.x) >= 530:
 				direction = 540 - direction % 360
+				position.x = clamp(position.x, -529, 529)
 			if position.y < -420 or position.y > 80:
 				direction = 360 - direction
+				position.y = clamp(position.y, -419, 79)
+			print(position)
 			
-			immune = true
 			$Timer.start(0.05)
 
 func _on_timer_timeout():

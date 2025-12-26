@@ -7,11 +7,31 @@ var ended = false
 var asteroids = []
 
 @onready var launchers = $CanvasLayer/launchers/GridContainer
+@onready var ship = $ship
+
+var pending_updates = 0
+var is_processing = false
 
 func changeMoney(newMoney):
-	money = newMoney
-	$CanvasLayer/moneyLabel.text = str(money)
 	Global.money = newMoney
+	money = newMoney + Global.numOfStars("Golden Tooth")
+	$CanvasLayer/moneyLabel.text = str(money)
+	pending_updates += 1
+	if is_processing:
+		return
+	is_processing = true
+	while pending_updates > 0:
+		await debtCollecter()
+		pending_updates -= 1
+	is_processing = false
+
+func debtCollecter():
+	for i in 1 + Global.numOfStars("Golden Tooth"):
+		for j in Global.numOfStars("Debt Collector"):
+			if Global.randChance(3) and deck[2] != null and !ended:
+				launch(2, false)
+				await get_tree().create_timer(0.1).timeout
+
 
 func onBounce(asteroid):
 	for child in $rules.get_children():
@@ -57,25 +77,24 @@ func _on_breach_timer_timeout():
 
 
 func _ready():
-	var temp = []
 	var permStatIndices = []
 	for i in range(deck.size()):
-		if deck[i] != null:
-			temp.append(deck[i])
-			permStatIndices.append(i)
-	deck = temp
+		permStatIndices.append(i)
 	for i in deck.size():
-		$timers.get_child(i).start(deckTimes[i])
-		launchers.get_child(i).max_time = deckTimes[i]
-		launchers.get_child(i).index = permStatIndices[i]
-		launchers.get_child(i).texture = load("res://ART/asteroidArts/" + deck[i] + ".png")
+		if deck[i]:
+			$timers.get_child(i).start(deckTimes[i])
+			print(i)
+			launchers.get_child(i).max_time = deckTimes[i]
+			launchers.get_child(i).index = permStatIndices[i]
+			launchers.get_child(i).texture = load("res://ART/asteroidArts/" + deck[i] + ".png")
 	for star in Global.starsDeck:
-		var scene = load("res://star.tscn").instantiate()
+		var scene = load("res://mainScene/scenes/baseStar.tscn").instantiate()
 		scene.set_script(load("res://stars/" + star + ".gd"))
 		if "main" in scene:
 			scene.main = self
 		$rules.add_child(scene)
-	$ship.attributes = $rules
+	ship.attributes = $rules
+	money = Global.money
 
 
 func defeat():
@@ -87,7 +106,7 @@ func defeat():
 			if child != null:
 				child.die()
 		$CanvasLayer/defeatLabel.visible = true
-		Global.health -= 3
+		Global.health -= 2 * pow(2,Global.numOfStars("Steak"))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 	
@@ -101,7 +120,7 @@ func victory():
 			if child != null:
 				child.die()
 		$CanvasLayer/victoryLabel.visible = true
-		Global.wins += 1
+		Global.wins += 1 * pow(2,Global.numOfStars("Steak"))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		
@@ -110,7 +129,8 @@ func victory():
 func _process(delta):
 	if !ended:
 		for i in range(deck.size()):
-			launchers.get_child(i).time = $timers.get_child(i).time_left
+			if deck[i]:
+				launchers.get_child(i).time = $timers.get_child(i).time_left
 	if $rules.breachAmount > 0:
 		$CanvasLayer/breachLabel.text = "[img]ART/icons/breachIcon.png[/img] " + str($rules.breachAmount)
 	elif $rules.breachAmount <= 0:
@@ -122,7 +142,10 @@ func _process(delta):
 
 
 func timeout(index):
-	if index >= deck.size() or ended:
+	launch(index, true)
+	
+func launch(index, atEdge):
+	if index >= deck.size() or ended or !deck[index]:
 		return
 	var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
 	scene.get_node("attributes").set_script(load("res://asteroids/" + deck[index] + ".gd"))
@@ -133,34 +156,42 @@ func timeout(index):
 	var bool2 = false
 	if randi_range(0,2)==0:
 		bool2 = true
-	var locations = [bool1, bool2, randi_range(0,6)]
 	
-	if locations[0]:
-		if locations[1]:
-			scene.position = Vector2(-850*(3-locations[2])/4, 80)
-			scene.direction = 90 + randi_range(-10,10)
+	if atEdge:
+		
+		var locations = [bool1, bool2, randi_range(0,6)]
+		
+		if locations[0]:
+			if locations[1]:
+				scene.position = Vector2(-850*(3-locations[2])/4, 80)
+				scene.direction = 90 + randi_range(-10,10)
+			else:
+				scene.position = Vector2(-850*(3-locations[2])/4, -420)
+				scene.direction = -90 + randi_range(-10,10)
 		else:
-			scene.position = Vector2(-850*(3-locations[2])/4, -420)
-			scene.direction = -90 + randi_range(-10,10)
+			if locations[1]:
+				scene.position = Vector2(530, 370*(3-locations[2])/5-170)
+				scene.direction = 180 + randi_range(-10,10)
+			else:
+				scene.position = Vector2(-530, 370*(3-locations[2])/5-170)
+				scene.direction = 0 + randi_range(-10,10)
+				
 	else:
-		if locations[1]:
-			scene.position = Vector2(530, 370*(3-locations[2])/5-170)
-			scene.direction = 180 + randi_range(-10,10)
-		else:
-			scene.position = Vector2(-530, 370*(3-locations[2])/5-170)
-			scene.direction = 0 + randi_range(-10,10)
-			
+		
+		scene.position = ship.position
+		scene.direction = 0
+	
 	scene.get_node("attributes").launcher = launchers.get_child(index)
 	scene.get_node("attributes").main = self
 	scene.get_node("attributes").baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
 	scene.get_node("attributes").damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
-	scene.ship = $ship
+	scene.ship = ship
 	asteroids.append(scene)
 	add_child(scene)
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://shop.tscn")
+	get_tree().change_scene_to_file("res://shopScene/scenes/shop.tscn")
 
 
 func _on_button_mouse_entered():
@@ -189,14 +220,14 @@ func _on_parasite_timer_timeout():
 		var scene = load("res://asteroids/asteroid.tscn").instantiate()
 		scene.get_node("attributes").set_script(load("res://asteroids/" + deck[0] + ".gd"))
 		scene.get_node("Sprite2D").texture = load("res://asteroidArts/" + deck[0] + ".png")
-		scene.direction = int(-$ship.rotation + randi_range(-120,120))
-		scene.position = $ship.position
+		scene.direction = int(-ship.rotation + randi_range(-120,120))
+		scene.position = ship.position
 		scene.parasite()
 		scene.get_node("attributes").launcher = launchers.get_child(0)
 		scene.get_node("attributes").main = self
 		asteroids.append(scene)
 		add_child(scene)
-		$ship.get_node("parasiteParticles").emitting = true
+		ship.get_node("parasiteParticles").emitting = true
 
 
 func spawn(asteroid, spawned):

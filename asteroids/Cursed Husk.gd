@@ -11,7 +11,7 @@ var damage = 10
 
 
 func onHit():
-	if randf_range(0,1) > 0.5:
+	if Global.randChance(50):
 		main.money += 3
 	else:
 		main.money -= 2

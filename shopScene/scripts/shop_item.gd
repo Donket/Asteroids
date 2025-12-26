@@ -8,7 +8,7 @@ var cost: int = 0
 var item: String = "": set = change
 var currentBaseRarity: int = 0
 
-
+@onready var shop = get_parent().get_parent()
 
 var itemsToDesc = {
 
@@ -50,10 +50,10 @@ Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
 
 	# Cursed Family
 	"Cursed Husk": 
-"On Hit: 50% chance + 3 [img]res://ART/icons/moneyIcon.png[/img] 50% chance - 2 [img]res://ART/icons/moneyIcon.png[/img]",
+"On Hit: 50% chance + 3 [img]res://ART/icons/moneyIcon.png[/img], otherwise - 2 [img]res://ART/icons/moneyIcon.png[/img]",
 
 	"Cursed Rock": 
-"On Crash: 50% chance to [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance to gain +1 permanent damage",
+"On Crash: 50% chance [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance gain +1 permanent damage",
 
 	"Cursed Gem": 
 "On Hit: 50% chance to apply 2 [img]res://ART/icons/breachIcon.png[/img], 50% chance to apply 1 [img]res://ART/icons/burnoutIcon.png[/img]",
@@ -88,31 +88,31 @@ Lose 1 random asteroid",
 	# Stars
 	
 	"Dice": 
-"Random chances +10%",
+"Random chances +10% (cannot stack above 90%)",
 	"Boot": 
-"Asteroid Acceleration +300",
+"Asteroid Acceleration +30",
 	"Backpack": 
 "Asteroids gain 1% speed for each Star you own",
 	"Goop": 
-"Asteroids in slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, they now only trigger On Bounce effects",
-	"Hanger": 
-"Upon spawning an asteroid, 30% chance to not spawn it and instead gain +10 [img]res://ART/icons/moneyIcon.png[/img]",
-	"Hourglass": 
+"Asteroids in Slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, On Bounce they lose 20 speed",
+	"Hanger":
+"Upon spawning an asteroid, 20% chance to destroy it and gain +4 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Hourglass":
 "Timer is 10% longer.",
 	"Pipe": 
 "On hit effects have a 20% chance of triggering twice (Does not affect star abilities).",
 	"Spider": 
-"All asteroid stats +100%. - 10 [img]res://ART/icons/moneyIcon.png[/img] when destroyed.",
+"All asteroid stats +20%. - 10 [img]res://ART/icons/moneyIcon.png[/img] when destroyed.",
 	"Steak": 
 "Each win gives double victories, and each loss takes double lives.",
 	"Steering Wheel": 
-"Asteroids slightly readjust towards the ship. This effect increases with asteroid acceleration.",
+"Asteroids steer towards the ship more directly. This effect increases with asteroid acceleration.",
 	"Speedometer": 
-"Gain 1 [img]res://ART/icons/moneyIcon.png[/img] per second, multiplied by 1% of average asteroid acceleration.",
+"Gain 1 [img]res://ART/icons/moneyIcon.png[/img] per second, multiplied by 10% of average asteroid speed.",
 	"Light Fingers": 
-"On purchasing a shop item, 1% chance to also purchase each star in shop",
+"On purchasing a shop item, 5% chance to also obtain all stars in shop.",
 	"Friendly Customer":
-"Each star you obtain reduces the cost of future stars by 5%",
+"Each star you obtain reduces the cost of future stars by 2%",
 	"Snowball":
 "As asteroids accelerate, they gain size.",
 	"Lethal":
@@ -122,13 +122,13 @@ Lose 1 random asteroid",
 	"Loose Change":
 "All asteroids 30% chance to drop +2 [img]res://ART/icons/moneyIcon.png[/img] On Crash",
 	"Coupon Book":
-"Items cost 15% less, but rerolls cost 15% more",
+"Future items cost 20% less, but rerolls cost 20% more",
 	"Payday":
 "At the start of each round, + 5 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Tip Jar":
 "Each On Hit effect has a 10% chance to grant +1 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Debt Collector":
-"Enemies drop +50% [img]res://ART/icons/moneyIcon.png[/img]. Lose half your [img]res://ART/icons/moneyIcon.png[/img] on loss",
+"Every time you gain money in battle, 3% chance to spawn a copy of the asteroid in Slot 3 on top of the ship.",
 	"Piggy Bank":
 "Unspent [img]res://ART/icons/moneyIcon.png[/img] grants +1% asteroid stats per 200 money",
 
@@ -188,7 +188,13 @@ func randomizeItem():
 		return
 	
 	item = possible_items[randi_range(0, possible_items.size() - 1)]
-	cost = dataArr[item][0]
+	if type == Type.STAR:
+		cost = dataArr[item][0] * pow(pow(0.98,Global.starsDeck.size()),Global.numOfStars("Friendly Customer"))
+	elif type == Type.STAR:
+		cost = dataArr[item][0]
+		
+	cost *= pow(0.8, Global.numOfStars("Coupon Book"))
+	
 	updateData()
 
 func updateData():
@@ -216,17 +222,20 @@ func _ready():
 
 
 func _on_control_2_mouse_entered():
-	if get_parent().get_parent().invOpen != true:
+	if shop.invOpen != true:
 		$AnimationPlayer.play("open")
 
 
 func _on_control_2_mouse_exited():
-	if get_parent().get_parent().invOpen != true:
+	if shop.invOpen != true:
 		$AnimationPlayer.play("close")
 
 
 func _on_control_2_pressed():
-	if item.is_empty() or get_parent().get_parent().invOpen == true or get_parent().get_parent().money < cost:
+	buy(true)
+
+func buy(spending):
+	if item.is_empty() or shop.invOpen == true or shop.money < cost:
 		return
 	
 	if type == Type.ASTEROID and null in Global.asteroidsDeck:
@@ -235,13 +244,21 @@ func _on_control_2_pressed():
 				Global.asteroidsDeck[i] = item
 				Global.asteroidPermStats[i] = [0,0]
 				break
-		item = ""
-		$CPUParticles2D.emitting = true
-		get_parent().get_parent().money -= cost
 	
 	elif type == Type.STAR:
 		Global.starsDeck.append(item)
-			
-		item = ""
-		$CPUParticles2D.emitting = true
-		get_parent().get_parent().money -= cost
+	
+	if item == "Coupon Book":
+		shop.rollPrice *= 1.2 
+	
+	item = ""
+	$CPUParticles2D.emitting = true
+	if spending:
+		shop.money -= cost
+
+	for i in shop.items:
+		if i.type == 1 and i != self:
+			var numOfLFNGRS = Global.numOfStars("Light Fingers")
+			if Global.randChance(5):
+				i.buy(false)
+

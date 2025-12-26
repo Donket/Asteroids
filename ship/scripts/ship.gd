@@ -78,7 +78,7 @@ func _on_area_2d_area_entered(area):
 		else:
 			var intercept_point = target_pos + target_vel * t
 			direction = (intercept_point - shooter_pos).normalized()
-	var bullet = load("res://bullet.tscn").instantiate()
+	var bullet = load("res://ship/scenes/bullet.tscn").instantiate()
 	bullet.velocity = direction * bullet_speed
 	bullet.position = shooter_pos
 	bullet.rotation = direction.angle()

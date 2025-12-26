@@ -13,4 +13,5 @@ var damage = 10
 func onCrash():
 	if main.money > 100:
 		main.money -= 10
-		Global.asteroidPermStats[launcher.index] += [1,1]
+		Global.asteroidPermStats[launcher.index][0] += 1
+		Global.asteroidPermStats[launcher.index][1] += 1

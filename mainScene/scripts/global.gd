@@ -1,12 +1,12 @@
 extends Camera2D
 
-var asteroidsDeck = ["Cursed Rock", null, null, "Cursed Rock", null, null]
+var asteroidsDeck = ["Gilded Gem", "Gilded Gem", "Gilded Gem", "Gilded Gem", "Gilded Gem", "Gilded Gem"]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
-var starsDeck = []
+var starsDeck = ["Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Debt Collector", "Golden Tooth", "Debt Collector", "Golden Tooth", "Debt Collector", "Golden Tooth", "Debt Collector", "Golden Tooth", "Piggy Bank"]
 var itemGrabbed = null
 var overSell = false
-var money = 5000
+var money = 50000
 
 var wins = 0
 var maxWins = 10
@@ -34,3 +34,17 @@ var starsToData: Dictionary = {
 	"Backpack": [150, 0],
 	"Pipe": [250, 1],
 }
+
+
+func numOfStars(star):
+	var num = 0
+	for deckStar in starsDeck:
+		if deckStar == star:
+			num += 1
+	return num
+
+
+func randChance(percent):
+	if randi_range(0,100) < min(90,percent + 10 * numOfStars("Dice")):
+		return true
+	return false
