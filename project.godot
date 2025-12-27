@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Asteroids"
-run/main_scene="res://shopScene/scenes/shop.tscn"
+run/main_scene="res://startup/scenes/startupMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 

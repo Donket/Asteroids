@@ -137,7 +137,7 @@ theme_override_fonts/normal_font = ExtResource("4_eyv25")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Control"]
+[node name="dmgLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
 offset_left = -150.0
 offset_top = 190.0
@@ -149,7 +149,7 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]1055"
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="Control"]
+[node name="spdLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
 offset_left = 65.0
 offset_top = 190.0

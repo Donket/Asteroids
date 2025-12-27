@@ -19,6 +19,8 @@ func _ready():
 		scene.type = 1
 		$items.add_child(scene)
 	money = Global.money
+	Global.turn += 1
+	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
 
 
 
@@ -30,7 +32,8 @@ func _on_roll_button_pressed():
 		item.randomizeItem()
 	money -= rollPrice
 	rollPrice *= 1.3
-	$RollButton/RichTextLabel.text = "[center]Roll (" + rollPrice + ")"
+	rollPrice = round(rollPrice)
+	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
 
 func _input(event):
 	if Input.is_action_just_pressed("e") and !invOpen:

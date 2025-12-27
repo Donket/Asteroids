@@ -11,5 +11,5 @@ var damage = 10
 
 
 func onHit():
-	main.money += 10
+	main.money += 100
 	main.asteroids.pick_random().die()

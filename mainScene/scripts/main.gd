@@ -107,7 +107,7 @@ func defeat():
 				child.die()
 		$CanvasLayer/defeatLabel.visible = true
 		Global.health -= 2 * pow(2,Global.numOfStars("Steak"))
-		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://healthIcon.png[/img]"+str(Global.health)+"/10"
+		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 	
 	
@@ -180,6 +180,7 @@ func launch(index, atEdge):
 		
 		scene.position = ship.position
 		scene.direction = 0
+		scene.speed = 0
 	
 	scene.get_node("attributes").launcher = launchers.get_child(index)
 	scene.get_node("attributes").main = self

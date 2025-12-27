@@ -1,39 +1,77 @@
 extends Camera2D
 
-var asteroidsDeck = ["Gilded Gem", "Gilded Gem", "Gilded Gem", "Gilded Gem", "Gilded Gem", "Gilded Gem"]
+var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
-var starsDeck = ["Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Debt Collector", "Golden Tooth", "Debt Collector", "Golden Tooth", "Debt Collector", "Golden Tooth", "Debt Collector", "Golden Tooth", "Piggy Bank"]
+var starsDeck = []
 var itemGrabbed = null
 var overSell = false
-var money = 50000
+var money = 300
 
 var wins = 0
 var maxWins = 10
 var health = 10
 
-# item : [cost, rarity]
+var turn = 0
+
+# item : [cost, rarity, speed, damage]
 var itemsToData: Dictionary = {
-	"Iron Husk": [100, 0],
-	"Iron Rock": [200, 1],
-	"Iron Gem": [150, 1],
-	"Iron Relic": [300, 2],
-	"Iron Meteor": [400, 3],
-	"Ancient Husk": [100, 0],
-	"Ancient Rock": [250, 1],
-	"Ancient Gem": [200, 2],
-	"Ancient Relic": [400, 3],
-	"Ancient Meteor": [500, 4],
+	"Ancient Husk": [50, 0, 110, 55],
+	"Iron Husk": [40, 0, 120, 40],
+	"Cursed Husk": [55, 1, 110, 45],
+	"Gilded Husk": [45, 1, 100, 55],
+
+	"Ancient Rock": [80, 1, 130, 70],
+	"Iron Rock": [75, 1, 110, 80],
+	"Cursed Rock": [90, 2, 120, 80],
+	"Gilded Rock": [100, 2, 130, 85],
+
+	"Ancient Gem": [150, 2, 230, 95],
+	"Iron Gem": [160, 2, 230, 100],
+	"Cursed Gem": [170, 3, 170, 95],
+	"Gilded Gem": [175, 3, 200, 105],
+
+	"Ancient Relic": [155, 3, 200, 105],
+	"Iron Relic": [155, 3, 160, 165],
+	"Cursed Relic": [205, 3, 160, 165],
+	"Gilded Relic": [215, 3, 210, 140],
+
+	"Ancient Meteor": [500, 4, 230, 210],
+	"Iron Meteor": [500, 4, 210, 205],
+	"Cursed Meteor": [500, 4, 210, 180],
+	"Gilded Meteor": [500, 4, 180, 300]
+
 }
 
-
-# item : [cost, rarity]
 var starsToData: Dictionary = {
-	"Dice": [100, 0],
-	"Boot": [300, 1],
-	"Backpack": [150, 0],
-	"Pipe": [250, 1],
+	"Boot": [80, 0],
+	"Hanger": [90, 1],
+	"Hourglass": [100, 0],
+	"Steering Wheel": [110, 0],
+	"Loose Change": [90, 0],
+	"Payday": [110, 0],
+	"Tip Jar": [85, 1],
+
+	"Dice": [140, 1],
+	"Backpack": [150, 1],
+	"Goop": [130, 2],
+	"Steak": [160, 2],
+	"Friendly Customer": [145, 2],
+	"Snowball": [135, 2],
+	"Lethal": [170, 2],
+	"Golden Tooth": [180, 2],
+	"Coupon Book": [140, 2],
+
+	"Spider": [260, 3],
+	"Speedometer": [250, 3],
+	"Debt Collector": [280, 3],
+
+	"Pipe": [500, 4],
+	"Piggy Bank": [500, 4],
+	"Light Fingers": [500, 4]
 }
+
+
 
 
 func numOfStars(star):

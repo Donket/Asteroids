@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnt0p1gvhgfgs"]
+
+[ext_resource type="Script" path="res://startup/scripts/startupMenu.gd" id="1_cejfu"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="1_rwvtb"]
+
+[sub_resource type="Gradient" id="Gradient_gutvu"]
+offsets = PackedFloat32Array(0.849741)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qbbia"]
+gradient = SubResource("Gradient_gutvu")
+
+[sub_resource type="Animation" id="Animation_64kcr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("subtitleLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rkpk5"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("subtitleLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y3484"]
+_data = {
+"RESET": SubResource("Animation_64kcr"),
+"default": SubResource("Animation_rkpk5")
+}
+
+[node name="StartupMenu" type="Node2D"]
+script = ExtResource("1_cejfu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -1147.0
+offset_top = -604.0
+offset_right = 1137.0
+offset_bottom = 615.0
+texture = SubResource("GradientTexture2D_qbbia")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y3484")
+}
+autoplay = "default"
+
+[node name="titleLabel" type="RichTextLabel" parent="."]
+offset_left = -400.0
+offset_top = -315.0
+offset_right = 400.0
+offset_bottom = 65.0
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(400, 190)
+theme_override_fonts/normal_font = ExtResource("1_rwvtb")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]
+Asterogue"
+
+[node name="subtitleLabel" type="RichTextLabel" parent="."]
+offset_left = -650.0
+offset_top = -40.0
+offset_right = 650.0
+offset_bottom = 40.0
+pivot_offset = Vector2(650, 40)
+theme_override_colors/default_color = Color(1, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_rwvtb")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Demo Out Soon!"
+
+[node name="mainLabel" type="RichTextLabel" parent="."]
+offset_left = -201.0
+offset_top = 92.0
+offset_right = 202.0
+offset_bottom = 416.0
+theme_override_fonts/normal_font = ExtResource("1_rwvtb")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Play
+
+Settings
+
+Exit"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-0.629395, -917.01)
+amount = 200
+lifetime = 2.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1)
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = -97.0
+offset_top = 70.0
+offset_right = 98.0
+offset_bottom = 177.0
+focus_mode = 0
+flat = true
+
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = -154.0
+offset_top = 191.0
+offset_right = 145.0
+offset_bottom = 298.0
+focus_mode = 0
+flat = true
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = -97.0
+offset_top = 318.0
+offset_right = 98.0
+offset_bottom = 425.0
+focus_mode = 0
+flat = true
+
+[node name="settingsLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -120.0
+offset_top = 220.0
+offset_right = 1065.0
+offset_bottom = 363.0
+theme_override_fonts/normal_font = ExtResource("1_rwvtb")
+theme_override_font_sizes/normal_font_size = 64
+text = "Settings aren't set up at the moment"
+
+[connection signal="mouse_entered" from="PlayButton" to="." method="playHover"]
+[connection signal="mouse_exited" from="PlayButton" to="." method="endHover"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="SettingsButton" to="." method="settingsHover"]
+[connection signal="mouse_exited" from="SettingsButton" to="." method="endHover"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_button_2_pressed"]
+[connection signal="mouse_entered" from="ExitButton" to="." method="exitHover"]
+[connection signal="mouse_exited" from="ExitButton" to="." method="endHover"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_button_3_pressed"]

@@ -52,7 +52,7 @@ func _on_timer_timeout():
 
 
 func _on_area_2d_area_entered(area):
-	if randi_range(0,3) > 0:
+	if randi_range(0,max(0,3-floor(Global.turn/2))) > 0:
 		return
 	var bullet_speed = 500.0
 	var shooter_pos = position
@@ -83,6 +83,20 @@ func _on_area_2d_area_entered(area):
 	bullet.position = shooter_pos
 	bullet.rotation = direction.angle()
 	get_parent().call_deferred("add_child",bullet)
+	if Global.turn >= 6:
+		var count = floor(Global.turn/2)-2
+		var spreadAngle = deg_to_rad(30.0)
+		var step = spreadAngle/max(1, count)
+		for i in range(count):
+			var offsetIndex = i - (count - 1) / 2.0
+			var angleOffset = offsetIndex * step
+			var spreadDirection = direction.rotated(angleOffset)
+
+			bullet = load("res://ship/scenes/bullet.tscn").instantiate()
+			bullet.velocity = spreadDirection * bullet_speed
+			bullet.position = shooter_pos
+			bullet.rotation = spreadDirection.angle()
+			get_parent().call_deferred("add_child", bullet)
 
 
 func _on_redraw_targets_timeout():

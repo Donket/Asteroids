@@ -50,7 +50,8 @@ Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
 
 	# Cursed Family
 	"Cursed Husk": 
-"On Hit: 50% chance + 3 [img]res://ART/icons/moneyIcon.png[/img], otherwise - 2 [img]res://ART/icons/moneyIcon.png[/img]",
+"On Hit: 50% chance + 3 [img]res://ART/icons/moneyIcon.png[/img]
+Otherwise - 2 [img]res://ART/icons/moneyIcon.png[/img]",
 
 	"Cursed Rock": 
 "On Crash: 50% chance [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance gain +1 permanent damage",
@@ -81,7 +82,7 @@ On Bounce: Spend 3 [img]res://ART/icons/moneyIcon.png[/img] to gain + 1 [img]res
 Has: 2 [img]res://ART/icons/bounceIcon.png[/img]",
 
 	"Gilded Meteor":
-"On Hit: [img]res://ART/icons/moneyIcon.png[/img] +15  
+"On Hit: [img]res://ART/icons/moneyIcon.png[/img] +100  
 Lose 1 random asteroid",
 
 
@@ -190,7 +191,7 @@ func randomizeItem():
 	item = possible_items[randi_range(0, possible_items.size() - 1)]
 	if type == Type.STAR:
 		cost = dataArr[item][0] * pow(pow(0.98,Global.starsDeck.size()),Global.numOfStars("Friendly Customer"))
-	elif type == Type.STAR:
+	else:
 		cost = dataArr[item][0]
 		
 	cost *= pow(0.8, Global.numOfStars("Coupon Book"))
@@ -203,6 +204,8 @@ func updateData():
 	if type == Type.ASTEROID:
 		$RichTextLabel.text = "[center]" + str(Global.itemsToData[item][0])
 		$Node2D.texture = load("res://ART/asteroidArts/" + item + ".png")
+		$Control/spdLabel.text = "[center]"+str(Global.itemsToData[item][2])
+		$Control/dmgLabel.text = "[center]"+str(Global.itemsToData[item][3])
 	else:
 		$RichTextLabel.text = "[center]" + str(Global.starsToData[item][0])
 		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
@@ -214,12 +217,17 @@ func updateData():
 
 
 func _ready():
+	currentBaseRarity = min(3,floor(Global.turn/2))
 	randomizeItem()
 	if type == Type.ASTEROID:
 		$RichTextLabel.position = Vector2(-168,136)
 	elif type == Type.STAR:
 		$RichTextLabel.position = Vector2(-268,213)
-
+		$Control/Sprite2D.texture = load("res://ART/uiArts/starShopPanel.png")
+		$Control/dmgLabel.visible = false
+		$Control/spdLabel.visible = false
+		$Control/RichTextLabel5.visible = false
+		$Control/RichTextLabel6.visible = false
 
 func _on_control_2_mouse_entered():
 	if shop.invOpen != true:
@@ -243,22 +251,27 @@ func buy(spending):
 			if Global.asteroidsDeck[i] == null:
 				Global.asteroidsDeck[i] = item
 				Global.asteroidPermStats[i] = [0,0]
+				item = ""
+				$CPUParticles2D.emitting = true
+				if spending:
+					shop.money -= cost
+				
 				break
 	
 	elif type == Type.STAR:
 		Global.starsDeck.append(item)
 	
-	if item == "Coupon Book":
-		shop.rollPrice *= 1.2 
-	
-	item = ""
-	$CPUParticles2D.emitting = true
-	if spending:
-		shop.money -= cost
-
-	for i in shop.items:
-		if i.type == 1 and i != self:
-			var numOfLFNGRS = Global.numOfStars("Light Fingers")
-			if Global.randChance(5):
-				i.buy(false)
+		if item == "Coupon Book":
+			shop.rollPrice *= 1.2 
+		
+		item = ""
+		$CPUParticles2D.emitting = true
+		if spending:
+			shop.money -= cost
+		
+	for j in Global.numOfStars("Light Fingers"):
+		for i in shop.items:
+			if i.type == 1 and i != self:
+				if Global.randChance(5):
+					i.buy(false)
 
