@@ -3,13 +3,16 @@ extends Node2D
 var launcher
 var main
 
-var baseSpeed = 300
+var baseSpeed = 180
 var baseAcceleration = 0
 var bounces = 0
 
-var damage = 10
+var damage = 300
 
 
 func onHit():
 	main.money += 100
-	main.asteroids.pick_random().die()
+	var asteroid = main.asteroids.pick_random()
+	while asteroid == null:
+		asteroid = main.asteroids.pick_random()
+	asteroid.die()

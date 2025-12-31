@@ -6,6 +6,7 @@ var money = 0: set = changeMoney
 var ended = false
 var asteroids = []
 
+
 @onready var launchers = $CanvasLayer/launchers/GridContainer
 @onready var ship = $ship
 
@@ -74,6 +75,30 @@ func onShot(asteroid):
 func _on_breach_timer_timeout():
 	if $rules.breachAmount > 0:
 		$rules.hp -= $rules.maxHP*0.01*$rules.breachAmount
+		
+func _on_parasite_timer_timeout():
+	if $rules.parasiteAmount > 0 and randi_range(0,100) < 5*$rules.parasiteAmount and deck.size() > 0:
+		var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
+		scene.get_node("attributes").set_script(load("res://asteroids/" + deck[0] + ".gd"))
+		scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[0] + ".png")
+		scene.direction = int(-ship.rotation + randi_range(-120,120))
+		scene.position = ship.position
+		scene.parasite()
+		scene.get_node("attributes").launcher = launchers.get_child(0)
+		scene.get_node("attributes").main = self
+		asteroids.append(scene)
+		add_child(scene)
+		ship.get_node("parasiteParticles").emitting = true
+
+func _on_burnout_timer_timeout():
+	if $rules.burnoutAmount > 0:
+		var amt = $rules.burnoutAmount
+		$rules.hp -= 3*amt
+		$ship.moveSpeed /= max(1,amt*0.5)
+		$ship.rotationSpeed /= max(1,amt*0.5)
+		await get_tree().create_timer(3).timeout
+		$ship.moveSpeed *= max(1,amt*0.5)
+		$ship.rotationSpeed *= max(1,amt*0.5)
 
 
 func _ready():
@@ -83,7 +108,6 @@ func _ready():
 	for i in deck.size():
 		if deck[i]:
 			$timers.get_child(i).start(deckTimes[i])
-			print(i)
 			launchers.get_child(i).max_time = deckTimes[i]
 			launchers.get_child(i).index = permStatIndices[i]
 			launchers.get_child(i).texture = load("res://ART/asteroidArts/" + deck[i] + ".png")
@@ -107,6 +131,7 @@ func defeat():
 				child.die()
 		$CanvasLayer/defeatLabel.visible = true
 		Global.health -= 2 * pow(2,Global.numOfStars("Steak"))
+		money += round(300 * pow(1.2,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 	
@@ -121,6 +146,7 @@ func victory():
 				child.die()
 		$CanvasLayer/victoryLabel.visible = true
 		Global.wins += 1 * pow(2,Global.numOfStars("Steak"))
+		money += round(300 * pow(1.2,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		
@@ -139,6 +165,10 @@ func _process(delta):
 		$CanvasLayer/parasiteLabel.text = "[img]ART/icons/parasiteIcon.png[/img] " + str($rules.parasiteAmount)
 	elif $rules.parasiteAmount <= 0:
 		$CanvasLayer/parasiteLabel.text = ""
+	if $rules.burnoutAmount > 0:
+		$CanvasLayer/burnoutLabel.text = "[img]ART/icons/burnoutIcon.png[/img] " + str($rules.burnoutAmount)
+	elif $rules.burnoutAmount <= 0:
+		$CanvasLayer/burnoutLabel.text = ""
 
 
 func timeout(index):
@@ -216,19 +246,6 @@ func _on_button_mouse_exited():
 
 
 
-func _on_parasite_timer_timeout():
-	if $rules.parasiteAmount > 0 and randi_range(0,100) < 5*$rules.parasiteAmount and deck.size() > 0:
-		var scene = load("res://asteroids/asteroid.tscn").instantiate()
-		scene.get_node("attributes").set_script(load("res://asteroids/" + deck[0] + ".gd"))
-		scene.get_node("Sprite2D").texture = load("res://asteroidArts/" + deck[0] + ".png")
-		scene.direction = int(-ship.rotation + randi_range(-120,120))
-		scene.position = ship.position
-		scene.parasite()
-		scene.get_node("attributes").launcher = launchers.get_child(0)
-		scene.get_node("attributes").main = self
-		asteroids.append(scene)
-		add_child(scene)
-		ship.get_node("parasiteParticles").emitting = true
 
 
 func spawn(asteroid, spawned):
@@ -264,3 +281,4 @@ func _on_defeat_button_mouse_exited():
 
 [center][color=yellow]Click to continue"
 	$CanvasLayer/defeatLabel.text = "[center][color=yellow]Defeat"
+

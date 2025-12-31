@@ -21,25 +21,25 @@ var itemsToData: Dictionary = {
 	"Cursed Husk": [55, 1, 110, 45],
 	"Gilded Husk": [45, 1, 100, 55],
 
-	"Ancient Rock": [80, 1, 130, 70],
-	"Iron Rock": [75, 1, 110, 80],
-	"Cursed Rock": [90, 2, 120, 80],
-	"Gilded Rock": [100, 2, 130, 85],
+	"Ancient Rock": [120, 1, 130, 70],
+	"Iron Rock": [135, 1, 110, 80],
+	"Cursed Rock": [140, 2, 120, 80],
+	"Gilded Rock": [160, 2, 130, 85],
 
-	"Ancient Gem": [150, 2, 230, 95],
-	"Iron Gem": [160, 2, 230, 100],
-	"Cursed Gem": [170, 3, 170, 95],
-	"Gilded Gem": [175, 3, 200, 105],
+	"Ancient Gem": [170, 2, 230, 95],
+	"Iron Gem": [190, 2, 230, 100],
+	"Cursed Gem": [270, 3, 170, 95],
+	"Gilded Gem": [275, 3, 200, 105],
 
-	"Ancient Relic": [155, 3, 200, 105],
-	"Iron Relic": [155, 3, 160, 165],
-	"Cursed Relic": [205, 3, 160, 165],
-	"Gilded Relic": [215, 3, 210, 140],
+	"Ancient Relic": [355, 3, 200, 105],
+	"Iron Relic": [355, 3, 160, 165],
+	"Cursed Relic": [305, 3, 160, 165],
+	"Gilded Relic": [415, 3, 210, 140],
 
-	"Ancient Meteor": [500, 4, 230, 210],
-	"Iron Meteor": [500, 4, 210, 205],
-	"Cursed Meteor": [500, 4, 210, 180],
-	"Gilded Meteor": [500, 4, 180, 300]
+	"Ancient Meteor": [1000, 4, 230, 210],
+	"Iron Meteor": [1000, 4, 210, 205],
+	"Cursed Meteor": [1000, 4, 210, 180],
+	"Gilded Meteor": [1000, 4, 180, 300]
 
 }
 

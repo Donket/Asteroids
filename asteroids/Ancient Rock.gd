@@ -5,19 +5,14 @@ extends Node2D
 var launcher
 var main
 
-var baseSpeed = 300
+var baseSpeed = 130
 var baseAcceleration = 0
 var bounces = 0
 
-var damage = 15
+var damage = 70
 
 
-func onBounce():
-	pass
-
-func onCrash():
-	pass
 
 func onHit():
-	main.get_node("rules").breachAmount += 1
+	main.get_node("rules").parasiteAmount += 1
 

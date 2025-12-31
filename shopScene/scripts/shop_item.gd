@@ -54,14 +54,14 @@ Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
 Otherwise - 2 [img]res://ART/icons/moneyIcon.png[/img]",
 
 	"Cursed Rock": 
-"On Crash: 50% chance [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance gain +1 permanent damage",
+"On Crash: 50% chance [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance gain +5 permanent damage",
 
 	"Cursed Gem": 
 "On Hit: 50% chance to apply 2 [img]res://ART/icons/breachIcon.png[/img], 50% chance to apply 1 [img]res://ART/icons/burnoutIcon.png[/img]",
 
 	"Cursed Relic": 
 "Has: 1 [img]res://ART/icons/bounceIcon.png[/img]
-On Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - 3 damage",
+On Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - 20 damage",
 
 	"Cursed Meteor": 
 "On Hit: [img]res://ART/icons/spawnIcon.png[/img] 4 Cursed. Each has a 50% chance to be destroyed immediately",
@@ -75,7 +75,7 @@ On Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - 3 damage",
 On Bounce: Spend 3 [img]res://ART/icons/moneyIcon.png[/img] to gain + 1 [img]res://ART/icons/bounceIcon.png[/img].",
 
 	"Gilded Gem":
-"On Crash: If you have 100+ [img]res://ART/icons/moneyIcon.png[/img], convert 10 [img]res://ART/icons/moneyIcon.png[/img] into +1 permanent damage and +1 permanent speed",
+"On Crash: If you have 100+ [img]res://ART/icons/moneyIcon.png[/img], convert 10 [img]res://ART/icons/moneyIcon.png[/img] into +4 permanent damage and +4 permanent speed",
 
 	"Gilded Relic":
 "On Bounce: Gain +5 [img]res://ART/icons/moneyIcon.png[/img]  

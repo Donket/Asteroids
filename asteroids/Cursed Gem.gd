@@ -3,11 +3,11 @@ extends Node2D
 var launcher
 var main
 
-var baseSpeed = 300
+var baseSpeed = 170
 var baseAcceleration = 0
 var bounces = 0
 
-var damage = 10
+var damage = 95
 
 
 func onCrash():

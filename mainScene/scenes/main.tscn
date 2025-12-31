@@ -48,6 +48,10 @@ autostart = true
 [node name="breachTimer" type="Timer" parent="timers"]
 autostart = true
 
+[node name="burnoutTimer" type="Timer" parent="timers"]
+wait_time = 5.0
+autostart = true
+
 [node name="parasiteTimer" type="Timer" parent="timers"]
 wait_time = 0.2
 autostart = true
@@ -207,11 +211,21 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[img]ART/icons/breachIcon.png[/img] 454"
 
-[node name="parasiteLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="burnoutLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 36.0
 offset_top = 201.0
 offset_right = 360.0
 offset_bottom = 265.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[img]ART/icons/burnoutIcon.png[/img] 454"
+
+[node name="parasiteLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 36.0
+offset_top = 272.0
+offset_right = 360.0
+offset_bottom = 336.0
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
@@ -232,6 +246,7 @@ script = ExtResource("8_7gyde")
 [connection signal="timeout" from="timers/Timer5" to="timers" method="_on_timer_5_timeout"]
 [connection signal="timeout" from="timers/Timer6" to="timers" method="_on_timer_6_timeout"]
 [connection signal="timeout" from="timers/breachTimer" to="." method="_on_breach_timer_timeout"]
+[connection signal="timeout" from="timers/burnoutTimer" to="." method="_on_burnout_timer_timeout"]
 [connection signal="timeout" from="timers/parasiteTimer" to="." method="_on_parasite_timer_timeout"]
 [connection signal="mouse_entered" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_exited"]

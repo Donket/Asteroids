@@ -3,7 +3,8 @@ extends CharacterBody2D
 var bulletSpeed = 500
 var target_pos = Vector2(0,0)
 var attributes: set = changeAttributes
-
+var moveSpeed = 120
+var rotationSpeed = 5
 
 func changeAttributes(newAttributes):
 	if !newAttributes.has_method("hurt"):
@@ -14,7 +15,7 @@ func changeAttributes(newAttributes):
 func _physics_process(delta):
 	if $"..".ended:
 		return 
-	move_rotate_towards(target_pos, delta, 5.0, 120.0, Vector2(-500,-300), Vector2(500,300))
+	move_rotate_towards(target_pos, delta, rotationSpeed, moveSpeed, Vector2(-500,-300), Vector2(500,300))
 	if attributes.has_method("hurt"):
 		$hp.rotation = -rotation
 	move_and_slide()
@@ -24,7 +25,7 @@ func _on_area_2d_body_entered(body):
 	body.queue_free()
 
 
-func move_rotate_towards(point: Vector2, delta: float, rotation_speed: float = 5.0, move_speed: float = 100.0, bounds_tl: Vector2 = Vector2(-500, -300), bounds_br: Vector2 = Vector2(500, 300)):
+func move_rotate_towards(point, delta, rotation_speed, move_speed, bounds_tl, bounds_br):
 	var arrive_threshold := 2.0
 	var facing_threshold := deg_to_rad(10.0)
 	var to_target: Vector2 = point - global_position

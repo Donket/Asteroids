@@ -11,16 +11,15 @@ var burnoutAmount = 0
 var parasiteAmount = 0
 @onready var ship = $"../ship"
 
+
 func hurt(newHP):
-	if hp > newHP:
-		hp = newHP
-		$"../ship".get_node("hp").get_node("hpbar").value = hp
-		if newHP <= 0 and !$"..".ended:
-			$"..".victory()
-		get_parent().money += 13
-	else:
-		hp = newHP
-	
+	hp = newHP
+	$"../ship".get_node("hp").get_node("hpbar").max_value = maxHP
+	$"../ship".get_node("hp").get_node("hpbar").value = hp
+	print(newHP)
+	if newHP <= 0 and !$"..".ended:
+		$"..".victory()
+
 
 
 func _ready():
@@ -29,10 +28,8 @@ func _ready():
 	initializeStats()
 
 func initializeStats():
-	hp *= pow(1.6,Global.turn)
-	maxHP = hp
-	$"../ship".get_node("hp").get_node("hpbar").value = hp
-	$"../ship".get_node("hp").get_node("hpbar").max_value = maxHP
+	maxHP *= pow(1.3,Global.turn)
+	hp = maxHP
 	
 
 

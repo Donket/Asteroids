@@ -5,7 +5,7 @@ var speed = 0
 var acceleration = 0
 var direction = 45
 var seekRadius = 300
-var turnSpeed = 10
+var turnSpeed = 20
 
 
 var immune = true
@@ -29,7 +29,7 @@ func _physics_process(delta):
 		seekShip(delta)
 	if speed < 0:
 		speed = 0
-	velocity = Vector2(speed*cos(-deg_to_rad(direction)), speed*sin(-deg_to_rad(direction)))
+	velocity = Vector2(speed*2*cos(-deg_to_rad(direction)), speed*2*sin(-deg_to_rad(direction)))
 	speed += acceleration*delta
 	edgeCheck()
 	var numOfSnowballs = Global.numOfStars("Snowball")
