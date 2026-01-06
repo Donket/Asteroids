@@ -3,7 +3,7 @@ extends Camera2D
 var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
-var starsDeck = []
+var starsDeck = ["Coupon Book", "Coupon Book", "Coupon Book"]
 var itemGrabbed = null
 var overSell = false
 var money = 300
@@ -13,6 +13,7 @@ var maxWins = 10
 var health = 10
 
 var turn = 0
+var firstOpen = true
 
 # item : [cost, rarity, speed, damage]
 var itemsToData: Dictionary = {

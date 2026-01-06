@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cf4dxpqmpy8f2"]
+[gd_scene load_steps=13 format=3 uid="uid://cf4dxpqmpy8f2"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop.gd" id="1_d4jli"]
 [ext_resource type="Texture2D" uid="uid://gufgyg1kc8ah" path="res://ART/uiArts/shopsprites.png" id="2_30pk5"]
@@ -6,6 +6,8 @@
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_poi11"]
 [ext_resource type="Texture2D" uid="uid://ihfjmfagdac" path="res://ART/uiArts/sellButton.png" id="5_a6vnd"]
 [ext_resource type="PackedScene" uid="uid://dlvp2kmfksqqn" path="res://shopScene/scenes/shop_inv_ui.tscn" id="6_31cc4"]
+[ext_resource type="PackedScene" uid="uid://cspev8t5agspi" path="res://startup/scenes/tutorial.tscn" id="7_ekylw"]
+[ext_resource type="Texture2D" uid="uid://b7545fiadwyey" path="res://ART/uiArts/shopTutorialButton.png" id="8_irtrg"]
 
 [sub_resource type="Animation" id="Animation_pqf0s"]
 length = 0.001
@@ -274,7 +276,36 @@ theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center] [img]res://ART/icons/moneyIcon.png[/img] 99999"
 
+[node name="Button" type="Button" parent="."]
+offset_left = -928.0
+offset_top = 170.0
+offset_right = -800.0
+offset_bottom = 266.0
+focus_mode = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Button"]
+position = Vector2(64, 48)
+scale = Vector2(4, 4)
+texture = ExtResource("8_irtrg")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Button"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -38.0
+offset_right = 131.0
+offset_bottom = 2.0
+theme_override_fonts/normal_font = ExtResource("4_poi11")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]Tutorial"
+
+[node name="tutorial" parent="." instance=ExtResource("7_ekylw")]
+visible = false
+
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]
 [connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

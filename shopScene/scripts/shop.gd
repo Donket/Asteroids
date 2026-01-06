@@ -3,7 +3,7 @@ extends Node2D
 var items = []
 var invOpen = false
 var money = 0: set = setMoney
-var rollPrice = 5 * pow(1.2,Global.numOfStars("Coupon Book"))
+var rollPrice = round(5 * pow(1.2,Global.numOfStars("Coupon Book")))
 
 func _ready():
 	for i in range(5):
@@ -21,6 +21,9 @@ func _ready():
 	money = Global.money
 	Global.turn += 1
 	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
+	if Global.firstOpen:
+		Global.firstOpen = false
+		$tutorial.visible = true
 
 
 
@@ -60,3 +63,15 @@ func setMoney(newMoney):
 	money = newMoney + Global.numOfStars("Golden Tooth")
 	$RichTextLabel.text = "[center] [img]res://ART/icons/moneyIcon.png[/img]" + str(money)
 	Global.money = money
+
+
+func _on_button_pressed():
+	$tutorial.visible = true
+
+
+func _on_button_mouse_entered():
+	$Button/Sprite2D.modulate = Color(0.8,0.8,0.8)
+
+
+func _on_button_mouse_exited():
+	$Button/Sprite2D.modulate = Color(1,1,1)

@@ -7,7 +7,7 @@ var baseSpeed = 180
 var baseAcceleration = 0
 var bounces = 0
 
-var damage = 300
+var damage = 1#300
 
 
 func onHit():

@@ -1,0 +1,259 @@
+[gd_scene load_steps=10 format=3 uid="uid://cspev8t5agspi"]
+
+[ext_resource type="Script" path="res://startup/scripts/tutorial.gd" id="1_7leqa"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="1_7sgdj"]
+[ext_resource type="Texture2D" uid="uid://buesmpjmt58vp" path="res://ART/uiArts/tutorialButtonNext.png" id="3_nhpm1"]
+[ext_resource type="Texture2D" uid="uid://b0g6kl4c1ll7i" path="res://ART/uiArts/tutorialButtonExit.png" id="4_oh7bl"]
+
+[sub_resource type="Animation" id="Animation_bpyev"]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["The gameloop comes in two stages, shop and battle.
+
+In battle, asteroids spawn from all your owned launchers, starting from one random spot on the edge and traveling to another. Your goal is to eliminate a ship which gets stronger each turn.
+
+In the shop, you spend your hard-earned money. You can buy asteroid spawners, which spawn asteroids every three seconds. You can have up to six of these at a time. You can also buy stars, which give powerful passive abilities. You can have unlimited stars.
+
+You win if you win 10 rounds, but you lose if you run out of health first (-2 health per loss)."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SectionLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center][color=yellow][Gameloop]"]
+}
+
+[sub_resource type="Animation" id="Animation_iehl6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["The gameloop comes in two stages, shop and battle.
+
+In battle, asteroids spawn from all your owned launchers, starting from one random spot on the edge and traveling to another. Your goal is to eliminate a ship which gets stronger each turn.
+
+In the shop, you spend your hard-earned money. You can buy asteroid spawners, which spawn asteroids every three seconds. You can have up to six of these at a time. You can also buy stars, which give powerful passive abilities. You can have unlimited stars.
+
+You win if you win 10 rounds, but you lose if you run out of health first (-2 health per loss)."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SectionLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center][color=yellow][Gameloop]"]
+}
+
+[sub_resource type="Animation" id="Animation_in7lg"]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SectionLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center][color=yellow][Afflictions]"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Breach: Every second, lose 1% of max health, times the amount of breach
+
+Burnout: Every 5 seconds lose 3 damage times the amount of burnout. Ship is also slowed for 3 seconds (this effect is increased by the amount of burnout).
+
+Parasite: Every 0.2 seconds, there is a chance to spawn the asteroid in your first launcher slot behind the ship. This chance increases with amount of parasite."]
+}
+
+[sub_resource type="Animation" id="Animation_krm41"]
+resource_name = "3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SectionLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center][color=yellow][Triggers]"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["\"On Crash:\" Triggers whenever an asteroid dies by hitting a wall or hitting the ship.
+
+\"On Hit:\" Triggers whenever an asteroid dies by hitting the ship.
+
+\"On Shot:\" Triggers whenever an asteroid dies by by a bullet shot by the ship.
+
+\"On Spawn\": Triggers whenever an asteroid is spawned by a launcher or by an ability.
+
+\"On Bounce:\" Triggers whenever an asteroid bounces."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t4wqn"]
+_data = {
+"1": SubResource("Animation_bpyev"),
+"2": SubResource("Animation_in7lg"),
+"3": SubResource("Animation_krm41"),
+"RESET": SubResource("Animation_iehl6")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_7leqa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0, 0, 0, 1)
+
+[node name="TutorialLabel" type="RichTextLabel" parent="."]
+offset_left = -360.0
+offset_top = -494.0
+offset_right = 360.0
+offset_bottom = -349.0
+theme_override_fonts/normal_font = ExtResource("1_7sgdj")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]Tutorial"
+
+[node name="SectionLabel" type="RichTextLabel" parent="."]
+offset_left = -360.0
+offset_top = -409.0
+offset_right = 360.0
+offset_bottom = -311.0
+theme_override_fonts/normal_font = ExtResource("1_7sgdj")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][color=yellow][Gameloop]"
+
+[node name="TextLabel" type="RichTextLabel" parent="."]
+offset_left = -400.0
+offset_top = -244.0
+offset_right = 400.0
+offset_bottom = 319.0
+theme_override_fonts/normal_font = ExtResource("1_7sgdj")
+theme_override_font_sizes/normal_font_size = 32
+text = "The gameloop comes in two stages, shop and battle.
+
+In battle, asteroids spawn from all your owned launchers, starting from one random spot on the edge and traveling to another. Your goal is to eliminate a ship which gets stronger each turn.
+
+In the shop, you spend your hard-earned money. You can buy asteroid spawners, which spawn asteroids every three seconds. You can have up to six of these at a time. You can also buy stars, which give powerful passive abilities. You can have unlimited stars.
+
+You win if you win 10 rounds, but you lose if you run out of health first (-2 health per loss)."
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-0.629395, -917.01)
+amount = 200
+lifetime = 2.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1)
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t4wqn")
+}
+
+[node name="Button" type="Button" parent="."]
+offset_left = -910.0
+offset_top = 399.0
+offset_right = -781.0
+offset_bottom = 499.0
+focus_mode = 0
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Button"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_nhpm1")
+offset = Vector2(16, 12)
+flip_h = true
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 765.0
+offset_top = 399.0
+offset_right = 893.0
+offset_bottom = 495.0
+focus_mode = 0
+flat = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Button2"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_nhpm1")
+offset = Vector2(16, 12)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(910, -520)
+scale = Vector2(4, 4)
+texture = ExtResource("4_oh7bl")
+offset = Vector2(-16, 12)
+
+[node name="exitButton" type="Button" parent="."]
+offset_left = 786.0
+offset_top = -516.0
+offset_right = 906.0
+offset_bottom = -428.0
+focus_mode = 0
+flat = true
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Button2" to="." method="_on_button_2_mouse_entered"]
+[connection signal="mouse_exited" from="Button2" to="." method="_on_button_2_mouse_exited"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="mouse_entered" from="exitButton" to="." method="_on_exit_button_mouse_entered"]
+[connection signal="mouse_exited" from="exitButton" to="." method="_on_exit_button_mouse_exited"]
+[connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]

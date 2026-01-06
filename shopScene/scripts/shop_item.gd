@@ -4,7 +4,6 @@ extends Control
 enum Type { ASTEROID, STAR }
 
 var cost: int = 0
-# Use an empty string "" as the initial value instead of null for string properties
 var item: String = "": set = change
 var currentBaseRarity: int = 0
 
@@ -194,7 +193,9 @@ func randomizeItem():
 	else:
 		cost = dataArr[item][0]
 		
-	cost *= pow(0.8, Global.numOfStars("Coupon Book"))
+	cost *= round(pow(0.8, Global.numOfStars("Coupon Book")))
+	print(cost)
+	print(cost)
 	
 	updateData()
 
@@ -202,12 +203,12 @@ func updateData():
 	$Control/RichTextLabel.text = "[center]" + item
 	$Control/RichTextLabel2.text = itemsToDesc[item]
 	if type == Type.ASTEROID:
-		$RichTextLabel.text = "[center]" + str(Global.itemsToData[item][0])
+		$RichTextLabel.text = "[center]" + str(cost)
 		$Node2D.texture = load("res://ART/asteroidArts/" + item + ".png")
 		$Control/spdLabel.text = "[center]"+str(Global.itemsToData[item][2])
 		$Control/dmgLabel.text = "[center]"+str(Global.itemsToData[item][3])
 	else:
-		$RichTextLabel.text = "[center]" + str(Global.starsToData[item][0])
+		$RichTextLabel.text = "[center]" + str(cost)
 		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
 	
 	var tween = get_tree().create_tween()

@@ -16,7 +16,6 @@ func hurt(newHP):
 	hp = newHP
 	$"../ship".get_node("hp").get_node("hpbar").max_value = maxHP
 	$"../ship".get_node("hp").get_node("hpbar").value = hp
-	print(newHP)
 	if newHP <= 0 and !$"..".ended:
 		$"..".victory()
 
