@@ -193,9 +193,7 @@ func randomizeItem():
 	else:
 		cost = dataArr[item][0]
 		
-	cost *= round(pow(0.8, Global.numOfStars("Coupon Book")))
-	print(cost)
-	print(cost)
+	cost = round(cost*pow(0.8, Global.numOfStars("Coupon Book")))
 	
 	updateData()
 
