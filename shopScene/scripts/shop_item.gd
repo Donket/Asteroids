@@ -242,6 +242,7 @@ func _on_control_2_pressed():
 	buy(true)
 
 func buy(spending):
+	cost = floor(cost)
 	if item.is_empty() or shop.invOpen == true or shop.money < cost:
 		return
 	

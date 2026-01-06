@@ -29,13 +29,13 @@ func _ready():
 
 
 func _on_roll_button_pressed():
-	if money < rollPrice:
+	if money < floor(rollPrice):
 		return
 	for item in items:
 		item.randomizeItem()
-	money -= rollPrice
+	money -= floor(rollPrice)
 	rollPrice *= 1.3
-	rollPrice = round(rollPrice)
+	rollPrice = floor(rollPrice)
 	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
 
 func _input(event):
