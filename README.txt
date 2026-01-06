@@ -17,10 +17,7 @@ README
 
 	GAME CREDITS:
 
-		All code, game concept, and most assets were created by myself. Any other assets are
-		licensed under CC0, and due credit is below:
-
-		TODO: INSERT CREDITS
+		All code, game concept, and assets were created by myself. 
 
 
 
