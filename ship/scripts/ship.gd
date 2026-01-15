@@ -5,6 +5,17 @@ var target_pos = Vector2(0,0)
 var attributes: set = changeAttributes
 var moveSpeed = 120
 var rotationSpeed = 5
+var hp = 200: set = hurt
+
+@onready var damageLabel = preload("res://ship/scenes/ship_damage_label.tscn")
+
+func hurt(newHp):
+	if newHp < hp:
+		var scene = damageLabel.instantiate()
+		scene.get_node("label").text = str(hp-newHp)
+		$hp.add_child(scene)
+	hp=newHp
+	$hp/hpbar.value = newHp
 
 func changeAttributes(newAttributes):
 	if !newAttributes.has_method("hurt"):

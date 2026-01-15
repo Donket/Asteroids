@@ -15,7 +15,7 @@ var parasiteAmount = 0
 func hurt(newHP):
 	hp = newHP
 	$"../ship".get_node("hp").get_node("hpbar").max_value = maxHP
-	$"../ship".get_node("hp").get_node("hpbar").value = hp
+	$"../ship".hp = hp
 	if newHP <= 0 and !$"..".ended:
 		$"..".victory()
 
@@ -27,7 +27,7 @@ func _ready():
 	initializeStats()
 
 func initializeStats():
-	maxHP *= pow(1.3,Global.turn)
+	maxHP *= pow(1.4,Global.turn)
 	hp = maxHP
 	
 

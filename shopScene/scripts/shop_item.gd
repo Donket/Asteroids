@@ -128,10 +128,21 @@ Lose 1 random asteroid",
 	"Tip Jar":
 "Each On Hit effect has a 10% chance to grant +1 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Debt Collector":
-"Every time you gain money in battle, 3% chance to spawn a copy of the asteroid in Slot 3 on top of the ship.",
+"Every time you gain money in battle, 10% (cannot be increased) chance to spawn a copy of the asteroid in Slot 3 on top of the ship.",
 	"Piggy Bank":
 "Unspent [img]res://ART/icons/moneyIcon.png[/img] grants +1% asteroid stats per 200 money",
-
+	"Minivan":
+"Gain 3 asteroid acceleration for each asteroid on screen.",
+	"Binky":
+"-20% asteroid speed",
+	"Bottle":
+"When an asteroid spawns, 10% (cannot be increased) chance to give the asteroid in Slot 4 +2 permanent damage.",
+	"Throw Pillow":
+"Each asteroid that spawns has a 1% (cannot be increased) chance on spawn to teleport to and remain at a random location",
+	"Suicide Bomb":
+"On Crash, each asteroid has a 20% chance to deal its damage to the ship.",
+	"Shotgun":
+"Each time an asteroid is launched, 20% chance to launch an extra and 10% (cannot be increased) chance to launch two extra.",
 }
 
 

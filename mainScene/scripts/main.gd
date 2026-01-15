@@ -29,7 +29,7 @@ func changeMoney(newMoney):
 func debtCollecter():
 	for i in 1 + Global.numOfStars("Golden Tooth"):
 		for j in Global.numOfStars("Debt Collector"):
-			if Global.randChance(3) and deck[2] != null and !ended:
+			if randf_range(0,1) <= 0.1 and deck[2] != null and !ended:
 				launch(2, false)
 				await get_tree().create_timer(0.1).timeout
 
@@ -211,14 +211,41 @@ func launch(index, atEdge):
 		scene.position = ship.position
 		scene.direction = 0
 		scene.speed = 0
+		
+	var dir = scene.direction
 	
 	scene.get_node("attributes").launcher = launchers.get_child(index)
 	scene.get_node("attributes").main = self
 	scene.get_node("attributes").baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
 	scene.get_node("attributes").damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
 	scene.ship = ship
-	asteroids.append(scene)
-	add_child(scene)
+	var shotguns = Global.numOfStars("Shotgun")
+	if shotguns >= 1:
+		var count = 1
+		for i in range(shotguns):
+			if randf_range(0,1) < 0.1:
+				count += 2
+			elif Global.randChance(20):
+				count += 1
+		
+		for i in range(count):
+			var shotgunScene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
+			shotgunScene.get_node("attributes").set_script(load("res://asteroids/" + deck[index] + ".gd"))
+			shotgunScene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[index] + ".png")
+			shotgunScene.get_node("attributes").launcher = launchers.get_child(index)
+			shotgunScene.get_node("attributes").main = self
+			shotgunScene.get_node("attributes").baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
+			shotgunScene.get_node("attributes").damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
+			shotgunScene.ship = ship
+			shotgunScene.direction = dir + (i-count/2)*30
+			shotgunScene.position = scene.position
+			asteroids.append(shotgunScene)
+			add_child(shotgunScene)
+	
+		
+	else:
+		asteroids.append(scene)
+		add_child(scene)
 
 
 func _on_button_pressed():

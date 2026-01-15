@@ -7,6 +7,7 @@ var direction = 45
 var seekRadius = 300
 var turnSpeed = 20
 
+var throwPillowed = false
 
 var immune = true
 var parasiteStart = false
@@ -20,10 +21,20 @@ var slot
 func _ready():
 	speed = attributes.baseSpeed
 	acceleration = attributes.baseAcceleration
+	for i in range(Global.numOfStars("Throw Pillow")):
+		if randf_range(0,100) < 1:
+			throwPillowed = true
+			position.x = randi_range(-529,529)
+			position.y = randi_range(-419,79)
+			speed = 0
+			acceleration = 0
 	get_parent().onSpawn($".")
+	if throwPillowed:
+		speed = 0
+		acceleration = 0
 
 func _physics_process(delta):
-	if dead:
+	if dead or throwPillowed:
 		return
 	if ship:
 		seekShip(delta)
@@ -94,6 +105,7 @@ func _on_area_2d_body_entered(body):
 	else:
 		if attributes.has_method("onShot"):
 			attributes.onShot()
+		body.queue_free()
 		get_parent().onShot($".")
 	die()
 

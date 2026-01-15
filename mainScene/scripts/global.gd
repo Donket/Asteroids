@@ -62,16 +62,21 @@ var starsToData: Dictionary = {
 	"Lethal": [170, 2],
 	"Golden Tooth": [180, 2],
 	"Coupon Book": [140, 2],
+	"Binky": [150, 2],
+	"Suicide Bomb": [120, 2],
 
 	"Spider": [260, 3],
+	"Throw Pillow": [250, 3],
+	"Bottle": [230, 3],
 	"Speedometer": [250, 3],
 	"Debt Collector": [280, 3],
+	"Minivan": [290, 3],
+	"Shotgun": [280, 3],
 
 	"Pipe": [500, 4],
 	"Piggy Bank": [500, 4],
 	"Light Fingers": [500, 4]
 }
-
 
 
 
