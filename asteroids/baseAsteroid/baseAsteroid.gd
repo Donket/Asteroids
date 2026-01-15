@@ -14,6 +14,7 @@ var parasiteStart = false
 var dead = false
 
 @onready var attributes = $attributes
+@onready var id = randi()
 var ship
 var slot 
 
@@ -93,14 +94,13 @@ func parasite():
 	parasiteStart = true
 
 func _on_area_2d_body_entered(body):
-	if parasiteStart:
+	if parasiteStart or dead:
 		return
 	if body == ship:
 		if attributes.has_method("onHit"):
 			attributes.onHit()
 		if attributes.has_method("onCrash"):
 			attributes.onCrash()
-		
 		get_parent().onHit($".")
 	else:
 		if attributes.has_method("onShot"):

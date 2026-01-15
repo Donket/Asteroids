@@ -235,6 +235,7 @@ text = "[img]ART/icons/parasiteIcon.png[/img] 454"
 position = Vector2(0, 43)
 
 [node name="rules" type="Node2D" parent="."]
+visible = false
 script = ExtResource("8_7gyde")
 
 [node name="rulesTimer" type="Timer" parent="."]

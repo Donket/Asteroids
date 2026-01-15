@@ -40,5 +40,6 @@ func _process(delta):
 		$"..".defeat()
 
 func onHit(asteroid):
+	print(asteroid)
 	hp -= asteroid.attributes.damage
 

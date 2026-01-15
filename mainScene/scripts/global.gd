@@ -1,9 +1,9 @@
 extends Camera2D
 
-var asteroidsDeck = [null, null, null, null, null, null]
+var asteroidsDeck = [null, null, null, "Gilded Husk", "Gilded Husk", "Gilded Husk"]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
-var starsDeck = []
+var starsDeck = ["Steering Wheel"]
 var itemGrabbed = null
 var overSell = false
 var money = 300
