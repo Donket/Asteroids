@@ -63,6 +63,16 @@ position = Vector2(960, 537)
 scale = Vector2(5, 5)
 texture = ExtResource("3_8j5i6")
 
+[node name="HSlider" type="HSlider" parent="CanvasLayer"]
+z_index = 50
+offset_left = 13.0
+offset_top = 856.0
+offset_right = 402.0
+offset_bottom = 999.0
+max_value = 3.0
+step = 0.1
+value = 1.0
+
 [node name="launchers" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -105,6 +115,8 @@ layout_mode = 2
 index = 5
 
 [node name="inventory" parent="CanvasLayer" instance=ExtResource("5_bryf5")]
+offset_left = 1920.0
+offset_right = 0.0
 
 [node name="moneyLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 102.0
@@ -165,6 +177,7 @@ offset_left = 321.0
 offset_top = -10.0
 offset_right = 780.0
 offset_bottom = 180.0
+focus_mode = 0
 flat = true
 
 [node name="defeatLabel" type="RichTextLabel" parent="CanvasLayer"]
@@ -199,6 +212,7 @@ offset_left = 321.0
 offset_top = -10.0
 offset_right = 780.0
 offset_bottom = 180.0
+focus_mode = 0
 flat = true
 
 [node name="breachLabel" type="RichTextLabel" parent="CanvasLayer"]
@@ -239,6 +253,7 @@ visible = false
 script = ExtResource("8_7gyde")
 
 [node name="rulesTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="timers/Timer1" to="timers" method="_on_timer_timeout"]
 [connection signal="timeout" from="timers/Timer2" to="timers" method="_on_timer_2_timeout"]
@@ -249,6 +264,7 @@ script = ExtResource("8_7gyde")
 [connection signal="timeout" from="timers/breachTimer" to="." method="_on_breach_timer_timeout"]
 [connection signal="timeout" from="timers/burnoutTimer" to="." method="_on_burnout_timer_timeout"]
 [connection signal="timeout" from="timers/parasiteTimer" to="." method="_on_parasite_timer_timeout"]
+[connection signal="value_changed" from="CanvasLayer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="mouse_entered" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_pressed"]

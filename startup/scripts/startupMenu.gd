@@ -1,6 +1,9 @@
 extends Node2D
 
 @onready var label = $mainLabel
+var defaultCursor = preload("res://ART/uiArts/cursor.png")
+var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
+
 
 var subtitles = [
 	"Demo Out Soon!",
@@ -22,6 +25,7 @@ var subtitles = [
 
 func _ready():
 	$subtitleLabel.text = "[center]" + subtitles.pick_random()
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 
 
 func _on_button_pressed():
@@ -42,6 +46,9 @@ func playHover():
 Settings
 
 Exit"
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	
+	
 
 
 func settingsHover():
@@ -50,6 +57,7 @@ func settingsHover():
 [color=yellow]Settings[/color]
 
 Exit"
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 
 
 func exitHover():
@@ -58,6 +66,7 @@ func exitHover():
 Settings
 
 [color=yellow]Exit[/color]"
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 
 
 func endHover():
@@ -66,3 +75,4 @@ func endHover():
 Settings
 
 Exit"
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))

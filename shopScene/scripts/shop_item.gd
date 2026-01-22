@@ -16,7 +16,7 @@ var itemsToDesc = {
 "Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
 
 	"Iron Rock": 
-"On Crash: [img]res://ART/icons/spawnIcon.png[/img] Pebble (25% chance)",
+"On Crash: [img]res://ART/icons/spawnIcon.png[/img] Iron Husk",
 
 	"Iron Gem": 
 "On Hit: Apply 1 [img]res://ART/icons/breachIcon.png[/img]",
@@ -96,7 +96,7 @@ Lose 1 random asteroid",
 	"Goop": 
 "Asteroids in Slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, On Bounce they lose 20 speed",
 	"Hanger":
-"Upon spawning an asteroid, 20% chance to destroy it and gain +4 [img]res://ART/icons/moneyIcon.png[/img]",
+"Upon spawning an asteroid, 20% (cannot be increased) chance to destroy it and gain +4 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Hourglass":
 "Timer is 10% longer.",
 	"Pipe": 
@@ -242,14 +242,18 @@ func _ready():
 func _on_control_2_mouse_entered():
 	if shop.invOpen != true:
 		$AnimationPlayer.play("open")
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 
 
 func _on_control_2_mouse_exited():
 	if shop.invOpen != true:
 		$AnimationPlayer.play("close")
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _on_control_2_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	buy(true)
 
 func buy(spending):

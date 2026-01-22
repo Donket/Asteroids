@@ -31,3 +31,7 @@ func update():
 	for child in $GridContainer.get_children():
 		Global.asteroidsDeck[iter] = child.item
 		iter += 1
+	var arr = []
+	for child in $GridContainer2.get_children():
+		arr.append(child.item)
+	Global.starsDeck = arr

@@ -18,4 +18,4 @@ func onCrash():
 				arr.append(child)
 		main.spawn(self, arr.pick_random())
 	else:
-		Global.asteroidPermStats[launcher.index][0] += 5
+		Global.asteroidPermStats[launcher.index][1] += 5

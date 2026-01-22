@@ -8,6 +8,8 @@ var grabbed = false
 var inRange = false
 var empty = false
 
+var defaultCursor = preload("res://ART/uiArts/cursor.png")
+var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
 
 func changeItem(newItem):
 	item = newItem
@@ -31,26 +33,43 @@ func _process(delta):
 
 func _input(event):
 	
-	if type == Type.STAR:
-		return
+	var starSold = false
 	
 	if Input.is_action_just_pressed("click") and inRange:
 		grabbed = true
 		Global.itemGrabbed = $"."
 	
 	if grabbed and !Input.is_action_pressed("click"):
+		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 		grabbed = false
 		$Sprite.position = Vector2(0, 0)
 		
 		if Global.overSell:
-			get_parent().get_parent().get_parent().money += Global.itemsToData[item][0]/2
-			Global.asteroidPermStats[slotIndex] = [0,0]
-			changeItem(null)
-			
+			if type == Type.ASTEROID:
+				get_parent().get_parent().get_parent().money += Global.itemsToData[item][0]/2
+				Global.asteroidPermStats[slotIndex] = [0,0]
+				changeItem(null)
+			else:
+				get_parent().get_parent().get_parent().money += Global.starsToData[item][0]/2
+				starSold = true
+				
 		
 		call_deferred("clear_global_grab")
+		
+		
+		var viewport = get_viewport()
+		var globalPos = viewport.get_mouse_position()
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Input.warp_mouse(Vector2(9999, 9999))
+		await get_tree().process_frame
+		await get_tree().process_frame
+		Input.warp_mouse(globalPos)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	if inRange and !grabbed and Global.itemGrabbed != null and !Input.is_action_pressed("click"):
+		if starSold:
+			queue_free()
+
+	if inRange and !grabbed and Global.itemGrabbed != null and !Input.is_action_pressed("click") and type != Type.STAR:
 		var temp = Global.itemGrabbed.item
 		var tempStats = Global.asteroidPermStats[slotIndex]
 		Global.asteroidPermStats[slotIndex] = Global.asteroidPermStats[Global.itemGrabbed.slotIndex]
@@ -60,12 +79,17 @@ func _input(event):
 		Global.itemGrabbed = null
 
 
+
 func _on_control_mouse_entered():
 	inRange = true
+	if empty == false and Global.itemGrabbed == null:
+		Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 
 
 func _on_control_mouse_exited():
 	inRange = false
+	if empty == false and Global.itemGrabbed == null:
+		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 
 
 func clear_global_grab():

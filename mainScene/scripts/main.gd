@@ -309,3 +309,7 @@ func _on_defeat_button_mouse_exited():
 [center][color=yellow]Click to continue"
 	$CanvasLayer/defeatLabel.text = "[center][color=yellow]Defeat"
 
+
+
+func _on_h_slider_value_changed(value):
+	Engine.time_scale = value

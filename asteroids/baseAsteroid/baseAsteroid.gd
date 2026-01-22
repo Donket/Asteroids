@@ -80,7 +80,6 @@ func edgeCheck():
 			if position.y < -420 or position.y > 80:
 				direction = 360 - direction
 				position.y = clamp(position.y, -419, 79)
-			print(position)
 			
 			$Timer.start(0.05)
 
@@ -102,7 +101,7 @@ func _on_area_2d_body_entered(body):
 		if attributes.has_method("onCrash"):
 			attributes.onCrash()
 		get_parent().onHit($".")
-	else:
+	elif body.name == "bullet":
 		if attributes.has_method("onShot"):
 			attributes.onShot()
 		body.queue_free()

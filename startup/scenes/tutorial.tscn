@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 In battle, asteroids spawn from all your owned launchers, starting from one random spot on the edge and traveling to another. Your goal is to eliminate a ship which gets stronger each turn.
 
-In the shop, you spend your hard-earned money. You can buy asteroid spawners, which spawn asteroids every three seconds. You can have up to six of these at a time. You can also buy stars, which give powerful passive abilities. You can have unlimited stars.
+In the shop, you spend your hard-earned money. You can buy asteroid spawners, which spawn asteroids every three seconds. You can have up to six of these at a time. You can also buy stars, which give powerful passive abilities. You can have unlimited stars, but for each star you own the enemy becomes stronger.
 
 You win if you win 10 rounds, but you lose if you run out of health first (-2 health per loss)."]
 }

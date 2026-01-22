@@ -4,8 +4,8 @@ extends Node2D
 #can buy new rulesets, altering the objective and changing what gains money/the win and lose
 #conditions. I've brainstormed and prototyped this but haven't had time to add it yet 
 
-var hp = 200: set = hurt
-var maxHP = 200
+var hp = 150: set = hurt
+var maxHP = 150
 var breachAmount = 0
 var burnoutAmount = 0
 var parasiteAmount = 0
@@ -13,7 +13,7 @@ var parasiteAmount = 0
 
 
 func hurt(newHP):
-	hp = newHP
+	hp = round(newHP)
 	$"../ship".get_node("hp").get_node("hpbar").max_value = maxHP
 	$"../ship".hp = hp
 	if newHP <= 0 and !$"..".ended:
@@ -23,11 +23,12 @@ func hurt(newHP):
 
 func _ready():
 	$"../CanvasLayer/timerLabel".visible = true
-	$"../rulesTimer".start(20*pow(1.1,Global.numOfStars("Hourglass")))
+	$"../rulesTimer".start(round((20+Global.turn*2.4)*pow(1.1,Global.numOfStars("Hourglass"))))
 	initializeStats()
 
 func initializeStats():
 	maxHP *= pow(1.4,Global.turn)
+	maxHP *= max(1,Global.starsDeck.size()*1/4)
 	hp = maxHP
 	
 
