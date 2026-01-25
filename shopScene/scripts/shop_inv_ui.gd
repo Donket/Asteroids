@@ -10,6 +10,7 @@ func refresh():
 	for child in $GridContainer.get_children():
 		if iter < Global.asteroidsDeck.size():
 			child.item = Global.asteroidsDeck[iter]
+			child.exp = Global.asteroidExps[iter]
 			iter += 1
 	
 	var startInd = $GridContainer2.get_child_count()

@@ -74,7 +74,7 @@ func onShot(asteroid):
 
 func _on_breach_timer_timeout():
 	if $rules.breachAmount > 0:
-		$rules.hp -= $rules.maxHP*0.01*$rules.breachAmount
+		$rules.hp -= ceil($rules.maxHP*0.005*$rules.breachAmount)
 		
 func _on_parasite_timer_timeout():
 	if $rules.parasiteAmount > 0 and randi_range(0,100) < 5*$rules.parasiteAmount and deck.size() > 0:

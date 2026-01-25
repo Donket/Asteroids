@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3llxpelm4eeb"]
+[gd_scene load_steps=11 format=3 uid="uid://b3llxpelm4eeb"]
 
 [ext_resource type="Script" path="res://ship/scripts/ship.gd" id="1_7j38c"]
 [ext_resource type="Texture2D" uid="uid://dlvlwlenm6m4m" path="res://ART/other/ship.png" id="1_u2c3h"]
@@ -43,9 +43,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kc7tr"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_0ucwj"]
-b = Vector2(419, 0)
-
 [node name="ship" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource("1_7j38c")
@@ -65,8 +62,8 @@ autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("SegmentShape2D_0ucwj")
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, 0, 71, -81, 271, -234, 396, -234, 387, 216, 260, 212, 88, 87)
 
 [node name="redrawTargets" type="Timer" parent="."]
 autostart = true
@@ -99,6 +96,12 @@ initial_velocity_max = 595.96
 scale_amount_min = 8.0
 scale_amount_max = 8.0
 
+[node name="shootTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="timeout" from="redrawTargets" to="." method="_on_redraw_targets_timeout"]
+[connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]

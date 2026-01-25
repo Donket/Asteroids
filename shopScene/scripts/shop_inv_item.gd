@@ -7,29 +7,41 @@ var item: set = changeItem
 var grabbed = false
 var inRange = false
 var empty = false
+var exp = 0: set = changeExp
 
 var defaultCursor = preload("res://ART/uiArts/cursor.png")
 var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
+
+
+func changeExp(newExp):
+	exp = newExp
+	Global.asteroidExps[slotIndex] = exp
+	$TextureProgressBar.value = exp % 3
+
 
 func changeItem(newItem):
 	item = newItem
 	if item == null:
 		$Sprite.visible = false
+		$TextureProgressBar.visible = false
 		empty = true
 	else:
 		if type == Type.ASTEROID:
 			$Sprite.texture = load("res://ART/asteroidArts/" + item + ".png")
 			$Sprite.visible = true
+			$TextureProgressBar.visible = true
 			empty = false
 		else:
 			$Sprite.texture = load("res://ART/starArts/" + item + ".png")
 			$Sprite.visible = true
+			$TextureProgressBar.visible = false
 			empty = false
 
 
 func _process(delta):
 	if grabbed:
 		$Sprite.position = get_local_mouse_position()
+		$TextureProgressBar.position = get_local_mouse_position() + Vector2(-54,-84)
 
 func _input(event):
 	
@@ -43,6 +55,7 @@ func _input(event):
 		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 		grabbed = false
 		$Sprite.position = Vector2(0, 0)
+		$TextureProgressBar.position = Vector2(-54,-84)
 		
 		if Global.overSell:
 			if type == Type.ASTEROID:
@@ -70,13 +83,23 @@ func _input(event):
 			queue_free()
 
 	if inRange and !grabbed and Global.itemGrabbed != null and !Input.is_action_pressed("click") and type != Type.STAR:
-		var temp = Global.itemGrabbed.item
-		var tempStats = Global.asteroidPermStats[slotIndex]
-		Global.asteroidPermStats[slotIndex] = Global.asteroidPermStats[Global.itemGrabbed.slotIndex]
-		Global.asteroidPermStats[Global.itemGrabbed.slotIndex] = tempStats
-		Global.itemGrabbed.item = item
-		item = temp
-		Global.itemGrabbed = null
+		if Global.itemGrabbed.item == item:
+			exp += Global.itemGrabbed.exp+1
+			print(exp)
+			Global.itemGrabbed.item = null
+			Global.itemGrabbed.exp = 0
+			
+		else:
+			var temp = Global.itemGrabbed.item
+			var tempStats = Global.asteroidPermStats[slotIndex]
+			var tempExp = Global.itemGrabbed.exp
+			Global.asteroidPermStats[slotIndex] = Global.asteroidPermStats[Global.itemGrabbed.slotIndex]
+			Global.asteroidPermStats[Global.itemGrabbed.slotIndex] = tempStats
+			Global.itemGrabbed.exp = exp
+			Global.itemGrabbed.item = item
+			item = temp
+			exp = tempExp
+			Global.itemGrabbed = null
 
 
 
