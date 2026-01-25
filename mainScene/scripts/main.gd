@@ -79,13 +79,13 @@ func _on_breach_timer_timeout():
 func _on_parasite_timer_timeout():
 	if $rules.parasiteAmount > 0 and randi_range(0,100) < 5*$rules.parasiteAmount and deck.size() > 0:
 		var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
-		scene.get_node("attributes").set_script(load("res://asteroids/" + deck[0] + ".gd"))
+		scene.attributes.set_script(load("res://asteroids/" + deck[0] + ".gd"))
 		scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[0] + ".png")
 		scene.direction = int(-ship.rotation + randi_range(-120,120))
 		scene.position = ship.position
 		scene.parasite()
-		scene.get_node("attributes").launcher = launchers.get_child(0)
-		scene.get_node("attributes").main = self
+		scene.attributes.launcher = launchers.get_child(0)
+		scene.attributes.main = self
 		asteroids.append(scene)
 		add_child(scene)
 		ship.get_node("parasiteParticles").emitting = true
@@ -213,11 +213,12 @@ func launch(index, atEdge):
 		scene.speed = 0
 		
 	var dir = scene.direction
+	var sceneAttributes = scene.get_node("attributes")
 	
-	scene.get_node("attributes").launcher = launchers.get_child(index)
-	scene.get_node("attributes").main = self
-	scene.get_node("attributes").baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
-	scene.get_node("attributes").damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
+	sceneAttributes.launcher = launchers.get_child(index)
+	sceneAttributes.main = self
+	sceneAttributes.baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
+	sceneAttributes.damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
 	scene.ship = ship
 	var shotguns = Global.numOfStars("Shotgun")
 	if shotguns >= 1:
@@ -230,12 +231,13 @@ func launch(index, atEdge):
 		
 		for i in range(count):
 			var shotgunScene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
-			shotgunScene.get_node("attributes").set_script(load("res://asteroids/" + deck[index] + ".gd"))
+			var shotsceneAttributes = shotgunScene.get_node("attributes")
+			shotsceneAttributes.set_script(load("res://asteroids/" + deck[index] + ".gd"))
 			shotgunScene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[index] + ".png")
-			shotgunScene.get_node("attributes").launcher = launchers.get_child(index)
-			shotgunScene.get_node("attributes").main = self
-			shotgunScene.get_node("attributes").baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
-			shotgunScene.get_node("attributes").damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
+			shotsceneAttributes.launcher = launchers.get_child(index)
+			shotsceneAttributes.main = self
+			shotsceneAttributes.baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
+			shotsceneAttributes.damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
 			shotgunScene.ship = ship
 			shotgunScene.direction = dir + (i-count/2)*30
 			shotgunScene.position = scene.position
@@ -278,12 +280,16 @@ func _on_button_mouse_exited():
 func spawn(asteroid, spawned):
 	if !ended:
 		var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
-		scene.get_node("attributes").set_script(load("res://asteroids/" + spawned + ".gd"))
+		var sceneAttributes = scene.get_node("attributes")
+		var asteroidAttributes = asteroid
+		print(asteroid.name)
+		print(asteroid)
+		sceneAttributes.set_script(load("res://asteroids/" + spawned + ".gd"))
 		scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + spawned + ".png")
 		scene.direction = int(-asteroid.get_parent().direction + randi_range(-120,120))
 		scene.global_position = asteroid.global_position
-		scene.get_node("attributes").launcher = launchers.get_child(0)
-		scene.get_node("attributes").main = self
+		sceneAttributes.launcher = launchers.get_child(asteroidAttributes.launcher.index)
+		sceneAttributes.main = self
 		scene.spawned()
 		asteroids.append(scene)
 		call_deferred("add_child",scene)
