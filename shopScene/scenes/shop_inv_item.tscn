@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds8oq5sb4tjr4"]
+[gd_scene load_steps=6 format=3 uid="uid://ds8oq5sb4tjr4"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop_inv_item.gd" id="1_f8hhc"]
 [ext_resource type="Texture2D" uid="uid://cojgg6l54t7lw" path="res://ART/asteroidArts/Ancient Relic.png" id="2_4f134"]
 [ext_resource type="Texture2D" uid="uid://dmexs81c4mspu" path="res://ART/uiArts/expBar.png" id="3_s5geq"]
 [ext_resource type="Texture2D" uid="uid://bv8jgjedqmvsf" path="res://ART/uiArts/expEmpty.png" id="4_ugomh"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="5_eewk6"]
 
 [node name="shopInvItem" type="Control"]
 layout_mode = 3
@@ -15,10 +16,6 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_f8hhc")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("2_4f134")
-
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
 offset_left = -64.0
@@ -26,17 +23,36 @@ offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="visuals" type="Control" parent="."]
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="visuals"]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -80.0
+offset_right = 20.0
+offset_bottom = -40.0
+theme_override_fonts/normal_font = ExtResource("5_eewk6")
+bbcode_enabled = true
+text = "[center]5"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="visuals"]
 layout_mode = 0
 offset_left = -54.0
-offset_top = -84.0
+offset_top = -64.0
 offset_right = -18.0
-offset_bottom = -44.0
+offset_bottom = -24.0
 scale = Vector2(3, 3)
 mouse_filter = 2
 max_value = 3.0
 texture_under = ExtResource("4_ugomh")
 texture_progress = ExtResource("3_s5geq")
+
+[node name="Sprite" type="Sprite2D" parent="visuals"]
+position = Vector2(0, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("2_4f134")
 
 [connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]

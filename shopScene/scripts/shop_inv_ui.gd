@@ -12,6 +12,7 @@ func refresh():
 			child.item = Global.asteroidsDeck[iter]
 			child.exp = Global.asteroidExps[iter]
 			iter += 1
+	print(Global.asteroidExps)
 	
 	var startInd = $GridContainer2.get_child_count()
 	while Global.starsDeck.size() > $GridContainer2.get_child_count():

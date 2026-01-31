@@ -93,3 +93,7 @@ func randChance(percent):
 	if randi_range(0,100) < min(90,percent + 10 * numOfStars("Dice")):
 		return true
 	return false
+
+
+func getLevel(ind):
+	return (asteroidExps[ind] - asteroidExps[ind] % 3)/3

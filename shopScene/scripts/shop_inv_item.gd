@@ -16,32 +16,38 @@ var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
 func changeExp(newExp):
 	exp = newExp
 	Global.asteroidExps[slotIndex] = exp
-	$TextureProgressBar.value = exp % 3
-
+	print(str(Global.asteroidExps[slotIndex]) + "!=" + str(exp))
+	$visuals/TextureProgressBar.value = exp % 3
+	if item != null:
+		$visuals/RichTextLabel.text = "[center]"+str(Global.getLevel(slotIndex)+1)
+	else:
+		$visuals/RichTextLabel.text = ""
 
 func changeItem(newItem):
+	var sprite = $visuals/Sprite
 	item = newItem
 	if item == null:
-		$Sprite.visible = false
-		$TextureProgressBar.visible = false
+		exp = 0
+		sprite.visible = false
+		$visuals/TextureProgressBar.visible = false
 		empty = true
 	else:
 		if type == Type.ASTEROID:
-			$Sprite.texture = load("res://ART/asteroidArts/" + item + ".png")
-			$Sprite.visible = true
-			$TextureProgressBar.visible = true
+			sprite.texture = load("res://ART/asteroidArts/" + item + ".png")
+			sprite.visible = true
+			$visuals/TextureProgressBar.visible = true
 			empty = false
 		else:
-			$Sprite.texture = load("res://ART/starArts/" + item + ".png")
-			$Sprite.visible = true
-			$TextureProgressBar.visible = false
+			sprite.texture = load("res://ART/starArts/" + item + ".png")
+			sprite.visible = true
+			$visuals/TextureProgressBar.visible = false
 			empty = false
+	#exp=exp
 
 
 func _process(delta):
 	if grabbed:
-		$Sprite.position = get_local_mouse_position()
-		$TextureProgressBar.position = get_local_mouse_position() + Vector2(-54,-84)
+		$visuals.position = get_local_mouse_position()
 
 func _input(event):
 	
@@ -54,8 +60,7 @@ func _input(event):
 	if grabbed and !Input.is_action_pressed("click"):
 		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 		grabbed = false
-		$Sprite.position = Vector2(0, 0)
-		$TextureProgressBar.position = Vector2(-54,-84)
+		$visuals.position = Vector2(0, 0)
 		
 		if Global.overSell:
 			if type == Type.ASTEROID:
@@ -85,9 +90,7 @@ func _input(event):
 	if inRange and !grabbed and Global.itemGrabbed != null and !Input.is_action_pressed("click") and type != Type.STAR:
 		if Global.itemGrabbed.item == item:
 			exp += Global.itemGrabbed.exp+1
-			print(exp)
 			Global.itemGrabbed.item = null
-			Global.itemGrabbed.exp = 0
 			
 		else:
 			var temp = Global.itemGrabbed.item
@@ -100,6 +103,7 @@ func _input(event):
 			item = temp
 			exp = tempExp
 			Global.itemGrabbed = null
+
 
 
 

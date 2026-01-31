@@ -5,7 +5,6 @@ extends Node2D
 
 var launcher
 var main
-var level
 
 var baseSpeed = 230
 var baseAcceleration = 0
