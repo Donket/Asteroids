@@ -120,9 +120,10 @@ func _on_redraw_targets_timeout():
 
 
 func _on_area_2d_area_entered(area):
-	asteroidsInRange.append(area.get_parent())
-	if readyForShot:
-		shoot(area.get_parent())
+	pass
+	#asteroidsInRange.append(area.get_parent())
+	#if readyForShot:
+		#shoot(area.get_parent())
 
 func _on_area_2d_area_exited(area):
 	asteroidsInRange.erase(area.get_parent())

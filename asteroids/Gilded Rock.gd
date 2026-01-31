@@ -11,6 +11,7 @@ var damage = 85
 
 
 func onBounce():
+	var level = Global.getLevel(launcher.index)
 	if main.money >= 3:
 		bounces += 1
-		main.money -= 3
+		main.money -= (3-level)

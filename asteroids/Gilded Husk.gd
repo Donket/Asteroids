@@ -11,4 +11,5 @@ var damage = 55
 
 
 func onHit():
-	main.money += 2
+	var level = Global.getLevel(launcher.index)
+	main.money += 2*level

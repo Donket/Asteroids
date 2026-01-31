@@ -14,5 +14,6 @@ var damage = 70
 
 
 func onHit():
-	main.get_node("rules").parasiteAmount += 1
+	var level = Global.getLevel(launcher.index)
+	main.get_node("rules").parasiteAmount += level
 

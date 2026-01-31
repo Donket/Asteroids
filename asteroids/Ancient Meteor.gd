@@ -13,11 +13,13 @@ var damage = 210
 
 
 func onHit():
+	var level = Global.getLevel(launcher.index)
 	var arr = []
 	for child in Global.itemsToData.keys():
 		if "Ancient" in child and child != "Ancient Meteor":
 			arr.append(child)
-	main.spawn(self, arr.pick_random())
-	main.spawn(self, arr.pick_random())
-	main.spawn(self, arr.pick_random())
+	for i in range(Global.getLevel(launcher.index)):
+		main.spawn(self, arr.pick_random())
+		main.spawn(self, arr.pick_random())
+		main.spawn(self, arr.pick_random())
 

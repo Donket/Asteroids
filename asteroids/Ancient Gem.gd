@@ -13,10 +13,8 @@ var bounces = 0
 
 var damage = 95
 
-func _ready():
-	print(launcher)
-
 func onHit():
-	print(launcher)
-	main._on_breach_timer_timeout()
+	var level = Global.getLevel(launcher.index)
+	for i in range(level):
+		main._on_breach_timer_timeout()
 

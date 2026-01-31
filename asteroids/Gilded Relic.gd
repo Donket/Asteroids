@@ -11,4 +11,5 @@ var damage = 140
 
 
 func onBounce():
-	main.money += 5
+	var level = Global.getLevel(launcher.index)
+	main.money += 5*level

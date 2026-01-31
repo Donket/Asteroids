@@ -1,11 +1,6 @@
 extends Node2D
 
 
-	#"Iron Meteor": 
-#"On Hit: [img]res://spawnIcon.png[/img] 2 random Rocks",
-#
-
-
 var launcher
 var main
 
@@ -18,10 +13,12 @@ var damage = 205
 
 
 func onHit():
+	var level = Global.getLevel(launcher.index)
 	var arr = []
 	for child in Global.itemsToData.keys():
 		if "Iron" in child and child != "Iron Meteor":
 			arr.append(child)
-	main.spawn(self, arr.pick_random())
-	main.spawn(self, arr.pick_random())
+	for i in level:
+		main.spawn(self, arr.pick_random())
+		main.spawn(self, arr.pick_random())
 

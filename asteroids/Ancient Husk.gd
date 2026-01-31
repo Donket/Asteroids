@@ -14,6 +14,7 @@ var damage = 55
 
 
 func onHit():
-	if randi_range(0,4) == 2:
+	var level = Global.getLevel(launcher.index)
+	if Global.randChance(25*level):
 		main.get_node("rules").burnoutAmount += 1
 

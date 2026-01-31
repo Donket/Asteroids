@@ -11,7 +11,8 @@ var damage = 45
 
 
 func onHit():
+	var level = Global.getLevel(launcher.index)
 	if Global.randChance(50):
-		main.money += 3
+		main.money += 3*level
 	else:
-		main.money -= 2
+		main.money -= 2*level

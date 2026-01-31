@@ -11,7 +11,8 @@ var damage = 300
 
 
 func onHit():
-	main.money += 100
+	var level = Global.getLevel(launcher.index)
+	main.money += 100*level
 	var asteroid = main.asteroids.pick_random()
 	while asteroid == null:
 		asteroid = main.asteroids.pick_random()

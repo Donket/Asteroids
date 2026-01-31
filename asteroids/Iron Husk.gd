@@ -5,7 +5,7 @@ var main
 
 var baseSpeed = 120
 var baseAcceleration = 0
-var bounces = 1
+var bounces = Global.getLevel(launcher.index)
 
 var damage = 40
 

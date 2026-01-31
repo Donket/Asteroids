@@ -16,10 +16,9 @@ var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
 func changeExp(newExp):
 	exp = newExp
 	Global.asteroidExps[slotIndex] = exp
-	print(str(Global.asteroidExps[slotIndex]) + "!=" + str(exp))
 	$visuals/TextureProgressBar.value = exp % 3
 	if item != null:
-		$visuals/RichTextLabel.text = "[center]"+str(Global.getLevel(slotIndex)+1)
+		$visuals/RichTextLabel.text = "[center]"+str(Global.getLevel(slotIndex))
 	else:
 		$visuals/RichTextLabel.text = ""
 

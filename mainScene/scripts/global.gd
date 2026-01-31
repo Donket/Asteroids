@@ -1,9 +1,9 @@
 extends Camera2D
 
-var asteroidsDeck = ["Ancient Meteor", "Ancient Meteor", "Ancient Meteor", "Ancient Meteor", "Ancient Meteor", "Ancient Meteor"]
+var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
-var asteroidExps = [0,0,0,0,0,0]
+var asteroidExps = [20,0,0,0,0,0]
 var starsDeck = []
 var itemGrabbed = null
 var overSell = false
@@ -13,7 +13,7 @@ var wins = 0
 var maxWins = 10
 var health = 10
 
-var turn = 0
+var turn = 10
 var firstOpen = true
 
 # item : [cost, rarity, speed, damage]
@@ -96,4 +96,4 @@ func randChance(percent):
 
 
 func getLevel(ind):
-	return (asteroidExps[ind] - asteroidExps[ind] % 3)/3
+	return (asteroidExps[ind] - asteroidExps[ind] % 3)/3 + 1

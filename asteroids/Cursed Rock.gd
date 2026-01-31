@@ -11,11 +11,13 @@ var damage = 80
 
 
 func onCrash():
+	var level = Global.getLevel(launcher.index)
 	if randf_range(0,1) > 0.5:
 		var arr = []
 		for child in Global.itemsToData.keys():
 			if "Rock" in child:
 				arr.append(child)
-		main.spawn(self, arr.pick_random())
+		for i in range(level):
+			main.spawn(self, arr.pick_random())
 	else:
-		Global.asteroidPermStats[launcher.index][1] += 5
+		Global.asteroidPermStats[launcher.index][1] += 5*level

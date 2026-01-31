@@ -15,5 +15,6 @@ var damage = 100
 
 
 func onHit():
-	main.get_node("rules").breachAmount += 1
+	var level = Global.getLevel(launcher.index)
+	main.get_node("rules").breachAmount += level
 
