@@ -13,7 +13,7 @@ var wins = 0
 var maxWins = 10
 var health = 10
 
-var turn = 10
+var turn = 0
 var firstOpen = true
 
 # item : [cost, rarity, speed, damage]
