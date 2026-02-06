@@ -1,5 +1,7 @@
 extends Camera2D
 
+var battleScene = null
+
 var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
@@ -79,7 +81,18 @@ var starsToData: Dictionary = {
 	"Light Fingers": [500, 4]
 }
 
+var block = 0: set = updateBlock
 
+func updateBlock(newBlock):
+	block = newBlock
+	battleScene.rules.blockAmount = block
+
+func hit():
+	if block > 0 and randf_range(0,1) < 0.7:
+		block -= 1
+		return false
+	else:
+		return true
 
 func numOfStars(star):
 	var num = 0

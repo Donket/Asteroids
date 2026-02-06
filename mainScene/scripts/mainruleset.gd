@@ -7,6 +7,7 @@ extends Node2D
 var hp = 150: set = hurt
 var maxHP = 150
 var breachAmount = 0
+var blockAmount = 0
 var burnoutAmount = 0
 var parasiteAmount = 0
 @onready var ship = $"../ship"

@@ -4,7 +4,7 @@ extends CharacterBody2D
 var speed = 0
 var acceleration = 0
 var direction = 45
-var seekRadius = 300
+var seekRadius = 500
 var turnSpeed = 20
 
 var throwPillowed = false
@@ -30,6 +30,8 @@ func _ready():
 			speed = 0
 			acceleration = 0
 	get_parent().onSpawn($".")
+	if attributes.has_method("onSpawn"):
+		attributes.onSpawn()
 	if throwPillowed:
 		speed = 0
 		acceleration = 0
@@ -106,6 +108,8 @@ func _on_area_2d_body_entered(body):
 			attributes.onShot()
 		body.queue_free()
 		get_parent().onShot($".")
+		if not Global.hit():
+			return
 	die()
 
 

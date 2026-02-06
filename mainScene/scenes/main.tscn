@@ -215,7 +215,7 @@ offset_bottom = 180.0
 focus_mode = 0
 flat = true
 
-[node name="breachLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="blockLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 36.0
 offset_top = 130.0
 offset_right = 360.0
@@ -223,9 +223,9 @@ offset_bottom = 194.0
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[img]ART/icons/breachIcon.png[/img] 454"
+text = "[img]ART/icons/blockIcon.png[/img] 454"
 
-[node name="burnoutLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="breachLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 36.0
 offset_top = 201.0
 offset_right = 360.0
@@ -233,13 +233,23 @@ offset_bottom = 265.0
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[img]ART/icons/burnoutIcon.png[/img] 454"
+text = "[img]ART/icons/breachIcon.png[/img] 454"
 
-[node name="parasiteLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="burnoutLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 36.0
 offset_top = 272.0
 offset_right = 360.0
 offset_bottom = 336.0
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[img]ART/icons/burnoutIcon.png[/img] 454"
+
+[node name="parasiteLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 36.0
+offset_top = 343.0
+offset_right = 360.0
+offset_bottom = 407.0
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true

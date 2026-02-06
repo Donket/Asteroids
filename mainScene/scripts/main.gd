@@ -9,6 +9,7 @@ var asteroids = []
 
 @onready var launchers = $CanvasLayer/launchers/GridContainer
 @onready var ship = $ship
+@onready var rules = $rules
 
 var pending_updates = 0
 var is_processing = false
@@ -35,73 +36,75 @@ func debtCollecter():
 
 
 func onBounce(asteroid):
-	for child in $rules.get_children():
+	for child in rules.get_children():
 		if child.has_method("onBounce"):
 			child.onBounce(asteroid)
-	if $rules.has_method("onBounce"):
-		$rules.onBounce(asteroid)
+	if rules.has_method("onBounce"):
+		rules.onBounce(asteroid)
 	
 
 func onCrash(asteroid):
-	for child in $rules.get_children():
+	for child in rules.get_children():
 		if child.has_method("onCrash"):
 			child.onCrash(asteroid)
-	if $rules.has_method("onCrash"):
-		$rules.onCrash(asteroid)
+	if rules.has_method("onCrash"):
+		rules.onCrash(asteroid)
 
 func onSpawn(asteroid):
-	for child in $rules.get_children():
+	for child in rules.get_children():
 		if child.has_method("onSpawn"):
 			child.onSpawn(asteroid)
-	if $rules.has_method("onSpawn"):
-		$rules.onSpawn(asteroid)
+	if rules.has_method("onSpawn"):
+		rules.onSpawn(asteroid)
 	
 
 func onHit(asteroid):
-	for child in $rules.get_children():
+	for child in rules.get_children():
 		if child.has_method("onHit"):
 			child.onHit(asteroid)
-	if $rules.has_method("onHit"):
-		$rules.onHit(asteroid)
+	if rules.has_method("onHit"):
+		rules.onHit(asteroid)
 
 func onShot(asteroid):
-	for child in $rules.get_children():
+	for child in rules.get_children():
 		if child.has_method("onShot"):
 			child.onShot(asteroid)
-	if $rules.has_method("onShot"):
-		$rules.onShot(asteroid)
+	if rules.has_method("onShot"):
+		rules.onShot(asteroid)
 
 
 func _on_breach_timer_timeout():
-	if $rules.breachAmount > 0:
-		$rules.hp -= ceil($rules.maxHP*0.005*$rules.breachAmount)
+	if rules.breachAmount > 0:
+		rules.hp -= ceil(rules.maxHP*0.005*rules.breachAmount)
 		
 func _on_parasite_timer_timeout():
-	if $rules.parasiteAmount > 0 and randi_range(0,100) < 5*$rules.parasiteAmount and deck.size() > 0:
+	if rules.parasiteAmount > 0 and randi_range(0,100) < 5*rules.parasiteAmount and deck.size() > 0:
 		var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
-		scene.attributes.set_script(load("res://asteroids/" + deck[0] + ".gd"))
+		var sceneAttributes = scene.get_node("attributes")
+		sceneAttributes.set_script(load("res://asteroids/" + deck[0] + ".gd"))
 		scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[0] + ".png")
 		scene.direction = int(-ship.rotation + randi_range(-120,120))
 		scene.position = ship.position
 		scene.parasite()
-		scene.attributes.launcher = launchers.get_child(0)
-		scene.attributes.main = self
+		sceneAttributes.launcher = launchers.get_child(0)
+		sceneAttributes.main = self
 		asteroids.append(scene)
 		add_child(scene)
 		ship.get_node("parasiteParticles").emitting = true
 
 func _on_burnout_timer_timeout():
-	if $rules.burnoutAmount > 0:
-		var amt = $rules.burnoutAmount
-		$rules.hp -= 3*amt
-		$ship.moveSpeed /= max(1,amt*0.5)
-		$ship.rotationSpeed /= max(1,amt*0.5)
+	if rules.burnoutAmount > 0:
+		var amt = rules.burnoutAmount
+		rules.hp -= 3*amt
+		ship.moveSpeed /= max(1,amt*0.5)
+		ship.rotationSpeed /= max(1,amt*0.5)
 		await get_tree().create_timer(3).timeout
-		$ship.moveSpeed *= max(1,amt*0.5)
-		$ship.rotationSpeed *= max(1,amt*0.5)
+		ship.moveSpeed *= max(1,amt*0.5)
+		ship.rotationSpeed *= max(1,amt*0.5)
 
 
 func _ready():
+	Global.battleScene = self
 	var permStatIndices = []
 	for i in range(deck.size()):
 		permStatIndices.append(i)
@@ -116,8 +119,8 @@ func _ready():
 		scene.set_script(load("res://stars/" + star + ".gd"))
 		if "main" in scene:
 			scene.main = self
-		$rules.add_child(scene)
-	ship.attributes = $rules
+		rules.add_child(scene)
+	ship.attributes = rules
 	money = Global.money
 
 
@@ -157,17 +160,21 @@ func _process(delta):
 		for i in range(deck.size()):
 			if deck[i]:
 				launchers.get_child(i).time = $timers.get_child(i).time_left
-	if $rules.breachAmount > 0:
+	if rules.blockAmount > 0:
+		$CanvasLayer/blockLabel.text = "[img]ART/icons/blockIcon.png[/img] " + str($rules.blockAmount)
+	elif rules.blockAmount <= 0:
+		$CanvasLayer/blockLabel.text = ""
+	if rules.breachAmount > 0:
 		$CanvasLayer/breachLabel.text = "[img]ART/icons/breachIcon.png[/img] " + str($rules.breachAmount)
-	elif $rules.breachAmount <= 0:
+	elif rules.breachAmount <= 0:
 		$CanvasLayer/breachLabel.text = ""
-	if $rules.parasiteAmount > 0:
+	if rules.parasiteAmount > 0:
 		$CanvasLayer/parasiteLabel.text = "[img]ART/icons/parasiteIcon.png[/img] " + str($rules.parasiteAmount)
-	elif $rules.parasiteAmount <= 0:
+	elif rules.parasiteAmount <= 0:
 		$CanvasLayer/parasiteLabel.text = ""
-	if $rules.burnoutAmount > 0:
+	if rules.burnoutAmount > 0:
 		$CanvasLayer/burnoutLabel.text = "[img]ART/icons/burnoutIcon.png[/img] " + str($rules.burnoutAmount)
-	elif $rules.burnoutAmount <= 0:
+	elif rules.burnoutAmount <= 0:
 		$CanvasLayer/burnoutLabel.text = ""
 
 
@@ -282,8 +289,6 @@ func spawn(asteroid, spawned):
 		var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
 		var sceneAttributes = scene.get_node("attributes")
 		var asteroidAttributes = asteroid
-		print(asteroid.name)
-		print(asteroid)
 		sceneAttributes.set_script(load("res://asteroids/" + spawned + ".gd"))
 		scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + spawned + ".png")
 		scene.direction = int(-asteroid.get_parent().direction + randi_range(-120,120))

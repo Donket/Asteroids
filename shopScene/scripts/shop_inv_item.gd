@@ -40,8 +40,8 @@ func changeItem(newItem):
 			sprite.texture = load("res://ART/starArts/" + item + ".png")
 			sprite.visible = true
 			$visuals/TextureProgressBar.visible = false
+			$visuals/RichTextLabel.visible = false
 			empty = false
-	#exp=exp
 
 
 func _process(delta):
