@@ -81,9 +81,24 @@ On Bounce: Spend 3 [img]res://ART/icons/moneyIcon.png[/img] to gain + 1 [img]res
 Has: 2 [img]res://ART/icons/bounceIcon.png[/img]",
 
 	"Gilded Meteor":
-"On Hit: [img]res://ART/icons/moneyIcon.png[/img] +100  
+"On Hit: +100 [img]res://ART/icons/moneyIcon.png[/img]
 Lose 1 random asteroid",
 
+	# Astral Family
+	"Astral Husk":
+"On Spawn: 50% chance +1 [img]res://ART/icons/blockIcon.png[/img]",
+
+	"Astral Rock":
+"On Bounce: +1 [img]res://ART/icons/blockIcon.png[/img]",
+
+	"Astral Gem":
+"On Shot: Convert all parasite, breach, and burnout into block.",
+
+	"Astral Relic":
+"On Spawn: Gain a small percentage boost of all stats which scales with block",
+
+	"Astral Meteor":
+"Oh Hit: Use all your block to deal huge damage which increases with block.",
 
 	# Stars
 	
