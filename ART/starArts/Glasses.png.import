@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp4glg1k7ltsv"
-path="res://.godot/imported/Glass Cannon.png-95e729486c154e4a89cd53bc36ba329d.ctex"
+uid="uid://qlvoa1omqr0p"
+path="res://.godot/imported/Glasses.png-07a085904d878e15a4333a7ac5f64eb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Glass Cannon.png"
-dest_files=["res://.godot/imported/Glass Cannon.png-95e729486c154e4a89cd53bc36ba329d.ctex"]
+source_file="res://ART/starArts/Glasses.png"
+dest_files=["res://.godot/imported/Glasses.png-07a085904d878e15a4333a7ac5f64eb0.ctex"]
 
 [params]
 

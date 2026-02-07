@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qlvoa1omqr0p"
-path="res://.godot/imported/Glasses.png-a9ade4bbb7281bb2a324dd6f397e32a2.ctex"
+uid="uid://cstxwnin3bhap"
+path="res://.godot/imported/Coconut.png-d8a2d1b18b46ab947116e9865956b120.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Glasses.png"
-dest_files=["res://.godot/imported/Glasses.png-a9ade4bbb7281bb2a324dd6f397e32a2.ctex"]
+source_file="res://ART/starArts/Coconut.png"
+dest_files=["res://.godot/imported/Coconut.png-d8a2d1b18b46ab947116e9865956b120.ctex"]
 
 [params]
 

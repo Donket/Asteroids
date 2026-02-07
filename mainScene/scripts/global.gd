@@ -84,8 +84,14 @@ var starsToData: Dictionary = {
 var block = 0: set = updateBlock
 
 func updateBlock(newBlock):
-	block = newBlock
-	battleScene.rules.blockAmount = block
+	var num = numOfStars("Glass Cannon")
+	if num == 0:
+		block = newBlock
+		battleScene.rules.blockAmount = block
+	else:
+		for ast in battleScene.asteroids:
+			if ast != null and is_instance_valid(ast):
+				ast.attributes.damage += 3*num
 
 func hit():
 	if block > 0 and randf_range(0,1) < 0.7:

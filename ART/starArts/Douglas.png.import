@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cstxwnin3bhap"
-path="res://.godot/imported/Coconut.png-7727760a556afbdfc8b2edf6449671ea.ctex"
+uid="uid://bikv0qlaess35"
+path="res://.godot/imported/Douglas.png-80712290c78a7658255718872297fcc9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Coconut.png"
-dest_files=["res://.godot/imported/Coconut.png-7727760a556afbdfc8b2edf6449671ea.ctex"]
+source_file="res://ART/starArts/Douglas.png"
+dest_files=["res://.godot/imported/Douglas.png-80712290c78a7658255718872297fcc9.ctex"]
 
 [params]
 

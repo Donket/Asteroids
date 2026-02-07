@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bikv0qlaess35"
-path="res://.godot/imported/Douglas.png-b60bb92b208c15b0638a76e41fc5aea5.ctex"
+uid="uid://dlsx6law2oqu4"
+path="res://.godot/imported/Radish.png-3b3f2a4642ca53f6d2169b15d2167e2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Douglas.png"
-dest_files=["res://.godot/imported/Douglas.png-b60bb92b208c15b0638a76e41fc5aea5.ctex"]
+source_file="res://ART/starArts/Radish.png"
+dest_files=["res://.godot/imported/Radish.png-3b3f2a4642ca53f6d2169b15d2167e2a.ctex"]
 
 [params]
 

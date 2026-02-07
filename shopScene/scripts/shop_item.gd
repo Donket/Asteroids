@@ -158,6 +158,25 @@ Lose 1 random asteroid",
 "On Crash, each asteroid has a 20% chance to deal its damage to the ship.",
 	"Shotgun":
 "Each time an asteroid is launched, 20% chance to launch an extra and 10% (cannot be increased) chance to launch two extra.",
+	"Bulldozer":
+"On Crash: Gain block proportional to asteroid speed",
+	"Coconut": 
+"On Crash: Convert 2 [img]res://ART/icons/burnoutIcon.png[/img] into 3 [img]res://ART/icons/blockIcon.png[/img]",
+	"Glass Cannon": 
+"When you would gain shield, instead give all current asteroids +3 temporary damage",
+	"Glasses": 
+"On Spawn: Spend 3 [img]res://ART/icons/blockIcon.png[/img] and gain 400% ship tracking",
+	"Radish": 
+"On Hit: Convert 5 [img]res://ART/icons/blockIcon.png[/img] into +3 permanent damage",
+	"Shield": 
+"On Bounce: Gain +1 [img]res://ART/icons/blockIcon.png[/img]",
+#TODO: Implement
+	"Snowman": 
+"If you have at least three snowballs, -30% launch time to all asteroids",
+	"Warhammer": 
+"On Hit: Deal damage equal to three times the sum of all effects.",
+	"Douglas":
+"He's just here for the ride. Every round, 15% chance to turn another star into Douglas."
 }
 
 

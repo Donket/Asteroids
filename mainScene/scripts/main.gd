@@ -102,15 +102,21 @@ func _on_burnout_timer_timeout():
 		ship.moveSpeed *= max(1,amt*0.5)
 		ship.rotationSpeed *= max(1,amt*0.5)
 
+func snowman():
+	if Global.numOfStars("Snowman") > 0:
+		if Global.numOfStars("Snowball") > 2:
+			return pow(0.7,Global.numOfStars("Snowman"))
+	return 1
 
 func _ready():
 	Global.battleScene = self
 	var permStatIndices = []
 	for i in range(deck.size()):
 		permStatIndices.append(i)
+	var snowmanMulti = snowman()
 	for i in deck.size():
 		if deck[i]:
-			$timers.get_child(i).start(deckTimes[i])
+			$timers.get_child(i).start(deckTimes[i]*snowmanMulti)
 			launchers.get_child(i).max_time = deckTimes[i]
 			launchers.get_child(i).index = permStatIndices[i]
 			launchers.get_child(i).texture = load("res://ART/asteroidArts/" + deck[i] + ".png")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlsx6law2oqu4"
-path="res://.godot/imported/Radish.png-a00d7d61c541bae289c3e25447998562.ctex"
+uid="uid://dp4glg1k7ltsv"
+path="res://.godot/imported/Glass Cannon.png-6da0d61a87022f9809e8591a09584cee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Radish.png"
-dest_files=["res://.godot/imported/Radish.png-a00d7d61c541bae289c3e25447998562.ctex"]
+source_file="res://ART/starArts/Glass Cannon.png"
+dest_files=["res://.godot/imported/Glass Cannon.png-6da0d61a87022f9809e8591a09584cee.ctex"]
 
 [params]
 
