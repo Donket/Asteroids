@@ -170,13 +170,13 @@ Lose 1 random asteroid",
 "On Hit: Convert 5 [img]res://ART/icons/blockIcon.png[/img] into +3 permanent damage",
 	"Shield": 
 "On Bounce: Gain +1 [img]res://ART/icons/blockIcon.png[/img]",
-#TODO: Implement
 	"Snowman": 
 "If you have at least three snowballs, -30% launch time to all asteroids",
 	"Warhammer": 
 "On Hit: Deal damage equal to three times the sum of all effects.",
-	"Douglas":
-"He's just here for the ride. Every round, 15% chance to turn another star into Douglas."
+#TODO: Low prio: Implement
+	#"Douglas":
+#"He's just here for the ride. Every round, 15% chance to turn another star into Douglas."
 }
 
 

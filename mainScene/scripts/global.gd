@@ -22,26 +22,31 @@ var firstOpen = true
 var itemsToData: Dictionary = {
 	"Ancient Husk": [50, 0, 110, 55],
 	"Iron Husk": [40, 0, 120, 40],
+	"Astral Husk": [50, 0, 90, 35],
 	"Cursed Husk": [55, 1, 110, 45],
 	"Gilded Husk": [45, 1, 100, 55],
 
 	"Ancient Rock": [120, 1, 130, 70],
 	"Iron Rock": [135, 1, 110, 80],
+	"Astral Rock": [135, 1, 90, 50],
 	"Cursed Rock": [140, 2, 120, 80],
 	"Gilded Rock": [160, 2, 130, 85],
 
 	"Ancient Gem": [170, 2, 230, 95],
 	"Iron Gem": [190, 2, 230, 100],
+	"Astral Gem": [180, 2, 150, 70],
 	"Cursed Gem": [270, 3, 170, 95],
 	"Gilded Gem": [275, 3, 200, 105],
 
 	"Ancient Relic": [355, 3, 200, 105],
 	"Iron Relic": [355, 3, 160, 165],
+	"Astral Relic": [355, 3, 160, 90],
 	"Cursed Relic": [305, 3, 160, 165],
 	"Gilded Relic": [415, 3, 210, 140],
 
 	"Ancient Meteor": [1000, 4, 230, 210],
 	"Iron Meteor": [1000, 4, 210, 205],
+	"Astral Meteor": [1000, 4, 200, 150],
 	"Cursed Meteor": [1000, 4, 210, 180],
 	"Gilded Meteor": [1000, 4, 180, 300]
 
@@ -55,20 +60,27 @@ var starsToData: Dictionary = {
 	"Loose Change": [90, 0],
 	"Payday": [110, 0],
 	"Tip Jar": [85, 1],
+	"Shield": [85, 0],
+	"Glasses": [100, 0],
 
 	"Dice": [140, 1],
 	"Backpack": [150, 1],
+	"Bulldozer": [150, 1],
 	"Goop": [130, 2],
 	"Steak": [160, 2],
+	"Radish": [160, 2],
 	"Friendly Customer": [145, 2],
 	"Snowball": [135, 2],
+	"Glass Cannon": [135, 2],
 	"Lethal": [170, 2],
 	"Golden Tooth": [180, 2],
 	"Coupon Book": [140, 2],
 	"Binky": [150, 2],
 	"Suicide Bomb": [120, 2],
+	"Coconut": [120, 2],
 
 	"Spider": [260, 3],
+	"Snowman": [280, 3],
 	"Throw Pillow": [250, 3],
 	"Bottle": [230, 3],
 	"Speedometer": [250, 3],
@@ -77,9 +89,11 @@ var starsToData: Dictionary = {
 	"Shotgun": [280, 3],
 
 	"Pipe": [500, 4],
+	"Warhammer": [500, 4],
 	"Piggy Bank": [500, 4],
 	"Light Fingers": [500, 4]
 }
+
 
 var block = 0: set = updateBlock
 
