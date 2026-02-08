@@ -17,7 +17,6 @@ func onCrash():
 		for child in Global.itemsToData.keys():
 			if "Rock" in child:
 				arr.append(child)
-		for i in range(level):
-			main.spawn(self, arr.pick_random())
+		main.spawn(self, arr.pick_random())
 	else:
 		Global.asteroidPermStats[launcher.index][1] += 5*level

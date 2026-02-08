@@ -15,4 +15,4 @@ func onHit():
 	if Global.randChance(50):
 		main.money += 3*level
 	else:
-		main.money -= 2*level
+		main.money -= 2+level

@@ -10,6 +10,7 @@ var bounces = 0
 var damage = 40
 
 func onSpawn():
-	bounces = Global.getLevel(launcher.index)
+	var level = Global.getLevel(launcher.index)
+	bounces = level
 
 

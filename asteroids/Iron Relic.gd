@@ -8,13 +8,14 @@ var main
 
 var baseSpeed = 160
 var baseAcceleration = 0
-var bounces = 1
+var bounces = 0
 
 var damage = 165
 
-
+func onSpawn():
+	var level = Global.getLevel(launcher.index)
+	bounces = level
 
 func onBounce():
-	var level = Global.getLevel(launcher.index)
-	get_parent().acceleration += 50*level
+	get_parent().acceleration += 50
 

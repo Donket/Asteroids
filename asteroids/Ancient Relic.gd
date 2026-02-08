@@ -19,6 +19,6 @@ func onCrash():
 	for child in Global.itemsToData.keys():
 		if "Relic" in child and child != "Ancient Relic":
 			arr.append(child)
-	for i in range(Global.getLevel(launcher.index)):
+	for i in range(level):
 		main.spawn(self, arr.pick_random())
 		

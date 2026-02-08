@@ -18,7 +18,7 @@ func onHit():
 	for child in Global.itemsToData.keys():
 		if "Ancient" in child and child != "Ancient Meteor":
 			arr.append(child)
-	for i in range(Global.getLevel(launcher.index)):
+	for i in range(level):
 		main.spawn(self, arr.pick_random())
 		main.spawn(self, arr.pick_random())
 		main.spawn(self, arr.pick_random())

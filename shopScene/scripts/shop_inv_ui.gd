@@ -1,10 +1,10 @@
 extends Control
 
 
-var itemToDesc
+var itemsToDesc
 
 func _ready():
-	itemToDesc = Global.itemToDesc
+	itemsToDesc = Global.itemsToDesc
 	refresh()
 
 

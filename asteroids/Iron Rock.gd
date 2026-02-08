@@ -13,6 +13,6 @@ var damage = 80
 
 func onCrash():
 	var level = Global.getLevel(launcher.index)
-	for i in min(round(pow(level,1.7)),15):
+	for i in 1+level*2:
 		main.spawn(self, "Iron Husk")
 

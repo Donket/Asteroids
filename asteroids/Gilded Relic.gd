@@ -9,7 +9,10 @@ var bounces = 2
 
 var damage = 140
 
+func onSpawn():
+	var level = Global.getLevel(launcher.index)
+	bounces = level+1
 
 func onBounce():
 	var level = Global.getLevel(launcher.index)
-	main.money += 5*level
+	main.money += 5+3*level

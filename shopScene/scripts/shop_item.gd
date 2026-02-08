@@ -76,13 +76,14 @@ func randomizeItem():
 
 func updateData():
 	$Control/RichTextLabel.text = "[center]" + item
-	$Control/RichTextLabel2.text = itemsToDesc[item]
 	if type == Type.ASTEROID:
+		$Control/RichTextLabel2.text = Global.getDesc(item,1)
 		$RichTextLabel.text = "[center]" + str(cost)
 		$Node2D.texture = load("res://ART/asteroidArts/" + item + ".png")
 		$Control/spdLabel.text = "[center]"+str(Global.itemsToData[item][2])
 		$Control/dmgLabel.text = "[center]"+str(Global.itemsToData[item][3])
 	else:
+		$Control/RichTextLabel2.text = itemsToDesc[item]
 		$RichTextLabel.text = "[center]" + str(cost)
 		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
 	

@@ -19,95 +19,141 @@ var turn = 0
 var firstOpen = true
 
 var itemsToDesc = {
+	
+	# --- IRON FAMILY ---
+	"Iron Husk": {
+		"text": "Has: {bounces} [img]res://ART/icons/bounceIcon.png[/img]",
+		"base": {"bounces": 1},
+		"gain": {"bounces": 1}
+	},
+	"Iron Rock": {
+		"text": "On Crash: [img]res://ART/icons/spawnIcon.png[/img] {count} Iron Husk",
+		"base": {"count": 1},
+		"gain": {"count": 2}
+	},
+	"Iron Gem": {
+		"text": "On Hit: Apply {breach} [img]res://ART/icons/breachIcon.png[/img]",
+		"base": {"breach": 1},
+		"gain": {"breach": 1}
+	},
+	"Iron Relic": {
+		"text": "On Bounce: Gain Acceleration\nHas: {bounces} [img]res://ART/icons/bounceIcon.png[/img]",
+		"base": {"bounces": 1},
+		"gain": {"bounces": 1}
+	},
+	"Iron Meteor": {
+		"text": "On Hit: [img]res://ART/icons/spawnIcon.png[/img] {count} random Irons",
+		"base": {"count": 2},
+		"gain": {"count": 2}
+	},
 
-	# Iron Family
-	"Iron Husk": 
-"Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
+	# --- ANCIENT FAMILY ---
+	"Ancient Husk": {
+		"text": "On Hit: Apply [img]res://ART/icons/burnoutIcon.png[/img] ({chance}% chance)",
+		"base": {"chance": 25},
+		"gain": {"chance": 25}
+	},
+	"Ancient Rock": {
+		"text": "On Hit: Apply {parasite} [img]res://ART/icons/parasiteIcon.png[/img]",
+		"base": {"parasite": 1},
+		"gain": {"parasite": 1}
+	},
+	"Ancient Gem": {
+		"text": "On Hit: Activates [img]res://ART/icons/breachIcon.png[/img] {count} times",
+		"base": {"count": 1},
+		"gain": {"count": 1}
+	},
+	"Ancient Relic": {
+		"text": "On Crash: [img]res://ART/icons/spawnIcon.png[/img] {count} random Relic (can't spawn Ancient Relic)",
+		"base": {"count": 1},
+		"gain": {"count": 1}
+	},
+	"Ancient Meteor": {
+		"text": "On Hit: [img]res://ART/icons/spawnIcon.png[/img] {count} Ancients",
+		"base": {"count": 3},
+		"gain": {"count": 3}
+	},
 
-	"Iron Rock": 
-"On Crash: [img]res://ART/icons/spawnIcon.png[/img] Iron Husk",
+	# --- CURSED FAMILY ---
+	"Cursed Husk": {
+		"text": "On Hit: 50% chance + {win} [img]res://ART/icons/moneyIcon.png[/img]\nOtherwise - {loss} [img]res://ART/icons/moneyIcon.png[/img]",
+		"base": {"win": 3, "loss": 2},
+		"gain": {"win": 3, "loss": 1}
+	},
+	"Cursed Rock": {
+		"text": "On Crash: 50% chance [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance gain +{dmg} permanent damage",
+		"base": {"dmg": 5},
+		"gain": {"dmg": 5}
+	},
+	"Cursed Gem": {
+		"text": "On Hit: 50% chance to apply {breach} [img]res://ART/icons/breachIcon.png[/img], 50% chance to apply {burnout} [img]res://ART/icons/burnoutIcon.png[/img]",
+		"base": {"breach": 2, "burnout": 1},
+		"gain": {"breach": 1, "burnout": 1}
+	},
+	"Cursed Relic": {
+		"text": "Has: 1 [img]res://ART/icons/bounceIcon.png[/img]\nOn Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - {pen} damage",
+		"base": {"pen": 20},
+		"gain": {"pen": -10}
+	},
+	"Cursed Meteor": {
+		"text": "On Hit: [img]res://ART/icons/spawnIcon.png[/img] {count} Cursed. Each has a 50% chance to be destroyed immediately",
+		"base": {"count": 4},
+		"gain": {"count": 4}
+	},
 
-	"Iron Gem": 
-"On Hit: Apply 1 [img]res://ART/icons/breachIcon.png[/img]",
+	# --- GILDED FAMILY ---
+	"Gilded Husk": {
+		"text": "On Hit: Gain +{money} [img]res://ART/icons/moneyIcon.png[/img]",
+		"base": {"money": 2},
+		"gain": {"money": 2}
+	},
+	"Gilded Rock": {
+		"text": "Has: 1 [img]res://ART/icons/bounceIcon.png[/img]\nOn Bounce: Spend {cost} [img]res://ART/icons/moneyIcon.png[/img] to gain + 1 [img]res://ART/icons/bounceIcon.png[/img].",
+		"base": {"cost": 3},
+		"gain": {"cost": -1}
+	},
+	"Gilded Gem": {
+		"text": "On Crash: If you have 100+ [img]res://ART/icons/moneyIcon.png[/img], convert 10 [img]res://ART/icons/moneyIcon.png[/img] into +{stat} permanent damage and +{stat} permanent speed",
+		"base": {"stat": 4},
+		"gain": {"stat": 4}
+	},
+	"Gilded Relic": {
+		"text": "On Bounce: Gain +{money} [img]res://ART/icons/moneyIcon.png[/img]\nHas: {bounces} [img]res://ART/icons/bounceIcon.png[/img]",
+		"base": {"money": 5, "bounces": 2},
+		"gain": {"money": 3, "bounces": 1}
+	},
+	"Gilded Meteor": {
+		"text": "On Hit: +{money} [img]res://ART/icons/moneyIcon.png[/img]\nLose 1 random asteroid",
+		"base": {"money": 100},
+		"gain": {"money": 100}
+	},
 
-	"Iron Relic": 
-"On Bounce: Gain Acceleration
-
-Has: 1 [img]res://ART/icons/bounceIcon.png[/img]",
-
-	"Iron Meteor": 
-"On Hit: [img]res://ART/icons/spawnIcon.png[/img] 2 random Irons",
-
-
-	# Ancient Family
-	"Ancient Husk": 
-"On Hit: Apply [img]res://ART/icons/burnoutIcon.png[/img] (25% chance)",
-
-	"Ancient Rock": 
-"On Hit: Apply 1 [img]res://ART/icons/parasiteIcon.png[/img]",
-
-	"Ancient Gem": 
-"On Hit: Activates [img]res://ART/icons/breachIcon.png[/img]",
-
-	"Ancient Relic": 
-"On Crash: [img]res://ART/icons/spawnIcon.png[/img] random Relic (can't spawn Ancient Relic)",
-
-	"Ancient Meteor": 
-"On Hit: [img]res://ART/icons/spawnIcon.png[/img] 3 Ancients",
-
-
-	# Cursed Family
-	"Cursed Husk": 
-"On Hit: 50% chance + 3 [img]res://ART/icons/moneyIcon.png[/img]
-Otherwise - 2 [img]res://ART/icons/moneyIcon.png[/img]",
-
-	"Cursed Rock": 
-"On Crash: 50% chance [img]res://ART/icons/spawnIcon.png[/img] a random Rock, 50% chance gain +5 permanent damage",
-
-	"Cursed Gem": 
-"On Hit: 50% chance to apply 2 [img]res://ART/icons/breachIcon.png[/img], 50% chance to apply 1 [img]res://ART/icons/burnoutIcon.png[/img]",
-
-	"Cursed Relic": 
-"Has: 1 [img]res://ART/icons/bounceIcon.png[/img]
-On Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - 20 damage",
-
-	"Cursed Meteor": 
-"On Hit: [img]res://ART/icons/spawnIcon.png[/img] 4 Cursed. Each has a 50% chance to be destroyed immediately",
-
-	# Gilded Family
-	"Gilded Husk":
-"On Hit: Gain +2 [img]res://ART/icons/moneyIcon.png[/img]",
-
-	"Gilded Rock":
-"Has: 1 [img]res://ART/icons/bounceIcon.png[/img]
-On Bounce: Spend 3 [img]res://ART/icons/moneyIcon.png[/img] to gain + 1 [img]res://ART/icons/bounceIcon.png[/img].",
-
-	"Gilded Gem":
-"On Crash: If you have 100+ [img]res://ART/icons/moneyIcon.png[/img], convert 10 [img]res://ART/icons/moneyIcon.png[/img] into +4 permanent damage and +4 permanent speed",
-
-	"Gilded Relic":
-"On Bounce: Gain +5 [img]res://ART/icons/moneyIcon.png[/img]  
-Has: 2 [img]res://ART/icons/bounceIcon.png[/img]",
-
-	"Gilded Meteor":
-"On Hit: +100 [img]res://ART/icons/moneyIcon.png[/img]
-Lose 1 random asteroid",
-
-	# Astral Family
-	"Astral Husk":
-"On Spawn: 50% chance +1 [img]res://ART/icons/blockIcon.png[/img]",
-
-	"Astral Rock":
-"On Bounce: +1 [img]res://ART/icons/blockIcon.png[/img]",
-
-	"Astral Gem":
-"On Shot: Convert all parasite, breach, and burnout into block.",
-
-	"Astral Relic":
-"On Spawn: Gain a small percentage boost of all stats which scales with block",
-
-	"Astral Meteor":
-"Oh Hit: Use all your block to deal huge damage which increases with block.",
+	# --- ASTRAL FAMILY ---
+	"Astral Husk": {
+		"text": "On Spawn: 50% chance +{block} [img]res://ART/icons/blockIcon.png[/img]",
+		"base": {"block": 1},
+		"gain": {"block": 1}
+	},
+	"Astral Rock": {
+		"text": "On Bounce: +{block} [img]res://ART/icons/blockIcon.png[/img]",
+		"base": {"block": 1},
+		"gain": {"block": 1}
+	},
+	"Astral Gem": {
+		"text": "On Shot: Convert all parasite, breach, and burnout into block, multiplied by {multi}.",
+		"base": {"multi": 1},
+		"gain": {"multi": 0.5}
+	},
+	"Astral Relic": {
+		"text": "On Spawn: Gain a {perc}% boost of all stats. This effect is multiplied by current [img]res://ART/icons/blockIcon.png[/img].",
+		"base": {"perc": 0.5},
+		"gain": {"perc": 5}
+	},
+	"Astral Meteor": {
+		"text": "Oh Hit: Use all your block to deal {mult} base damage. This scales exponentially with [img]res://ART/icons/blockIcon.png[/img].",
+		"base": {"mult": 40},
+		"gain": {"mult": 40}
+	},
 
 	# Stars
 	
@@ -174,7 +220,7 @@ Lose 1 random asteroid",
 	"Coconut": 
 "On Crash: Convert 2 [img]res://ART/icons/burnoutIcon.png[/img] into 3 [img]res://ART/icons/blockIcon.png[/img]",
 	"Glass Cannon": 
-"When you would gain shield, instead give all current asteroids +3 temporary damage",
+"When you would gain [img]res://ART/icons/blockIcon.png[/img], instead give all current asteroids +3 temporary damage",
 	"Glasses": 
 "On Spawn: Spend 3 [img]res://ART/icons/blockIcon.png[/img] and gain 400% ship tracking",
 	"Radish": 
@@ -189,6 +235,16 @@ Lose 1 random asteroid",
 	#"Douglas":
 #"He's just here for the ride. Every round, 15% chance to turn another star into Douglas."
 }
+
+func getDesc(item, level):
+	var data = itemsToDesc[item]
+	var placeholders = {}
+	for stat in data["base"].keys():
+		var base=data["base"][stat]
+		var gain=data["gain"][stat]
+		placeholders[stat]=base+(gain*(level-1))
+	return data["text"].format(placeholders)
+
 
 # item : [cost, rarity, speed, damage]
 var itemsToData: Dictionary = {
