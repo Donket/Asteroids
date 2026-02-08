@@ -2,11 +2,11 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = [null, null, null, null, null, null]
+var asteroidsDeck = ["Astral Rock", "Astral Rock", "Astral Rock", "Astral Rock", "Astral Rock", "Astral Rock"]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = []
+var starsDeck = ["Trampoline", "Trampoline", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", ]
 var itemGrabbed = null
 var overSell = false
 var money = 300
@@ -59,6 +59,7 @@ var starsToData: Dictionary = {
 	"Steering Wheel": [110, 0],
 	"Loose Change": [90, 0],
 	"Payday": [110, 0],
+	"Trampoline": [90, 0],
 	"Tip Jar": [85, 1],
 	"Shield": [85, 0],
 	"Glasses": [100, 0],

@@ -108,6 +108,8 @@ Lose 1 random asteroid",
 "Asteroid Acceleration +30",
 	"Backpack": 
 "Asteroids gain 1% speed for each Star you own",
+	"Trampoline": 
+"On spawn, asteroids have a 30% chance to gain 1 bounce",
 	"Goop": 
 "Asteroids in Slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, On Bounce they lose 20 speed",
 	"Hanger":
