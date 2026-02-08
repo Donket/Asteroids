@@ -3,14 +3,14 @@ extends Node
 var launcher
 var main
 
-var baseSpeed = 130
+var baseSpeed = 90
 var baseAcceleration = 0
 var bounces = 0
 
-var damage = 70
+var damage = 50
 
 
 
-func onHit():
+func onBounce():
 	var level = Global.getLevel(launcher.index)
 	Global.block += level

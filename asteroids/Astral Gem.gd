@@ -4,7 +4,7 @@ extends Node
 var launcher
 var main
 
-var baseSpeed = 130
+var baseSpeed = 150
 var baseAcceleration = 0
 var bounces = 0
 

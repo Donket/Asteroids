@@ -2,11 +2,11 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Astral Rock", "Astral Rock", "Astral Rock", "Astral Rock", "Astral Rock", "Astral Rock"]
+var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = ["Trampoline", "Trampoline", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", "Dice", ]
+var starsDeck = []
 var itemGrabbed = null
 var overSell = false
 var money = 300
@@ -109,7 +109,7 @@ func updateBlock(newBlock):
 				ast.attributes.damage += 3*num
 
 func hit():
-	if block > 0 and randf_range(0,1) < 0.7:
+	if block > 0:
 		block -= 1
 		return false
 	else:

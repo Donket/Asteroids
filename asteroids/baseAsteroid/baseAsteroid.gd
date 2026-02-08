@@ -97,20 +97,22 @@ func parasite():
 func _on_area_2d_body_entered(body):
 	if parasiteStart or dead:
 		return
-	if body == ship:
+	elif body == ship:
 		if attributes.has_method("onHit"):
 			attributes.onHit()
 		if attributes.has_method("onCrash"):
 			attributes.onCrash()
 		get_parent().onHit($".")
-	elif body.name == "bullet":
+		die()
+		return
+	else:
 		if attributes.has_method("onShot"):
 			attributes.onShot()
 		body.queue_free()
 		get_parent().onShot($".")
-		if not Global.hit():
-			return
-	die()
+		if Global.hit():
+			die()
+		return
 
 
 func die():
