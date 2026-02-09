@@ -8,6 +8,7 @@ var rotationSpeed = 5.0
 var hp = 200: set = hurt
 var asteroidsInRange = []
 var readyForShot = false
+var shootingDisabled = false
 
 @onready var damageLabel = preload("res://ship/scenes/ship_damage_label.tscn")
 
@@ -62,7 +63,7 @@ func _on_timer_timeout():
 
 
 func shoot(target):
-	if randi_range(0,max(0,3-floor(Global.turn/2))) > 0:
+	if shootingDisabled or randi_range(0,max(0,3-floor(Global.turn/2))) > 0:
 		return
 	var bullet_speed = 500.0
 	var shooter_pos = position

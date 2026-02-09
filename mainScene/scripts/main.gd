@@ -98,9 +98,11 @@ func _on_burnout_timer_timeout():
 		rules.hp -= 3*amt
 		ship.moveSpeed /= max(1,amt*0.5)
 		ship.rotationSpeed /= max(1,amt*0.5)
+		ship.shootingDisabled = true
 		await get_tree().create_timer(3).timeout
 		ship.moveSpeed *= max(1,amt*0.5)
 		ship.rotationSpeed *= max(1,amt*0.5)
+		ship.shootingDisabled = false
 
 func snowman():
 	if Global.numOfStars("Snowman") > 0:
