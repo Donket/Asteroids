@@ -8,6 +8,7 @@ var grabbed = false
 var inRange = false
 var empty = false
 var exp = 0: set = changeExp
+var open = false
 
 var defaultCursor = preload("res://ART/uiArts/cursor.png")
 var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
@@ -19,6 +20,7 @@ func changeExp(newExp):
 	$visuals/TextureProgressBar.value = exp % 3
 	if item != null:
 		$visuals/RichTextLabel.text = "[center]"+str(Global.getLevel(slotIndex))
+		$panel/RichTextLabel2.text = Global.getDesc(item,Global.getLevel(slotIndex))
 	else:
 		$visuals/RichTextLabel.text = ""
 
@@ -33,11 +35,20 @@ func changeItem(newItem):
 	else:
 		if type == Type.ASTEROID:
 			sprite.texture = load("res://ART/asteroidArts/" + item + ".png")
+			$panel/RichTextLabel.text = "[center]"+item
+			$panel/RichTextLabel2.text = Global.getDesc(item,Global.getLevel(slotIndex))
+			$panel/spdLabel.text = "[center]"+str(Global.itemsToData[item][2]+Global.asteroidPermStats[slotIndex][0])
+			$panel/dmgLabel.text = "[center]"+str(Global.itemsToData[item][3]+Global.asteroidPermStats[slotIndex][1])
 			sprite.visible = true
 			$visuals/TextureProgressBar.visible = true
 			empty = false
 		else:
 			sprite.texture = load("res://ART/starArts/" + item + ".png")
+			$panel/RichTextLabel.text = "[center]"+item
+			$panel/RichTextLabel2.text = Global.itemsToDesc[item]
+			$panel/RichTextLabel5.visible = false
+			$panel/RichTextLabel6.visible = false
+			$panel/Sprite2D.texture = load("res://ART/uiArts/starShopPanel.png")
 			sprite.visible = true
 			$visuals/TextureProgressBar.visible = false
 			$visuals/RichTextLabel.visible = false
@@ -55,6 +66,8 @@ func _input(event):
 	if Input.is_action_just_pressed("click") and inRange:
 		grabbed = true
 		Global.itemGrabbed = $"."
+		$AnimationPlayer.play("close")
+		open = false
 	
 	if grabbed and !Input.is_action_pressed("click"):
 		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
@@ -110,14 +123,22 @@ func _on_control_mouse_entered():
 	inRange = true
 	if empty == false and Global.itemGrabbed == null:
 		Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		$AnimationPlayer.play("open")
+		open = true
 
 
 func _on_control_mouse_exited():
 	inRange = false
 	if empty == false and Global.itemGrabbed == null:
 		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		$AnimationPlayer.play("close")
+		open = false
 
 
 func clear_global_grab():
 	if Global.itemGrabbed == self:
 		Global.itemGrabbed = null
+		if inRange and !open:
+			$AnimationPlayer.play("open")

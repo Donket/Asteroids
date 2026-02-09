@@ -1,10 +1,65 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds8oq5sb4tjr4"]
+[gd_scene load_steps=11 format=3 uid="uid://ds8oq5sb4tjr4"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop_inv_item.gd" id="1_f8hhc"]
 [ext_resource type="Texture2D" uid="uid://cojgg6l54t7lw" path="res://ART/asteroidArts/Ancient Relic.png" id="2_4f134"]
 [ext_resource type="Texture2D" uid="uid://dmexs81c4mspu" path="res://ART/uiArts/expBar.png" id="3_s5geq"]
 [ext_resource type="Texture2D" uid="uid://bv8jgjedqmvsf" path="res://ART/uiArts/expEmpty.png" id="4_ugomh"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="5_eewk6"]
+[ext_resource type="Texture2D" uid="uid://iqnajpomo23a" path="res://ART/uiArts/shopPanel.png" id="6_j2l37"]
+
+[sub_resource type="Animation" id="Animation_6bjdr"]
+resource_name = "close"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_j5gxj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_auq8j"]
+resource_name = "open"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.00136e-05, 1.00136e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g3qgn"]
+_data = {
+"RESET": SubResource("Animation_j5gxj"),
+"close": SubResource("Animation_6bjdr"),
+"open": SubResource("Animation_auq8j")
+}
 
 [node name="shopInvItem" type="Control"]
 layout_mode = 3
@@ -53,6 +108,96 @@ texture_progress = ExtResource("3_s5geq")
 position = Vector2(0, 20)
 scale = Vector2(4, 4)
 texture = ExtResource("2_4f134")
+
+[node name="panel" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_top = 77.0
+offset_bottom = 77.0
+scale = Vector2(1e-05, 1e-05)
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="panel"]
+scale = Vector2(5, 5)
+texture = ExtResource("6_j2l37")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -150.0
+offset_top = -215.0
+offset_right = 150.0
+offset_bottom = -115.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_eewk6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "
+[center]Iron Rock"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -140.0
+offset_top = -88.0
+offset_right = 216.0
+offset_bottom = 391.0
+scale = Vector2(0.8, 0.8)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("5_eewk6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+
+[node name="dmgLabel" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -150.0
+offset_top = 190.0
+offset_right = -65.0
+offset_bottom = 226.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_eewk6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]1055"
+
+[node name="spdLabel" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 190.0
+offset_right = 150.0
+offset_bottom = 226.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_eewk6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]1055"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -155.0
+offset_top = 139.0
+offset_right = -55.0
+offset_bottom = 175.0
+theme_override_fonts/normal_font = ExtResource("5_eewk6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]DMG"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 139.0
+offset_right = 155.0
+offset_bottom = 175.0
+theme_override_fonts/normal_font = ExtResource("5_eewk6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]SPD"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g3qgn")
+}
 
 [connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
