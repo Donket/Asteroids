@@ -13,7 +13,7 @@ var shootingDisabled = false
 @onready var damageLabel = preload("res://ship/scenes/ship_damage_label.tscn")
 
 func _ready():
-	$shootTimer.wait_time = 2 - min(1/6*Global.turn+1/10*Global.starsDeck.size(),1.95)
+	$shootTimer.wait_time = 1 - min(1/6*Global.turn+1/10*Global.starsDeck.size(),0.99)
 
 func hurt(newHp):
 	if newHp < hp:
@@ -63,7 +63,7 @@ func _on_timer_timeout():
 
 
 func shoot(target):
-	if shootingDisabled or randi_range(0,max(0,3-floor(Global.turn/2))) > 0:
+	if shootingDisabled:
 		return
 	var bullet_speed = 500.0
 	var shooter_pos = position
@@ -123,6 +123,7 @@ func _on_redraw_targets_timeout():
 func _on_area_2d_area_entered(area):
 	asteroidsInRange.append(area.get_parent())
 	if readyForShot:
+		readyForShot = false
 		shoot(area.get_parent())
 
 func _on_area_2d_area_exited(area):

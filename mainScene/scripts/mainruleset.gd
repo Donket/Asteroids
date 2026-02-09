@@ -4,8 +4,8 @@ extends Node2D
 #can buy new rulesets, altering the objective and changing what gains money/the win and lose
 #conditions. I've brainstormed and prototyped this but haven't had time to add it yet 
 
-var hp = 150: set = hurt
-var maxHP = 150
+var hp = 100: set = hurt
+var maxHP = 100
 var breachAmount = 0
 var blockAmount = 0
 var burnoutAmount = 0
@@ -28,8 +28,9 @@ func _ready():
 	initializeStats()
 
 func initializeStats():
-	maxHP *= pow(1.4,Global.turn)
+	maxHP *= pow(1.1,Global.turn)
 	maxHP *= max(1,Global.starsDeck.size()*1/4)
+	maxHP *= 1.5
 	hp = maxHP
 	
 

@@ -266,7 +266,10 @@ func launch(index, atEdge):
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://shopScene/scenes/shop.tscn")
+	if Global.wins >= Global.maxWins or Global.health <= 0:
+		get_tree().change_scene_to_file("res://mainScene/scenes/end.tscn")
+	else:
+		get_tree().change_scene_to_file("res://shopScene/scenes/shop.tscn")
 
 
 func _on_button_mouse_entered():
