@@ -18,6 +18,7 @@ README
 	GAME CREDITS:
 
 		All code, game concept, and assets were created by myself. 
+		Audio by Not-Jam (not-jam.itch.io)
 
 
 

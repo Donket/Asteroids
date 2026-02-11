@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cf4dxpqmpy8f2"]
+[gd_scene load_steps=14 format=3 uid="uid://cf4dxpqmpy8f2"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop.gd" id="1_d4jli"]
 [ext_resource type="Texture2D" uid="uid://gufgyg1kc8ah" path="res://ART/uiArts/shopsprites.png" id="2_30pk5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dlvp2kmfksqqn" path="res://shopScene/scenes/shop_inv_ui.tscn" id="6_31cc4"]
 [ext_resource type="PackedScene" uid="uid://cspev8t5agspi" path="res://startup/scenes/tutorial.tscn" id="7_ekylw"]
 [ext_resource type="Texture2D" uid="uid://b7545fiadwyey" path="res://ART/uiArts/shopTutorialButton.png" id="8_irtrg"]
+[ext_resource type="AudioStream" uid="uid://6qyttirmp84r" path="res://MUSIC/grumpy_shopkeep_loopable.wav" id="9_r4k7b"]
 
 [sub_resource type="Animation" id="Animation_pqf0s"]
 length = 0.001
@@ -324,6 +325,10 @@ text = "[center]Tutorial"
 
 [node name="tutorial" parent="." instance=ExtResource("7_ekylw")]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_r4k7b")
+autoplay = true
 
 [connection signal="mouse_entered" from="RollButton" to="." method="_on_roll_button_mouse_entered"]
 [connection signal="mouse_exited" from="RollButton" to="." method="_on_roll_button_mouse_exited"]

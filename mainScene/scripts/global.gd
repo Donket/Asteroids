@@ -2,16 +2,16 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Gilded Meteor", "Gilded Meteor", "Gilded Meteor", null, null, null]
+var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = ["Steering Wheel", "Steering Wheel", "Boot"]
+var starsDeck = []
 var itemGrabbed = null
 var overSell = false
 var money = 300
 
-var wins = 9
+var wins = 0
 var maxWins = 10
 var health = 10
 

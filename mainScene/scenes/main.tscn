@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq61aqbals68d"]
+[gd_scene load_steps=10 format=3 uid="uid://dq61aqbals68d"]
 
 [ext_resource type="Script" path="res://mainScene/scripts/main.gd" id="1_aanir"]
 [ext_resource type="Script" path="res://mainScene/scripts/timers.gd" id="2_t1drb"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="6_w4eqt"]
 [ext_resource type="PackedScene" uid="uid://b3llxpelm4eeb" path="res://ship/scenes/ship.tscn" id="7_n35oc"]
 [ext_resource type="Script" path="res://mainScene/scripts/mainruleset.gd" id="8_7gyde"]
+[ext_resource type="AudioStream" uid="uid://b8n863tfw8lpd" path="res://MUSIC/battle_commences_loopable.wav" id="9_6cs4h"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_aanir")
@@ -264,6 +265,10 @@ script = ExtResource("8_7gyde")
 
 [node name="rulesTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_6cs4h")
+autoplay = true
 
 [connection signal="timeout" from="timers/Timer1" to="timers" method="_on_timer_timeout"]
 [connection signal="timeout" from="timers/Timer2" to="timers" method="_on_timer_2_timeout"]
