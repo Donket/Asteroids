@@ -1,5 +1,9 @@
 extends Control
 
+@onready var sellSfx = $"../sell"
+@onready var clickSfx = $"../click"
+@onready var hoverSfx = $"../hover"
+
 
 var itemsToDesc
 

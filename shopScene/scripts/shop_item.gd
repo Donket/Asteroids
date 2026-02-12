@@ -8,6 +8,8 @@ var item: String = "": set = change
 var currentBaseRarity: int = 0
 
 @onready var shop = get_parent().get_parent()
+@onready var hoverSfx = shop.get_node("hover")
+@onready var clickSfx = shop.get_node("click")
 
 var itemsToDesc
 
@@ -109,6 +111,7 @@ func _ready():
 
 func _on_control_2_mouse_entered():
 	if shop.invOpen != true:
+		hoverSfx.playing=true
 		$AnimationPlayer.play("open")
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -121,6 +124,7 @@ func _on_control_2_mouse_exited():
 
 
 func _on_control_2_pressed():
+	clickSfx.playing=true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	buy(true)
 

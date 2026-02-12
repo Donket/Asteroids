@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cf4dxpqmpy8f2"]
+[gd_scene load_steps=17 format=3 uid="uid://cf4dxpqmpy8f2"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop.gd" id="1_d4jli"]
 [ext_resource type="Texture2D" uid="uid://gufgyg1kc8ah" path="res://ART/uiArts/shopsprites.png" id="2_30pk5"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cspev8t5agspi" path="res://startup/scenes/tutorial.tscn" id="7_ekylw"]
 [ext_resource type="Texture2D" uid="uid://b7545fiadwyey" path="res://ART/uiArts/shopTutorialButton.png" id="8_irtrg"]
 [ext_resource type="AudioStream" uid="uid://6qyttirmp84r" path="res://MUSIC/grumpy_shopkeep_loopable.wav" id="9_r4k7b"]
+[ext_resource type="AudioStream" uid="uid://bh0er6eraotlx" path="res://MUSIC/sfx/hover.wav" id="10_haxow"]
+[ext_resource type="AudioStream" uid="uid://d3c618h3mtol1" path="res://MUSIC/sfx/accept.wav" id="11_akndf"]
+[ext_resource type="AudioStream" uid="uid://dkqg28jrsr0i4" path="res://MUSIC/sfx/spawn.wav" id="12_y3r6p"]
 
 [sub_resource type="Animation" id="Animation_pqf0s"]
 length = 0.001
@@ -329,6 +332,18 @@ visible = false
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_r4k7b")
 autoplay = true
+
+[node name="hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_haxow")
+volume_db = 8.0
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_akndf")
+volume_db = 8.0
+
+[node name="sell" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_y3r6p")
+volume_db = 8.0
 
 [connection signal="mouse_entered" from="RollButton" to="." method="_on_roll_button_mouse_entered"]
 [connection signal="mouse_exited" from="RollButton" to="." method="_on_roll_button_mouse_exited"]

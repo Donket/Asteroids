@@ -9,6 +9,7 @@ var inRange = false
 var empty = false
 var exp = 0: set = changeExp
 var open = false
+@onready var invUi = get_parent().get_parent()
 
 var defaultCursor = preload("res://ART/uiArts/cursor.png")
 var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
@@ -64,6 +65,7 @@ func _input(event):
 	var starSold = false
 	
 	if Input.is_action_just_pressed("click") and inRange:
+		invUi.clickSfx.playing = true
 		grabbed = true
 		Global.itemGrabbed = $"."
 		$AnimationPlayer.play("close")
@@ -75,12 +77,13 @@ func _input(event):
 		$visuals.position = Vector2(0, 0)
 		
 		if Global.overSell:
+			invUi.sellSfx.playing = true
 			if type == Type.ASTEROID:
-				get_parent().get_parent().get_parent().money += Global.itemsToData[item][0]/2
+				invUi.get_parent().money += Global.itemsToData[item][0]/2
 				Global.asteroidPermStats[slotIndex] = [0,0]
 				changeItem(null)
 			else:
-				get_parent().get_parent().get_parent().money += Global.starsToData[item][0]/2
+				invUi.get_parent().money += Global.starsToData[item][0]/2
 				starSold = true
 				
 		
@@ -121,6 +124,7 @@ func _input(event):
 
 func _on_control_mouse_entered():
 	inRange = true
+	invUi.hoverSfx.playing = true
 	if empty == false and Global.itemGrabbed == null:
 		Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
