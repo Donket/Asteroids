@@ -31,6 +31,9 @@ func initializeStats():
 	maxHP *= pow(1.1,Global.turn)
 	maxHP *= max(1,Global.starsDeck.size()*1/4)
 	maxHP *= 1.5
+	if Global.wins + 1*pow(2,Global.numOfStars("Steak")) >= Global.maxWins:
+		maxHP *= 3
+		hp *= 3
 	hp = maxHP
 	
 

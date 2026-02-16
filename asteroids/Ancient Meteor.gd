@@ -12,7 +12,7 @@ var bounces = 0
 var damage = 210
 
 
-func onHit():
+func onCrash():
 	var level = Global.getLevel(launcher.index)
 	var arr = []
 	for child in Global.itemsToData.keys():

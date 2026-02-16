@@ -9,11 +9,57 @@ var hp = 200: set = hurt
 var asteroidsInRange = []
 var readyForShot = false
 var shootingDisabled = false
+var lastRound = false
 
 @onready var damageLabel = preload("res://ship/scenes/ship_damage_label.tscn")
 
 func _ready():
 	$shootTimer.wait_time = 1 - min(1/6*Global.turn+1/10*Global.starsDeck.size(),0.99)
+	if lastRound:
+		scale = Vector2(3,3)
+		$shootTimer.wait_time *= 0.5
+		bulletSpeed *= 2
+
+func bossShot():
+	if shootingDisabled:
+		return
+	var shooter_pos = position
+	for target in get_parent().asteroids:
+		if target == null:
+			continue
+		var target_pos = target.position
+		var target_vel = target.velocity
+		var r = target_pos - shooter_pos
+		var a = target_vel.dot(target_vel) - bulletSpeed * bulletSpeed
+		var b = 2.0 * r.dot(target_vel)
+		var c = r.dot(r)
+		var discriminant = b * b - 4.0 * a * c
+		var direction : Vector2
+		if discriminant < 0.0 or abs(a) < 0.0001:
+			direction = r.normalized()
+		else:
+			var sqrt_disc = sqrt(discriminant)
+			var t1 = (-b + sqrt_disc) / (2.0 * a)
+			var t2 = (-b - sqrt_disc) / (2.0 * a)
+			var t = min(t1, t2)
+			if t < 0.0:
+				t = max(t1, t2)
+			if t < 0.0:
+				direction = r.normalized()
+			else:
+				var intercept_point = target_pos + target_vel * t
+				direction = (intercept_point - shooter_pos).normalized()
+		
+		if direction == Vector2.ZERO:
+			direction = Vector2.RIGHT.rotated(rotation)
+		
+		direction *= randf_range(0.9, 1.1)
+		
+		var bullet = load("res://ship/scenes/bullet.tscn").instantiate()
+		bullet.velocity = direction * bulletSpeed
+		bullet.position = shooter_pos
+		bullet.rotation = direction.angle()
+		get_parent().call_deferred("add_child", bullet)
 
 func hurt(newHp):
 	if newHp < hp:
@@ -60,7 +106,6 @@ func _on_timer_timeout():
 	target_pos = position + random_offset
 	target_pos.x = clamp(target_pos.x, -500, 500)
 	target_pos.y = clamp(target_pos.y, -400, 60)
-
 
 func shoot(target):
 	if shootingDisabled:
@@ -150,3 +195,7 @@ func _on_shoot_timer_timeout():
 		shoot(closest)
 	else:
 		readyForShot = true
+
+
+func _on_boss_shot_timer_timeout():
+	bossShot()

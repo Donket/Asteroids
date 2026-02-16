@@ -43,13 +43,19 @@ func _on_roll_button_pressed():
 
 func _input(event):
 	if Input.is_action_just_pressed("e") and !invOpen:
+		var tween = get_tree().create_tween()
 		$AnimationPlayer.play("openInv")
 		invOpen = true
 		$shopInvUI.refresh()
+		tween.parallel().tween_property($music1, "volume_db", -30, 1)
+		tween.parallel().tween_property($music2, "volume_db", 0, 1)
 	if Input.is_action_just_pressed("back") and invOpen:
+		var tween = get_tree().create_tween()
 		$AnimationPlayer.play("closeInv")
 		invOpen = false
 		$shopInvUI.update()
+		tween.parallel().tween_property($music1,"volume_db",0,1)
+		tween.parallel().tween_property($music2,"volume_db",-30,1)
 
 func _on_end_button_pressed():
 	get_tree().change_scene_to_file("res://mainScene/scenes/main.tscn")
@@ -99,3 +105,6 @@ func _on_end_button_mouse_entered():
 
 func _on_end_button_mouse_exited():
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+
+

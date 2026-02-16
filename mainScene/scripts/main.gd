@@ -5,6 +5,7 @@ var deckTimes = [3, 3, 3, 3, 3, 3]
 var money = 0: set = changeMoney
 var ended = false
 var asteroids = []
+var paused = false
 
 
 @onready var launchers = $CanvasLayer/launchers/GridContainer
@@ -51,6 +52,7 @@ func onCrash(asteroid):
 		rules.onCrash(asteroid)
 
 func onSpawn(asteroid):
+	$spawnPlayer.playing = true
 	for child in rules.get_children():
 		if child.has_method("onSpawn"):
 			child.onSpawn(asteroid)
@@ -85,6 +87,7 @@ func _on_parasite_timer_timeout():
 		scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[0] + ".png")
 		scene.direction = int(-ship.rotation + randi_range(-120,120))
 		scene.position = ship.position
+		scene.ship = ship
 		scene.parasite()
 		sceneAttributes.launcher = launchers.get_child(0)
 		sceneAttributes.main = self
@@ -111,6 +114,10 @@ func snowman():
 	return 1
 
 func _ready():
+	if Global.wins + 1*pow(2,Global.numOfStars("Steak")) >= Global.maxWins:
+		$music1.stream = load("res://MUSIC/leading_the_charge_loopable.wav")
+		$music1.playing = true
+		$ship.lastRound = true
 	Global.battleScene = self
 	var permStatIndices = []
 	for i in range(deck.size()):
@@ -145,6 +152,10 @@ func defeat():
 		money += round(300 * pow(1.2,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
+		var tween = get_tree().create_tween()
+		tween.set_speed_scale(1.0/Engine.time_scale)
+		tween.parallel().tween_property($music1, "volume_db", -30, 1)
+		tween.parallel().tween_property($music2, "volume_db", 0, 1)
 	
 	
 func victory():
@@ -160,6 +171,10 @@ func victory():
 		money += round(300 * pow(1.2,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
+		var tween = get_tree().create_tween()
+		tween.set_speed_scale(1.0/Engine.time_scale)
+		tween.parallel().tween_property($music1, "volume_db", -30, 1)
+		tween.parallel().tween_property($music2, "volume_db", 0, 1)
 		
 
 
@@ -306,6 +321,7 @@ func spawn(asteroid, spawned):
 		scene.global_position = asteroid.global_position
 		sceneAttributes.launcher = launchers.get_child(asteroidAttributes.launcher.index)
 		sceneAttributes.main = self
+		scene.ship = ship
 		scene.spawned()
 		asteroids.append(scene)
 		call_deferred("add_child",scene)
@@ -334,4 +350,30 @@ func _on_defeat_button_mouse_exited():
 
 
 func _on_h_slider_value_changed(value):
-	Engine.time_scale = value
+	if value > 0:
+		Engine.time_scale = value
+		get_tree().paused = false
+	else:
+		get_tree().paused = true
+
+	if $ship.lastRound or ended:
+		return
+
+	elif value <= 0.05 and !paused:
+		value = 0.05
+		var tween = get_tree().create_tween()
+		tween.set_speed_scale(1.0/value)
+		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		tween.parallel().tween_property($music1, "volume_db", -30, 1)
+		tween.parallel().tween_property($music2, "volume_db", 0, 1)
+		paused = true
+
+	elif value > 0.05 and paused:
+		value = 0.1
+		var tween = get_tree().create_tween()
+		tween.set_speed_scale(1.0/value)
+		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		tween.parallel().tween_property($music1, "volume_db", 0, 1)
+		tween.parallel().tween_property($music2, "volume_db", -30, 1)
+		paused = false
+	

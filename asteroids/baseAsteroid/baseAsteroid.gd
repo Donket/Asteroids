@@ -67,12 +67,15 @@ func edgeCheck():
 		if attributes.bounces == 0:
 			if attributes.has_method("onCrash"):
 				attributes.onCrash()
+			
 			get_parent().onCrash(self)
 			die()
 
 		else:
 			if attributes.has_method("onBounce"):
 				attributes.onBounce()
+			$AudioStreamPlayer.stream = load("res://MUSIC/sfx/bounce"+str(randi_range(1,4))+".wav")
+			$AudioStreamPlayer.playing = true
 			get_parent().onBounce(self)
 			attributes.bounces -= 1
 			
@@ -104,7 +107,6 @@ func _on_area_2d_body_entered(body):
 			attributes.onCrash()
 		get_parent().onHit($".")
 		die()
-		return
 	else:
 		if attributes.has_method("onShot"):
 			attributes.onShot()
@@ -112,7 +114,6 @@ func _on_area_2d_body_entered(body):
 		get_parent().onShot($".")
 		if Global.hit():
 			die()
-		return
 
 
 func die():
@@ -121,6 +122,8 @@ func die():
 		velocity = Vector2(0,0)
 		$Sprite2D.visible=false
 		$GPUParticles2D.emitting=true
+		$AudioStreamPlayer.stream = load("res://MUSIC/sfx/hit"+str(randi_range(1,4))+".wav")
+		$AudioStreamPlayer.playing = true
 		var timer = Timer.new()
 		add_child(timer)
 		timer.start()
