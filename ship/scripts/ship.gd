@@ -23,6 +23,7 @@ func _ready():
 func bossShot():
 	if shootingDisabled:
 		return
+	$shoot.playing = true
 	var shooter_pos = position
 	for target in get_parent().asteroids:
 		if target == null:
@@ -110,6 +111,7 @@ func _on_timer_timeout():
 func shoot(target):
 	if shootingDisabled:
 		return
+	$shoot.playing = true
 	var bullet_speed = 500.0
 	var shooter_pos = position
 	var target_pos = target.position

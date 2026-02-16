@@ -9,8 +9,12 @@ func _ready():
 	Engine.time_scale = 1
 	if Global.wins >= Global.maxWins:
 		$VerdictLabel.text = "Victory!"
+		$music.stream = load("res://MUSIC/really_long_arms_loopable.wav")
+		$music.playing = true
 	else:
 		$VerdictLabel.text = "Defeat..."
+		$music.stream = load("res://MUSIC/solemn_advance_loopable.wav")
+		$music.playing = true
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 
 func _on_play_again_button_pressed():

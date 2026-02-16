@@ -16,7 +16,7 @@
 script = ExtResource("1_aanir")
 
 [node name="Polygon2D5" type="Polygon2D" parent="."]
-position = Vector2(808, 494)
+position = Vector2(799, 261)
 scale = Vector2(5, 5)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-600, -370, -600, 370, 630, 370, 630, -370)
@@ -282,6 +282,7 @@ autoplay = true
 
 [node name="spawnPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_e0qr2")
+volume_db = -5.0
 
 [connection signal="timeout" from="timers/Timer1" to="timers" method="_on_timer_timeout"]
 [connection signal="timeout" from="timers/Timer2" to="timers" method="_on_timer_2_timeout"]

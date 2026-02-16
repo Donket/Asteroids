@@ -152,6 +152,8 @@ func defeat():
 		money += round(300 * pow(1.2,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
+		if ship.lastRound:
+			return
 		var tween = get_tree().create_tween()
 		tween.set_speed_scale(1.0/Engine.time_scale)
 		tween.parallel().tween_property($music1, "volume_db", -30, 1)
@@ -171,6 +173,8 @@ func victory():
 		money += round(300 * pow(1.2,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
+		if ship.lastRound:
+			return
 		var tween = get_tree().create_tween()
 		tween.set_speed_scale(1.0/Engine.time_scale)
 		tween.parallel().tween_property($music1, "volume_db", -30, 1)

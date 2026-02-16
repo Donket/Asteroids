@@ -2,7 +2,7 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Ancient Meteor", "Ancient Meteor", "Ancient Meteor", "Ancient Meteor", "Ancient Meteor", "Ancient Meteor"]
+var asteroidsDeck = []
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
