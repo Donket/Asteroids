@@ -27,6 +27,11 @@ func changeMoney(newMoney):
 		await debtCollecter()
 		pending_updates -= 1
 	is_processing = false
+	var n = Global.numOfStars("Astral Essence")
+	if n > 0:
+		for asteroid in asteroids:
+			if "Astral" in Global.asteroidsDeck[asteroid.slot]:
+				asteroid.attributes.damage += 5
 
 func debtCollecter():
 	for i in 1 + Global.numOfStars("Golden Tooth"):

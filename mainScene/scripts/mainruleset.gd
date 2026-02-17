@@ -6,11 +6,76 @@ extends Node2D
 
 var hp = 100: set = hurt
 var maxHP = 100
-var breachAmount = 0
-var blockAmount = 0
-var burnoutAmount = 0
-var parasiteAmount = 0
+var breachAmount = 0: set = changeBreach
+var blockAmount = 0: set = changeBlock
+var burnoutAmount = 0: set = changeBurnout
+var parasiteAmount = 0: set = changeParasite
 @onready var ship = $"../ship"
+
+func changeBreach(new):
+	breachAmount = new
+	var n = Global.numOfStars("Cursed Essence")
+	if n > 0:
+		for i in n:
+			if randf_range(0,1) < 0.2:
+				var statusChanged = randi_range(1,4)
+				if statusChanged == 1:
+					breachAmount += 1
+				elif statusChanged == 2:
+					Global.block += 1
+				elif statusChanged == 3:
+					burnoutAmount += 1
+				elif statusChanged == 4:
+					parasiteAmount += 1
+
+func changeBlock(new):
+	blockAmount = new
+	var n = Global.numOfStars("Cursed Essence")
+	if n > 0:
+		for i in n:
+			if randf_range(0,1) < 0.2:
+				var statusChanged = randi_range(1,4)
+				if statusChanged == 1:
+					breachAmount += 1
+				elif statusChanged == 2:
+					Global.block += 1
+				elif statusChanged == 3:
+					burnoutAmount += 1
+				elif statusChanged == 4:
+					parasiteAmount += 1
+
+func changeBurnout(new):
+	burnoutAmount = new
+	var n = Global.numOfStars("Cursed Essence")
+	if n > 0:
+		for i in n:
+			if randf_range(0,1) < 0.2:
+				var statusChanged = randi_range(1,4)
+				if statusChanged == 1:
+					breachAmount += 1
+				elif statusChanged == 2:
+					Global.block += 1
+				elif statusChanged == 3:
+					burnoutAmount += 1
+				elif statusChanged == 4:
+					parasiteAmount += 1
+
+func changeParasite(new):
+	parasiteAmount = new
+	var n = Global.numOfStars("Cursed Essence")
+	if n > 0:
+		for i in n:
+			if randf_range(0,1) < 0.2:
+				var statusChanged = randi_range(1,4)
+				if statusChanged == 1:
+					breachAmount += 1
+				elif statusChanged == 2:
+					Global.block += 1
+				elif statusChanged == 3:
+					burnoutAmount += 1
+				elif statusChanged == 4:
+					parasiteAmount += 1
+
 
 
 func hurt(newHP):

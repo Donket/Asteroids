@@ -233,21 +233,20 @@ var itemsToDesc = {
 "On Hit: Deal damage equal to three times the sum of all effects.",
 	"Candle": 
 "On Spawn: 20% chance to apply [img]res://ART/icons/burnoutIcon.png[/img].",
-#TODO Implement
 	"Snowmelt": 
-"Convert 1 [img]res://ART/icons/blockIcon.png[/img] to [img]res://ART/icons/burnoutIcon.png[/img].",
-	"Sandpaper": 
-"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 10% of damage",
+"On Hit: Convert 1 [img]res://ART/icons/blockIcon.png[/img] to 1 [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Rose":
 "Every four seconds, trigger all star On Spawn effects on a random existing asteroid.",
+	"Sandpaper": 
+"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 10% of damage",
 	"Iron Essence":
 "Whenever an Iron asteroid gains bounce, it gains +10% of existing speed.",
 	"Gilded Essence":
 "Whenever a Gilded asteroid gains speed, gain +5 [img]res://ART/icons/moneyIcon.png[/img].",
 	"Astral Essence":
-"Whenever you gain money, Astral asteroids gain +5 damage.",
+"Whenever you gain money, existing Astral asteroids gain +5 damage.",
 	"Ancient Essence":
-"If you ever have more than 30 status effects, spend all to gain 100 damage on all existing asteroids.",
+"If you ever have more than 30 status effects, spend all to gain 50 damage on all existing asteroids.",
 	"Cursed Essence":
 "Whenever you gain a status effect, 20% (cannot be increased) chance to also gain another.",
 

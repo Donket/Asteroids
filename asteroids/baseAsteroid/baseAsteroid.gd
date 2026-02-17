@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 0
+var speed = 0: set = changeSpeed
 var acceleration = 0
 var direction = 45
 var seekRadius = 500
@@ -35,6 +35,13 @@ func _ready():
 	if throwPillowed:
 		speed = 0
 		acceleration = 0
+
+func changeSpeed(newSpeed):
+	if "Gilded" in Global.asteroidsDeck[slot]:
+		var n = Global.numOfStars("Gilded Essence")
+		if n > 0:
+			Global.battleScene.money += 5 * n
+	speed = newSpeed
 
 func _physics_process(delta):
 	if dead or throwPillowed:

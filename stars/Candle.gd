@@ -4,4 +4,4 @@ var main
 
 func onSpawn(asteroid):
 	if Global.randChance(20):
-		Global.battleScene.rules.burnoutAmount += 1
+		main.rules.burnoutAmount += 1
