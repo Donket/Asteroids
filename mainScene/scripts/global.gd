@@ -192,7 +192,7 @@ var itemsToDesc = {
 	"Golden Tooth":
 "Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +1 extra",
 	"Loose Change":
-"All asteroids 30% chance to drop +2 [img]res://ART/icons/moneyIcon.png[/img] On Crash",
+"On Crash: 30% chance to drop +2 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Coupon Book":
 "Future items cost 20% less, but rerolls cost 20% more",
 	"Payday":
@@ -231,6 +231,27 @@ var itemsToDesc = {
 "If you have at least three snowballs, -30% launch time to all asteroids",
 	"Warhammer": 
 "On Hit: Deal damage equal to three times the sum of all effects.",
+	"Candle": 
+"On Spawn: 20% chance to apply [img]res://ART/icons/burnoutIcon.png[/img].",
+#TODO Implement
+	"Snowmelt": 
+"Convert 1 [img]res://ART/icons/blockIcon.png[/img] to [img]res://ART/icons/burnoutIcon.png[/img].",
+	"Sandpaper": 
+"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 10% of damage",
+	"Rose":
+"Every four seconds, trigger all star On Spawn effects on a random existing asteroid.",
+	"Iron Essence":
+"Whenever an Iron asteroid gains bounce, it gains +10% of existing speed.",
+	"Gilded Essence":
+"Whenever a Gilded asteroid gains speed, gain +5 [img]res://ART/icons/moneyIcon.png[/img].",
+	"Astral Essence":
+"Whenever you gain money, Astral asteroids gain +5 damage.",
+	"Ancient Essence":
+"If you ever have more than 30 status effects, spend all to gain 100 damage on all existing asteroids.",
+	"Cursed Essence":
+"Whenever you gain a status effect, 20% (cannot be increased) chance to also gain another.",
+
+
 #TODO: Low prio: Implement
 	#"Douglas":
 #"He's just here for the ride. Every round, 15% chance to turn another star into Douglas."
