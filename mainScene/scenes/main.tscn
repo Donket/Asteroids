@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c5k4rpc2vcoph" path="res://ART/uiArts/mainUI.png" id="3_8j5i6"]
 [ext_resource type="Texture2D" uid="uid://tafkqlw4wmbl" path="res://ART/uiArts/sliderGrabber.png" id="4_3hiqg"]
 [ext_resource type="PackedScene" uid="uid://t2jcpwhwgqjh" path="res://mainScene/scenes/launcherUI.tscn" id="4_xd1qb"]
-[ext_resource type="PackedScene" uid="uid://ddxelv380fj4r" path="res://mainScene/scenes/inventory.tscn" id="5_bryf5"]
+[ext_resource type="PackedScene" uid="uid://ddxelv380fj4r" path="res://mainScene/scenes/log.tscn" id="5_bryf5"]
 [ext_resource type="Texture2D" uid="uid://dvgva0u77omk1" path="res://ART/uiArts/sliderBack.png" id="5_qogog"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="6_w4eqt"]
 [ext_resource type="PackedScene" uid="uid://b3llxpelm4eeb" path="res://ship/scenes/ship.tscn" id="7_n35oc"]
@@ -129,7 +129,7 @@ index = 4
 layout_mode = 2
 index = 5
 
-[node name="inventory" parent="CanvasLayer" instance=ExtResource("5_bryf5")]
+[node name="log" parent="CanvasLayer" instance=ExtResource("5_bryf5")]
 offset_left = 1920.0
 offset_right = 0.0
 

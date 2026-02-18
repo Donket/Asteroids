@@ -16,7 +16,8 @@ var dead = false
 @onready var attributes = $attributes
 @onready var id = randi()
 var ship
-var slot 
+var slot
+var asteroidName
 
 
 func _ready():
@@ -37,7 +38,7 @@ func _ready():
 		acceleration = 0
 
 func changeSpeed(newSpeed):
-	if "Gilded" in Global.asteroidsDeck[attributes.launcher.index]:
+	if "Gilded" in Global.asteroidsDeck[slot] and newSpeed > speed and speed != 0:
 		var n = Global.numOfStars("Gilded Essence")
 		if n > 0:
 			Global.battleScene.money += 5 * n

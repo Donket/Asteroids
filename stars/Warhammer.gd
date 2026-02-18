@@ -3,4 +3,6 @@ extends Node
 var main
 
 func onHit(asteroid):
-	main.rules.hp -= 3*(main.rules.burnoutAmount*main.rules.blockAmount*main.rules.breachAmount*main.rules.parasiteAmount)
+	var amt = main.rules.burnoutAmount*main.rules.blockAmount*main.rules.breachAmount*main.rules.parasiteAmount
+	main.rules.hp -= amt
+	Global.addToLog("Warhammer", amt)

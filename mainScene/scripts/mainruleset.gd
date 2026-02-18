@@ -111,6 +111,7 @@ func _process(delta):
 		$"..".defeat()
 
 func onHit(asteroid):
-	print(asteroid)
 	hp -= asteroid.attributes.damage
-
+	var type = Global.asteroidsDeck[asteroid.slot]
+	Global.addToLog(type,asteroid.attributes.damage)
+	$"../CanvasLayer/log".update()

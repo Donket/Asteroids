@@ -18,6 +18,10 @@ var health = 10
 var turn = 0
 var firstOpen = true
 
+var logData = {
+	
+}
+
 var itemsToDesc = {
 	
 	# --- IRON FAMILY ---
@@ -230,7 +234,7 @@ var itemsToDesc = {
 	"Snowman": 
 "If you have at least three snowballs, -30% launch time to all asteroids",
 	"Warhammer": 
-"On Hit: Deal damage equal to three times the sum of all effects.",
+"On Hit: Deal damage equal to the sum of all status effects.",
 	"Candle": 
 "On Spawn: 20% chance to apply [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Snowmelt": 
@@ -394,3 +398,10 @@ func randChance(percent):
 
 func getLevel(ind):
 	return (asteroidExps[ind] - asteroidExps[ind] % 3)/3 + 1
+
+
+func addToLog(source, damage):
+	if source in logData.keys():
+		logData[source] += damage
+	else:
+		logData[source] = damage

@@ -93,6 +93,7 @@ func onShot(asteroid):
 func _on_breach_timer_timeout():
 	if rules.breachAmount > 0:
 		rules.hp -= ceil(rules.maxHP*0.005*rules.breachAmount)
+		Global.addToLog("Breach",ceil(rules.maxHP*0.005*rules.breachAmount))
 		
 func _on_parasite_timer_timeout():
 	if rules.parasiteAmount > 0 and randi_range(0,100) < 5*rules.parasiteAmount and deck.size() > 0:
@@ -115,6 +116,7 @@ func _on_burnout_timer_timeout():
 	if rules.burnoutAmount > 0:
 		var amt = rules.burnoutAmount
 		rules.hp -= 3*amt
+		Global.addToLog("Burnout",ceil(rules.maxHP*0.005*rules.breachAmount))
 		ship.moveSpeed /= max(1,amt*0.5)
 		ship.rotationSpeed /= max(1,amt*0.5)
 		ship.shootingDisabled = true

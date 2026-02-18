@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddxelv380fj4r"]
+[gd_scene load_steps=8 format=3 uid="uid://ddxelv380fj4r"]
 
 [ext_resource type="Texture2D" uid="uid://652ug064s4w0" path="res://ART/uiArts/inventoryMenu.png" id="1_iq88g"]
 [ext_resource type="Script" path="res://mainScene/scripts/inventory.gd" id="1_mw5bs"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="3_uahse"]
 
 [sub_resource type="Animation" id="Animation_lyee4"]
 length = 0.001
@@ -28,6 +29,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(27, 125)]
 }
 
 [sub_resource type="Animation" id="Animation_qny67"]
@@ -56,6 +69,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-328, 125), Vector2(27, 125)]
+}
 
 [sub_resource type="Animation" id="Animation_pxokj"]
 resource_name = "open"
@@ -82,6 +107,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(27, 125), Vector2(-356, 125)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xqosj"]
@@ -115,12 +152,23 @@ libraries = {
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1883.0
-offset_top = 341.0
-offset_right = 1921.0
-offset_bottom = 411.0
+offset_left = -36.0
+offset_top = 342.0
+offset_right = 2.0
+offset_bottom = 412.0
 focus_mode = 0
 mouse_filter = 1
 flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 125.0
+offset_right = 204.0
+offset_bottom = 473.0
+scale = Vector2(1.5, 1.5)
+theme_override_fonts/normal_font = ExtResource("3_uahse")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
