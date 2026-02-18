@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnt0p1gvhgfgs"]
+[gd_scene load_steps=10 format=3 uid="uid://bnt0p1gvhgfgs"]
 
 [ext_resource type="Script" path="res://startup/scripts/startupMenu.gd" id="1_cejfu"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="1_rwvtb"]
 [ext_resource type="AudioStream" uid="uid://csn2qilpk0bfs" path="res://MUSIC/baroque_chips_loopable.wav" id="3_i0o6g"]
+[ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://settings.tscn" id="4_abi20"]
 
 [sub_resource type="Gradient" id="Gradient_gutvu"]
 offsets = PackedFloat32Array(0.849741)
@@ -48,7 +49,7 @@ _data = {
 "default": SubResource("Animation_rkpk5")
 }
 
-[node name="StartupMenu" type="Node2D"]
+[node name="mainMenu" type="Node2D"]
 script = ExtResource("1_cejfu")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -152,6 +153,9 @@ text = "Settings aren't set up at the moment"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_i0o6g")
 autoplay = true
+
+[node name="Settings" parent="." instance=ExtResource("4_abi20")]
+visible = false
 
 [connection signal="mouse_entered" from="PlayButton" to="." method="playHover"]
 [connection signal="mouse_exited" from="PlayButton" to="." method="endHover"]

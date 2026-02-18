@@ -26,6 +26,7 @@ var subtitles = [
 func _ready():
 	$subtitleLabel.text = "[center]" + subtitles.pick_random()
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -25)
 
 
 func _on_button_pressed():
@@ -33,7 +34,7 @@ func _on_button_pressed():
 
 
 func _on_button_2_pressed():
-	$settingsLabel.visible = true
+	$Settings.visible = true
 
 
 func _on_button_3_pressed():

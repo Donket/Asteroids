@@ -2,7 +2,7 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = []
+var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
@@ -315,8 +315,10 @@ var starsToData: Dictionary = {
 	"Tip Jar": [85, 1],
 	"Shield": [85, 0],
 	"Glasses": [100, 0],
+	"Candle": [100, 0],
 
 	"Dice": [140, 1],
+	"Snowmelt": [140, 1],
 	"Backpack": [150, 1],
 	"Bulldozer": [150, 1],
 	"Goop": [130, 2],
@@ -326,11 +328,13 @@ var starsToData: Dictionary = {
 	"Snowball": [135, 2],
 	"Glass Cannon": [135, 2],
 	"Lethal": [170, 2],
+	"Sandpaper": [160, 2],
 	"Golden Tooth": [180, 2],
 	"Coupon Book": [140, 2],
 	"Binky": [150, 2],
 	"Suicide Bomb": [120, 2],
 	"Coconut": [120, 2],
+	"Recursive": [200, 2],
 
 	"Spider": [260, 3],
 	"Snowman": [280, 3],
@@ -340,11 +344,18 @@ var starsToData: Dictionary = {
 	"Debt Collector": [280, 3],
 	"Minivan": [290, 3],
 	"Shotgun": [280, 3],
+	"Rose": [280, 3],
+	"Death Rattle": [280, 3],
 
 	"Pipe": [500, 4],
 	"Warhammer": [500, 4],
 	"Piggy Bank": [500, 4],
-	"Light Fingers": [500, 4]
+	"Light Fingers": [500, 4],
+	"Iron Essence": [750, 4],
+	"Astral Essence": [750, 4],
+	"Gilded Essence": [750, 4],
+	"Cursed Essence": [750, 4],
+	"Ancient Essence": [750, 4],
 }
 
 

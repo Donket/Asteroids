@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cf4dxpqmpy8f2"]
+[gd_scene load_steps=20 format=3 uid="uid://cf4dxpqmpy8f2"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop.gd" id="1_d4jli"]
 [ext_resource type="Texture2D" uid="uid://gufgyg1kc8ah" path="res://ART/uiArts/shopsprites.png" id="2_30pk5"]
@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://bh0er6eraotlx" path="res://MUSIC/sfx/hover.wav" id="10_haxow"]
 [ext_resource type="AudioStream" uid="uid://d3c618h3mtol1" path="res://MUSIC/sfx/accept.wav" id="11_akndf"]
 [ext_resource type="AudioStream" uid="uid://dkqg28jrsr0i4" path="res://MUSIC/sfx/spawn.wav" id="12_y3r6p"]
+[ext_resource type="Texture2D" uid="uid://kac22w78ljk8" path="res://ART/icons/settingsIcon.png" id="14_4hww2"]
+[ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://settings.tscn" id="15_6801w"]
 
 [sub_resource type="Animation" id="Animation_pqf0s"]
 length = 0.001
@@ -148,6 +150,11 @@ scale = Vector2(5, 5)
 texture = ExtResource("2_30pk5")
 hframes = 3
 
+[node name="settingsButton" type="Sprite2D" parent="."]
+position = Vector2(-912, -492)
+scale = Vector2(3, 3)
+texture = ExtResource("14_4hww2")
+
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(-0.629395, -917.01)
 amount = 200
@@ -276,6 +283,14 @@ theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center]Sell"
 
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = -948.0
+offset_top = -529.0
+offset_right = -872.0
+offset_bottom = -455.0
+focus_mode = 0
+flat = true
+
 [node name="shopInvUI" parent="." instance=ExtResource("6_31cc4")]
 z_index = 1
 scale = Vector2(1e-05, 1e-05)
@@ -351,12 +366,18 @@ volume_db = 8.0
 stream = ExtResource("12_y3r6p")
 volume_db = 8.0
 
+[node name="Settings" parent="." instance=ExtResource("15_6801w")]
+visible = false
+
 [connection signal="mouse_entered" from="RollButton" to="." method="_on_roll_button_mouse_entered"]
 [connection signal="mouse_exited" from="RollButton" to="." method="_on_roll_button_mouse_exited"]
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="mouse_entered" from="EndButton" to="." method="_on_end_button_mouse_entered"]
 [connection signal="mouse_exited" from="EndButton" to="." method="_on_end_button_mouse_exited"]
 [connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]
+[connection signal="mouse_entered" from="SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_exited" from="SettingsButton" to="." method="_on_settings_button_mouse_exited"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

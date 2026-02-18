@@ -37,7 +37,7 @@ func _ready():
 		acceleration = 0
 
 func changeSpeed(newSpeed):
-	if "Gilded" in Global.asteroidsDeck[slot]:
+	if "Gilded" in Global.asteroidsDeck[attributes.launcher.index]:
 		var n = Global.numOfStars("Gilded Essence")
 		if n > 0:
 			Global.battleScene.money += 5 * n

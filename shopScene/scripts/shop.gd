@@ -81,6 +81,7 @@ func _on_button_pressed():
 func _on_button_mouse_entered():
 	$Button/Sprite2D.modulate = Color(0.8,0.8,0.8)
 	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	$hover.playing = true
 	
 
 
@@ -91,20 +92,30 @@ func _on_button_mouse_exited():
 
 func _on_roll_button_mouse_entered():
 	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	$hover.playing = true
 
 
 func _on_roll_button_mouse_exited():
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
-	
-	
 
 
 func _on_end_button_mouse_entered():
 	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	$hover.playing = true
 
 
 func _on_end_button_mouse_exited():
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 
 
+func _on_settings_button_mouse_entered():
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	$hover.playing = true
 
+
+func _on_settings_button_mouse_exited():
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+
+func _on_settings_button_pressed():
+	$Settings.visible = true

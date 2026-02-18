@@ -200,4 +200,5 @@ func _on_shoot_timer_timeout():
 
 
 func _on_boss_shot_timer_timeout():
-	bossShot()
+	if lastRound:
+		bossShot()

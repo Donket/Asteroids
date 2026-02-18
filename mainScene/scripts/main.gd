@@ -100,6 +100,7 @@ func _on_parasite_timer_timeout():
 		scene.direction = int(-ship.rotation + randi_range(-120,120))
 		scene.position = ship.position
 		scene.ship = ship
+		scene.slot = 0
 		scene.parasite()
 		sceneAttributes.launcher = launchers.get_child(0)
 		sceneAttributes.main = self
