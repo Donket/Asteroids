@@ -14,6 +14,7 @@ var open = false
 var defaultCursor = preload("res://ART/uiArts/cursor.png")
 var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
 
+static var hovered_slot = null 
 
 func changeExp(newExp):
 	exp = newExp
@@ -72,6 +73,9 @@ func _input(event):
 		open = false
 	
 	if grabbed and !Input.is_action_pressed("click"):
+		if hovered_slot != null and hovered_slot != self and hovered_slot.type != Type.STAR:
+			hovered_slot.receive_drop(self)
+
 		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 		grabbed = false
 		$visuals.position = Vector2(0, 0)
@@ -89,7 +93,6 @@ func _input(event):
 		
 		call_deferred("clear_global_grab")
 		
-		
 		var viewport = get_viewport()
 		var globalPos = viewport.get_mouse_position()
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -102,28 +105,27 @@ func _input(event):
 		if starSold:
 			queue_free()
 
-	if inRange and !grabbed and Global.itemGrabbed != null and !Input.is_action_pressed("click") and type != Type.STAR:
-		if Global.itemGrabbed.item == item:
-			exp += Global.itemGrabbed.exp+1
-			Global.itemGrabbed.item = null
-			
-		else:
-			var temp = Global.itemGrabbed.item
-			var tempStats = Global.asteroidPermStats[slotIndex]
-			var tempExp = Global.itemGrabbed.exp
-			Global.asteroidPermStats[slotIndex] = Global.asteroidPermStats[Global.itemGrabbed.slotIndex]
-			Global.asteroidPermStats[Global.itemGrabbed.slotIndex] = tempStats
-			Global.itemGrabbed.exp = exp
-			Global.itemGrabbed.item = item
-			item = temp
-			exp = tempExp
-			Global.itemGrabbed = null
-
-
-
+func receive_drop(source_item):
+	if source_item.item == item:
+		exp += source_item.exp + 1
+		source_item.item = null
+	else:
+		var temp = source_item.item
+		var tempStats = Global.asteroidPermStats[slotIndex]
+		var tempExp = source_item.exp
+		
+		Global.asteroidPermStats[slotIndex] = Global.asteroidPermStats[source_item.slotIndex]
+		Global.asteroidPermStats[source_item.slotIndex] = tempStats
+		
+		source_item.exp = exp
+		source_item.item = item
+		
+		item = temp
+		exp = tempExp
 
 func _on_control_mouse_entered():
 	inRange = true
+	hovered_slot = self
 	invUi.hoverSfx.playing = true
 	if empty == false and Global.itemGrabbed == null:
 		Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
@@ -134,6 +136,7 @@ func _on_control_mouse_entered():
 
 func _on_control_mouse_exited():
 	inRange = false
+	if hovered_slot == self: hovered_slot = null
 	if empty == false and Global.itemGrabbed == null:
 		Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

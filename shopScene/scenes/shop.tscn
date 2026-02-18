@@ -368,6 +368,7 @@ volume_db = 8.0
 
 [node name="Settings" parent="." instance=ExtResource("15_6801w")]
 visible = false
+z_index = 2
 
 [connection signal="mouse_entered" from="RollButton" to="." method="_on_roll_button_mouse_entered"]
 [connection signal="mouse_exited" from="RollButton" to="." method="_on_roll_button_mouse_exited"]

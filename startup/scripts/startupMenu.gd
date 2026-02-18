@@ -19,7 +19,7 @@ var subtitles = [
 	"A Moose Bit My Sister Once ...",
 	"Mynd you, moose bites Kan be pretti nasti ...",
 	"The Cake is a Lie!",
-	"It’s Dangerous to go Alone!",
+	"Its Dangerous to go Alone!",
 	"Birdhouse in Your Soul!"
 ]
 
