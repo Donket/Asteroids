@@ -7,6 +7,9 @@ var ended = false
 var asteroids = []
 var paused = false
 
+var defaultCursor = preload("res://ART/uiArts/cursor.png")
+var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
+
 
 @onready var launchers = $CanvasLayer/launchers/GridContainer
 @onready var ship = $ship
@@ -47,16 +50,16 @@ func onBounce(asteroid):
 			child.onBounce(asteroid)
 	if rules.has_method("onBounce"):
 		rules.onBounce(asteroid)
-	
+
 
 func onCrash(asteroid):
 	var n = Global.numOfStars("Death Rattle")
 	for child in rules.get_children():
 		if child.has_method("onCrash"):
 			child.onCrash(asteroid)
-		if n > 0:
-			for i in range(n):
-				child.onBounce()
+			if n > 0:
+				for i in range(n):
+					child.onBounce()
 	if rules.has_method("onCrash"):
 		rules.onCrash(asteroid)
 		if n > 0:
@@ -171,6 +174,8 @@ func defeat():
 		tween.set_speed_scale(1.0/Engine.time_scale)
 		tween.parallel().tween_property($music1, "volume_db", -30, 1)
 		tween.parallel().tween_property($music2, "volume_db", 0, 1)
+		$CanvasLayer/HSlider.value = 1
+		$CanvasLayer/HSlider.editable = false
 	
 	
 func victory():
@@ -192,6 +197,8 @@ func victory():
 		tween.set_speed_scale(1.0/Engine.time_scale)
 		tween.parallel().tween_property($music1, "volume_db", -30, 1)
 		tween.parallel().tween_property($music2, "volume_db", 0, 1)
+		$CanvasLayer/HSlider.value = 1
+		$CanvasLayer/HSlider.editable = false
 		
 
 
@@ -396,3 +403,11 @@ func _on_h_slider_value_changed(value):
 		tween.parallel().tween_property($music2, "volume_db", -30, 1)
 		paused = false
 	
+
+
+func _on_h_slider_mouse_entered():
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+
+func _on_h_slider_mouse_exited():
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))

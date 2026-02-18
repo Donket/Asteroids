@@ -1,16 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq61aqbals68d"]
+[gd_scene load_steps=15 format=3 uid="uid://dq61aqbals68d"]
 
 [ext_resource type="Script" path="res://mainScene/scripts/main.gd" id="1_aanir"]
 [ext_resource type="Script" path="res://mainScene/scripts/timers.gd" id="2_t1drb"]
 [ext_resource type="Texture2D" uid="uid://c5k4rpc2vcoph" path="res://ART/uiArts/mainUI.png" id="3_8j5i6"]
+[ext_resource type="Texture2D" uid="uid://tafkqlw4wmbl" path="res://ART/uiArts/sliderGrabber.png" id="4_3hiqg"]
 [ext_resource type="PackedScene" uid="uid://t2jcpwhwgqjh" path="res://mainScene/scenes/launcherUI.tscn" id="4_xd1qb"]
 [ext_resource type="PackedScene" uid="uid://ddxelv380fj4r" path="res://mainScene/scenes/inventory.tscn" id="5_bryf5"]
+[ext_resource type="Texture2D" uid="uid://dvgva0u77omk1" path="res://ART/uiArts/sliderBack.png" id="5_qogog"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="6_w4eqt"]
 [ext_resource type="PackedScene" uid="uid://b3llxpelm4eeb" path="res://ship/scenes/ship.tscn" id="7_n35oc"]
 [ext_resource type="Script" path="res://mainScene/scripts/mainruleset.gd" id="8_7gyde"]
 [ext_resource type="AudioStream" uid="uid://b8n863tfw8lpd" path="res://MUSIC/battle_commences_loopable.wav" id="9_6cs4h"]
 [ext_resource type="AudioStream" uid="uid://dkqg28jrsr0i4" path="res://MUSIC/sfx/spawn.wav" id="10_e0qr2"]
 [ext_resource type="AudioStream" uid="uid://1mgfjieipayh" path="res://MUSIC/battle_ceases_loopable.wav" id="10_hshsf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sfo6"]
+texture = ExtResource("5_qogog")
+expand_margin_top = 12.0
+expand_margin_bottom = 12.0
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_aanir")
@@ -73,6 +80,10 @@ offset_left = 13.0
 offset_top = 856.0
 offset_right = 402.0
 offset_bottom = 999.0
+theme_override_icons/grabber = ExtResource("4_3hiqg")
+theme_override_icons/grabber_highlight = ExtResource("4_3hiqg")
+theme_override_icons/grabber_disabled = ExtResource("4_3hiqg")
+theme_override_styles/slider = SubResource("StyleBoxTexture_1sfo6")
 max_value = 3.0
 step = 0.1
 value = 1.0
@@ -293,6 +304,8 @@ volume_db = -5.0
 [connection signal="timeout" from="timers/breachTimer" to="." method="_on_breach_timer_timeout"]
 [connection signal="timeout" from="timers/burnoutTimer" to="." method="_on_burnout_timer_timeout"]
 [connection signal="timeout" from="timers/parasiteTimer" to="." method="_on_parasite_timer_timeout"]
+[connection signal="mouse_entered" from="CanvasLayer/HSlider" to="." method="_on_h_slider_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/HSlider" to="." method="_on_h_slider_mouse_exited"]
 [connection signal="value_changed" from="CanvasLayer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="mouse_entered" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/victoryLabel/Button" to="." method="_on_button_mouse_exited"]

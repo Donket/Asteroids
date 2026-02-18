@@ -14,7 +14,7 @@ var lastRound = false
 @onready var damageLabel = preload("res://ship/scenes/ship_damage_label.tscn")
 
 func _ready():
-	$shootTimer.wait_time = 1 - min(1/6*Global.turn+1/10*Global.starsDeck.size(),0.99)
+	$shootTimer.wait_time = 2 - min(1/5*Global.turn+1/10*Global.starsDeck.size(),0.95)
 	if lastRound:
 		scale = Vector2(3,3)
 		$shootTimer.wait_time *= 0.5
