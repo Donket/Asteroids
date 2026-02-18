@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj0jmtdthbcce"
-path="res://.godot/imported/Death Rattle.png-4c624e811389f02c383ceb75de902aa9.ctex"
+uid="uid://b7nf26cjsvhao"
+path="res://.godot/imported/Sandpaper.png-12ad49a27a49a68b3afdfbbe389702fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Death Rattle.png"
-dest_files=["res://.godot/imported/Death Rattle.png-4c624e811389f02c383ceb75de902aa9.ctex"]
+source_file="res://ART/starArts/Sandpaper.png"
+dest_files=["res://.godot/imported/Sandpaper.png-12ad49a27a49a68b3afdfbbe389702fd.ctex"]
 
 [params]
 

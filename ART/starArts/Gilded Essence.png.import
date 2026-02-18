@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj676jkbrqdsu"
-path="res://.godot/imported/Ancient Essence.png-31e9fb67e758708215d6d448a2128fef.ctex"
+uid="uid://c6eq5ay1hacey"
+path="res://.godot/imported/Gilded Essence.png-ec9a6cad11b2576f05da962b3a1af415.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Ancient Essence.png"
-dest_files=["res://.godot/imported/Ancient Essence.png-31e9fb67e758708215d6d448a2128fef.ctex"]
+source_file="res://ART/starArts/Gilded Essence.png"
+dest_files=["res://.godot/imported/Gilded Essence.png-ec9a6cad11b2576f05da962b3a1af415.ctex"]
 
 [params]
 

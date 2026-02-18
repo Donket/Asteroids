@@ -76,6 +76,10 @@ func edgeCheck():
 				attributes.onCrash()
 			
 			get_parent().onCrash(self)
+			var n = Global.numOfStars("Death Rattle")
+			if n > 0:
+				for i in range(n):
+					attributes.onBounce()
 			die()
 
 		else:
@@ -113,6 +117,10 @@ func _on_area_2d_body_entered(body):
 		if attributes.has_method("onCrash"):
 			attributes.onCrash()
 		get_parent().onHit($".")
+		var n = Global.numOfStars("Death Rattle")
+		if n > 0:
+			for i in range(n):
+				attributes.onBounce()
 		die()
 	else:
 		if attributes.has_method("onShot"):
@@ -134,7 +142,16 @@ func die():
 		var timer = Timer.new()
 		add_child(timer)
 		timer.start()
-		await timer.timeout
+		if Global.numOfStars("Recursive") > 0 and self == Global.battleScene.asteroids[0] and !Global.battleScene.ended:
+			Global.battleScene.spawn(attributes,Global.asteroidsDeck[slot])
+			var asteroid = Global.battleScene.asteroids[Global.battleScene.asteroids.size()-1]
+			Global.battleScene.asteroids[Global.battleScene.asteroids.size()-1]=Global.battleScene.asteroids[0]
+			Global.battleScene.asteroids[0]=asteroid
+			await timer.timeout
+			Global.battleScene.asteroids[0].get_node("attributes").damage = attributes.damage
+			Global.battleScene.asteroids[0].get_node("attributes").baseSpeed = speed
+		else:
+			await timer.timeout
 		queue_free()
 
 

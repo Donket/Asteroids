@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8um3csj38nob"
-path="res://.godot/imported/Astral Essence.png-72ae2bd451a395d6e56080b8c4067d33.ctex"
+uid="uid://dkuy7l1mgs5hu"
+path="res://.godot/imported/Cursed Essence.png-2dcfa22ff059b5b6068f42f9364b2f83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Astral Essence.png"
-dest_files=["res://.godot/imported/Astral Essence.png-72ae2bd451a395d6e56080b8c4067d33.ctex"]
+source_file="res://ART/starArts/Cursed Essence.png"
+dest_files=["res://.godot/imported/Cursed Essence.png-2dcfa22ff059b5b6068f42f9364b2f83.ctex"]
 
 [params]
 

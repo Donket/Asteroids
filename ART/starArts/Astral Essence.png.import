@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq2dilkv1sefc"
-path="res://.godot/imported/Recursive.png-a389b72ae269592796cda28b1aae0585.ctex"
+uid="uid://8um3csj38nob"
+path="res://.godot/imported/Astral Essence.png-1f7799ec8900c858746deea2148c9010.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Recursive.png"
-dest_files=["res://.godot/imported/Recursive.png-a389b72ae269592796cda28b1aae0585.ctex"]
+source_file="res://ART/starArts/Astral Essence.png"
+dest_files=["res://.godot/imported/Astral Essence.png-1f7799ec8900c858746deea2148c9010.ctex"]
 
 [params]
 

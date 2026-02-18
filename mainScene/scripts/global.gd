@@ -249,6 +249,10 @@ var itemsToDesc = {
 "If you ever have more than 30 status effects, spend all to gain 50 damage on all existing asteroids.",
 	"Cursed Essence":
 "Whenever you gain a status effect, 20% (cannot be increased) chance to also gain another.",
+	"Death Rattle":
+"On Crash: Trigger On Bounce effects.",
+	"Recursive":
+"On Crash: If this is the first asteroid of the battle, respawn it. Does not stack.",
 
 
 #TODO: Low prio: Implement

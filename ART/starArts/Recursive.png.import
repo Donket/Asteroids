@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7nf26cjsvhao"
-path="res://.godot/imported/Sandpaper.png-1c390252a896cdec87a7852d38064160.ctex"
+uid="uid://bq2dilkv1sefc"
+path="res://.godot/imported/Recursive.png-ff4ac12117f08404df38fbd5b97bff0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Sandpaper.png"
-dest_files=["res://.godot/imported/Sandpaper.png-1c390252a896cdec87a7852d38064160.ctex"]
+source_file="res://ART/starArts/Recursive.png"
+dest_files=["res://.godot/imported/Recursive.png-ff4ac12117f08404df38fbd5b97bff0a.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1mbc6c0b5y1"
-path="res://.godot/imported/Snowmelt.png-97a78e818c493e8301baa26c2e0d9586.ctex"
+path="res://.godot/imported/Snowmelt.png-34a40efdab9b7d05c383cb5ad08d8a10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Snowmelt.png"
-dest_files=["res://.godot/imported/Snowmelt.png-97a78e818c493e8301baa26c2e0d9586.ctex"]
+source_file="res://ART/starArts/Snowmelt.png"
+dest_files=["res://.godot/imported/Snowmelt.png-34a40efdab9b7d05c383cb5ad08d8a10.ctex"]
 
 [params]
 

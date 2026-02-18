@@ -50,11 +50,18 @@ func onBounce(asteroid):
 	
 
 func onCrash(asteroid):
+	var n = Global.numOfStars("Death Rattle")
 	for child in rules.get_children():
 		if child.has_method("onCrash"):
 			child.onCrash(asteroid)
+		if n > 0:
+			for i in range(n):
+				child.onBounce()
 	if rules.has_method("onCrash"):
 		rules.onCrash(asteroid)
+		if n > 0:
+			for i in range(n):
+				rules.onBounce()
 
 func onSpawn(asteroid):
 	$spawnPlayer.playing = true
@@ -259,6 +266,7 @@ func launch(index, atEdge):
 	sceneAttributes.baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
 	sceneAttributes.damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
 	scene.ship = ship
+	scene.slot = index
 	var shotguns = Global.numOfStars("Shotgun")
 	if shotguns >= 1:
 		var count = 1
@@ -331,6 +339,7 @@ func spawn(asteroid, spawned):
 		sceneAttributes.launcher = launchers.get_child(asteroidAttributes.launcher.index)
 		sceneAttributes.main = self
 		scene.ship = ship
+		scene.slot = asteroid.get_parent().slot
 		scene.spawned()
 		asteroids.append(scene)
 		call_deferred("add_child",scene)

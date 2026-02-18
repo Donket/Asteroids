@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkuy7l1mgs5hu"
-path="res://.godot/imported/Cursed Essence.png-483c5833fd169e51e06982ee9a1cfc80.ctex"
+uid="uid://04kn3rdg1q1s"
+path="res://.godot/imported/Iron Essence.png-2b7beb6074c55cdd1e2a45b649245ca6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Cursed Essence.png"
-dest_files=["res://.godot/imported/Cursed Essence.png-483c5833fd169e51e06982ee9a1cfc80.ctex"]
+source_file="res://ART/starArts/Iron Essence.png"
+dest_files=["res://.godot/imported/Iron Essence.png-2b7beb6074c55cdd1e2a45b649245ca6.ctex"]
 
 [params]
 

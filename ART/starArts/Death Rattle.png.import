@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://04kn3rdg1q1s"
-path="res://.godot/imported/Iron Essence.png-1bb0f84fc8425831cf491c4a4b9f1152.ctex"
+uid="uid://cj0jmtdthbcce"
+path="res://.godot/imported/Death Rattle.png-ad1aa64824625b9c5e814e2758cd935a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inProgress/art/Iron Essence.png"
-dest_files=["res://.godot/imported/Iron Essence.png-1bb0f84fc8425831cf491c4a4b9f1152.ctex"]
+source_file="res://ART/starArts/Death Rattle.png"
+dest_files=["res://.godot/imported/Death Rattle.png-ad1aa64824625b9c5e814e2758cd935a.ctex"]
 
 [params]
 
