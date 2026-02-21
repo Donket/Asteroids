@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://startup/scripts/tutorial.gd" id="1_7leqa"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="1_7sgdj"]
 [ext_resource type="Texture2D" uid="uid://buesmpjmt58vp" path="res://ART/uiArts/tutorialButtonNext.png" id="3_nhpm1"]
-[ext_resource type="Texture2D" uid="uid://b0g6kl4c1ll7i" path="res://ART/uiArts/tutorialButtonExit.png" id="4_oh7bl"]
 
 [sub_resource type="Animation" id="Animation_bpyev"]
 resource_name = "1"
@@ -21,7 +20,7 @@ tracks/0/keys = {
 
 In battle, asteroids spawn from all your owned launchers, starting from one random spot on the edge and traveling to another. Your goal is to eliminate a ship which gets stronger each turn.
 
-In the shop, you spend your hard-earned money. You can buy asteroid spawners, which spawn asteroids every three seconds. You can have up to six of these at a time. You can also buy stars, which give powerful passive abilities. You can have unlimited stars, but for each star you own the enemy becomes stronger.
+In the shop, you spend your hard-earned money. You can buy asteroid spawners, which spawn asteroids every three seconds. You can have up to six of these at a time. You can also buy stars, which give powerful passive abilities. You also can have up to six of these at a time.
 
 You win if you win 10 rounds, but you lose if you run out of health first (-2 health per loss)."]
 }
@@ -50,7 +49,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["[center][color=yellow][Afflictions]"]
+"values": ["[center][color=yellow][Status Effects]"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -62,11 +61,15 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["Breach: Every second, lose 1% of max health, times the amount of breach
+"values": ["Certain abilities apply status effects to the ship. These are:
 
-Burnout: Every 5 seconds lose 3 damage times the amount of burnout. Ship is also slowed for 3 seconds (this effect is increased by the amount of burnout).
+[img]res://ART/icons/breachIcon.png[/img] Breach: Every second, lose 2% of current health, times the amount of breach
 
-Parasite: Every 0.2 seconds, there is a chance to spawn the asteroid in your first launcher slot behind the ship. This chance increases with amount of parasite."]
+[img]res://ART/icons/burnoutIcon.png[/img]Burnout: Every 5 seconds take 3 damage times the amount of burnout, and become slowed and unable to shoot briefly (this disable stacks to a max of 3 seconds).
+
+[img]res://ART/icons/parasiteIcon.png[/img] Parasite: Every 0.2 seconds, there is a chance to spawn the asteroid in your first launcher slot behind the ship. This chance increases with amount of parasite.
+
+[img]res://ART/icons/blockIcon.png[/img] Block: When an asteroid is shot, if you have any block a charge is used and the asteroid is not destroyed as normal."]
 }
 
 [sub_resource type="Animation" id="Animation_krm41"]
@@ -101,7 +104,40 @@ tracks/1/keys = {
 
 \"On Spawn\": Triggers whenever an asteroid is spawned by a launcher or by an ability.
 
-\"On Bounce:\" Triggers whenever an asteroid bounces."]
+\"On Bounce:\" Triggers whenever an asteroid bounces off a wall."]
+}
+
+[sub_resource type="Animation" id="Animation_n4bwv"]
+resource_name = "4"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SectionLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[center][color=yellow][Inventory]"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextLabel:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Use [E] to open and close your inventory. In your inventory you will find six asteroid slots. You can click and drag to rearrange these. 
+
+When you drag two asteroids of the same type onto each other, they combine to gain experience, and when they hit three experience their abilities level up and their experience resets.
+
+When you have your inventory open, you can sell your existing asteroids AND stars for half of their value by dragging them over the sell box and releasing them.
+
+Remember, you can have only have six asteroids and six stars at a time! Choose wisely which stars and asteroids you buy."]
 }
 
 [sub_resource type="Animation" id="Animation_iehl6"]
@@ -142,6 +178,7 @@ _data = {
 "1": SubResource("Animation_bpyev"),
 "2": SubResource("Animation_in7lg"),
 "3": SubResource("Animation_krm41"),
+"4": SubResource("Animation_n4bwv"),
 "RESET": SubResource("Animation_iehl6")
 }
 
@@ -179,9 +216,10 @@ text = "[center][color=yellow][Gameloop]"
 offset_left = -400.0
 offset_top = -244.0
 offset_right = 400.0
-offset_bottom = 319.0
+offset_bottom = 535.0
 theme_override_fonts/normal_font = ExtResource("1_7sgdj")
 theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
 text = "The gameloop comes in two stages, shop and battle.
 
 In battle, asteroids spawn from all your owned launchers, starting from one random spot on the edge and traveling to another. Your goal is to eliminate a ship which gets stronger each turn.
@@ -234,26 +272,9 @@ scale = Vector2(4, 4)
 texture = ExtResource("3_nhpm1")
 offset = Vector2(16, 12)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(910, -520)
-scale = Vector2(4, 4)
-texture = ExtResource("4_oh7bl")
-offset = Vector2(-16, 12)
-
-[node name="exitButton" type="Button" parent="."]
-offset_left = 786.0
-offset_top = -516.0
-offset_right = 906.0
-offset_bottom = -428.0
-focus_mode = 0
-flat = true
-
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="mouse_exited" from="Button2" to="." method="_on_button_2_mouse_exited"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
-[connection signal="mouse_entered" from="exitButton" to="." method="_on_exit_button_mouse_entered"]
-[connection signal="mouse_exited" from="exitButton" to="." method="_on_exit_button_mouse_exited"]
-[connection signal="pressed" from="exitButton" to="." method="_on_exit_button_pressed"]

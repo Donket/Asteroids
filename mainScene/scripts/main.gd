@@ -55,12 +55,12 @@ func onBounce(asteroid):
 func onCrash(asteroid):
 	var n = Global.numOfStars("Death Rattle")
 	for child in rules.get_children():
-		if child.has_method("onCrash"):
+		if child.has_method("onBounce"):
 			child.onCrash(asteroid)
 			if n > 0:
 				for i in range(n):
 					child.onBounce()
-	if rules.has_method("onCrash"):
+	if rules.has_method("onBounce"):
 		rules.onCrash(asteroid)
 		if n > 0:
 			for i in range(n):
@@ -93,7 +93,7 @@ func onShot(asteroid):
 func _on_breach_timer_timeout():
 	if rules.breachAmount > 0:
 		rules.hp -= ceil(rules.maxHP*0.005*rules.breachAmount)
-		Global.addToLog("Breach",ceil(rules.maxHP*0.005*rules.breachAmount))
+		Global.addToLog("Breach",ceil(rules.hp*0.02*rules.breachAmount))
 		
 func _on_parasite_timer_timeout():
 	if rules.parasiteAmount > 0 and randi_range(0,100) < 5*rules.parasiteAmount and deck.size() > 0:
@@ -167,7 +167,7 @@ func defeat():
 				child.die()
 		$CanvasLayer/defeatLabel.visible = true
 		Global.health -= 2 * pow(2,Global.numOfStars("Steak"))
-		money += round(300 * pow(1.2,Global.turn))
+		money += round(300 * pow(1.1,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		if ship.lastRound:
@@ -190,7 +190,7 @@ func victory():
 				child.die()
 		$CanvasLayer/victoryLabel.visible = true
 		Global.wins += 1 * pow(2,Global.numOfStars("Steak"))
-		money += round(300 * pow(1.2,Global.turn))
+		money += round(300 * pow(1.1,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		if ship.lastRound:

@@ -133,7 +133,7 @@ func buy(spending):
 	if item.is_empty() or shop.invOpen == true or shop.money < cost:
 		return
 	
-	if type == Type.ASTEROID and null in Global.asteroidsDeck:
+	elif type == Type.ASTEROID and null in Global.asteroidsDeck:
 		for i in range(Global.asteroidsDeck.size()):
 			if Global.asteroidsDeck[i] == null:
 				Global.asteroidsDeck[i] = item
@@ -142,10 +142,9 @@ func buy(spending):
 				$CPUParticles2D.emitting = true
 				if spending:
 					shop.money -= cost
-				
 				break
 	
-	elif type == Type.STAR:
+	elif type == Type.STAR and Global.starsDeck.size() < 6:
 		Global.starsDeck.append(item)
 	
 		if item == "Coupon Book":

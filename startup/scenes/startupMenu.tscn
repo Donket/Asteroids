@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://startup/scripts/startupMenu.gd" id="1_cejfu"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="1_rwvtb"]
 [ext_resource type="AudioStream" uid="uid://csn2qilpk0bfs" path="res://MUSIC/baroque_chips_loopable.wav" id="3_i0o6g"]
-[ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://settings.tscn" id="4_abi20"]
+[ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://mainScene/scenes/settings.tscn" id="4_abi20"]
 
 [sub_resource type="Gradient" id="Gradient_gutvu"]
 offsets = PackedFloat32Array(0.849741)
