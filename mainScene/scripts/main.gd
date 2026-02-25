@@ -116,7 +116,8 @@ func _on_burnout_timer_timeout():
 	if rules.burnoutAmount > 0:
 		var amt = rules.burnoutAmount
 		rules.hp -= 3*amt
-		Global.addToLog("Burnout",ceil(rules.maxHP*0.005*rules.breachAmount))
+		Global.addToLog("Burnout",3*amt)
+		print(3*amt)
 		ship.moveSpeed /= max(1,amt*0.5)
 		ship.rotationSpeed /= max(1,amt*0.5)
 		ship.shootingDisabled = true

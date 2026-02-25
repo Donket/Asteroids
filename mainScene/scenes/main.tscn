@@ -23,8 +23,15 @@ expand_margin_bottom = 12.0
 script = ExtResource("1_aanir")
 
 [node name="Polygon2D5" type="Polygon2D" parent="."]
+z_index = 4096
 position = Vector2(799, 261)
 scale = Vector2(5, 5)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-283.4, 159.4, -375.2, 556.4, 369, 562, 279.6, 159.4)
+
+[node name="Polygon2D6" type="Polygon2D" parent="."]
+position = Vector2(4794, 1566)
+scale = Vector2(25, 25)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-600, -370, -600, 370, 630, 370, 630, -370)
 

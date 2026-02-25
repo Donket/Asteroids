@@ -65,7 +65,7 @@ func _input(event):
 	
 	var starSold = false
 	
-	if Input.is_action_just_pressed("click") and inRange:
+	if Input.is_action_just_pressed("click") and inRange and !empty:
 		invUi.clickSfx.playing = true
 		grabbed = true
 		Global.itemGrabbed = $"."
@@ -106,7 +106,9 @@ func _input(event):
 			queue_free()
 
 func receive_drop(source_item):
-	if source_item.item == item:
+	if source_item.type == Type.STAR:
+		return
+	elif source_item.item == item:
 		exp += source_item.exp + 1
 		source_item.item = null
 	else:
@@ -147,5 +149,5 @@ func _on_control_mouse_exited():
 func clear_global_grab():
 	if Global.itemGrabbed == self:
 		Global.itemGrabbed = null
-		if inRange and !open:
+		if inRange and !open and empty == false:
 			$AnimationPlayer.play("open")

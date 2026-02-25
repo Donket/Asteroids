@@ -6,3 +6,4 @@ func onHit(asteroid):
 	var amt = main.rules.burnoutAmount*main.rules.blockAmount*main.rules.breachAmount*main.rules.parasiteAmount
 	main.rules.hp -= amt
 	Global.addToLog("Warhammer", amt)
+	print(amt)

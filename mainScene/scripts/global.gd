@@ -11,7 +11,7 @@ var itemGrabbed = null
 var overSell = false
 var money = 300
 
-var wins = 0
+var wins = 9
 var maxWins = 10
 var health = 10
 
@@ -273,6 +273,22 @@ func getDesc(item, level):
 		placeholders[stat]=base+(gain*(level-1))
 	return data["text"].format(placeholders)
 
+
+func resetGlobalData():
+	battleScene = null
+	asteroidsDeck = [null, null, null, null, null, null]
+	asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
+	asteroidExps = [0,0,0,0,0,0]
+	starsDeck = []
+	itemGrabbed = null
+	overSell = false
+	money = 300
+	wins = 0
+	maxWins = 10
+	health = 10
+	turn = 0
+	firstOpen = true
+	logData = {}
 
 # item : [cost, rarity, speed, damage]
 var itemsToData: Dictionary = {

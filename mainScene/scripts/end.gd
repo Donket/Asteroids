@@ -16,6 +16,8 @@ func _ready():
 		$music.stream = load("res://MUSIC/solemn_advance_loopable.wav")
 		$music.playing = true
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Global.resetGlobalData()
+
 
 func _on_play_again_button_pressed():
 	get_tree().change_scene_to_file("res://shopScene/scenes/shop.tscn")

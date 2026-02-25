@@ -13,4 +13,4 @@ var damage = 165
 func onBounce():
 	var level = Global.getLevel(launcher.index)
 	bounces += 1
-	damage -= (30-10*level)
+	damage = max(0,damage-(30-10*level))
