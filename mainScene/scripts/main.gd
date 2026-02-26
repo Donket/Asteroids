@@ -55,16 +55,16 @@ func onBounce(asteroid):
 func onCrash(asteroid):
 	var n = Global.numOfStars("Death Rattle")
 	for child in rules.get_children():
-		if child.has_method("onBounce"):
+		if child.has_method("onCrash"):
 			child.onCrash(asteroid)
-			if n > 0:
-				for i in range(n):
-					child.onBounce()
-	if rules.has_method("onBounce"):
+		if child.has_method("onBounce") and n > 0:
+			for i in range(n):
+				child.onBounce()
+	if rules.has_method("onCrash"):
 		rules.onCrash(asteroid)
 		if n > 0:
 			for i in range(n):
-				rules.onBounce()
+				rules.onCrash()
 
 func onSpawn(asteroid):
 	$spawnPlayer.playing = true

@@ -4,6 +4,6 @@ var main
 
 func onCrash(asteroid):
 	if randf_range(0,1) <= 0.2:
-		main.get_node("rules").hp -= asteroid.attributes.damage
-		Global.addToLog("Suicide Bomb",asteroid.attributes.damage)
+		main.get_node("rules").hp -= 50
+		Global.addToLog("Suicide Bomb",50)
 

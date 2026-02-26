@@ -2,11 +2,11 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = [null, null, null, null, null, null]
+var asteroidsDeck = ["Iron Husk", "Iron Husk", "Iron Husk","Iron Husk", "Iron Husk", "Iron Husk"]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = []
+var starsDeck = ["Warhammer"]
 var itemGrabbed = null
 var overSell = false
 var money = 300
@@ -216,7 +216,7 @@ var itemsToDesc = {
 	"Throw Pillow":
 "Each asteroid that spawns has a 1% (cannot be increased) chance on spawn to teleport to and remain at a random location",
 	"Suicide Bomb":
-"On Crash, each asteroid has a 20% chance to deal its damage to the ship.",
+"On Crash, each asteroid has a 20% chance to deal 50 damage to the ship.",
 	"Shotgun":
 "Each time an asteroid is launched, 20% chance to launch an extra and 10% (cannot be increased) chance to launch two extra.",
 	"Bulldozer":
@@ -234,7 +234,7 @@ var itemsToDesc = {
 	"Snowman": 
 "If you have at least three snowballs, -30% launch time to all asteroids",
 	"Warhammer": 
-"On Hit: Deal damage equal to the sum of all status effects.",
+"On Hit: Deal damage equal to double the sum of all status effects.",
 	"Candle": 
 "On Spawn: 20% chance to apply [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Snowmelt": 
@@ -421,3 +421,4 @@ func addToLog(source, damage):
 		logData[source] += damage
 	else:
 		logData[source] = damage
+	battleScene.get_node("CanvasLayer/log").update()

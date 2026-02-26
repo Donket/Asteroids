@@ -6,10 +6,10 @@ extends Node2D
 
 var hp = 500: set = hurt
 var maxHP = 500
-var breachAmount = 30: set = changeBreach
+var breachAmount = 0: set = changeBreach
 var blockAmount = 0: set = changeBlock
 var burnoutAmount = 0: set = changeBurnout
-var parasiteAmount = 0: set = changeParasite
+var parasiteAmount = 30: set = changeParasite
 @onready var ship = $"../ship"
 
 func changeBreach(new):
