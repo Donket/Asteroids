@@ -9,23 +9,29 @@ var hp = 200: set = hurt
 var asteroidsInRange = []
 var readyForShot = false
 var shootingDisabled = false
-var lastRound = false
+var lastRound = false: set = lr 
 
 @onready var damageLabel = preload("res://ship/scenes/ship_damage_label.tscn")
+@export var bounds_tl: Vector2 = Vector2(-500, -420)
+@export var bounds_br: Vector2 = Vector2(500, 80)
 
 func _ready():
 	$shootTimer.wait_time = 2 - min(1/4*Global.turn,0.95)
-	if lastRound:
-		scale = Vector2(3,3)
+
+func lr(last):
+		scale = Vector2(2,2)
+		$Sprite2D.animation = "boss"
 		$shootTimer.wait_time *= 0.5
 		bulletSpeed *= 2
+		lastRound = last
 
 func bossShot():
-	if shootingDisabled:
+	var asteroidArr = get_parent().asteroids
+	if shootingDisabled or asteroidArr.size() == 0:
 		return
 	$shoot.playing = true
 	var shooter_pos = position
-	for target in get_parent().asteroids:
+	for target in asteroidArr:
 		if target == null:
 			continue
 		var target_pos = target.position
@@ -79,7 +85,7 @@ func _physics_process(delta):
 	if $"..".ended:
 		return 
 	
-	move_rotate_towards(target_pos, delta, rotationSpeed, moveSpeed, Vector2(-500,-300), Vector2(500,300))
+	move_rotate_towards(target_pos, delta, rotationSpeed, moveSpeed)
 	
 	if attributes.has_method("hurt"):
 		$hp.rotation = -rotation
@@ -88,7 +94,7 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	body.queue_free()
 
-func move_rotate_towards(point, delta, rotation_speed, move_speed, bounds_tl, bounds_br):
+func move_rotate_towards(point, delta, rotation_speed, move_speed):
 	var to_target = point - global_position
 	
 	if to_target.length() > 5.0:
@@ -105,8 +111,8 @@ func move_rotate_towards(point, delta, rotation_speed, move_speed, bounds_tl, bo
 func _on_timer_timeout():
 	var random_offset = Vector2(randf_range(-300, 300), randf_range(-300, 300))
 	target_pos = position + random_offset
-	target_pos.x = clamp(target_pos.x, -500, 500)
-	target_pos.y = clamp(target_pos.y, -400, 60)
+	target_pos.x = clamp(target_pos.x, bounds_tl.x, bounds_br.x)
+	target_pos.y = clamp(target_pos.y, bounds_tl.y, bounds_br.y)
 
 func shoot(target):
 	if shootingDisabled:

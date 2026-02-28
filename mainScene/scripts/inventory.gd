@@ -1,6 +1,6 @@
 extends Control
 
-var open = false
+var open = true
 
 func _on_button_pressed():
 	if !open:

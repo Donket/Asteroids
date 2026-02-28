@@ -278,7 +278,7 @@ bbcode_enabled = true
 text = "[img]ART/icons/parasiteIcon.png[/img] 454"
 
 [node name="ship" parent="." instance=ExtResource("7_n35oc")]
-position = Vector2(0, 43)
+position = Vector2(-5.00256, -394.947)
 
 [node name="rules" type="Node2D" parent="."]
 visible = false

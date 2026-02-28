@@ -13,4 +13,4 @@ var damage = 150
 
 func onHit():
 	var level = Global.getLevel(launcher.index)
-	main.rules.hp -= 40*level*pow(Global.block,1.5)
+	main.rules.hp -= 5*level*pow(Global.block,1.5)

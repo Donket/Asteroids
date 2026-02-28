@@ -2,16 +2,16 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Iron Husk", "Iron Husk", "Iron Husk","Iron Husk", "Iron Husk", "Iron Husk"]
+var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = ["Warhammer"]
+var starsDeck = []
 var itemGrabbed = null
 var overSell = false
 var money = 300
 
-var wins = 9
+var wins = 0
 var maxWins = 10
 var health = 10
 
@@ -58,9 +58,9 @@ var itemsToDesc = {
 		"gain": {"chance": 25}
 	},
 	"Ancient Rock": {
-		"text": "On Hit: Apply {parasite} [img]res://ART/icons/parasiteIcon.png[/img]",
+		"text": "On Hit: 30% chance to apply {parasite} [img]res://ART/icons/parasiteIcon.png[/img]",
 		"base": {"parasite": 1},
-		"gain": {"parasite": 1}
+		"gain": {"parasite": 2}
 	},
 	"Ancient Gem": {
 		"text": "On Hit: Activates [img]res://ART/icons/breachIcon.png[/img] {count} times",
@@ -95,7 +95,7 @@ var itemsToDesc = {
 		"gain": {"breach": 1, "burnout": 1}
 	},
 	"Cursed Relic": {
-		"text": "Has: 1 [img]res://ART/icons/bounceIcon.png[/img]\nOn Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - {pen} damage",
+		"text": "Has: 1 [img]res://ART/icons/bounceIcon.png[/img]\nOn Bounce: + 1 [img]res://ART/icons/bounceIcon.png[/img] - {pen} damage (negative penalty does nothing)",
 		"base": {"pen": 20},
 		"gain": {"pen": -10}
 	},
@@ -151,12 +151,12 @@ var itemsToDesc = {
 	"Astral Relic": {
 		"text": "On Spawn: Gain a {perc}% boost of all stats. This effect is multiplied by current [img]res://ART/icons/blockIcon.png[/img].",
 		"base": {"perc": 0.5},
-		"gain": {"perc": 5}
+		"gain": {"perc": 1}
 	},
 	"Astral Meteor": {
 		"text": "Oh Hit: Use all your block to deal {mult} base damage. This scales exponentially with [img]res://ART/icons/blockIcon.png[/img].",
-		"base": {"mult": 40},
-		"gain": {"mult": 40}
+		"base": {"mult": 5},
+		"gain": {"mult": 5}
 	},
 
 	# Stars
@@ -417,6 +417,7 @@ func getLevel(ind):
 
 
 func addToLog(source, damage):
+	damage = round(damage)
 	if source in logData.keys():
 		logData[source] += damage
 	else:

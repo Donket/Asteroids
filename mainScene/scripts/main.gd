@@ -33,7 +33,7 @@ func changeMoney(newMoney):
 	var n = Global.numOfStars("Astral Essence")
 	if n > 0:
 		for asteroid in asteroids:
-			if "Astral" in Global.asteroidsDeck[asteroid.slot]:
+			if asteroid.is_instance_valid() and "Astral" in Global.asteroidsDeck[asteroid.slot]:
 				asteroid.attributes.damage += 5
 
 func debtCollecter():
@@ -117,7 +117,6 @@ func _on_burnout_timer_timeout():
 		var amt = rules.burnoutAmount
 		rules.hp -= 3*amt
 		Global.addToLog("Burnout",3*amt)
-		print(3*amt)
 		ship.moveSpeed /= max(1,amt*0.5)
 		ship.rotationSpeed /= max(1,amt*0.5)
 		ship.shootingDisabled = true
@@ -156,6 +155,8 @@ func _ready():
 		rules.add_child(scene)
 	ship.attributes = rules
 	money = Global.money
+	Global.logData = {}
+	Global.block = 0
 
 
 func defeat():
@@ -237,6 +238,7 @@ func launch(index, atEdge):
 	var scene = load("res://asteroids/baseAsteroid/asteroid.tscn").instantiate()
 	scene.get_node("attributes").set_script(load("res://asteroids/" + deck[index] + ".gd"))
 	scene.get_node("Sprite2D").texture = load("res://ART/asteroidArts/" + deck[index] + ".png")
+	scene.slot = index
 	var bool1 = false
 	if randi_range(0,2)==0:
 		bool1 = true
@@ -277,7 +279,6 @@ func launch(index, atEdge):
 	sceneAttributes.baseSpeed += Global.asteroidPermStats[launchers.get_child(index).index][0]
 	sceneAttributes.damage += Global.asteroidPermStats[launchers.get_child(index).index][1]
 	scene.ship = ship
-	scene.slot = index
 	var shotguns = Global.numOfStars("Shotgun")
 	if shotguns >= 1:
 		var count = 1
@@ -299,6 +300,7 @@ func launch(index, atEdge):
 			shotgunScene.ship = ship
 			shotgunScene.direction = dir + (i-count/2)*30
 			shotgunScene.position = scene.position
+			shotgunScene.slot = index
 			asteroids.append(shotgunScene)
 			add_child(shotgunScene)
 	

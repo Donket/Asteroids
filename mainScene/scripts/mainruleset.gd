@@ -9,7 +9,7 @@ var maxHP = 500
 var breachAmount = 0: set = changeBreach
 var blockAmount = 0: set = changeBlock
 var burnoutAmount = 0: set = changeBurnout
-var parasiteAmount = 30: set = changeParasite
+var parasiteAmount = 0: set = changeParasite
 @onready var ship = $"../ship"
 
 func changeBreach(new):
@@ -98,6 +98,10 @@ func initializeStats():
 		maxHP *= 3
 		hp *= 3
 	hp = maxHP
+	breachAmount = 0
+	blockAmount = 0
+	burnoutAmount = 0
+	parasiteAmount = 0
 	
 
 

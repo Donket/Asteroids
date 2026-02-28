@@ -15,5 +15,6 @@ var damage = 70
 
 func onHit():
 	var level = Global.getLevel(launcher.index)
-	main.get_node("rules").parasiteAmount += level
+	if Global.randChance(30):
+		main.get_node("rules").parasiteAmount += 2*level-1
 
