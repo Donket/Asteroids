@@ -1,11 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://dq61aqbals68d"]
+[gd_scene load_steps=19 format=3 uid="uid://dq61aqbals68d"]
 
 [ext_resource type="Script" path="res://mainScene/scripts/main.gd" id="1_aanir"]
 [ext_resource type="Script" path="res://mainScene/scripts/timers.gd" id="2_t1drb"]
 [ext_resource type="Texture2D" uid="uid://c5k4rpc2vcoph" path="res://ART/uiArts/mainUI.png" id="3_8j5i6"]
 [ext_resource type="Texture2D" uid="uid://s38f1we2tls5" path="res://ART/uiArts/timeScaleIcon.png" id="4_0oit1"]
+[ext_resource type="Texture2D" uid="uid://kac22w78ljk8" path="res://ART/icons/settingsIcon.png" id="4_guw4t"]
 [ext_resource type="PackedScene" uid="uid://t2jcpwhwgqjh" path="res://mainScene/scenes/launcherUI.tscn" id="4_xd1qb"]
 [ext_resource type="PackedScene" uid="uid://ddxelv380fj4r" path="res://mainScene/scenes/log.tscn" id="5_bryf5"]
+[ext_resource type="Texture2D" uid="uid://b7545fiadwyey" path="res://ART/uiArts/shopTutorialButton.png" id="5_hq4sv"]
 [ext_resource type="Texture2D" uid="uid://dvgva0u77omk1" path="res://ART/uiArts/sliderBack.png" id="5_qogog"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="6_w4eqt"]
 [ext_resource type="PackedScene" uid="uid://b3llxpelm4eeb" path="res://ship/scenes/ship.tscn" id="7_n35oc"]
@@ -13,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://b8n863tfw8lpd" path="res://MUSIC/battle_commences_loopable.wav" id="9_6cs4h"]
 [ext_resource type="AudioStream" uid="uid://dkqg28jrsr0i4" path="res://MUSIC/sfx/spawn.wav" id="10_e0qr2"]
 [ext_resource type="AudioStream" uid="uid://1mgfjieipayh" path="res://MUSIC/battle_ceases_loopable.wav" id="10_hshsf"]
+[ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://mainScene/scenes/settings.tscn" id="16_xa6x3"]
+[ext_resource type="PackedScene" uid="uid://cspev8t5agspi" path="res://startup/scenes/tutorial.tscn" id="17_7kjtq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sfo6"]
 texture = ExtResource("5_qogog")
@@ -80,9 +84,34 @@ position = Vector2(960, 537)
 scale = Vector2(5, 5)
 texture = ExtResource("3_8j5i6")
 
+[node name="settingsButton" type="Button" parent="CanvasLayer"]
+offset_left = 73.0
+offset_top = 737.0
+offset_right = 143.0
+offset_bottom = 809.0
+focus_mode = 0
+flat = true
+
+[node name="settingsButton" type="Sprite2D" parent="CanvasLayer/settingsButton"]
+position = Vector2(35, 36)
+scale = Vector2(3, 3)
+texture = ExtResource("4_guw4t")
+
+[node name="TutorialButton" type="Button" parent="CanvasLayer"]
+offset_left = 218.0
+offset_top = 726.0
+offset_right = 346.0
+offset_bottom = 822.0
+focus_mode = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/TutorialButton"]
+position = Vector2(64, 48)
+scale = Vector2(4, 4)
+texture = ExtResource("5_hq4sv")
+
 [node name="HSlider" type="HSlider" parent="CanvasLayer"]
 process_mode = 3
-z_index = 50
+z_index = 1
 offset_left = 13.0
 offset_top = 856.0
 offset_right = 402.0
@@ -277,6 +306,124 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[img]ART/icons/parasiteIcon.png[/img] 454"
 
+[node name="statLabels" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="slot1Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 866.0
+offset_right = 637.0
+offset_bottom = 1075.0
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]AVD: 500
+AVS: 300
+PDMG: 0
+PSPD: 0
+Count: 0"
+
+[node name="slot2Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+layout_mode = 0
+offset_left = 614.0
+offset_top = 866.0
+offset_right = 817.0
+offset_bottom = 1075.0
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]AVD: 500
+AVS: 300
+PDMG: 0
+PSPD: 0
+Count: 0"
+
+[node name="slot3Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+layout_mode = 0
+offset_left = 794.0
+offset_top = 866.0
+offset_right = 997.0
+offset_bottom = 1075.0
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]AVD: 500
+AVS: 300
+PDMG: 0
+PSPD: 0
+Count: 0"
+
+[node name="slot4Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+layout_mode = 0
+offset_left = 974.0
+offset_top = 866.0
+offset_right = 1177.0
+offset_bottom = 1075.0
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]AVD: 500
+AVS: 300
+PDMG: 0
+PSPD: 0
+Count: 0"
+
+[node name="slot5Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+layout_mode = 0
+offset_left = 1154.0
+offset_top = 866.0
+offset_right = 1357.0
+offset_bottom = 1075.0
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]AVD: 500
+AVS: 300
+PDMG: 0
+PSPD: 0
+Count: 0"
+
+[node name="slot6Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+layout_mode = 0
+offset_left = 1334.0
+offset_top = 866.0
+offset_right = 1537.0
+offset_bottom = 1075.0
+scale = Vector2(0.75, 0.75)
+theme_override_fonts/normal_font = ExtResource("6_w4eqt")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]AVD: 500
+AVS: 300
+PDMG: 0
+PSPD: 0
+Count: 0"
+
+[node name="abilityLabels" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource("16_xa6x3")]
+visible = false
+z_index = 10
+position = Vector2(960, 540)
+
+[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("17_7kjtq")]
+visible = false
+z_index = 10
+position = Vector2(960, 540)
+
 [node name="ship" parent="." instance=ExtResource("7_n35oc")]
 position = Vector2(-5.00256, -394.947)
 
@@ -311,6 +458,12 @@ volume_db = -5.0
 [connection signal="timeout" from="timers/breachTimer" to="." method="_on_breach_timer_timeout"]
 [connection signal="timeout" from="timers/burnoutTimer" to="." method="_on_burnout_timer_timeout"]
 [connection signal="timeout" from="timers/parasiteTimer" to="." method="_on_parasite_timer_timeout"]
+[connection signal="mouse_entered" from="CanvasLayer/settingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/settingsButton" to="." method="_on_settings_button_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/settingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/TutorialButton" to="." method="_on_tutorial_button_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/TutorialButton" to="." method="_on_tutorial_button_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/HSlider" to="." method="_on_h_slider_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/HSlider" to="." method="_on_h_slider_mouse_exited"]
 [connection signal="value_changed" from="CanvasLayer/HSlider" to="." method="_on_h_slider_value_changed"]

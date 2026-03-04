@@ -38,7 +38,7 @@ func cursedEssence():
 	var n = Global.numOfStars("Cursed Essence")
 	if n > 0:
 		for i in n:
-			if randf_range(0,1) < 0.2:
+			if Global.randChance(50):
 				var statusChanged = randi_range(1,4)
 				if statusChanged == 1:
 					breachAmount += 1
@@ -66,7 +66,7 @@ func _ready():
 	initializeStats()
 
 func initializeStats():
-	maxHP *= pow(1.15,Global.turn)
+	maxHP *= pow(1.25,Global.turn)
 	if Global.wins + 1*pow(2,Global.numOfStars("Steak")) >= Global.maxWins:
 		maxHP *= 3
 		hp *= 3

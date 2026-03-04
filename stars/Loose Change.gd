@@ -4,4 +4,4 @@ var main
 
 func onCrash(asteroid):
 	if Global.randChance(30):
-		main.money += 2
+		main.money += 8

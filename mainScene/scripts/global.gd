@@ -2,14 +2,14 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = [null, null, null, null, null, null]
+var asteroidsDeck = ["Iron Husk", "Iron Husk", "Iron Husk", "Iron Husk", "Iron Husk", "Iron Husk"]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
 var starsDeck = []
 var itemGrabbed = null
 var overSell = false
-var money = 300
+var money = 600
 
 var wins = 0
 var maxWins = 10
@@ -109,8 +109,8 @@ var itemsToDesc = {
 	# --- GILDED FAMILY ---
 	"Gilded Husk": {
 		"text": "On Hit: Gain +{money} [img]res://ART/icons/moneyIcon.png[/img]",
-		"base": {"money": 2},
-		"gain": {"money": 2}
+		"base": {"money": 5},
+		"gain": {"money": 5}
 	},
 	"Gilded Rock": {
 		"text": "Has: 1 [img]res://ART/icons/bounceIcon.png[/img]\nOn Bounce: Spend {cost} [img]res://ART/icons/moneyIcon.png[/img] to gain + 1 [img]res://ART/icons/bounceIcon.png[/img].",
@@ -124,8 +124,8 @@ var itemsToDesc = {
 	},
 	"Gilded Relic": {
 		"text": "On Bounce: Gain +{money} [img]res://ART/icons/moneyIcon.png[/img]\nHas: {bounces} [img]res://ART/icons/bounceIcon.png[/img]",
-		"base": {"money": 5, "bounces": 2},
-		"gain": {"money": 3, "bounces": 1}
+		"base": {"money": 10, "bounces": 2},
+		"gain": {"money": 5, "bounces": 1}
 	},
 	"Gilded Meteor": {
 		"text": "On Hit: +{money} [img]res://ART/icons/moneyIcon.png[/img]\nLose 1 random asteroid",
@@ -167,17 +167,17 @@ var itemsToDesc = {
 	"Boot": 
 "When you gain a status effect, all asteroids gain +20 acceleration.",
 	"Backpack": 
-"Asteroids gain 1% speed for each Star you own",
+"When you gain a status effect, 30% chance to gain 5 money",
 	"Trampoline": 
 "On spawn, asteroids have a 30% chance to gain 1 [img]res://ART/icons/bounceIcon.png[/img]",
 	"Goop": 
 "Asteroids in Slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, On Bounce they lose 20 speed",
 	"Hanger":
-"Upon spawning an asteroid, 20% (cannot be increased) chance to destroy it and gain +4 [img]res://ART/icons/moneyIcon.png[/img]",
+"Upon spawning an asteroid, 20% chance to destroy it and gain +10 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Hourglass":
 "Timer is 10% longer.",
 	"Pipe": 
-"On hit effects have a 20% chance of triggering twice (Does not affect star abilities).",
+"On Hit effects have a 20% chance of triggering twice (Does not affect star abilities).",
 	"Spider": 
 "All asteroid stats +20%. - 10 [img]res://ART/icons/moneyIcon.png[/img] when destroyed.",
 	"Steak": 
@@ -195,17 +195,17 @@ var itemsToDesc = {
 	"Lethal":
 "If you will die next loss, all asteroid stats +20%",
 	"Golden Tooth":
-"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +1 extra",
+"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +3 extra",
 	"Loose Change":
-"On Crash: 30% chance to drop +2 [img]res://ART/icons/moneyIcon.png[/img]",
+"On Crash: 30% chance to drop +8 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Coupon Book":
 "Future items cost 20% less, but rerolls cost 20% more",
 	"Payday":
-"At the start of each round, + 5 [img]res://ART/icons/moneyIcon.png[/img]",
+"At the start of each round, + 40 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Tip Jar":
-"Each On Hit effect has a 10% chance to grant +1 [img]res://ART/icons/moneyIcon.png[/img]",
+"Each On Hit effect has a 40% chance to grant +6 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Debt Collector":
-"Every time you gain money in battle, 10% (cannot be increased) chance to spawn a copy of the asteroid in Slot 3 on top of the ship.",
+"Every time you gain money in battle, 10% chance to spawn a copy of the asteroid in Slot 3 on top of the ship.",
 	"Piggy Bank":
 "Unspent [img]res://ART/icons/moneyIcon.png[/img] grants +1% asteroid stats per 200 money",
 	"Minivan":
@@ -213,13 +213,13 @@ var itemsToDesc = {
 	"Binky":
 "-20% asteroid speed",
 	"Bottle":
-"When an asteroid spawns, 10% (cannot be increased) chance to give the asteroid in Slot 4 +2 permanent damage.",
+"When an asteroid spawns, 10% chance to give the asteroid in Slot 4 +2 permanent damage.",
 	"Throw Pillow":
-"Each asteroid that spawns has a 1% (cannot be increased) chance on spawn to teleport to and remain at a random location",
+"Each asteroid that spawns has a 5% chance on spawn to teleport to a random location motionless. After 5 seconds, it gains back its base speed and double its other stats.",
 	"Suicide Bomb":
 "On Crash, each asteroid has a 20% chance to deal 50 damage to the ship.",
 	"Shotgun":
-"Each time an asteroid is launched, 20% chance to launch an extra and 10% (cannot be increased) chance to launch two extra.",
+"Each time an asteroid is launched, 20% chance to launch an extra and 5% chance to launch two extra.",
 	"Bulldozer":
 "On Crash: Gain block proportional to asteroid speed",
 	"Coconut": 
@@ -233,7 +233,7 @@ var itemsToDesc = {
 	"Shield": 
 "On Bounce: Gain +1 [img]res://ART/icons/blockIcon.png[/img]",
 	"Snowman": 
-"If you have at least three snowballs, -30% launch time to all asteroids",
+"If you have at least four snowballs, -65% launch time to all asteroids",
 	"Warhammer": 
 "On Hit: Deal damage equal to double the sum of all status effects.",
 	"Candle": 
@@ -253,7 +253,7 @@ var itemsToDesc = {
 	"Ancient Essence":
 "If you ever have more than 30 status effects, spend all to gain 50 damage on all existing asteroids.",
 	"Cursed Essence":
-"Whenever you gain a status effect, 20% (cannot be increased) chance to also gain another.",
+"Whenever you gain a status effect, 50% chance to also gain another.",
 	"Death Rattle":
 "On Crash: Trigger On Bounce effects.",
 	"Recursive":
@@ -263,7 +263,7 @@ var itemsToDesc = {
 	"Blind Stick":
 "Asteroids steer away from the ship.",
 	"Wagon Wheel":
-"If an asteroid's acceleration ever exceeds 100, return to base speed and acceleration and spend 5 [img]res://ART/icons/burnoutIcon.png[/img] to gain 5 [img]res://ART/icons/bounceIcon.png[/img]."
+"If an asteroid's acceleration ever reaches 100, return to base speed and acceleration and spend 5 [img]res://ART/icons/burnoutIcon.png[/img] to gain 5 [img]res://ART/icons/bounceIcon.png[/img]."
 
 
 #TODO: Low prio: Implement

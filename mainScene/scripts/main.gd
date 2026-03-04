@@ -20,7 +20,7 @@ var is_processing = false
 
 func changeMoney(newMoney):
 	Global.money = newMoney
-	money = newMoney + Global.numOfStars("Golden Tooth")
+	money = newMoney + Global.numOfStars("Golden Tooth") * 3
 	$CanvasLayer/moneyLabel.text = str(money)
 	pending_updates += 1
 	if is_processing:
@@ -39,7 +39,7 @@ func changeMoney(newMoney):
 func debtCollecter():
 	for i in 1 + Global.numOfStars("Golden Tooth"):
 		for j in Global.numOfStars("Debt Collector"):
-			if randf_range(0,1) <= 0.1 and deck[2] != null and !ended:
+			if Global.randChance(10) and deck[2] != null and !ended:
 				launch(2, false)
 				await get_tree().create_timer(0.1).timeout
 
@@ -127,8 +127,8 @@ func _on_burnout_timer_timeout():
 
 func snowman():
 	if Global.numOfStars("Snowman") > 0:
-		if Global.numOfStars("Snowball") > 2:
-			return pow(0.7,Global.numOfStars("Snowman"))
+		if Global.numOfStars("Snowball") >= 4:
+			return pow(0.35,Global.numOfStars("Snowman"))
 	return 1
 
 func _ready():
@@ -147,6 +147,8 @@ func _ready():
 			launchers.get_child(i).max_time = deckTimes[i]
 			launchers.get_child(i).index = permStatIndices[i]
 			launchers.get_child(i).texture = load("res://ART/asteroidArts/" + deck[i] + ".png")
+			launchers.get_child(i).empty = false
+			launchers.get_child(i).item = deck[i]
 	for star in Global.starsDeck:
 		var scene = load("res://mainScene/scenes/baseStar.tscn").instantiate()
 		scene.set_script(load("res://stars/" + star + ".gd"))
@@ -158,6 +160,37 @@ func _ready():
 	Global.logData = {}
 	Global.block = 0
 	$CanvasLayer/HSlider.value=Global.timeScale
+	refreshStatLabels()
+
+
+func refreshStatLabels():
+	var labels = $CanvasLayer/statLabels
+	for i in range(0,6):
+		var relevantAsteroids = []
+		for asteroid in asteroids:
+			if is_instance_valid(asteroid) and asteroid.slot == i:
+				relevantAsteroids.append(asteroid)
+		
+		var averageDmg = 0
+		for asteroid in relevantAsteroids:
+			averageDmg += asteroid.attributes.damage
+		if relevantAsteroids.size() > 0:
+			averageDmg /= relevantAsteroids.size()
+			
+		var averageSpd = 0
+		for asteroid in relevantAsteroids:
+			averageSpd += asteroid.speed
+		if relevantAsteroids.size() > 0:
+			averageSpd /= relevantAsteroids.size()
+		
+		var label = labels.get_child(i)
+		label.text = "[center]ADMG: " + str(averageDmg) + "
+ASPD: " + str(averageSpd) + "
+PDMG: " + str(Global.asteroidPermStats[i][0]) + "
+PSPD: " + str(Global.asteroidPermStats[i][1]) + "
+Count: " + str(relevantAsteroids.size())
+	await get_tree().create_timer(0.5, true, false, true).timeout
+	refreshStatLabels()
 
 
 func defeat():
@@ -270,7 +303,7 @@ func launch(index, atEdge):
 	if shotguns >= 1:
 		var count = 1
 		for i in range(shotguns):
-			if randf_range(0,1) < 0.1:
+			if Global.randChance(5):
 				count += 2
 			elif Global.randChance(20):
 				count += 1
@@ -407,23 +440,58 @@ func _on_h_slider_mouse_exited():
 
 
 func _on_rules_status_effect_changed():
+	if !rules:
+		return
 	if rules.blockAmount > 0:
-		$CanvasLayer/blockLabel.visible = true
-		$CanvasLayer/blockLabel.text = "[img]ART/icons/blockIcon.png[/img] " + str($rules.blockAmount)
+		$CanvasLayer/VBoxContainer/blockLabel.visible = true
+		$CanvasLayer/VBoxContainer/blockLabel.text = "[img]ART/icons/blockIcon.png[/img] " + str($rules.blockAmount)
 	elif rules.blockAmount <= 0:
-		$CanvasLayer/blockLabel.visible = false
+		$CanvasLayer/VBoxContainer/blockLabel.visible = false
 	if rules.breachAmount > 0:
-		$CanvasLayer/breachLabel.visible = true
-		$CanvasLayer/breachLabel.text = "[img]ART/icons/breachIcon.png[/img] " + str($rules.breachAmount)
+		$CanvasLayer/VBoxContainer/breachLabel.visible = true
+		$CanvasLayer/VBoxContainer/breachLabel.text = "[img]ART/icons/breachIcon.png[/img] " + str($rules.breachAmount)
 	elif rules.breachAmount <= 0:
-		$CanvasLayer/breachLabel.visible = false
+		$CanvasLayer/VBoxContainer/breachLabel.visible = false
 	if rules.parasiteAmount > 0:
-		$CanvasLayer/parasiteLabel.visible = true
-		$CanvasLayer/parasiteLabel.text = "[img]ART/icons/parasiteIcon.png[/img] " + str($rules.parasiteAmount)
+		$CanvasLayer/VBoxContainer/parasiteLabel.visible = true
+		$CanvasLayer/VBoxContainer/parasiteLabel.text = "[img]ART/icons/parasiteIcon.png[/img] " + str($rules.parasiteAmount)
 	elif rules.parasiteAmount <= 0:
-		$CanvasLayer/parasiteLabel.visible = false
+		$CanvasLayer/VBoxContainer/parasiteLabel.visible = false
 	if rules.burnoutAmount > 0:
-		$CanvasLayer/burnoutLabel.visible = true
-		$CanvasLayer/burnoutLabel.text = "[img]ART/icons/burnoutIcon.png[/img] " + str($rules.burnoutAmount)
+		$CanvasLayer/VBoxContainer/burnoutLabel.visible = true
+		$CanvasLayer/VBoxContainer/burnoutLabel.text = "[img]ART/icons/burnoutIcon.png[/img] " + str($rules.burnoutAmount)
 	elif rules.burnoutAmount <= 0:
-		$CanvasLayer/burnoutLabel.visible = false
+		$CanvasLayer/VBoxContainer/burnoutLabel.visible = false
+	var n = Global.numOfStars("Boot")
+	for asteroid in asteroids:
+		asteroid.acceleration += 20 * n
+	n = Global.numOfStars("Backpack")
+	if Global.randChance(30):
+		money += 5 * n
+
+
+func _on_settings_button_pressed():
+	$CanvasLayer/HSlider.value = 0
+	$CanvasLayer/Settings.visible = true
+
+
+
+func _on_tutorial_button_pressed():
+	$CanvasLayer/HSlider.value = 0
+	$CanvasLayer/Tutorial.visible = true
+
+
+func _on_settings_button_mouse_entered():
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+
+func _on_settings_button_mouse_exited():
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+
+func _on_tutorial_button_mouse_entered():
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+
+func _on_tutorial_button_mouse_exited():
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))

@@ -1,10 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://t2jcpwhwgqjh"]
+[gd_scene load_steps=10 format=3 uid="uid://t2jcpwhwgqjh"]
 
 [ext_resource type="Script" path="res://mainScene/scripts/launcherUI.gd" id="1_d6sig"]
 [ext_resource type="Shader" path="res://ART/resources/allBlack.gdshader" id="2_meq77"]
+[ext_resource type="Texture2D" uid="uid://iqnajpomo23a" path="res://ART/uiArts/shopPanel.png" id="3_wtha1"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_b2wyn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahq23"]
 shader = ExtResource("2_meq77")
+
+[sub_resource type="Animation" id="Animation_j5gxj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6bjdr"]
+resource_name = "close"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_auq8j"]
+resource_name = "open"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.00136e-05, 1.00136e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g3qgn"]
+_data = {
+"RESET": SubResource("Animation_j5gxj"),
+"close": SubResource("Animation_6bjdr"),
+"open": SubResource("Animation_auq8j")
+}
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -33,3 +89,105 @@ z_index = 1
 material = SubResource("ShaderMaterial_ahq23")
 position = Vector2(73, 54.5)
 scale = Vector2(3, 3)
+
+[node name="panel" type="Control" parent="."]
+z_index = 3
+layout_mode = 3
+anchors_preset = 0
+offset_left = 73.0
+offset_top = 54.5
+offset_right = 73.0
+offset_bottom = 54.5
+scale = Vector2(1e-05, 1e-05)
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="panel"]
+scale = Vector2(5, 5)
+texture = ExtResource("3_wtha1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -150.0
+offset_top = -215.0
+offset_right = 150.0
+offset_bottom = -115.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "
+[center]Iron Rock"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -140.0
+offset_top = -88.0
+offset_right = 216.0
+offset_bottom = 391.0
+scale = Vector2(0.8, 0.8)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+
+[node name="dmgLabel" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -150.0
+offset_top = 190.0
+offset_right = -65.0
+offset_bottom = 226.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]1055"
+
+[node name="spdLabel" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 190.0
+offset_right = 150.0
+offset_bottom = 226.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]1055"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = -155.0
+offset_top = 139.0
+offset_right = -55.0
+offset_bottom = 175.0
+theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]DMG"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="panel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 139.0
+offset_right = 155.0
+offset_bottom = 175.0
+theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]SPD"
+
+[node name="GridContainer" type="GridContainer" parent="panel"]
+layout_mode = 0
+offset_left = -290.0
+offset_right = -250.0
+offset_bottom = 40.0
+theme_override_constants/v_separation = 180
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g3qgn")
+}
+
+[connection signal="mouse_entered" from="ProgressBar" to="." method="_on_progress_bar_mouse_entered"]
+[connection signal="mouse_exited" from="ProgressBar" to="." method="_on_progress_bar_mouse_exited"]

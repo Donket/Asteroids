@@ -21,7 +21,7 @@ func changeExp(newExp):
 	Global.asteroidExps[slotIndex] = exp
 	$visuals/TextureProgressBar.value = exp % 3
 	if item != null:
-		$visuals/RichTextLabel.text = "[center]"+str(Global.getLevel(slotIndex))
+		$visuals/RichTextLabel.text = "[center]LVL "+str(Global.getLevel(slotIndex))
 		$panel/RichTextLabel2.text = Global.getDesc(item,Global.getLevel(slotIndex))
 	else:
 		$visuals/RichTextLabel.text = ""

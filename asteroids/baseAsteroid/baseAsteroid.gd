@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 
 var speed = 0: set = changeSpeed
-var acceleration = 0
+var acceleration = 0: set = WagonWheel
 var direction = 45
 var seekRadius = 500
-var turnSpeed = 20
+var turnSpeed = 15
 
 var throwPillowed = false
 
@@ -19,17 +19,32 @@ var ship
 var slot
 var asteroidName
 
+func WagonWheel(accel):
+	acceleration = accel
+	var n = Global.numOfStars("Wagon Wheel")
+	if acceleration >= 100 and n > 0 and Global.battleScene.rules.burnoutAmount >= 5:
+		Global.battleScene.rules.burnoutAmount -= 5
+		attributes.bounces += 5
+		acceleration = attributes.baseAcceleration
+		speed = attributes.baseSpeed
+		seekRadius *= 2
+		turnSpeed *= 2
 
 func _ready():
 	speed = attributes.baseSpeed
 	acceleration = attributes.baseAcceleration
 	for i in range(Global.numOfStars("Throw Pillow")):
-		if randf_range(0,100) < 1:
+		if Global.randChance(5):
 			throwPillowed = true
 			position.x = randi_range(-529,529)
 			position.y = randi_range(-419,79)
 			speed = 0
-			acceleration = 0
+			await get_tree().create_timer(5).timeout
+			speed = attributes.baseSpeed
+			attributes.bounces *= 2
+			attributes.damage *= 2
+			
+			
 	get_parent().onSpawn($".")
 	if attributes.has_method("onSpawn"):
 		attributes.onSpawn()
@@ -165,8 +180,18 @@ func seekShip(delta):
 	var distance = toPlayer.length()
 	if distance > seekRadius:
 		return
-	var targetAngle = rad_to_deg(atan2(-toPlayer.y, toPlayer.x))
-	var angleDiff = wrapf(targetAngle - direction, -180.0, 180.0)
-	var maxTurn = turnSpeed * delta
-	direction += clamp(angleDiff, -maxTurn, maxTurn)
-	direction = int(direction)
+	var n = Global.numOfStars("Blind Stick")
+	if n == 0:
+		var targetAngle = rad_to_deg(atan2(-toPlayer.y, toPlayer.x))
+		var angleDiff = wrapf(targetAngle - direction, -180.0, 180.0)
+		var maxTurn = turnSpeed * delta
+		direction += clamp(angleDiff, -maxTurn, maxTurn)
+		direction = int(direction)
+		return
+	if distance < seekRadius:
+		var awayAngle = rad_to_deg(atan2(toPlayer.y, -toPlayer.x))
+		var angleDiff = wrapf(awayAngle - direction, -180.0, 180.0)
+		var strengthMultiplier = 1.0 + (0.5 * n)
+		var maxTurn = turnSpeed * strengthMultiplier * delta
+		direction += clamp(angleDiff, -maxTurn, maxTurn)
+		direction = int(direction)

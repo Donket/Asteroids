@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="1_4m4rt"]
 [ext_resource type="Script" path="res://mainScene/scripts/settings.gd" id="1_bkrg3"]
-[ext_resource type="Texture2D" uid="uid://tafkqlw4wmbl" path="res://ART/uiArts/sliderGrabber.png" id="2_8rga8"]
+[ext_resource type="Texture2D" uid="uid://bf2bvgodb8qdb" path="res://ART/uiArts/sliderGrabber.png" id="2_8rga8"]
 [ext_resource type="Texture2D" uid="uid://dvgva0u77omk1" path="res://ART/uiArts/sliderBack.png" id="3_72sw0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g1xyn"]
@@ -11,6 +11,7 @@ expand_margin_top = 12.0
 expand_margin_bottom = 12.0
 
 [node name="Settings" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_bkrg3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
