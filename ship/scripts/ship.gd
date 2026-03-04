@@ -152,20 +152,19 @@ func shoot(target):
 	bullet.position = shooter_pos
 	bullet.rotation = direction.angle()
 	get_parent().call_deferred("add_child",bullet)
-	if Global.turn >= 6:
-		var count = floor(Global.turn/2)-2
-		var spreadAngle = deg_to_rad(30.0)
-		var step = spreadAngle/max(1, count)
-		for i in range(count):
-			var offsetIndex = i - (count - 1) / 2.0
-			var angleOffset = offsetIndex * step
-			var spreadDirection = direction.rotated(angleOffset)
+	var count = max(0,floor(Global.turn/2)-1)
+	var spreadAngle = deg_to_rad(30.0)
+	var step = spreadAngle/max(1, count)
+	for i in range(count):
+		var offsetIndex = i - (count - 1) / 2.0
+		var angleOffset = offsetIndex * step
+		var spreadDirection = direction.rotated(angleOffset)
 
-			bullet = load("res://ship/scenes/bullet.tscn").instantiate()
-			bullet.velocity = spreadDirection * bullet_speed
-			bullet.position = shooter_pos
-			bullet.rotation = spreadDirection.angle()
-			get_parent().call_deferred("add_child", bullet)
+		bullet = load("res://ship/scenes/bullet.tscn").instantiate()
+		bullet.velocity = spreadDirection * bullet_speed
+		bullet.position = shooter_pos
+		bullet.rotation = spreadDirection.angle()
+		get_parent().call_deferred("add_child", bullet)
 
 
 func _on_redraw_targets_timeout():

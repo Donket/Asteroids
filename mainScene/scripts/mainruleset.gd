@@ -10,58 +10,31 @@ var breachAmount = 0: set = changeBreach
 var blockAmount = 0: set = changeBlock
 var burnoutAmount = 0: set = changeBurnout
 var parasiteAmount = 0: set = changeParasite
+signal statusEffectChanged
+
 @onready var ship = $"../ship"
 
 func changeBreach(new):
 	breachAmount = new
-	var n = Global.numOfStars("Cursed Essence")
-	if n > 0:
-		for i in n:
-			if randf_range(0,1) < 0.2:
-				var statusChanged = randi_range(1,4)
-				if statusChanged == 1:
-					breachAmount += 1
-				elif statusChanged == 2:
-					Global.block += 1
-				elif statusChanged == 3:
-					burnoutAmount += 1
-				elif statusChanged == 4:
-					parasiteAmount += 1
+	statusEffectChanged.emit()
+	cursedEssence()
 
 func changeBlock(new):
 	blockAmount = new
-	var n = Global.numOfStars("Cursed Essence")
-	if n > 0:
-		for i in n:
-			if randf_range(0,1) < 0.2:
-				var statusChanged = randi_range(1,4)
-				if statusChanged == 1:
-					breachAmount += 1
-				elif statusChanged == 2:
-					Global.block += 1
-				elif statusChanged == 3:
-					burnoutAmount += 1
-				elif statusChanged == 4:
-					parasiteAmount += 1
+	statusEffectChanged.emit()
+	cursedEssence()
 
 func changeBurnout(new):
 	burnoutAmount = new
-	var n = Global.numOfStars("Cursed Essence")
-	if n > 0:
-		for i in n:
-			if randf_range(0,1) < 0.2:
-				var statusChanged = randi_range(1,4)
-				if statusChanged == 1:
-					breachAmount += 1
-				elif statusChanged == 2:
-					Global.block += 1
-				elif statusChanged == 3:
-					burnoutAmount += 1
-				elif statusChanged == 4:
-					parasiteAmount += 1
+	statusEffectChanged.emit()
+	cursedEssence()
 
 func changeParasite(new):
 	parasiteAmount = new
+	statusEffectChanged.emit()
+	cursedEssence()
+
+func cursedEssence():
 	var n = Global.numOfStars("Cursed Essence")
 	if n > 0:
 		for i in n:
@@ -75,7 +48,7 @@ func changeParasite(new):
 					burnoutAmount += 1
 				elif statusChanged == 4:
 					parasiteAmount += 1
-
+	
 
 
 func hurt(newHP):

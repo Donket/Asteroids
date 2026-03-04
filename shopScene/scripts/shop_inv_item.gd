@@ -55,6 +55,7 @@ func changeItem(newItem):
 			$visuals/TextureProgressBar.visible = false
 			$visuals/RichTextLabel.visible = false
 			empty = false
+		initTooltips()
 
 
 func _process(delta):
@@ -101,6 +102,7 @@ func _input(event):
 		await get_tree().process_frame
 		Input.warp_mouse(globalPos)
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_parent().get_parent().update()
 
 		if starSold:
 			queue_free()
@@ -124,6 +126,7 @@ func receive_drop(source_item):
 		
 		item = temp
 		exp = tempExp
+	get_parent().get_parent().update()
 
 func _on_control_mouse_entered():
 	inRange = true
@@ -151,3 +154,19 @@ func clear_global_grab():
 		Global.itemGrabbed = null
 		if inRange and !open and empty == false:
 			$AnimationPlayer.play("open")
+
+
+func initTooltips():
+	var container = $panel/GridContainer
+	for tt in container.get_children():
+		tt.free()
+	container.position.y = -50
+	var tooltips = ["res://ART/icons/parasiteIcon.png", "res://ART/icons/burnoutIcon.png", "res://ART/icons/moneyIcon.png", "res://ART/icons/breachIcon.png", "res://ART/icons/blockIcon.png", "res://ART/icons/bounceIcon.png", "res://ART/icons/spawnIcon.png"]
+	if position.x == -710:
+		container.position.x = 290
+	for tt in tooltips:
+		if tt in $panel/RichTextLabel2.text:
+			var scene = load("res://shopScene/scenes/tooltip.tscn").instantiate()
+			scene.type = tt
+			container.add_child(scene)
+	container.position.y -= 90*(container.get_child_count()-1)

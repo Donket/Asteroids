@@ -194,6 +194,13 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]SPD"
 
+[node name="GridContainer" type="GridContainer" parent="panel"]
+layout_mode = 0
+offset_left = -290.0
+offset_right = -250.0
+offset_bottom = 40.0
+theme_override_constants/v_separation = 180
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_g3qgn")

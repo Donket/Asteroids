@@ -17,6 +17,7 @@ var health = 10
 
 var turn = 0
 var firstOpen = true
+var timeScale = 1
 
 var logData = {
 	
@@ -164,11 +165,11 @@ var itemsToDesc = {
 	"Dice": 
 "Random chances +10% (cannot stack above 90%)",
 	"Boot": 
-"Asteroid Acceleration +30",
+"When you gain a status effect, all asteroids gain +20 acceleration.",
 	"Backpack": 
 "Asteroids gain 1% speed for each Star you own",
 	"Trampoline": 
-"On spawn, asteroids have a 30% chance to gain 1 bounce",
+"On spawn, asteroids have a 30% chance to gain 1 [img]res://ART/icons/bounceIcon.png[/img]",
 	"Goop": 
 "Asteroids in Slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, On Bounce they lose 20 speed",
 	"Hanger":
@@ -246,7 +247,7 @@ var itemsToDesc = {
 	"Iron Essence":
 "Whenever an Iron asteroid gains bounce, it gains +10% of existing speed.",
 	"Gilded Essence":
-"Whenever a Gilded asteroid gains speed, gain +5 [img]res://ART/icons/moneyIcon.png[/img].",
+"Whenever a Gilded asteroid gains speed from an ability, gain +5 [img]res://ART/icons/moneyIcon.png[/img].",
 	"Astral Essence":
 "Whenever you gain money, existing Astral asteroids gain +5 damage.",
 	"Ancient Essence":
@@ -257,6 +258,12 @@ var itemsToDesc = {
 "On Crash: Trigger On Bounce effects.",
 	"Recursive":
 "On Crash: If this is the first asteroid of the battle, respawn it. Does not stack.",
+	"Mirror":
+"On Bounce: Deal 20% of asteroid damage to ship.",
+	"Blind Stick":
+"Asteroids steer away from the ship.",
+	"Wagon Wheel":
+"If an asteroid's acceleration ever exceeds 100, return to base speed and acceleration and spend 5 [img]res://ART/icons/burnoutIcon.png[/img] to gain 5 [img]res://ART/icons/bounceIcon.png[/img]."
 
 
 #TODO: Low prio: Implement

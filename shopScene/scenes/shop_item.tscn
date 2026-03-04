@@ -101,6 +101,7 @@ bbcode_enabled = true
 text = "[center]1020"
 
 [node name="Control" type="Control" parent="."]
+z_index = 1
 anchors_preset = 0
 offset_top = 77.0
 offset_bottom = 77.0
@@ -182,6 +183,14 @@ theme_override_fonts/normal_font = ExtResource("4_eyv25")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]SPD"
+
+[node name="GridContainer" type="GridContainer" parent="Control"]
+z_index = 20
+layout_mode = 0
+offset_left = -290.0
+offset_right = -250.0
+offset_bottom = 360.0
+theme_override_constants/v_separation = 180
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false

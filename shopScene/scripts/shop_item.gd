@@ -8,6 +8,7 @@ var item: String = "": set = change
 var currentBaseRarity: int = 0
 
 @onready var shop = get_parent().get_parent()
+@onready var inv = get_parent().get_parent().get_node("shopInvUI")
 @onready var hoverSfx = shop.get_node("hover")
 @onready var clickSfx = shop.get_node("click")
 
@@ -25,7 +26,6 @@ func change(newItem: String):
 		$RichTextLabel.visible = true
 		
 	item = newItem
-
 
 func randomizeItem():
 	var items
@@ -89,6 +89,7 @@ func updateData():
 		$RichTextLabel.text = "[center]" + str(cost)
 		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
 	
+	initTooltips()
 	var tween = get_tree().create_tween()
 	tween.tween_property($Node2D, "position", Vector2(0,-10), 0.02)
 	tween.tween_property($Node2D, "position", Vector2(0,0), 0.02)
@@ -100,27 +101,26 @@ func _ready():
 	currentBaseRarity = min(3,floor(Global.turn/2))
 	randomizeItem()
 	if type == Type.ASTEROID:
-		$RichTextLabel.position = Vector2(-168,136)
+		$RichTextLabel.position = Vector2(-168,121)
 	elif type == Type.STAR:
-		$RichTextLabel.position = Vector2(-268,213)
+		$RichTextLabel.position = Vector2(-168,130)
 		$Control/Sprite2D.texture = load("res://ART/uiArts/starShopPanel.png")
+		$Node2D.scale = Vector2(4,4)
 		$Control/dmgLabel.visible = false
 		$Control/spdLabel.visible = false
 		$Control/RichTextLabel5.visible = false
 		$Control/RichTextLabel6.visible = false
 
 func _on_control_2_mouse_entered():
-	if shop.invOpen != true:
-		hoverSfx.playing=true
-		$AnimationPlayer.play("open")
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	hoverSfx.playing=true
+	$AnimationPlayer.play("open")
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 
 func _on_control_2_mouse_exited():
-	if shop.invOpen != true:
-		$AnimationPlayer.play("close")
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$AnimationPlayer.play("close")
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _on_control_2_pressed():
@@ -130,7 +130,7 @@ func _on_control_2_pressed():
 
 func buy(spending):
 	cost = floor(cost)
-	if item.is_empty() or shop.invOpen == true or shop.money < cost:
+	if item.is_empty() or shop.money < cost:
 		return
 	
 	elif type == Type.ASTEROID and null in Global.asteroidsDeck:
@@ -138,6 +138,17 @@ func buy(spending):
 			if Global.asteroidsDeck[i] == null:
 				Global.asteroidsDeck[i] = item
 				Global.asteroidPermStats[i] = [0,0]
+				item = ""
+				$CPUParticles2D.emitting = true
+				if spending:
+					shop.money -= cost
+				break
+				
+	elif type == Type.ASTEROID and item in Global.asteroidsDeck:
+		for i in range(Global.asteroidsDeck.size()):
+			if Global.asteroidsDeck[i] == item:
+				Global.asteroidsDeck[i] = item
+				Global.asteroidExps[i] += 1
 				item = ""
 				$CPUParticles2D.emitting = true
 				if spending:
@@ -160,4 +171,21 @@ func buy(spending):
 			if i.type == 1 and i != self:
 				if Global.randChance(5):
 					i.buy(false)
+	inv.refresh()
+
+
+func initTooltips():
+	var container = $Control/GridContainer
+	for tt in container.get_children():
+		tt.free()
+	container.position.y = -50
+	var tooltips = ["res://ART/icons/parasiteIcon.png", "res://ART/icons/burnoutIcon.png", "res://ART/icons/moneyIcon.png", "res://ART/icons/breachIcon.png", "res://ART/icons/blockIcon.png", "res://ART/icons/bounceIcon.png", "res://ART/icons/spawnIcon.png"]
+	if position.x == -710:
+		container.position.x = 290
+	for tt in tooltips:
+		if tt in $Control/RichTextLabel2.text:
+			var scene = load("res://shopScene/scenes/tooltip.tscn").instantiate()
+			scene.type = tt
+			container.add_child(scene)
+	container.position.y -= 90*(container.get_child_count()-1)
 

@@ -10,7 +10,7 @@ var bounces = 0
 var damage = 95
 
 
-func onCrash():
+func onHit():
 	var level = Global.getLevel(launcher.index)
 	if randf_range(0,1) > 0.5:
 		main.get_node("rules").breachAmount += 1+level

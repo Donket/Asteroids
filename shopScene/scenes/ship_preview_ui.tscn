@@ -1,0 +1,120 @@
+[gd_scene load_steps=15 format=3 uid="uid://t5jxjylo1f1q"]
+
+[ext_resource type="Script" path="res://shopScene/scripts/ship_preview_ui.gd" id="1_m4s1y"]
+[ext_resource type="Texture2D" uid="uid://phkqf7fj6k3j" path="res://ART/uiArts/shipPreviewBox.png" id="2_hrf5w"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="3_jhjjp"]
+[ext_resource type="Texture2D" uid="uid://dmn1m1d1lwwyf" path="res://ART/other/bossShip.png" id="4_3ktcu"]
+[ext_resource type="Texture2D" uid="uid://dlvlwlenm6m4m" path="res://ART/other/ship.png" id="4_5ve4j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fir7r"]
+atlas = ExtResource("4_3ktcu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06sk6"]
+atlas = ExtResource("4_3ktcu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f434"]
+atlas = ExtResource("4_3ktcu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6j4t"]
+atlas = ExtResource("4_3ktcu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_860hp"]
+atlas = ExtResource("4_5ve4j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iamm"]
+atlas = ExtResource("4_5ve4j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8fem"]
+atlas = ExtResource("4_5ve4j")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro1jo"]
+atlas = ExtResource("4_5ve4j")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5kimd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fir7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06sk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f434")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6j4t")
+}],
+"loop": true,
+"name": &"boss",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_860hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iamm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8fem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro1jo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="shipPreviewUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m4s1y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-159, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("2_hrf5w")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = -25.0
+offset_top = -19.0
+offset_right = 100.0
+offset_bottom = 78.0
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/normal_font = ExtResource("3_jhjjp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]HP: "
+
+[node name="Sprite2D2" type="AnimatedSprite2D" parent="Sprite2D"]
+position = Vector2(0.8, 5)
+scale = Vector2(1.4, 1.4)
+sprite_frames = SubResource("SpriteFrames_5kimd")
+animation = &"boss"
+autoplay = "default"
+frame_progress = 0.39145
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D"]
+offset_left = -25.0
+offset_top = 14.0
+offset_right = 223.0
+offset_bottom = 50.0
+scale = Vector2(0.2, 0.2)
+theme_override_fonts/normal_font = ExtResource("3_jhjjp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]"

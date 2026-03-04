@@ -92,7 +92,7 @@ func onShot(asteroid):
 
 func _on_breach_timer_timeout():
 	if rules.breachAmount > 0:
-		rules.hp -= ceil(rules.maxHP*0.005*rules.breachAmount)
+		rules.hp -= ceil(rules.hp*0.02*rules.breachAmount)
 		Global.addToLog("Breach",ceil(rules.hp*0.02*rules.breachAmount))
 		
 func _on_parasite_timer_timeout():
@@ -120,7 +120,7 @@ func _on_burnout_timer_timeout():
 		ship.moveSpeed /= max(1,amt*0.5)
 		ship.rotationSpeed /= max(1,amt*0.5)
 		ship.shootingDisabled = true
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(min(amt*0.1,4)).timeout
 		ship.moveSpeed *= max(1,amt*0.5)
 		ship.rotationSpeed *= max(1,amt*0.5)
 		ship.shootingDisabled = false
@@ -157,6 +157,7 @@ func _ready():
 	money = Global.money
 	Global.logData = {}
 	Global.block = 0
+	$CanvasLayer/HSlider.value=Global.timeScale
 
 
 func defeat():
@@ -211,22 +212,8 @@ func _process(delta):
 		for i in range(deck.size()):
 			if deck[i]:
 				launchers.get_child(i).time = $timers.get_child(i).time_left
-	if rules.blockAmount > 0:
-		$CanvasLayer/blockLabel.text = "[img]ART/icons/blockIcon.png[/img] " + str($rules.blockAmount)
-	elif rules.blockAmount <= 0:
-		$CanvasLayer/blockLabel.text = ""
-	if rules.breachAmount > 0:
-		$CanvasLayer/breachLabel.text = "[img]ART/icons/breachIcon.png[/img] " + str($rules.breachAmount)
-	elif rules.breachAmount <= 0:
-		$CanvasLayer/breachLabel.text = ""
-	if rules.parasiteAmount > 0:
-		$CanvasLayer/parasiteLabel.text = "[img]ART/icons/parasiteIcon.png[/img] " + str($rules.parasiteAmount)
-	elif rules.parasiteAmount <= 0:
-		$CanvasLayer/parasiteLabel.text = ""
-	if rules.burnoutAmount > 0:
-		$CanvasLayer/burnoutLabel.text = "[img]ART/icons/burnoutIcon.png[/img] " + str($rules.burnoutAmount)
-	elif rules.burnoutAmount <= 0:
-		$CanvasLayer/burnoutLabel.text = ""
+
+
 
 
 func timeout(index):
@@ -408,6 +395,7 @@ func _on_h_slider_value_changed(value):
 		tween.parallel().tween_property($music2, "volume_db", -30, 1)
 		paused = false
 	
+	Global.timeScale = value
 
 
 func _on_h_slider_mouse_entered():
@@ -416,3 +404,26 @@ func _on_h_slider_mouse_entered():
 
 func _on_h_slider_mouse_exited():
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+
+func _on_rules_status_effect_changed():
+	if rules.blockAmount > 0:
+		$CanvasLayer/blockLabel.visible = true
+		$CanvasLayer/blockLabel.text = "[img]ART/icons/blockIcon.png[/img] " + str($rules.blockAmount)
+	elif rules.blockAmount <= 0:
+		$CanvasLayer/blockLabel.visible = false
+	if rules.breachAmount > 0:
+		$CanvasLayer/breachLabel.visible = true
+		$CanvasLayer/breachLabel.text = "[img]ART/icons/breachIcon.png[/img] " + str($rules.breachAmount)
+	elif rules.breachAmount <= 0:
+		$CanvasLayer/breachLabel.visible = false
+	if rules.parasiteAmount > 0:
+		$CanvasLayer/parasiteLabel.visible = true
+		$CanvasLayer/parasiteLabel.text = "[img]ART/icons/parasiteIcon.png[/img] " + str($rules.parasiteAmount)
+	elif rules.parasiteAmount <= 0:
+		$CanvasLayer/parasiteLabel.visible = false
+	if rules.burnoutAmount > 0:
+		$CanvasLayer/burnoutLabel.visible = true
+		$CanvasLayer/burnoutLabel.text = "[img]ART/icons/burnoutIcon.png[/img] " + str($rules.burnoutAmount)
+	elif rules.burnoutAmount <= 0:
+		$CanvasLayer/burnoutLabel.visible = false
