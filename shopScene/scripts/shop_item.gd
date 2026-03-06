@@ -20,12 +20,15 @@ func change(newItem: String):
 		$Node2D.visible = false
 		$Control.visible = false
 		$RichTextLabel.visible = false
+		item = newItem
 	else:
 		$Node2D.visible = true
 		$Control.visible = true
 		$RichTextLabel.visible = true
-		
-	item = newItem
+		item = newItem
+		updateData()
+
+
 
 func randomizeItem():
 	var items

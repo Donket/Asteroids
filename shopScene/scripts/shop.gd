@@ -23,9 +23,6 @@ func _ready():
 	money = Global.money
 	Global.turn += 1
 	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
-	if Global.firstOpen:
-		Global.firstOpen = false
-		$tutorial.visible = true
 
 
 
@@ -42,6 +39,7 @@ func _on_roll_button_pressed():
 
 
 func _on_end_button_pressed():
+	Global.shopTutorialComplete = true
 	get_tree().change_scene_to_file("res://mainScene/scenes/main.tscn")
 
 
@@ -103,3 +101,16 @@ func _on_settings_button_mouse_exited():
 
 func _on_settings_button_pressed():
 	$Settings.visible = true
+
+func tutorialForce(asteroids, stars, inventoryv, sellv, rollv, previewv, tutorialv, endTurnv):
+	await get_tree().process_frame
+	$RollButton.visible = rollv
+	$shipPreviewUI.visible = previewv
+	$Button.visible = tutorialv
+	$EndButton.visible = endTurnv
+	$shopInvUI.visible = inventoryv
+	$SellButton.visible = sellv
+	for i in range(5):
+		items[i].item = asteroids[i]
+	for i in range(2):
+		items[i+5].item = stars[i]

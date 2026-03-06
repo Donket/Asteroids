@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cf4dxpqmpy8f2"]
+[gd_scene load_steps=18 format=3 uid="uid://cf4dxpqmpy8f2"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop.gd" id="1_d4jli"]
 [ext_resource type="Texture2D" uid="uid://df1iw2yv8opym" path="res://ART/uiArts/shopbgsprites.png" id="2_k6llu"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://kac22w78ljk8" path="res://ART/icons/settingsIcon.png" id="14_4hww2"]
 [ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://mainScene/scenes/settings.tscn" id="15_6801w"]
 [ext_resource type="PackedScene" uid="uid://t5jxjylo1f1q" path="res://shopScene/scenes/ship_preview_ui.tscn" id="16_axtj2"]
+[ext_resource type="PackedScene" uid="uid://dh7oca2cjbits" path="res://startup/scenes/playthrough_tutorial.tscn" id="17_pvin0"]
 
 [node name="shop" type="Node2D"]
 script = ExtResource("1_d4jli")
@@ -191,20 +192,23 @@ texture = ExtResource("8_irtrg")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Button"]
 layout_mode = 0
-offset_left = -3.0
-offset_top = -38.0
-offset_right = 131.0
-offset_bottom = 2.0
+offset_left = -16.0
+offset_top = -40.0
+offset_right = 145.0
 theme_override_fonts/normal_font = ExtResource("4_poi11")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center]Tutorial"
+text = "[center]Rulebook"
 
 [node name="shipPreviewUI" parent="." instance=ExtResource("16_axtj2")]
 offset_left = 960.0
 offset_top = -6.0
 offset_right = 960.0
 offset_bottom = -6.0
+
+[node name="playthroughTutorial" parent="." instance=ExtResource("17_pvin0")]
+position = Vector2(441, 334)
+isShop = true
 
 [node name="tutorial" parent="." instance=ExtResource("7_ekylw")]
 visible = false

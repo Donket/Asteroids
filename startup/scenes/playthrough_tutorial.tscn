@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh7oca2cjbits"]
+
+[ext_resource type="Script" path="res://startup/scripts/playthrough_tutorial.gd" id="1_4efvf"]
+[ext_resource type="Texture2D" uid="uid://phkqf7fj6k3j" path="res://ART/uiArts/shipPreviewBox.png" id="2_egkrc"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="3_fdrwy"]
+
+[node name="playthroughTutorial" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_4efvf")
+
+[node name="message" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("2_egkrc")
+
+[node name="CenterContainer" type="CenterContainer" parent="message"]
+scale = Vector2(0.165, 0.165)
+use_top_left = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="message/CenterContainer"]
+custom_minimum_size = Vector2(290, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_fdrwy")
+bbcode_enabled = true
+text = "[center]This is the roll button. Click it to refresh the shop, for the price listed in (). Careful, however! This price increases exponentially per roll, and resets to the original price after each battle.
+
+Click here to continue"
+fit_content = true
+
+[connection signal="mouse_entered" from="message/CenterContainer/RichTextLabel" to="." method="_on_rich_text_label_mouse_entered"]
+[connection signal="mouse_exited" from="message/CenterContainer/RichTextLabel" to="." method="_on_rich_text_label_mouse_exited"]

@@ -61,7 +61,6 @@ func hurt(newHP):
 
 
 func _ready():
-	$"../CanvasLayer/timerLabel".visible = true
 	$"../rulesTimer".start(round((20+Global.turn*2.4)*pow(1.1,Global.numOfStars("Hourglass"))))
 	initializeStats()
 
@@ -80,9 +79,9 @@ func initializeStats():
 
 func _process(delta):
 	if !$"..".ended:
-		$"../CanvasLayer/timerLabel".text = str(round($"../rulesTimer".time_left*100)/100)
+		$"../CanvasLayer/timerLabel".text = "[center]" + str(round($"../rulesTimer".time_left*100)/100)
 	if round($"../rulesTimer".time_left*100)/100 < 0.02:
-		$"../CanvasLayer/timerLabel".text = "0.00"
+		$"../CanvasLayer/timerLabel".text = "[center]0.00"
 		$"..".defeat()
 
 func onHit(asteroid):

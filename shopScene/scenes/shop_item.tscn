@@ -103,8 +103,8 @@ text = "[center]1020"
 [node name="Control" type="Control" parent="."]
 z_index = 1
 anchors_preset = 0
-offset_top = 77.0
-offset_bottom = 77.0
+offset_top = 95.0
+offset_bottom = 95.0
 scale = Vector2(1e-05, 1e-05)
 mouse_filter = 2
 

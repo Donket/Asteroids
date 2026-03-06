@@ -184,11 +184,11 @@ func refreshStatLabels():
 			averageSpd /= relevantAsteroids.size()
 		
 		var label = labels.get_child(i)
-		label.text = "[center]ADMG: " + str(averageDmg) + "
-ASPD: " + str(averageSpd) + "
-PDMG: " + str(Global.asteroidPermStats[i][0]) + "
-PSPD: " + str(Global.asteroidPermStats[i][1]) + "
-Count: " + str(relevantAsteroids.size())
+		label.text = "[center]ADMG: " + str(round(averageDmg)) + "
+ASPD: " + str(round(averageSpd)) + "
+PDMG: " + str(round(Global.asteroidPermStats[i][0])) + "
+PSPD: " + str(round(Global.asteroidPermStats[i][1])) + "
+Count: " + str(round(relevantAsteroids.size()))
 	await get_tree().create_timer(0.5, true, false, true).timeout
 	refreshStatLabels()
 
@@ -197,6 +197,7 @@ func defeat():
 	if !ended:
 		for child in $timers.get_children():
 			child.stop()
+		$rulesTimer.stop()
 		ended = true
 		for child in asteroids:
 			if child != null:
@@ -214,12 +215,14 @@ func defeat():
 		tween.parallel().tween_property($music2, "volume_db", 0, 1)
 		$CanvasLayer/HSlider.value = 1
 		$CanvasLayer/HSlider.editable = false
+		Global.battleTutorialComplete = true
 	
 	
 func victory():
 	if !ended:
 		for child in $timers.get_children():
 			child.stop()
+		$rulesTimer.stop()
 		ended = true
 		for child in asteroids:
 			if child != null:
@@ -237,6 +240,7 @@ func victory():
 		tween.parallel().tween_property($music2, "volume_db", 0, 1)
 		$CanvasLayer/HSlider.value = 1
 		$CanvasLayer/HSlider.editable = false
+		Global.battleTutorialComplete = true
 		
 
 
@@ -399,36 +403,37 @@ func _on_defeat_button_mouse_exited():
 	$CanvasLayer/defeatLabel.text = "[center][color=yellow]Defeat"
 
 
-
 func _on_h_slider_value_changed(value):
-	if value > 0:
-		Engine.time_scale = value
-		get_tree().paused = false
-	else:
+	if value <= 0:
 		get_tree().paused = true
-
+	else:
+		get_tree().paused = false
+		Engine.time_scale = value
 	if $ship.lastRound or ended:
 		return
-
-	elif value <= 0.05 and !paused:
-		value = 0.05
-		var tween = get_tree().create_tween()
-		tween.set_speed_scale(1.0/value)
-		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		tween.parallel().tween_property($music1, "volume_db", -30, 1)
-		tween.parallel().tween_property($music2, "volume_db", 0, 1)
-		paused = true
-
+	if value <= 0.05 and !paused:
+		enterPauseState(value)
 	elif value > 0.05 and paused:
-		value = 0.1
-		var tween = get_tree().create_tween()
-		tween.set_speed_scale(1.0/value)
-		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		tween.parallel().tween_property($music1, "volume_db", 0, 1)
-		tween.parallel().tween_property($music2, "volume_db", -30, 1)
-		paused = false
-	
+		exitPauseState(value)
 	Global.timeScale = value
+
+
+func enterPauseState(value):
+	paused = true
+	var tween = get_tree().create_tween()
+	tween.set_speed_scale(1.0 / value)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.parallel().tween_property($music1, "volume_db", -30, 1)
+	tween.parallel().tween_property($music2, "volume_db", 0, 1)
+
+
+func exitPauseState(value):
+	paused = false
+	var tween = get_tree().create_tween()
+	tween.set_speed_scale(1.0 / value)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.parallel().tween_property($music1, "volume_db", 0, 1)
+	tween.parallel().tween_property($music2, "volume_db", -30, 1)
 
 
 func _on_h_slider_mouse_entered():
@@ -464,7 +469,8 @@ func _on_rules_status_effect_changed():
 		$CanvasLayer/VBoxContainer/burnoutLabel.visible = false
 	var n = Global.numOfStars("Boot")
 	for asteroid in asteroids:
-		asteroid.acceleration += 20 * n
+		if is_instance_valid(asteroid):
+			asteroid.acceleration += 20 * n
 	n = Global.numOfStars("Backpack")
 	if Global.randChance(30):
 		money += 5 * n
@@ -495,3 +501,11 @@ func _on_tutorial_button_mouse_entered():
 
 func _on_tutorial_button_mouse_exited():
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+
+#timer visible, status effects visible, stats visible, time scale visible
+
+func tutorialForce(timerv, statuseffectsv, statsv, timescalev):
+	$CanvasLayer/timerLabel.visible = timerv
+	$CanvasLayer/VBoxContainer.visible = statuseffectsv
+	$CanvasLayer/statLabels.visible = statsv
+	$CanvasLayer/HSlider.visible = timescalev

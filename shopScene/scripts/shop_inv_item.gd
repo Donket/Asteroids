@@ -70,6 +70,10 @@ func _input(event):
 		invUi.clickSfx.playing = true
 		grabbed = true
 		Global.itemGrabbed = $"."
+		if type == Type.ASTEROID:
+			get_parent().get_parent().get_parent().get_node("SellButton").get_child(1).text = "[center]Sell (" + str(Global.itemsToData[item][0]/2) + ")"
+		else:
+			get_parent().get_parent().get_parent().get_node("SellButton").get_child(1).text = "[center]Sell (" + str(Global.starsToData[item][0]/2) + ")"
 		$AnimationPlayer.play("close")
 		open = false
 	
@@ -152,6 +156,7 @@ func _on_control_mouse_exited():
 func clear_global_grab():
 	if Global.itemGrabbed == self:
 		Global.itemGrabbed = null
+		get_parent().get_parent().get_parent().get_node("SellButton").get_child(1).text = "[center]Sell"
 		if inRange and !open and empty == false:
 			$AnimationPlayer.play("open")
 

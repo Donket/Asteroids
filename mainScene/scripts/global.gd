@@ -2,22 +2,23 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Iron Husk", "Iron Husk", "Iron Husk", "Iron Husk", "Iron Husk", "Iron Husk"]
+var asteroidsDeck = [null, null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
 var starsDeck = []
 var itemGrabbed = null
 var overSell = false
-var money = 600
+var money = 2000
 
 var wins = 0
 var maxWins = 10
 var health = 10
 
 var turn = 0
-var firstOpen = true
 var timeScale = 1
+var shopTutorialComplete = true #false
+var battleTutorialComplete = true #false
 
 var logData = {
 	
@@ -294,7 +295,6 @@ func resetGlobalData():
 	maxWins = 10
 	health = 10
 	turn = 0
-	firstOpen = true
 	logData = {}
 
 # item : [cost, rarity, speed, damage]
