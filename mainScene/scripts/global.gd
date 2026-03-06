@@ -9,7 +9,7 @@ var asteroidExps = [0,0,0,0,0,0]
 var starsDeck = []
 var itemGrabbed = null
 var overSell = false
-var money = 2000
+var money = 600
 
 var wins = 0
 var maxWins = 10
@@ -17,8 +17,8 @@ var health = 10
 
 var turn = 0
 var timeScale = 1
-var shopTutorialComplete = true #false
-var battleTutorialComplete = true #false
+var shopTutorialComplete = false
+var battleTutorialComplete = false
 
 var logData = {
 	
