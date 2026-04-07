@@ -1,26 +1,28 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3llxpelm4eeb"]
+[gd_scene load_steps=27 format=3 uid="uid://b3llxpelm4eeb"]
 
 [ext_resource type="Script" path="res://ship/scripts/ship.gd" id="1_7j38c"]
 [ext_resource type="Texture2D" uid="uid://dlvlwlenm6m4m" path="res://ART/other/ship.png" id="1_u2c3h"]
-[ext_resource type="Texture2D" uid="uid://dmn1m1d1lwwyf" path="res://ART/other/bossShip.png" id="2_x4e6n"]
+[ext_resource type="Texture2D" uid="uid://dy3b7aalwrajk" path="res://ART/other/bossShip.png" id="2_x4e6n"]
 [ext_resource type="Texture2D" uid="uid://ba7labpb65ae8" path="res://ART/other/shipHP.png" id="3_7r2lq"]
+[ext_resource type="Texture2D" uid="uid://me5obs7pgc6c" path="res://ART/other/ship2.png" id="4_jcp5d"]
+[ext_resource type="Texture2D" uid="uid://dmn1m1d1lwwyf" path="res://ART/other/ship3.png" id="5_v23y6"]
 [ext_resource type="AudioStream" uid="uid://kanuq8jqaqtr" path="res://MUSIC/sfx/shoot.wav" id="5_wm6md"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fir7r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdqjk"]
 atlas = ExtResource("2_x4e6n")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_06sk6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_21auj"]
 atlas = ExtResource("2_x4e6n")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8f434"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajsvf"]
 atlas = ExtResource("2_x4e6n")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(96, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j6j4t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_edyvg"]
 atlas = ExtResource("2_x4e6n")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_860hp"]
 atlas = ExtResource("1_u2c3h")
@@ -38,24 +40,56 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_u2c3h")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fnuu"]
+atlas = ExtResource("4_jcp5d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agi6m"]
+atlas = ExtResource("4_jcp5d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40pov"]
+atlas = ExtResource("4_jcp5d")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syky2"]
+atlas = ExtResource("4_jcp5d")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fir7r"]
+atlas = ExtResource("5_v23y6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06sk6"]
+atlas = ExtResource("5_v23y6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f434"]
+atlas = ExtResource("5_v23y6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6j4t"]
+atlas = ExtResource("5_v23y6")
+region = Rect2(96, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_5enuc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fir7r")
+"texture": SubResource("AtlasTexture_sdqjk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_06sk6")
+"texture": SubResource("AtlasTexture_21auj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8f434")
+"texture": SubResource("AtlasTexture_ajsvf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j6j4t")
+"texture": SubResource("AtlasTexture_edyvg")
 }],
 "loop": true,
 "name": &"boss",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -71,23 +105,60 @@ animations = [{
 "texture": SubResource("AtlasTexture_ro1jo")
 }],
 "loop": true,
-"name": &"default",
+"name": &"ship1",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fnuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agi6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40pov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syky2")
+}],
+"loop": true,
+"name": &"ship2",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fir7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06sk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f434")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6j4t")
+}],
+"loop": true,
+"name": &"ship3",
+"speed": 3.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kc7tr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1dlp1"]
+radius = 322.149
 
 [node name="ship" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource("1_7j38c")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 3
 position = Vector2(3, 10)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_5enuc")
 animation = &"boss"
-autoplay = "default"
-frame_progress = 0.741662
+autoplay = "ship1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kc7tr")
@@ -99,6 +170,10 @@ autostart = true
 
 [node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(0, 0, 71, -81, 271, -234, 396, -234, 387, 216, 260, 212, 88, 87)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1dlp1")
+disabled = true
 
 [node name="redrawTargets" type="Timer" parent="."]
 autostart = true
@@ -141,9 +216,12 @@ autostart = true
 stream = ExtResource("5_wm6md")
 volume_db = -5.0
 
+[node name="Timer2" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="timeout" from="redrawTargets" to="." method="_on_redraw_targets_timeout"]
+[connection signal="changed" from="hp/hpbar" to="." method="_on_hpbar_changed"]
 [connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="bossShotTimer" to="." method="_on_boss_shot_timer_timeout"]

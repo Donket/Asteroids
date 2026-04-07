@@ -11,14 +11,14 @@ var itemGrabbed = null
 var overSell = false
 var money = 600
 
-var wins = 0
+var wins = 7
 var maxWins = 10
 var health = 10
 
 var turn = 0
 var timeScale = 1
-var shopTutorialComplete = false
-var battleTutorialComplete = false
+var shopTutorialComplete = true
+var battleTutorialComplete = true
 
 var logData = {
 	
@@ -430,3 +430,6 @@ func addToLog(source, damage):
 	else:
 		logData[source] = damage
 	battleScene.get_node("CanvasLayer/log").update()
+
+func camShake(intensity):
+	battleScene.camShake(intensity)

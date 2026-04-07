@@ -14,9 +14,25 @@ var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
 @onready var launchers = $CanvasLayer/launchers/GridContainer
 @onready var ship = $ship
 @onready var rules = $rules
+@onready var cam = $cam
 
 var pending_updates = 0
 var is_processing = false
+
+
+#Cam shake bs
+
+var shakeTimer = 0.0
+var shakeIntensity = 0.0
+var originalCamPos = Vector2.ZERO
+
+
+
+func camShake(intensity):
+	shakeIntensity = intensity
+	shakeTimer = 0.15
+	originalCamPos = cam.position
+
 
 func changeMoney(newMoney):
 	Global.money = newMoney
@@ -135,7 +151,6 @@ func _ready():
 	if Global.wins + 1*pow(2,Global.numOfStars("Steak")) >= Global.maxWins:
 		$music1.stream = load("res://MUSIC/leading_the_charge_loopable.wav")
 		$music1.playing = true
-		$ship.lastRound = true
 	Global.battleScene = self
 	var permStatIndices = []
 	for i in range(deck.size()):
@@ -161,6 +176,7 @@ func _ready():
 	Global.block = 0
 	$CanvasLayer/HSlider.value=Global.timeScale
 	refreshStatLabels()
+	cam.make_current()
 
 
 func refreshStatLabels():
@@ -207,7 +223,7 @@ func defeat():
 		money += round(300 * pow(1.1,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
-		if ship.lastRound:
+		if ship.phase == 3:
 			return
 		var tween = get_tree().create_tween()
 		tween.set_speed_scale(1.0/Engine.time_scale)
@@ -232,7 +248,7 @@ func victory():
 		money += round(300 * pow(1.1,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
-		if ship.lastRound:
+		if ship.phase == 3:
 			return
 		var tween = get_tree().create_tween()
 		tween.set_speed_scale(1.0/Engine.time_scale)
@@ -249,7 +265,12 @@ func _process(delta):
 		for i in range(deck.size()):
 			if deck[i]:
 				launchers.get_child(i).time = $timers.get_child(i).time_left
-
+	if shakeTimer > 0:
+		shakeTimer -= delta
+		var offset = Vector2(randf_range(-shakeIntensity, shakeIntensity), randf_range(-shakeIntensity, shakeIntensity))
+		cam.position = originalCamPos + offset
+	elif cam:
+		cam.position = originalCamPos
 
 
 
@@ -409,7 +430,7 @@ func _on_h_slider_value_changed(value):
 	else:
 		get_tree().paused = false
 		Engine.time_scale = value
-	if $ship.lastRound or ended:
+	if $ship.phase == 3 or ended:
 		return
 	if value <= 0.05 and !paused:
 		enterPauseState(value)

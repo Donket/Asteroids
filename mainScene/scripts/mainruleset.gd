@@ -52,23 +52,28 @@ func cursedEssence():
 
 
 func hurt(newHP):
-	hp = round(newHP)
-	$"../ship".get_node("hp").get_node("hpbar").max_value = maxHP
-	$"../ship".hp = hp
-	if newHP <= 0 and !$"..".ended:
+	if ship.phase == 2:
+		hp = max(round(newHP),hp-20)
+	else:
+		hp = round(newHP)
+	ship.get_node("hp").get_node("hpbar").max_value = maxHP
+	ship.hp = hp
+	if hp <= 0 and !$"..".ended:
 		$"..".victory()
 
 
 
 func _ready():
-	$"../rulesTimer".start(round((20+Global.turn*2.4)*pow(1.1,Global.numOfStars("Hourglass"))))
+	$"../rulesTimer".start(round((300+Global.turn*2.4)*pow(1.1,Global.numOfStars("Hourglass"))))
 	initializeStats()
 
 func initializeStats():
 	maxHP *= pow(1.25,Global.turn)
-	if Global.wins + 1*pow(2,Global.numOfStars("Steak")) >= Global.maxWins:
-		maxHP *= 3
-		hp *= 3
+	if ship.phase == 3:
+		maxHP *= 1.5
+		hp *= 1.5
+		hp = floor(hp)
+		maxHP = floor(maxHP)
 	hp = maxHP
 	breachAmount = 0
 	blockAmount = 0
@@ -79,9 +84,9 @@ func initializeStats():
 
 func _process(delta):
 	if !$"..".ended:
-		$"../CanvasLayer/timerLabel".text = "[center]" + str(round($"../rulesTimer".time_left*100)/100)
+		$"../CanvasLayer/timerLabel".text = str(round($"../rulesTimer".time_left*100)/100)
 	if round($"../rulesTimer".time_left*100)/100 < 0.02:
-		$"../CanvasLayer/timerLabel".text = "[center]0.00"
+		$"../CanvasLayer/timerLabel".text = "0.00"
 		$"..".defeat()
 
 func onHit(asteroid):

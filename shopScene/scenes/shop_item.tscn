@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://jp3ejjldvhrn"]
+[gd_scene load_steps=12 format=3 uid="uid://jp3ejjldvhrn"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/shop_item.gd" id="1_f4hwt"]
 [ext_resource type="Texture2D" uid="uid://c4l7j3l2ska2j" path="res://ART/asteroidArts/Ancient Gem.png" id="2_08hl3"]
 [ext_resource type="Texture2D" uid="uid://iqnajpomo23a" path="res://ART/uiArts/shopPanel.png" id="3_yaqea"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_eyv25"]
+[ext_resource type="Texture2D" uid="uid://bh7lxx6crwef4" path="res://ART/other/explosionParticles.png" id="5_44nc5"]
 
 [sub_resource type="Animation" id="Animation_8xvot"]
 length = 0.001
@@ -58,6 +59,22 @@ _data = {
 "close": SubResource("Animation_g8snk"),
 "open": SubResource("Animation_fkqdf")
 }
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kmnkh"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vipqp"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="ShopItem" type="Control"]
 layout_mode = 3
@@ -192,20 +209,15 @@ offset_right = -250.0
 offset_bottom = 360.0
 theme_override_constants/v_separation = 180
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_kmnkh")
 emitting = false
-amount = 60
-lifetime = 0.2
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_vipqp")
+texture = ExtResource("5_44nc5")
+lifetime = 0.3
 one_shot = true
-explosiveness = 0.75
-randomness = 0.7
-lifetime_randomness = 1.0
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 1000.0
-initial_velocity_max = 1000.0
-scale_amount_min = 6.0
-scale_amount_max = 6.0
+explosiveness = 0.92
 
 [connection signal="mouse_entered" from="Control2" to="." method="_on_control_2_mouse_entered"]
 [connection signal="mouse_exited" from="Control2" to="." method="_on_control_2_mouse_exited"]

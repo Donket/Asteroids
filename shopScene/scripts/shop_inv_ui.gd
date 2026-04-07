@@ -36,6 +36,7 @@ func refresh():
 	
 
 func update():
+	await get_tree().process_frame
 	var iter = 0
 	for child in $GridContainer.get_children():
 		Global.asteroidsDeck[iter] = child.item

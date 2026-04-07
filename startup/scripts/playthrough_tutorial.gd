@@ -1,6 +1,6 @@
 extends Node2D
 
-#shopdata = {message, message location, shop asteroids, shop stars, inventory visible, sell visible, roll visible, preview visible, tutorial visible, end turn visible}
+#shopdata = {message, message location, shop asteroids, shop stars, inventory visible, sell visible, roll visible, preview visible, tutorial visible, end turn visible, refresh shop}
 
 var inRange
 @export var isShop: bool
@@ -19,7 +19,8 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
-	false
+	false, 
+	true
 	], 
 	
 	[
@@ -32,7 +33,8 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
-	false
+	false, 
+	true
 	],
 	
 	[
@@ -40,6 +42,8 @@ var dataShop = [
 	Vector2(0,-50),
 	["", "", "", "", ""],
 	["", ""],
+	false, 
+	false, 
 	false, 
 	false, 
 	false, 
@@ -58,7 +62,8 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
-	false
+	false, 
+	true
 	],
 
 	[
@@ -67,6 +72,7 @@ var dataShop = [
 	["", "", "", "", ""],
 	["", ""],
 	true, 
+	false, 
 	false, 
 	false, 
 	false, 
@@ -85,7 +91,8 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
-	false
+	false, 
+	true
 	],
 
 	[
@@ -98,7 +105,8 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
-	false
+	false, 
+	true
 	],
 	
 	[
@@ -107,6 +115,7 @@ var dataShop = [
 	["", "", "", "", ""],
 	["", ""],
 	true, 
+	false, 
 	false, 
 	false, 
 	false, 
@@ -124,6 +133,7 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
+	false, 
 	false
 	],
 	
@@ -134,6 +144,7 @@ var dataShop = [
 	["", ""],
 	true, 
 	true, 
+	false, 
 	false, 
 	false, 
 	false, 
@@ -150,6 +161,7 @@ var dataShop = [
 	true, 
 	false, 
 	false, 
+	false, 
 	false
 	], 
 	
@@ -164,6 +176,7 @@ var dataShop = [
 	true, 
 	true, 
 	false, 
+	false, 
 	false
 	], 
 	
@@ -177,6 +190,7 @@ var dataShop = [
 	true, 
 	true, 
 	true, 
+	false, 
 	false
 	], 
 	
@@ -190,7 +204,8 @@ var dataShop = [
 	true, 
 	true, 
 	true, 
-	false
+	false, 
+	true
 	], 
 	
 	[
@@ -203,7 +218,8 @@ var dataShop = [
 	true, 
 	true, 
 	true, 
-	true
+	true,
+	false
 	], 
 	
 	
@@ -279,7 +295,7 @@ func _ready():
 		var d = dataShop[index]
 		$message/CenterContainer/RichTextLabel.text = "[center]" + d[0] + "\n\nClick here to continue"
 		$message.position = d[1]
-		get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9])
+		get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10])
 		visible = true
 	elif !Global.battleTutorialComplete and !isShop:
 		index = 0
@@ -303,7 +319,7 @@ func _input(event):
 				var d = dataShop[index]
 				$message/CenterContainer/RichTextLabel.text = "[center]" + d[0] + "\n\nClick here to continue"
 				$message.position = d[1]
-				get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9])
+				get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10])
 			else:
 				visible = false
 				Global.shopTutorialComplete=true

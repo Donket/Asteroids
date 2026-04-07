@@ -1,26 +1,28 @@
-[gd_scene load_steps=15 format=3 uid="uid://t5jxjylo1f1q"]
+[gd_scene load_steps=25 format=3 uid="uid://t5jxjylo1f1q"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/ship_preview_ui.gd" id="1_m4s1y"]
 [ext_resource type="Texture2D" uid="uid://phkqf7fj6k3j" path="res://ART/uiArts/shipPreviewBox.png" id="2_hrf5w"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="3_jhjjp"]
-[ext_resource type="Texture2D" uid="uid://dmn1m1d1lwwyf" path="res://ART/other/bossShip.png" id="4_3ktcu"]
+[ext_resource type="Texture2D" uid="uid://dy3b7aalwrajk" path="res://ART/other/bossShip.png" id="4_3ktcu"]
 [ext_resource type="Texture2D" uid="uid://dlvlwlenm6m4m" path="res://ART/other/ship.png" id="4_5ve4j"]
+[ext_resource type="Texture2D" uid="uid://me5obs7pgc6c" path="res://ART/other/ship2.png" id="6_13g4q"]
+[ext_resource type="Texture2D" uid="uid://dmn1m1d1lwwyf" path="res://ART/other/ship3.png" id="7_52ygn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fir7r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdqjk"]
 atlas = ExtResource("4_3ktcu")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_06sk6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_21auj"]
 atlas = ExtResource("4_3ktcu")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8f434"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajsvf"]
 atlas = ExtResource("4_3ktcu")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(96, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j6j4t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_edyvg"]
 atlas = ExtResource("4_3ktcu")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_860hp"]
 atlas = ExtResource("4_5ve4j")
@@ -38,24 +40,56 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("4_5ve4j")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_5kimd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fnuu"]
+atlas = ExtResource("6_13g4q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agi6m"]
+atlas = ExtResource("6_13g4q")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40pov"]
+atlas = ExtResource("6_13g4q")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syky2"]
+atlas = ExtResource("6_13g4q")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fir7r"]
+atlas = ExtResource("7_52ygn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06sk6"]
+atlas = ExtResource("7_52ygn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f434"]
+atlas = ExtResource("7_52ygn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6j4t"]
+atlas = ExtResource("7_52ygn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oei2d"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fir7r")
+"texture": SubResource("AtlasTexture_sdqjk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_06sk6")
+"texture": SubResource("AtlasTexture_21auj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8f434")
+"texture": SubResource("AtlasTexture_ajsvf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j6j4t")
+"texture": SubResource("AtlasTexture_edyvg")
 }],
 "loop": true,
 "name": &"boss",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -71,8 +105,42 @@ animations = [{
 "texture": SubResource("AtlasTexture_ro1jo")
 }],
 "loop": true,
-"name": &"default",
+"name": &"ship1",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fnuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agi6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40pov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syky2")
+}],
+"loop": true,
+"name": &"ship2",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fir7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06sk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f434")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6j4t")
+}],
+"loop": true,
+"name": &"ship3",
+"speed": 3.0
 }]
 
 [node name="shipPreviewUI" type="Control"]
@@ -101,20 +169,33 @@ bbcode_enabled = true
 text = "[center]HP: "
 
 [node name="Sprite2D2" type="AnimatedSprite2D" parent="Sprite2D"]
-position = Vector2(0.8, 5)
+process_mode = 3
+position = Vector2(1, 5.6)
 scale = Vector2(1.4, 1.4)
-sprite_frames = SubResource("SpriteFrames_5kimd")
-animation = &"boss"
-autoplay = "default"
-frame_progress = 0.39145
+sprite_frames = SubResource("SpriteFrames_oei2d")
+animation = &"ship3"
+autoplay = "ship1"
+frame_progress = 0.228653
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D"]
-offset_left = -25.0
-offset_top = 14.0
-offset_right = 223.0
-offset_bottom = 50.0
-scale = Vector2(0.2, 0.2)
+[node name="CenterContainer" type="CenterContainer" parent="Sprite2D"]
+visible = false
+offset_left = -53.0
+offset_right = -53.0
+scale = Vector2(0.4, 0.4)
+use_top_left = true
+
+[node name="ShipPreviewBox" type="Sprite2D" parent="Sprite2D/CenterContainer"]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_hrf5w")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D/CenterContainer"]
+custom_minimum_size = Vector2(110, 20)
+layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("3_jhjjp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]"
+fit_content = true
+
+[connection signal="mouse_entered" from="Sprite2D/RichTextLabel" to="." method="_on_rich_text_label_mouse_entered"]
+[connection signal="mouse_exited" from="Sprite2D/RichTextLabel" to="." method="_on_rich_text_label_mouse_exited"]

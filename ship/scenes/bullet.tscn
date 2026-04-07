@@ -13,7 +13,7 @@ script = ExtResource("1_xeinb")
 position = Vector2(19, -3)
 rotation = 1.5708
 scale = Vector2(1, 1.87264)
-polygon = PackedVector2Array(0, 18, 0, 2, 6, 2.08696, 6, 18.087)
+polygon = PackedVector2Array(0, 18, 0, 2, 6, 2, 6, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)

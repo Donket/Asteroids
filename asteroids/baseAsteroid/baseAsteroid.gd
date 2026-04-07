@@ -133,15 +133,17 @@ func _on_area_2d_body_entered(body):
 		if attributes.has_method("onCrash"):
 			attributes.onCrash()
 		get_parent().onHit($".")
-		var n = Global.numOfStars("Death Rattle")
-		if n > 0:
-			for i in range(n):
-				attributes.onBounce()
+		if attributes.has_method("onBounce"):
+			var n = Global.numOfStars("Death Rattle")
+			if n > 0:
+				for i in range(n):
+					attributes.onBounce()
 		die()
 	else:
 		if attributes.has_method("onShot"):
 			attributes.onShot()
-		body.queue_free()
+		#if body.name != "saw":
+			#body.queue_free()
 		get_parent().onShot($".")
 		if Global.hit():
 			die()
@@ -149,6 +151,7 @@ func _on_area_2d_body_entered(body):
 
 func die():
 	if !dead:
+		Global.camShake(5)
 		dead = true
 		velocity = Vector2(0,0)
 		$Sprite2D.visible=false
