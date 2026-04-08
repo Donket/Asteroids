@@ -2,11 +2,11 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = [null, null, null, null, null, null]
+var asteroidsDeck = ["Iron Husk", null, null, null, null, null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = []
+var starsDeck = ["Binky", "Blind Stick"]
 var itemGrabbed = null
 var overSell = false
 var money = 600
@@ -217,7 +217,7 @@ On bounce: 40% chance to apply +2 [img]res://ART/icons/breachIcon.png[/img].",
 	"Coupon Book":
 		"Future items cost 20% less, but rerolls cost 20% more",
 	"Binky":
-		"-20% asteroid speed",
+		"On Bounce: 20% chance to apply + 1 [img]res://ART/icons/breachIcon.png[/img].",
 	"Suicide Bomb":
 		"On Crash, each asteroid has a 20% chance to deal 50 damage to the ship.",
 	"Coconut":
@@ -364,7 +364,7 @@ var starsToData: Dictionary = {
 	"Suicide Bomb": [120, 2],
 	"Coconut": [120, 2],
 	"Recursive": [200, 2],
-	"Mirror": [1500, 2],
+	"Mirror": [150, 2],
 
 	"Spider": [260, 3],
 	"Snowman": [280, 3],
