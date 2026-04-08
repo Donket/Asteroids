@@ -181,6 +181,7 @@ func _ready():
 
 func refreshStatLabels():
 	var labels = $CanvasLayer/statLabels
+	if ended: return
 	for i in range(0,6):
 		var relevantAsteroids = []
 		for asteroid in asteroids:
