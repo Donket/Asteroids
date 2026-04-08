@@ -119,7 +119,7 @@ var itemsToDesc = {
 		"gain": {"cost": -1}
 	},
 	"Gilded Gem": {
-		"text": "On Crash: If you have 100+ [img]res://ART/icons/moneyIcon.png[/img], convert 10 [img]res://ART/icons/moneyIcon.png[/img] into +{stat} permanent damage and +{stat} permanent speed",
+		"text": "On Crash: Convert 10 [img]res://ART/icons/moneyIcon.png[/img] into +{stat} permanent damage and +{stat} permanent speed",
 		"base": {"stat": 4},
 		"gain": {"stat": 4}
 	},
@@ -172,7 +172,8 @@ var itemsToDesc = {
 	"Trampoline": 
 "On spawn, asteroids have a 30% chance to gain 1 [img]res://ART/icons/bounceIcon.png[/img]",
 	"Goop": 
-"Asteroids in Slot 1 gain +2 [img]res://ART/icons/bounceIcon.png[/img]. However, On Bounce they lose 20 speed",
+"Asteroids gain +1 [img]res://ART/icons/bounceIcon.png[/img].
+On bounce: 40% chance to apply +2 [img]res://ART/icons/breachIcon.png[/img].",
 	"Hanger":
 "Upon spawning an asteroid, 20% chance to destroy it and gain +10 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Hourglass":
@@ -264,7 +265,7 @@ var itemsToDesc = {
 	"Blind Stick":
 "Asteroids steer away from the ship.",
 	"Wagon Wheel":
-"If an asteroid's acceleration ever reaches 100, return to base speed and acceleration and spend 5 [img]res://ART/icons/burnoutIcon.png[/img] to gain 5 [img]res://ART/icons/bounceIcon.png[/img]."
+"If an asteroid's acceleration ever reaches 100, return to base speed and acceleration and gain 5 [img]res://ART/icons/burnoutIcon.png[/img] and 5 [img]res://ART/icons/bounceIcon.png[/img]."
 
 
 #TODO: Low prio: Implement
@@ -333,26 +334,28 @@ var itemsToData: Dictionary = {
 
 var starsToData: Dictionary = {
 	"Boot": [80, 0],
-	"Hanger": [90, 1],
 	"Hourglass": [100, 0],
 	"Steering Wheel": [110, 0],
 	"Loose Change": [90, 0],
 	"Payday": [110, 0],
 	"Trampoline": [90, 0],
-	"Tip Jar": [85, 1],
+	"Tip Jar": [85, 0],
 	"Shield": [85, 0],
 	"Glasses": [100, 0],
 	"Candle": [100, 0],
+	"Blind Stick": [80, 0],
 
 	"Dice": [140, 1],
+	"Hanger": [90, 1],
 	"Snowmelt": [140, 1],
 	"Backpack": [150, 1],
 	"Bulldozer": [150, 1],
-	"Goop": [130, 2],
+	"Snowball": [135, 1],
+	"Goop": [130, 1],
+
 	"Steak": [160, 2],
 	"Radish": [160, 2],
 	"Friendly Customer": [145, 2],
-	"Snowball": [135, 2],
 	"Glass Cannon": [135, 2],
 	"Lethal": [170, 2],
 	"Sandpaper": [160, 2],
@@ -362,6 +365,7 @@ var starsToData: Dictionary = {
 	"Suicide Bomb": [120, 2],
 	"Coconut": [120, 2],
 	"Recursive": [200, 2],
+	"Mirror": [1500, 2],
 
 	"Spider": [260, 3],
 	"Snowman": [280, 3],
@@ -378,6 +382,7 @@ var starsToData: Dictionary = {
 	"Warhammer": [500, 4],
 	"Piggy Bank": [500, 4],
 	"Light Fingers": [500, 4],
+	"Wagon Wheel": [500, 4],
 	"Iron Essence": [750, 4],
 	"Astral Essence": [750, 4],
 	"Gilded Essence": [750, 4],

@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://dirp806xnorx4"]
+
+[ext_resource type="Script" path="res://shopScene/scripts/aList.gd" id="1_v6may"]
+[ext_resource type="AudioStream" uid="uid://bh0er6eraotlx" path="res://MUSIC/sfx/hover.wav" id="2_qhi8p"]
+[ext_resource type="Texture2D" uid="uid://b0g6kl4c1ll7i" path="res://ART/uiArts/tutorialButtonExit.png" id="3_0mb0l"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_mm3ny"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_v6may")
+
+[node name="Polygon2D6" type="Polygon2D" parent="."]
+position = Vector2(3264.32, 1065)
+scale = Vector2(21.4896, 17.487)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-220.68, -112.16, -220.68, -0.400002, -82.52, 1.6, -82.6197, -56.3271, -82.72, -114.599)
+
+[node name="hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qhi8p")
+volume_db = 4.0
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ui"]
+custom_minimum_size = Vector2(1500, 900)
+layout_mode = 0
+offset_left = -750.0
+offset_top = -400.0
+offset_right = 750.0
+offset_bottom = 500.0
+horizontal_scroll_mode = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="ui/ScrollContainer"]
+custom_minimum_size = Vector2(1180, 900)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="ui/ScrollContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 150
+theme_override_constants/v_separation = 300
+columns = 5
+
+[node name="Button" type="Button" parent="ui"]
+layout_mode = 0
+offset_left = -875.0
+offset_top = -475.0
+offset_right = -842.0
+offset_bottom = -451.0
+scale = Vector2(3, 3)
+focus_mode = 0
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ui/Button"]
+position = Vector2(17, 12)
+texture = ExtResource("3_0mb0l")
+
+[node name="TutorialLabel" type="RichTextLabel" parent="ui"]
+layout_mode = 0
+offset_left = -507.0
+offset_top = -494.0
+offset_right = 510.0
+offset_bottom = -349.0
+theme_override_fonts/normal_font = ExtResource("4_mm3ny")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]Asteroids [color=yellow]and[/color] Stars"
+
+[connection signal="mouse_entered" from="ui/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ui/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="ui/Button" to="." method="_on_button_pressed"]

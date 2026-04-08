@@ -22,8 +22,8 @@ var asteroidName
 func WagonWheel(accel):
 	acceleration = accel
 	var n = Global.numOfStars("Wagon Wheel")
-	if acceleration >= 100 and n > 0 and Global.battleScene.rules.burnoutAmount >= 5:
-		Global.battleScene.rules.burnoutAmount -= 5
+	if acceleration >= 100 and n > 0:
+		Global.battleScene.rules.burnoutAmount += 5
 		attributes.bounces += 5
 		acceleration = attributes.baseAcceleration
 		speed = attributes.baseSpeed

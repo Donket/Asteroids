@@ -458,11 +458,11 @@ func exitPauseState(value):
 
 
 func _on_h_slider_mouse_entered():
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_h_slider_mouse_exited():
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_rules_status_effect_changed():
@@ -509,19 +509,19 @@ func _on_tutorial_button_pressed():
 
 
 func _on_settings_button_mouse_entered():
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_settings_button_mouse_exited():
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_tutorial_button_mouse_entered():
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_tutorial_button_mouse_exited():
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 #timer visible, status effects visible, stats visible, time scale visible
 

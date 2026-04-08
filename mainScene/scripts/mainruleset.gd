@@ -64,7 +64,7 @@ func hurt(newHP):
 
 
 func _ready():
-	$"../rulesTimer".start(round((300+Global.turn*2.4)*pow(1.1,Global.numOfStars("Hourglass"))))
+	$"../rulesTimer".start(round((30+Global.turn*2.4)*pow(1.1,Global.numOfStars("Hourglass"))))
 	initializeStats()
 
 func initializeStats():

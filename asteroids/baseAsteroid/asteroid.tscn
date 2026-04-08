@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://mw0vbll3j0xv"]
+[gd_scene load_steps=11 format=3 uid="uid://6aix6w5wnb7m"]
 
 [ext_resource type="Script" path="res://asteroids/baseAsteroid/baseAsteroid.gd" id="1_l50v5"]
 [ext_resource type="Texture2D" uid="uid://bycpab7gu2fj0" path="res://ART/asteroidArts/Gilded Rock.png" id="2_jvd4f"]

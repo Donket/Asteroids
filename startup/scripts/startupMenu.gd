@@ -25,7 +25,7 @@ var subtitles = [
 
 func _ready():
 	$subtitleLabel.text = "[center]" + subtitles.pick_random()
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -25)
 
 
@@ -47,7 +47,7 @@ func playHover():
 Settings
 
 Exit"
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 	
 	
 
@@ -58,7 +58,7 @@ func settingsHover():
 [color=yellow]Settings[/color]
 
 Exit"
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func exitHover():
@@ -67,7 +67,7 @@ func exitHover():
 Settings
 
 [color=yellow]Exit[/color]"
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func endHover():
@@ -76,4 +76,4 @@ func endHover():
 Settings
 
 Exit"
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))

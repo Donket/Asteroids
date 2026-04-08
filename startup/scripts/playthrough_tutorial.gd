@@ -280,12 +280,12 @@ var index = 0
 
 func _on_rich_text_label_mouse_entered():
 	inRange = true
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_rich_text_label_mouse_exited():
 	inRange = false
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 func _ready():
 	visible = false

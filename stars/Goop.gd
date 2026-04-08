@@ -3,9 +3,8 @@ extends Node
 var main
 
 func onSpawn(asteroid):
-	if asteroid.attributes.launcher.index == 0:
-		asteroid.attributes.bounces += 2
+	asteroid.attributes.bounces += 1
 
 func onBounce(asteroid):
-	if asteroid.attributes.launcher.index == 0:
-		asteroid.speed -= 20
+	if Global.randChance(40):
+		main.rules.breachAmount += 2

@@ -62,41 +62,41 @@ func _on_button_pressed():
 
 func _on_button_mouse_entered():
 	$Button/Sprite2D.modulate = Color(0.8,0.8,0.8)
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 	$hover.playing = true
 	
 
 
 func _on_button_mouse_exited():
 	$Button/Sprite2D.modulate = Color(1,1,1)
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_roll_button_mouse_entered():
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 	$hover.playing = true
 
 
 func _on_roll_button_mouse_exited():
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_end_button_mouse_entered():
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 	$hover.playing = true
 
 
 func _on_end_button_mouse_exited():
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_settings_button_mouse_entered():
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 	$hover.playing = true
 
 
 func _on_settings_button_mouse_exited():
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(36, 21))
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_settings_button_pressed():
@@ -115,3 +115,18 @@ func tutorialForce(asteroids, stars, inventoryv, sellv, rollv, previewv, tutoria
 			items[i].item = asteroids[i]
 		for i in range(2):
 			items[i+5].item = stars[i]
+
+
+func _on_a_list_button_mouse_entered():
+	$aListButton/Sprite2D.modulate = Color(0.8,0.8,0.8)
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
+	$hover.playing = true
+
+
+func _on_a_list_button_mouse_exited():
+	$aListButton/Sprite2D.modulate = Color(1,1,1)
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
+
+
+func _on_a_list_button_pressed():
+	$aList.visible = true
