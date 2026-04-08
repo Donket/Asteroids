@@ -17,6 +17,7 @@ func change(newItem: String):
 		$Node2D.visible = false
 		$Control.visible = false
 		$RichTextLabel.visible = false
+		$RichTextLabel2.visible = false
 		item = newItem
 	else:
 		$Node2D.visible = true
@@ -25,26 +26,73 @@ func change(newItem: String):
 		item = newItem
 		updateData()
 
+func getItemProbability(targetItem, itemType, baseRarity):
+	var items
+	var dataArr
+	if itemType == Type.ASTEROID:
+		items = Global.itemsToData.keys()
+		dataArr = Global.itemsToData
+	else:
+		items = Global.starsToData.keys()
+		dataArr = Global.starsToData
+	
+	if not dataArr.has(targetItem):
+		return 0.0
+		
+	var targetRarity = dataArr[targetItem][1]
+	var rarityProb = 0.0
+	
+	if targetRarity == baseRarity:
+		rarityProb += 0.5
+		if baseRarity == 0:
+			rarityProb += 0.4
+			
+		var max_rarity = 0
+		for data in Global.itemsToData.values():
+			max_rarity = max(max_rarity, data[1])
+			
+		if baseRarity >= max_rarity:
+			rarityProb += 0.1
+			
+	elif targetRarity < baseRarity:
+		rarityProb = 0.4 / baseRarity
+		
+	elif targetRarity == baseRarity + 1:
+		rarityProb = 0.1
+
+	var possible_items = []
+	for i in items:
+		if dataArr[i][1] == targetRarity:
+			possible_items.append(i)
+	
+	if possible_items.is_empty() or rarityProb == 0:
+		return 0.0
+		
+	var percentage = round((rarityProb / possible_items.size()) * 10000.0)/100
+	return percentage
 
 
 func updateData():
-	$Control/RichTextLabel.text = "[center]" + item
-	if type == Type.ASTEROID:
-		$Control/RichTextLabel2.text = Global.getDesc(item,1)
-		$RichTextLabel.text = "[center]" + str(cost)
-		$Node2D.texture = load("res://ART/asteroidArts/" + item + ".png")
-		$Control/spdLabel.text = "[center]"+str(Global.itemsToData[item][2])
-		$Control/dmgLabel.text = "[center]"+str(Global.itemsToData[item][3])
-	else:
-		$Control/RichTextLabel2.text = Global.itemsToDesc[item]
-		$RichTextLabel.text = "[center]" + str(cost)
-		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
 	var dataArr
 	if type == Type.ASTEROID:
 		dataArr = Global.itemsToData
 	else:
 		dataArr = Global.starsToData
 	cost = dataArr[item][0]
+	var chance = getItemProbability(item, type, min(3,floor(Global.turn/2)))
+	$Control/RichTextLabel.text = "[center]" + item
+	if type == Type.ASTEROID:
+		$Control/RichTextLabel2.text = Global.getDesc(item,1)
+		$RichTextLabel.text = "[center]" + str(cost)
+		$RichTextLabel2.text = "[center] "+str(chance)+"%"
+		$Node2D.texture = load("res://ART/asteroidArts/" + item + ".png")
+		$Control/spdLabel.text = "[center]"+str(Global.itemsToData[item][2])
+		$Control/dmgLabel.text = "[center]"+str(Global.itemsToData[item][3])
+	else:
+		$Control/RichTextLabel2.text = Global.itemsToDesc[item]
+		$RichTextLabel.text = "[center]" + str(cost)
+		$RichTextLabel2.text = "[center] "+str(chance)+"%"
+		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
 	initTooltips()
 
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dirp806xnorx4"]
+[gd_scene load_steps=6 format=3 uid="uid://dirp806xnorx4"]
 
 [ext_resource type="Script" path="res://shopScene/scripts/aList.gd" id="1_v6may"]
 [ext_resource type="AudioStream" uid="uid://bh0er6eraotlx" path="res://MUSIC/sfx/hover.wav" id="2_qhi8p"]
 [ext_resource type="Texture2D" uid="uid://b0g6kl4c1ll7i" path="res://ART/uiArts/tutorialButtonExit.png" id="3_0mb0l"]
+[ext_resource type="Theme" uid="uid://cqur82j81dsrm" path="res://ART/resources/theme.tres" id="3_cu5aj"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_mm3ny"]
 
 [node name="Node2D" type="Node2D"]
@@ -21,8 +22,15 @@ volume_db = 4.0
 [node name="ui" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 806.0
+offset_bottom = 782.0
+
+[node name="mouseblocker" type="Control" parent="ui"]
+anchors_preset = 0
+offset_left = -1446.0
+offset_top = -835.0
+offset_right = 1378.0
+offset_bottom = 793.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ui"]
 custom_minimum_size = Vector2(1500, 900)
@@ -31,6 +39,7 @@ offset_left = -750.0
 offset_top = -400.0
 offset_right = 750.0
 offset_bottom = 500.0
+theme = ExtResource("3_cu5aj")
 horizontal_scroll_mode = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="ui/ScrollContainer"]

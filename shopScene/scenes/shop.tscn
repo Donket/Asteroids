@@ -175,6 +175,7 @@ offset_top = 170.0
 offset_right = -800.0
 offset_bottom = 266.0
 focus_mode = 0
+flat = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Button"]
 position = Vector2(64, 48)

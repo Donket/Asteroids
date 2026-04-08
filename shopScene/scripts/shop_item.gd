@@ -183,7 +183,7 @@ func initTooltips():
 		tt.free()
 	container.position.y = -50
 	var tooltips = ["res://ART/icons/parasiteIcon.png", "res://ART/icons/burnoutIcon.png", "res://ART/icons/moneyIcon.png", "res://ART/icons/breachIcon.png", "res://ART/icons/blockIcon.png", "res://ART/icons/bounceIcon.png", "res://ART/icons/spawnIcon.png"]
-	if position.x == -710:
+	if position.x == -630:
 		container.position.x = 290
 	for tt in tooltips:
 		if tt in $Control/RichTextLabel2.text:

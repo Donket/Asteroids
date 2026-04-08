@@ -11,7 +11,7 @@ var itemGrabbed = null
 var overSell = false
 var money = 600
 
-var wins = 7
+var wins = 0
 var maxWins = 10
 var health = 10
 
@@ -163,110 +163,109 @@ var itemsToDesc = {
 
 	# Stars
 	
-	"Dice": 
-"Random chances +10% (cannot stack above 90%)",
-	"Boot": 
-"When you gain a status effect, all asteroids gain +20 acceleration.",
-	"Backpack": 
-"When you gain a status effect, 30% chance to gain 5 money",
-	"Trampoline": 
-"On spawn, asteroids have a 30% chance to gain 1 [img]res://ART/icons/bounceIcon.png[/img]",
-	"Goop": 
-"Asteroids gain +1 [img]res://ART/icons/bounceIcon.png[/img].
-On bounce: 40% chance to apply +2 [img]res://ART/icons/breachIcon.png[/img].",
-	"Hanger":
-"Upon spawning an asteroid, 20% chance to destroy it and gain +10 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Boot":
+		"When you gain a status effect, all asteroids gain +20 acceleration.",
 	"Hourglass":
-"Timer is 10% longer.",
-	"Pipe": 
-"On Hit effects have a 20% chance of triggering twice (Does not affect star abilities).",
-	"Spider": 
-"All asteroid stats +20%. - 10 [img]res://ART/icons/moneyIcon.png[/img] when destroyed.",
-	"Steak": 
-"Each win gives double victories, and each loss takes double lives.",
-	"Steering Wheel": 
-"Asteroids steer towards the ship more directly. This effect increases with asteroid acceleration.",
-	"Speedometer": 
-"Gain 1 [img]res://ART/icons/moneyIcon.png[/img] per second, multiplied by 10% of average asteroid speed.",
-	"Light Fingers": 
-"On purchasing a shop item, 5% chance to also obtain all stars in shop.",
-	"Friendly Customer":
-"Each star you obtain reduces the cost of future stars by 2%",
-	"Snowball":
-"As asteroids accelerate, they gain size.",
-	"Lethal":
-"If you will die next loss, all asteroid stats +20%",
-	"Golden Tooth":
-"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +3 extra",
+		"Timer is 10% longer.",
+	"Steering Wheel":
+		"Asteroids steer towards the ship more directly. This effect increases with asteroid acceleration.",
 	"Loose Change":
-"On Crash: 30% chance to drop +8 [img]res://ART/icons/moneyIcon.png[/img]",
-	"Coupon Book":
-"Future items cost 20% less, but rerolls cost 20% more",
+		"On Crash: 30% chance to drop +8 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Payday":
-"At the start of each round, + 40 [img]res://ART/icons/moneyIcon.png[/img]",
+		"At the start of each round, + 40 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Trampoline":
+		"On spawn, asteroids have a 30% chance to gain 1 [img]res://ART/icons/bounceIcon.png[/img]",
 	"Tip Jar":
-"Each On Hit effect has a 40% chance to grant +6 [img]res://ART/icons/moneyIcon.png[/img]",
-	"Debt Collector":
-"Every time you gain money in battle, 10% chance to spawn a copy of the asteroid in Slot 3 on top of the ship.",
-	"Piggy Bank":
-"Unspent [img]res://ART/icons/moneyIcon.png[/img] grants +1% asteroid stats per 200 money",
-	"Minivan":
-"Gain 3 asteroid acceleration for each asteroid on screen.",
-	"Binky":
-"-20% asteroid speed",
-	"Bottle":
-"When an asteroid spawns, 10% chance to give the asteroid in Slot 4 +2 permanent damage.",
-	"Throw Pillow":
-"Each asteroid that spawns has a 5% chance on spawn to teleport to a random location motionless. After 5 seconds, it gains back its base speed and double its other stats.",
-	"Suicide Bomb":
-"On Crash, each asteroid has a 20% chance to deal 50 damage to the ship.",
-	"Shotgun":
-"Each time an asteroid is launched, 20% chance to launch an extra and 5% chance to launch two extra.",
-	"Bulldozer":
-"On Crash: Gain block proportional to asteroid speed",
-	"Coconut": 
-"On Crash: Convert 2 [img]res://ART/icons/burnoutIcon.png[/img] into 3 [img]res://ART/icons/blockIcon.png[/img]",
-	"Glass Cannon": 
-"When you would gain [img]res://ART/icons/blockIcon.png[/img], instead give all current asteroids +3 temporary damage",
-	"Glasses": 
-"On Spawn: Spend 3 [img]res://ART/icons/blockIcon.png[/img] and gain 400% ship tracking",
-	"Radish": 
-"On Hit: Convert 5 [img]res://ART/icons/blockIcon.png[/img] into +3 permanent damage",
-	"Shield": 
-"On Bounce: Gain +1 [img]res://ART/icons/blockIcon.png[/img]",
-	"Snowman": 
-"If you have at least four snowballs, -65% launch time to all asteroids",
-	"Warhammer": 
-"On Hit: Deal damage equal to double the sum of all status effects.",
-	"Candle": 
-"On Spawn: 20% chance to apply [img]res://ART/icons/burnoutIcon.png[/img].",
-	"Snowmelt": 
-"On Hit: Convert 1 [img]res://ART/icons/blockIcon.png[/img] to 1 [img]res://ART/icons/burnoutIcon.png[/img].",
-	"Rose":
-"Every four seconds, trigger all star On Spawn effects on a random existing asteroid.",
-	"Sandpaper": 
-"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 10% of damage",
-	"Iron Essence":
-"Whenever an Iron asteroid gains bounce, it gains +10% of existing speed.",
-	"Gilded Essence":
-"Whenever a Gilded asteroid gains speed from an ability, gain +5 [img]res://ART/icons/moneyIcon.png[/img].",
-	"Astral Essence":
-"Whenever you gain money, existing Astral asteroids gain +5 damage.",
-	"Ancient Essence":
-"If you ever have more than 30 status effects, spend all to gain 50 damage on all existing asteroids.",
-	"Cursed Essence":
-"Whenever you gain a status effect, 50% chance to also gain another.",
-	"Death Rattle":
-"On Crash: Trigger On Bounce effects.",
-	"Recursive":
-"On Crash: If this is the first asteroid of the battle, respawn it. Does not stack.",
-	"Mirror":
-"On Bounce: Deal 20% of asteroid damage to ship.",
+		"Each On Hit effect has a 40% chance to grant +6 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Shield":
+		"On Bounce: Gain +1 [img]res://ART/icons/blockIcon.png[/img]",
+	"Glasses":
+		"On Spawn: Spend 3 [img]res://ART/icons/blockIcon.png[/img] and gain 400% ship tracking",
+	"Candle":
+		"On Spawn: 20% chance to apply [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Blind Stick":
-"Asteroids steer away from the ship.",
+		"Asteroids steer away from the ship.",
+	"Dice":
+		"Random chances +10% (cannot stack above 90%)",
+	"Hanger":
+		"Upon spawning an asteroid, 20% chance to destroy it and gain +10 [img]res://ART/icons/moneyIcon.png[/img]",
+	"Snowmelt":
+		"On Hit: Convert 1 [img]res://ART/icons/blockIcon.png[/img] to 1 [img]res://ART/icons/burnoutIcon.png[/img].",
+	"Backpack":
+		"When you gain a status effect, 30% chance to gain 5 money",
+	"Bulldozer":
+		"On Crash: Gain block proportional to asteroid speed",
+	"Snowball":
+		"As asteroids accelerate, they gain size.",
+	"Goop":
+		"Asteroids gain +1 [img]res://ART/icons/bounceIcon.png[/img].
+On bounce: 40% chance to apply +2 [img]res://ART/icons/breachIcon.png[/img].",
+	"Steak":
+		"Each win gives double victories, and each loss takes double lives.",
+	"Radish":
+		"On Hit: Convert 5 [img]res://ART/icons/blockIcon.png[/img] into +3 permanent damage",
+	"Friendly Customer":
+		"Each star you obtain reduces the cost of future stars by 2%",
+	"Glass Cannon":
+		"When you would gain [img]res://ART/icons/blockIcon.png[/img], instead give all current asteroids +3 temporary damage",
+	"Lethal":
+		"If you will die next loss, all asteroid stats +20%",
+	"Sandpaper":
+		"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 10% of damage",
+	"Golden Tooth":
+		"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +3 extra",
+	"Coupon Book":
+		"Future items cost 20% less, but rerolls cost 20% more",
+	"Binky":
+		"-20% asteroid speed",
+	"Suicide Bomb":
+		"On Crash, each asteroid has a 20% chance to deal 50 damage to the ship.",
+	"Coconut":
+		"On Crash: Convert 2 [img]res://ART/icons/burnoutIcon.png[/img] into 3 [img]res://ART/icons/blockIcon.png[/img]",
+	"Recursive":
+		"On Crash: If this is the first asteroid of the battle, respawn it. Does not stack.",
+	"Mirror":
+		"On Bounce: Deal 20% of asteroid damage to ship.",
+	"Spider":
+		"All asteroid stats +20%. - 10 [img]res://ART/icons/moneyIcon.png[/img] when destroyed.",
+	"Snowman":
+		"If you have at least four snowballs, -65% launch time to all asteroids",
+	"Throw Pillow":
+		"Each asteroid that spawns has a 5% chance on spawn to teleport to a random location motionless. After 5 seconds, it gains back its base speed and double its other stats.",
+	"Bottle":
+		"When an asteroid spawns, 10% chance to give the asteroid in Slot 4 +2 permanent damage.",
+	"Speedometer":
+		"Gain 1 [img]res://ART/icons/moneyIcon.png[/img] per second, multiplied by 10% of average asteroid speed.",
+	"Debt Collector":
+		"Every time you gain money in battle, 10% chance to spawn a copy of the asteroid in Slot 3 on top of the ship.",
+	"Minivan":
+		"Gain 3 asteroid acceleration for each asteroid on screen.",
+	"Shotgun":
+		"Each time an asteroid is launched, 20% chance to launch an extra and 5% chance to launch two extra.",
+	"Rose":
+		"Every four seconds, trigger all star On Spawn effects on a random existing asteroid.",
+	"Death Rattle":
+		"On Crash: Trigger On Bounce effects.",
+	"Pipe":
+		"On Hit effects have a 20% chance of triggering twice (Does not affect star abilities).",
+	"Warhammer":
+		"On Hit: Deal damage equal to double the sum of all status effects.",
+	"Piggy Bank":
+		"Unspent [img]res://ART/icons/moneyIcon.png[/img] grants +1% asteroid stats per 200 money",
+	"Light Fingers":
+		"On purchasing a shop item, 5% chance to also obtain all stars in shop.",
 	"Wagon Wheel":
-"If an asteroid's acceleration ever reaches 100, return to base speed and acceleration and gain 5 [img]res://ART/icons/burnoutIcon.png[/img] and 5 [img]res://ART/icons/bounceIcon.png[/img]."
-
+		"If an asteroid's acceleration ever reaches 100, return to base speed and acceleration and gain 5 [img]res://ART/icons/burnoutIcon.png[/img] and 5 [img]res://ART/icons/bounceIcon.png[/img].",
+	"Iron Essence":
+		"Whenever an Iron asteroid gains bounce, it gains +10% of existing speed.",
+	"Astral Essence":
+		"Whenever you gain money, existing Astral asteroids gain +5 damage.",
+	"Gilded Essence":
+		"Whenever a Gilded asteroid gains speed from an ability, gain +5 [img]res://ART/icons/moneyIcon.png[/img].",
+	"Cursed Essence":
+		"Whenever you gain a status effect, 50% chance to also gain another.",
+	"Ancient Essence":
+		"If you ever have more than 30 status effects, spend all to gain 50 damage on all existing asteroids."
 
 #TODO: Low prio: Implement
 	#"Douglas":
