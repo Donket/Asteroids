@@ -53,7 +53,7 @@ func cursedEssence():
 
 func hurt(newHP):
 	if ship.phase == 2:
-		hp = max(round(newHP),hp-20)
+		hp = max(round(newHP),hp-50)
 	else:
 		hp = round(newHP)
 	ship.get_node("hp").get_node("hpbar").max_value = maxHP

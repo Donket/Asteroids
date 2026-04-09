@@ -492,7 +492,7 @@ func _on_rules_status_effect_changed():
 	var n = Global.numOfStars("Boot")
 	for asteroid in asteroids:
 		if is_instance_valid(asteroid):
-			asteroid.acceleration += 20 * n
+			asteroid.acceleration += 3 * n
 	n = Global.numOfStars("Backpack")
 	if Global.randChance(30):
 		money += 5 * n

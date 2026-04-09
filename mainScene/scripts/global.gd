@@ -2,11 +2,11 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Iron Husk", null, null, null, null, null]
+var asteroidsDeck = ["Cursed Relic", "Cursed Relic", "Cursed Relic", "Cursed Relic", "Cursed Relic", "Cursed Relic"]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = ["Binky", "Blind Stick"]
+var starsDeck = ["Boot", "Blind Stick", "Binky", "Binky", "Binky", "Wagon Wheel"]
 var itemGrabbed = null
 var overSell = false
 var itemsSaved = false
@@ -18,7 +18,7 @@ var wins = 0
 var maxWins = 10
 var health = 10
 
-var turn = 0
+var turn = 100
 var timeScale = 1
 var shopTutorialComplete = true
 var battleTutorialComplete = true
@@ -167,7 +167,7 @@ var itemsToDesc = {
 	# Stars
 	
 	"Boot":
-		"When you gain a status effect, all asteroids gain +20 acceleration.",
+		"When you gain a status effect, all asteroids gain +3 acceleration.",
 	"Hourglass":
 		"Timer is 10% longer.",
 	"Steering Wheel":
@@ -188,6 +188,8 @@ var itemsToDesc = {
 		"On Spawn: 20% chance to apply [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Blind Stick":
 		"Asteroids steer away from the ship.",
+	"Binky":
+		"On Bounce: 20% chance to apply + 1 [img]res://ART/icons/breachIcon.png[/img].",
 	"Dice":
 		"Random chances +10% (cannot stack above 90%)",
 	"Hanger":
@@ -219,8 +221,6 @@ On bounce: 40% chance to apply +2 [img]res://ART/icons/breachIcon.png[/img].",
 		"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +3 extra",
 	"Coupon Book":
 		"Future items cost 20% less, but rerolls cost 20% more",
-	"Binky":
-		"On Bounce: 20% chance to apply + 1 [img]res://ART/icons/breachIcon.png[/img].",
 	"Suicide Bomb":
 		"On Crash, each asteroid has a 20% chance to deal 50 damage to the ship.",
 	"Coconut":
@@ -346,6 +346,7 @@ var starsToData: Dictionary = {
 	"Glasses": [100, 0],
 	"Candle": [100, 0],
 	"Blind Stick": [80, 0],
+	"Binky": [120, 0],
 
 	"Dice": [140, 1],
 	"Hanger": [90, 1],
@@ -363,7 +364,6 @@ var starsToData: Dictionary = {
 	"Sandpaper": [160, 2],
 	"Golden Tooth": [180, 2],
 	"Coupon Book": [140, 2],
-	"Binky": [150, 2],
 	"Suicide Bomb": [120, 2],
 	"Coconut": [120, 2],
 	"Recursive": [200, 2],
@@ -431,7 +431,10 @@ func getLevel(ind):
 
 
 func addToLog(source, damage):
-	damage = round(damage)
+	if battleScene.ship.phase == 2 and damage > 50:
+		damage = 50
+	else:
+		damage = round(damage)
 	if source in logData.keys():
 		logData[source] += damage
 	else:

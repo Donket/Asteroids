@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 var speed = 0: set = changeSpeed
-var acceleration = 0: set = WagonWheel
+var acceleration = 0
 var direction = 45
 var seekRadius = 500
 var turnSpeed = 15
@@ -19,16 +19,14 @@ var ship
 var slot
 var asteroidName
 
-func WagonWheel(accel):
-	acceleration = accel
-	var n = Global.numOfStars("Wagon Wheel")
-	if acceleration >= 100 and n > 0:
-		Global.battleScene.rules.burnoutAmount += 5
-		attributes.bounces += 5
-		acceleration = attributes.baseAcceleration
-		speed = attributes.baseSpeed
-		seekRadius *= 2
-		turnSpeed *= 2
+func WagonWheel():
+	if acceleration >= 100:
+		var n = Global.numOfStars("Wagon Wheel")
+		if n > 0:
+			Global.battleScene.rules.burnoutAmount += 5
+			attributes.bounces += 5
+			acceleration = 0
+			speed = attributes.baseSpeed
 
 func _ready():
 	speed = attributes.baseSpeed
@@ -69,6 +67,7 @@ func _physics_process(delta):
 	velocity = Vector2(speed*2*cos(-deg_to_rad(direction)), speed*2*sin(-deg_to_rad(direction)))
 	speed += acceleration*delta
 	edgeCheck()
+	WagonWheel()
 	var numOfSnowballs = Global.numOfStars("Snowball")
 	$".".scale += Vector2(0.005*acceleration*delta*numOfSnowballs, 0.005*acceleration*delta*numOfSnowballs)
 	move_and_slide()

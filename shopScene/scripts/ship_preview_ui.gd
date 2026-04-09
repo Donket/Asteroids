@@ -17,7 +17,7 @@ func _ready():
 		$Sprite2D/CenterContainer/RichTextLabel2.text += "Fires at all asteroids every 5 secs."
 		$Sprite2D/Sprite2D2.animation = "ship2"
 	if phase == 2:
-		$Sprite2D/CenterContainer/RichTextLabel2.text += "Cannot take more than 20 damage at once. Moves slowly."
+		$Sprite2D/CenterContainer/RichTextLabel2.text += "Cannot take more than 50 damage at once. Moves slowly."
 		$Sprite2D/Sprite2D2.animation = "ship3"
 	if phase == 3:
 		$Sprite2D/CenterContainer/RichTextLabel2.text += "???"
