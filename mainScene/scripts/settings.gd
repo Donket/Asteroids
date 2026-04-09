@@ -43,25 +43,16 @@ func _on_menu_button_mouse_exited():
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
-func _on_exit_button_mouse_entered():
-	$exitLabel.text = "[center][color=yellow]Exit"
-	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
-
-
-func _on_exit_button_mouse_exited():
-	$exitLabel.text = "[center]Exit"
-	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
-
-
 func _on_menu_button_pressed():
+	if get_parent().name == "shop":
+		Global.itemsSaved = true
+		Global.savedItems = get_parent().getItems()
+		Global.savedRollPrice = get_parent().rollPrice
 	if get_parent().name == "mainMenu":
 		visible = false
 	else:
 		get_tree().change_scene_to_file("res://startup/scenes/startupMenu.tscn")
 
-
-func _on_exit_button_pressed():
-	get_tree().quit()
 
 
 func _on_h_slider_value_changed(value):

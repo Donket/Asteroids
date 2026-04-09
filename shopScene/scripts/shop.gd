@@ -22,10 +22,19 @@ func _ready():
 		$items.add_child(scene)
 	money = Global.money
 	Global.turn += 1
+	if Global.itemsSaved:
+		await get_tree().process_frame
+		rollPrice = Global.savedRollPrice
+		for i in range(items.size()):
+			items[i].item = Global.savedItems[i]
+		Global.itemsSaved = false
 	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
 
-
-
+func getItems():
+	var ar = []
+	for i in items:
+		ar.append(i.item)
+	return ar
 
 func _on_roll_button_pressed():
 	if money < floor(rollPrice):

@@ -9,6 +9,9 @@ var asteroidExps = [0,0,0,0,0,0]
 var starsDeck = ["Binky", "Blind Stick"]
 var itemGrabbed = null
 var overSell = false
+var itemsSaved = false
+var savedItems = []
+var savedRollPrice = 5
 var money = 600
 
 var wins = 0
@@ -211,7 +214,7 @@ On bounce: 40% chance to apply +2 [img]res://ART/icons/breachIcon.png[/img].",
 	"Lethal":
 		"If you will die next loss, all asteroid stats +20%",
 	"Sandpaper":
-		"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 10% of damage",
+		"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 1% of damage",
 	"Golden Tooth":
 		"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +3 extra",
 	"Coupon Book":
