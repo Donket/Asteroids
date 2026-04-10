@@ -13,22 +13,26 @@ func _ready():
 		items.append(scene)
 		scene.position = $anchors.get_child(i).position
 		scene.type = 0
+		scene.index = i
 		$items.add_child(scene)
 	for i in range(2):
 		var scene = load("res://shopScene/scenes/shop_item.tscn").instantiate()
 		items.append(scene)
 		scene.position = $anchors.get_child(i+5).position
 		scene.type = 1
+		scene.index = i+5
 		$items.add_child(scene)
 	money = Global.money
 	Global.turn += 1
-	if Global.itemsSaved:
-		await get_tree().process_frame
-		rollPrice = Global.savedRollPrice
-		for i in range(items.size()):
-			items[i].item = Global.savedItems[i]
-		Global.itemsSaved = false
+	for i in range(Global.savedItems.size()):
+		if Global.savedItems[i] != "":
+			items[i].item=Global.savedItems[i]
+			items[i].lockFromStart()
+			rollPrice = Global.savedRollPrice
 	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
+
+#
+#
 
 func getItems():
 	var ar = []
@@ -40,7 +44,8 @@ func _on_roll_button_pressed():
 	if money < floor(rollPrice):
 		return
 	for item in items:
-		item.randomizeItem()
+		if !item.locked:
+			item.randomizeItem()
 	money -= floor(rollPrice)
 	rollPrice *= 1.3
 	rollPrice = floor(rollPrice)

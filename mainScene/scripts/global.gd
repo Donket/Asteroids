@@ -9,8 +9,7 @@ var asteroidExps = [0,0,0,0,0,0]
 var starsDeck = ["Boot", "Blind Stick", "Binky", "Binky", "Binky", "Wagon Wheel"]
 var itemGrabbed = null
 var overSell = false
-var itemsSaved = false
-var savedItems = []
+var savedItems = ["", "", "", "", "", "", ""]
 var savedRollPrice = 5
 var money = 600
 

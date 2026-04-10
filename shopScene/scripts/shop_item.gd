@@ -5,6 +5,7 @@ enum Type { ASTEROID, STAR }
 
 var cost: int = 0
 var item: String = "": set = change
+var index=0
 var currentBaseRarity: int = 0
 
 @onready var shop = get_parent().get_parent()
@@ -12,8 +13,17 @@ var currentBaseRarity: int = 0
 @onready var hoverSfx = shop.get_node("hover")
 @onready var clickSfx = shop.get_node("click")
 
+@export var locked: bool: set = changeLock
 var itemsToDesc
+var inrange = false
 
+
+func changeLock(newLock):
+	if newLock == true:
+		Global.savedItems[index] = item
+	else:
+		Global.savedItems[index] = ""
+	locked = newLock
 
 func change(newItem: String):
 	if newItem.is_empty():
@@ -28,7 +38,31 @@ func change(newItem: String):
 		item = newItem
 		updateData()
 
+func _input(event):
+	if Input.is_action_just_pressed("rclick") and inrange:
+		if locked and !$lockAnims.is_playing():
+			if type == Type.ASTEROID:
+				$lockAnims.play("asteroidUnlock")
+			else:
+				$lockAnims.play("starUnlock")
+			await $lockAnims.animation_finished
+			if inrange:
+				$AnimationPlayer.play("open")
+				Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		elif !locked and !$lockAnims.is_playing():
+			if type == Type.ASTEROID:
+				$lockAnims.play("asteroidLock")
+			else:
+				$lockAnims.play("starLock")
+			$AnimationPlayer.play("close")
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+func lockFromStart():
+	locked = true
+	if type == Type.ASTEROID:
+		$lockSprites.frame = 6
+	else:
+		$lockSprites.frame = 12
 
 func randomizeItem():
 	var items
@@ -87,10 +121,14 @@ func updateData():
 		$Node2D.texture = load("res://ART/asteroidArts/" + item + ".png")
 		$Control/spdLabel.text = "[center]"+str(Global.itemsToData[item][2])
 		$Control/dmgLabel.text = "[center]"+str(Global.itemsToData[item][3])
+		$lockSprites.frame = 0
+		$lockSprites.position = Vector2(850,425)
 	else:
 		$Control/RichTextLabel2.text = itemsToDesc[item]
 		$RichTextLabel.text = "[center]" + str(cost)
 		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
+		$lockSprites.frame = 7
+		$lockSprites.position = Vector2(780,400)
 	
 	initTooltips()
 	var tween = get_tree().create_tween()
@@ -116,14 +154,18 @@ func _ready():
 
 func _on_control_2_mouse_entered():
 	hoverSfx.playing=true
-	$AnimationPlayer.play("open")
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	inrange = true
+	if !locked:
+		$AnimationPlayer.play("open")
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 
 func _on_control_2_mouse_exited():
-	$AnimationPlayer.play("close")
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	inrange = false
+	if !locked:
+		$AnimationPlayer.play("close")
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _on_control_2_pressed():

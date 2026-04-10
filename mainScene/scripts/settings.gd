@@ -45,7 +45,6 @@ func _on_menu_button_mouse_exited():
 
 func _on_menu_button_pressed():
 	if get_parent().name == "shop":
-		Global.itemsSaved = true
 		Global.savedItems = get_parent().getItems()
 		Global.savedRollPrice = get_parent().rollPrice
 	if get_parent().name == "mainMenu":
