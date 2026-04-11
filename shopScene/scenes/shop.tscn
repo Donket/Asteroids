@@ -221,7 +221,7 @@ offset_right = 960.0
 offset_bottom = -6.0
 
 [node name="playthroughTutorial" parent="." instance=ExtResource("17_pvin0")]
-position = Vector2(441, 334)
+position = Vector2(-560, 50)
 isShop = true
 
 [node name="tutorial" parent="." instance=ExtResource("7_ekylw")]

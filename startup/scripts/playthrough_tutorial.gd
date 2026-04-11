@@ -1,6 +1,6 @@
 extends Node2D
 
-#shopdata = {message, message location, shop asteroids, shop stars, inventory visible, sell visible, roll visible, preview visible, tutorial visible, end turn visible, refresh shop}
+#shopdata = {message, message location, shop asteroids, shop stars, inventory visible, sell visible, roll visible, preview visible, catalogue visible, tutorial visible, end turn visible, refresh shop}
 
 var inRange
 @export var isShop: bool
@@ -14,6 +14,7 @@ var dataShop = [
 	Vector2(0,0),
 	["", "", "", "", ""],
 	["", ""],
+	false, 
 	false, 
 	false, 
 	false, 
@@ -34,19 +35,6 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
-	true
-	],
-	
-	[
-	"A large way to deal damage is through abilities. Each asteroid type has its own ability, which you can see when hovering. For example, this Gilded Husk drops [img width=32 height=32]res://ART/icons/moneyIcon.png[/img] whenever it hits the ship.", 
-	Vector2(0,-50),
-	["", "", "Gilded Husk", "", ""],
-	["", ""],
-	false, 
-	false, 
-	false, 
-	false, 
-	false, 
 	false, 
 	true
 	],
@@ -62,16 +50,18 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
+	false, 
 	false
 	],
 	
 
 	[
-	"You can level up all asteroids in the inventory by combining enough of one kind. Buy all three of these Iron Husks. When you have them in your inventory, click and drag each onto the one you already own. Then, look at its upgraded level 2 ability.", 
+	"You can level up all asteroids in the inventory by combining enough of one kind. Click and drag three of your Iron Husks onto the fourth. Then, look at its upgraded level 2 ability.", 
 	Vector2(0,-50),
-	["Iron Husk", "Iron Husk", "Iron Husk", "", ""],
+	["", "", "", "", ""],
 	["", ""],
 	true, 
+	false, 
 	false, 
 	false, 
 	false, 
@@ -81,7 +71,7 @@ var dataShop = [
 	],
 
 	[
-	"This is a star, the other type of item. Stars provide universal abilities, and cannot be leveled up like asteroids. This star makes you gain one [img width=32 height=32]res://ART/icons/blockIcon.png[/img] whenever one of your asteroids bounces off the wall. Click it to buy it.", 
+	"Stars show up for sale here, and cannot be leveled up like asteroids. This star is another shield, just like the one you already have. Click it to buy it.", 
 	Vector2(-340,280),
 	["", "", "", "", ""],
 	["Shield", ""],
@@ -91,29 +81,17 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
+	false, 
 	true
 	],
 	
 	[
-	"Note that this pairs with the asteroid you bought earlier - the asteroid has a bounce, meaning it activates the star's ability. Making sure the abilities of your items trigger each other is a very powerful and necessary tool! ", 
+	"Note that shields pair with the asteroid you leveled up earlier - the asteroid has bounces, meaning it activates the shield ability. Making sure the abilities of your items trigger each other is a very powerful and necessary tool! ", 
 	Vector2(0,0),
 	["", "", "", "", ""],
 	["", ""],
 	true, 
 	false, 
-	false, 
-	false, 
-	false, 
-	false, 
-	false
-	],
-	
-	[
-	"The resource that your new star gives, [img width=32 height=32]res://ART/icons/blockIcon.png[/img], is a status effect. There are a few different status effects, all with different functionalities. If you are ever curious what a status effect does, hover the item that mentions it - there will be a tooltip next to it explaining what it does.", 
-	Vector2(0,0),
-	["", "", "", "", ""],
-	["", ""],
-	true, 
 	false, 
 	false, 
 	false, 
@@ -133,6 +111,7 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
+	false, 
 	false
 	],
 	
@@ -147,6 +126,7 @@ var dataShop = [
 	false, 
 	false, 
 	false, 
+	false, 
 	false
 	], 
 	
@@ -156,6 +136,22 @@ var dataShop = [
 	Vector2(450,-10),
 	["", "", "", "", ""],
 	["", ""],
+	true, 
+	true, 
+	true, 
+	true, 
+	false, 
+	false, 
+	false, 
+	false
+	], 
+	
+	[
+	"For a list of all items the shop has to offer (including cost and current probability of showing up in the shop), you can open the store catalogue here.", 
+	Vector2(-560,50),
+	["", "", "", "", ""],
+	["", ""],
+	true, 
 	true, 
 	true, 
 	true, 
@@ -175,6 +171,7 @@ var dataShop = [
 	true, 
 	true, 
 	true, 
+	true, 
 	false, 
 	false
 	], 
@@ -189,6 +186,7 @@ var dataShop = [
 	true, 
 	true, 
 	true, 
+	true, 
 	false, 
 	true
 	], 
@@ -198,6 +196,7 @@ var dataShop = [
 	Vector2(441,334),
 	["", "", "", "", ""],
 	["", ""],
+	true, 
 	true, 
 	true, 
 	true, 
@@ -222,7 +221,7 @@ var battleData = [
 	],
 	
 	[
-	"Soon, the asteroid launchers you own will begin attacking the ship by launching their type of asteroid from a random location every 3 seconds. Hover over the icons to look at your owned asteroid launchers.",
+	"Soon, the asteroid launchers you own will begin attacking the ship by launching their type of asteroid from a random location every 3 seconds. Hover over the icons in the top row of boxes to look at each of your owned asteroid launchers.",
 	Vector2(960,540),
 	false,
 	false,
@@ -249,7 +248,7 @@ var battleData = [
 	],
 	
 	[
-	"Some abilities relate to status effects. When you gain status effects, their icons and quantities will show up here on this left panel, below your [img width=32 height=32]res://ART/icons/moneyIcon.png[/img] (Money), which the currency used in the shop and is not important for now.",
+	"Some abilities relate to status effects. When you gain status effects, their icons and quantities will show up here on this left panel.",
 	Vector2(431,272),
 	true,
 	true,
@@ -260,6 +259,15 @@ var battleData = [
 	[
 	"Some stats of your asteroids will show up here in these boxes - average damage, average speed, permanent damage gained, permanent speed gained, and number of current asteroids (or, asteroids on field that have not been destroyed). For average stats, the average is taken of all current asteroids on the field.",
 	Vector2(960,530),
+	true,
+	true,
+	true,
+	false
+	],
+	
+	[
+	"Stars are passive abilities which are always active throughout each battle. Whenever any asteroid triggers an effect, the relevant stars trigger (for example, you have a shield. This means whenever any of your asteroids bounce, the shield triggers.)",
+	Vector2(960,753),
 	true,
 	true,
 	true,
@@ -298,7 +306,7 @@ func _ready():
 		var d = dataShop[index]
 		$message/CenterContainer/RichTextLabel.text = "[center]" + d[0] + "\n\nClick here to continue"
 		$message.position = d[1]
-		get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10])
+		get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10], d[11])
 		visible = true
 	elif !Global.battleTutorialComplete and !isShop:
 		index = 0
@@ -322,7 +330,7 @@ func _input(event):
 				var d = dataShop[index]
 				$message/CenterContainer/RichTextLabel.text = "[center]" + d[0] + "\n\nClick here to continue"
 				$message.position = d[1]
-				get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10])
+				get_parent().tutorialForce(d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10], d[11])
 			else:
 				visible = false
 				Global.shopTutorialComplete=true

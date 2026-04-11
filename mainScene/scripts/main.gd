@@ -61,21 +61,28 @@ func debtCollecter():
 
 
 func onBounce(asteroid):
+	var iter = -1
 	for child in rules.get_children():
+		iter+=1
 		if child.has_method("onBounce"):
 			child.onBounce(asteroid)
+			$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 	if rules.has_method("onBounce"):
 		rules.onBounce(asteroid)
 
 
 func onCrash(asteroid):
 	var n = Global.numOfStars("Death Rattle")
+	var iter = -1
 	for child in rules.get_children():
+		iter+=1
 		if child.has_method("onCrash"):
 			child.onCrash(asteroid)
+			$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 		if child.has_method("onBounce") and n > 0:
 			for i in range(n):
 				child.onBounce()
+				$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 	if rules.has_method("onCrash"):
 		rules.onCrash(asteroid)
 		if n > 0:
@@ -84,32 +91,41 @@ func onCrash(asteroid):
 
 func onSpawn(asteroid):
 	$spawnPlayer.playing = true
+	var iter = -1
 	for child in rules.get_children():
+		iter+=1
 		if child.has_method("onSpawn"):
 			child.onSpawn(asteroid)
+			$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 	if rules.has_method("onSpawn"):
 		rules.onSpawn(asteroid)
 	
 
 func onHit(asteroid):
+	var iter = -1
 	for child in rules.get_children():
+		iter+=1
 		if child.has_method("onHit"):
 			child.onHit(asteroid)
+			$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 	if rules.has_method("onHit"):
 		rules.onHit(asteroid)
 
 func onShot(asteroid):
+	var iter = -1
 	for child in rules.get_children():
+		iter+=1
 		if child.has_method("onShot"):
 			child.onShot(asteroid)
+			$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 	if rules.has_method("onShot"):
 		rules.onShot(asteroid)
 
 
 func _on_breach_timer_timeout():
 	if rules.breachAmount > 0:
-		rules.hp -= ceil(rules.hp*0.02*rules.breachAmount)
-		Global.addToLog("Breach",ceil(rules.hp*0.02*rules.breachAmount))
+		rules.hp -= ceil(rules.hp*0.01*rules.breachAmount)
+		Global.addToLog("Breach",ceil(rules.hp*0.01*rules.breachAmount))
 		
 func _on_parasite_timer_timeout():
 	if rules.parasiteAmount > 0 and randi_range(0,100) < 5*rules.parasiteAmount and deck.size() > 0:
@@ -164,12 +180,16 @@ func _ready():
 			launchers.get_child(i).texture = load("res://ART/asteroidArts/" + deck[i] + ".png")
 			launchers.get_child(i).empty = false
 			launchers.get_child(i).item = deck[i]
+	var iter = -1
 	for star in Global.starsDeck:
+		iter += 1
 		var scene = load("res://mainScene/scenes/baseStar.tscn").instantiate()
 		scene.set_script(load("res://stars/" + star + ".gd"))
 		if "main" in scene:
 			scene.main = self
 		rules.add_child(scene)
+		$CanvasLayer/stars/GridContainer.get_child(iter).item = star
+		$CanvasLayer/stars/GridContainer.get_child(iter).index = iter
 	ship.attributes = rules
 	money = Global.money
 	Global.logData = {}
@@ -203,8 +223,6 @@ func refreshStatLabels():
 		var label = labels.get_child(i)
 		label.text = "[center]ADMG: " + str(round(averageDmg)) + "
 ASPD: " + str(round(averageSpd)) + "
-PDMG: " + str(round(Global.asteroidPermStats[i][0])) + "
-PSPD: " + str(round(Global.asteroidPermStats[i][1])) + "
 Count: " + str(round(relevantAsteroids.size()))
 	await get_tree().create_timer(0.5, true, false, true).timeout
 	refreshStatLabels()
@@ -221,7 +239,7 @@ func defeat():
 				child.die()
 		$CanvasLayer/defeatLabel.visible = true
 		Global.health -= 2 * pow(2,Global.numOfStars("Steak"))
-		money += round(300 * pow(1.1,Global.turn))
+		money += round(120 * pow(1.1,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		if ship.phase == 3:
@@ -246,7 +264,7 @@ func victory():
 				child.die()
 		$CanvasLayer/victoryLabel.visible = true
 		Global.wins += 1 * pow(2,Global.numOfStars("Steak"))
-		money += round(300 * pow(1.1,Global.turn))
+		money += round(120 * pow(1.1,Global.turn))
 		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		if ship.phase == 3:

@@ -116,13 +116,14 @@ func _on_settings_button_mouse_exited():
 func _on_settings_button_pressed():
 	$Settings.visible = true
 
-func tutorialForce(asteroids, stars, inventoryv, sellv, rollv, previewv, tutorialv, endTurnv, refreshShop):
+func tutorialForce(asteroids, stars, inventoryv, sellv, rollv, previewv, cataloguev, tutorialv, endTurnv, refreshShop):
 	await get_tree().process_frame
 	$RollButton.visible = rollv
 	$shipPreviewUI.visible = previewv
 	$Button.visible = tutorialv
 	$EndButton.visible = endTurnv
 	$shopInvUI.visible = inventoryv
+	$aListButton.visible = cataloguev
 	$SellButton.visible = sellv
 	if refreshShop:
 		for i in range(5):

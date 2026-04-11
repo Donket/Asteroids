@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dq61aqbals68d"]
+[gd_scene load_steps=21 format=3 uid="uid://dq61aqbals68d"]
 
 [ext_resource type="Script" path="res://mainScene/scripts/main.gd" id="1_aanir"]
 [ext_resource type="Script" path="res://mainScene/scripts/timers.gd" id="2_t1drb"]
-[ext_resource type="Texture2D" uid="uid://c5k4rpc2vcoph" path="res://ART/uiArts/mainUI.png" id="3_8j5i6"]
+[ext_resource type="Texture2D" uid="uid://c5k4rpc2vcoph" path="res://ART/uiArts/mainUi.png" id="3_8j5i6"]
 [ext_resource type="Texture2D" uid="uid://s38f1we2tls5" path="res://ART/uiArts/timeScaleIcon.png" id="4_0oit1"]
 [ext_resource type="Texture2D" uid="uid://kac22w78ljk8" path="res://ART/icons/settingsIcon.png" id="4_guw4t"]
 [ext_resource type="PackedScene" uid="uid://t2jcpwhwgqjh" path="res://mainScene/scenes/launcherUI.tscn" id="4_xd1qb"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b3llxpelm4eeb" path="res://ship/scenes/ship.tscn" id="7_n35oc"]
 [ext_resource type="Script" path="res://mainScene/scripts/mainruleset.gd" id="8_7gyde"]
 [ext_resource type="AudioStream" uid="uid://b8n863tfw8lpd" path="res://MUSIC/battle_commences_loopable.wav" id="9_6cs4h"]
+[ext_resource type="PackedScene" uid="uid://dtiyiwul238f3" path="res://star.tscn" id="9_lwju0"]
 [ext_resource type="AudioStream" uid="uid://dkqg28jrsr0i4" path="res://MUSIC/sfx/spawn.wav" id="10_e0qr2"]
 [ext_resource type="AudioStream" uid="uid://1mgfjieipayh" path="res://MUSIC/battle_ceases_loopable.wav" id="10_hshsf"]
 [ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://mainScene/scenes/settings.tscn" id="16_xa6x3"]
@@ -141,9 +142,9 @@ process_mode = 3
 z_index = 1
 layout_mode = 0
 offset_left = -525.0
-offset_top = -28.0
+offset_top = -38.0
 offset_right = 375.0
-offset_bottom = 12.0
+offset_bottom = 2.0
 theme_override_constants/h_separation = 180
 columns = 6
 
@@ -169,6 +170,41 @@ index = 4
 [node name="launcher6" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
 layout_mode = 2
 index = 5
+
+[node name="stars" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 435.0
+offset_top = 952.0
+offset_right = 1485.0
+offset_bottom = 1035.0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/stars"]
+z_index = 1
+layout_mode = 0
+offset_top = 5.0
+offset_right = 900.0
+offset_bottom = 45.0
+theme_override_constants/h_separation = 180
+columns = 6
+
+[node name="star" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+layout_mode = 2
+
+[node name="star2" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+layout_mode = 2
+
+[node name="star3" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+layout_mode = 2
+
+[node name="star4" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+layout_mode = 2
+
+[node name="star5" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+layout_mode = 2
+
+[node name="star6" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+layout_mode = 2
 
 [node name="log" parent="CanvasLayer" instance=ExtResource("5_bryf5")]
 offset_left = 1920.0
@@ -321,97 +357,85 @@ offset_bottom = 40.0
 [node name="slot1Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
 layout_mode = 0
 offset_left = 434.0
-offset_top = 866.0
+offset_top = 846.0
 offset_right = 637.0
-offset_bottom = 1075.0
+offset_bottom = 961.0
 scale = Vector2(0.75, 0.75)
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]AVD: 500
 AVS: 300
-PDMG: 0
-PSPD: 0
 Count: 0"
 
 [node name="slot2Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
 layout_mode = 0
 offset_left = 614.0
-offset_top = 866.0
+offset_top = 846.0
 offset_right = 817.0
-offset_bottom = 1075.0
+offset_bottom = 961.0
 scale = Vector2(0.75, 0.75)
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]AVD: 500
 AVS: 300
-PDMG: 0
-PSPD: 0
 Count: 0"
 
 [node name="slot3Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
 layout_mode = 0
 offset_left = 794.0
-offset_top = 866.0
+offset_top = 846.0
 offset_right = 997.0
-offset_bottom = 1075.0
+offset_bottom = 961.0
 scale = Vector2(0.75, 0.75)
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]AVD: 500
 AVS: 300
-PDMG: 0
-PSPD: 0
 Count: 0"
 
 [node name="slot4Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
 layout_mode = 0
 offset_left = 974.0
-offset_top = 866.0
+offset_top = 846.0
 offset_right = 1177.0
-offset_bottom = 1075.0
+offset_bottom = 961.0
 scale = Vector2(0.75, 0.75)
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]AVD: 500
 AVS: 300
-PDMG: 0
-PSPD: 0
 Count: 0"
 
 [node name="slot5Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
 layout_mode = 0
 offset_left = 1154.0
-offset_top = 866.0
+offset_top = 846.0
 offset_right = 1357.0
-offset_bottom = 1075.0
+offset_bottom = 961.0
 scale = Vector2(0.75, 0.75)
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]AVD: 500
 AVS: 300
-PDMG: 0
-PSPD: 0
 Count: 0"
 
 [node name="slot6Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
 layout_mode = 0
 offset_left = 1334.0
-offset_top = 866.0
+offset_top = 846.0
 offset_right = 1537.0
-offset_bottom = 1075.0
+offset_bottom = 961.0
 scale = Vector2(0.75, 0.75)
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]AVD: 500
 AVS: 300
-PDMG: 0
-PSPD: 0
 Count: 0"
 
 [node name="abilityLabels" type="Control" parent="CanvasLayer"]
@@ -421,7 +445,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="playthroughTutorial" parent="CanvasLayer" instance=ExtResource("18_slyyv")]
-z_index = 1
+z_index = 2
 position = Vector2(1179.05, -319.398)
 
 [node name="Settings" parent="CanvasLayer" instance=ExtResource("16_xa6x3")]

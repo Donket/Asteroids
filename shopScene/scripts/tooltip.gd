@@ -8,7 +8,7 @@ var typeToDesc = {
 	"res://ART/icons/moneyIcon.png": 
 		"[center][img]res://ART/icons/moneyIcon.png[/img] (Money) is the currency used to purchase items in the shop.",
 	"res://ART/icons/breachIcon.png": 
-		"[center][img]res://ART/icons/breachIcon.png[/img] (Breach) triggers every second and deals 2% of the ship's current hp as damage per stack.",
+		"[center][img]res://ART/icons/breachIcon.png[/img] (Breach) triggers every second and deals 1% of the ship's current hp as damage per stack.",
 	"res://ART/icons/blockIcon.png": 
 		"
 [center]Each time an asteroid would be shot, if you have [img]res://ART/icons/blockIcon.png[/img] (Block) instead use a stack to prevent the asteroid from being destroyed.",

@@ -1,12 +1,47 @@
-[gd_scene load_steps=10 format=3 uid="uid://t2jcpwhwgqjh"]
+[gd_scene load_steps=12 format=3 uid="uid://dtiyiwul238f3"]
 
-[ext_resource type="Script" path="res://mainScene/scripts/launcherUI.gd" id="1_d6sig"]
-[ext_resource type="Shader" path="res://ART/resources/allBlack.gdshader" id="2_meq77"]
-[ext_resource type="Texture2D" uid="uid://iqnajpomo23a" path="res://ART/uiArts/shopPanel.png" id="3_wtha1"]
-[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_b2wyn"]
+[ext_resource type="Texture2D" uid="uid://bikv0qlaess35" path="res://ART/starArts/Douglas.png" id="1_0kiwg"]
+[ext_resource type="Script" path="res://star.gd" id="1_txj7e"]
+[ext_resource type="Texture2D" uid="uid://cd8kn0n7k0phu" path="res://ART/uiArts/starShopPanel.png" id="3_rtanb"]
+[ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_15lbo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahq23"]
-shader = ExtResource("2_meq77")
+[sub_resource type="Animation" id="Animation_merya"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_iecqv"]
+resource_name = "bounce"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(4, 4), Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8r1sd"]
+_data = {
+"RESET": SubResource("Animation_merya"),
+"bounce": SubResource("Animation_iecqv")
+}
 
 [sub_resource type="Animation" id="Animation_j5gxj"]
 length = 0.001
@@ -98,33 +133,33 @@ _data = {
 "open": SubResource("Animation_auq8j")
 }
 
-[node name="Control" type="Control"]
+[node name="star" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
-script = ExtResource("1_d6sig")
+script = ExtResource("1_txj7e")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(30, 30)
-polygon = PackedVector2Array(-30, -30, 120, -30, 120, 80, -30, 80)
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 110.0
-value = 50.0
-fill_mode = 3
-show_percentage = false
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-z_index = 1
-material = SubResource("ShaderMaterial_ahq23")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(73, 54.5)
 scale = Vector2(3, 3)
+texture = ExtResource("1_0kiwg")
+
+[node name="anims" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8r1sd")
+}
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 136.0
+offset_bottom = 107.0
 
 [node name="panel" type="Control" parent="."]
 z_index = 3
@@ -139,7 +174,7 @@ mouse_filter = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="panel"]
 scale = Vector2(5, 5)
-texture = ExtResource("3_wtha1")
+texture = ExtResource("3_rtanb")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="panel"]
 layout_mode = 0
@@ -149,7 +184,7 @@ offset_right = 150.0
 offset_bottom = -115.0
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_fonts/normal_font = ExtResource("4_15lbo")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "
@@ -163,55 +198,9 @@ offset_right = 216.0
 offset_bottom = 391.0
 scale = Vector2(0.8, 0.8)
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("4_b2wyn")
+theme_override_fonts/normal_font = ExtResource("4_15lbo")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-
-[node name="dmgLabel" type="RichTextLabel" parent="panel"]
-layout_mode = 0
-offset_left = -150.0
-offset_top = 190.0
-offset_right = -65.0
-offset_bottom = 226.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_b2wyn")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[center]1055"
-
-[node name="spdLabel" type="RichTextLabel" parent="panel"]
-layout_mode = 0
-offset_left = 65.0
-offset_top = 190.0
-offset_right = 150.0
-offset_bottom = 226.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("4_b2wyn")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[center]1055"
-
-[node name="RichTextLabel5" type="RichTextLabel" parent="panel"]
-layout_mode = 0
-offset_left = -155.0
-offset_top = 139.0
-offset_right = -55.0
-offset_bottom = 175.0
-theme_override_fonts/normal_font = ExtResource("4_b2wyn")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[center]DMG"
-
-[node name="RichTextLabel6" type="RichTextLabel" parent="panel"]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 139.0
-offset_right = 155.0
-offset_bottom = 175.0
-theme_override_fonts/normal_font = ExtResource("4_b2wyn")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[center]SPD"
 
 [node name="GridContainer" type="GridContainer" parent="panel"]
 layout_mode = 0
@@ -225,5 +214,5 @@ libraries = {
 "": SubResource("AnimationLibrary_g3qgn")
 }
 
-[connection signal="mouse_entered" from="ProgressBar" to="." method="_on_progress_bar_mouse_entered"]
-[connection signal="mouse_exited" from="ProgressBar" to="." method="_on_progress_bar_mouse_exited"]
+[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]

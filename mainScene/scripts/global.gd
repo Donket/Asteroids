@@ -6,12 +6,12 @@ var asteroidsDeck = ["Iron Husk", "Iron Husk", "Iron Husk", "Iron Rock", "Iron R
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = []
+var starsDeck = ["Shield", "Steering Wheel"]
 var itemGrabbed = null
 var overSell = false
 var savedItems = ["", "", "", "", "", "", ""]
 var savedRollPrice = 5
-var money = 600
+var money = 300
 
 var wins = 0
 var maxWins = 10
@@ -170,7 +170,7 @@ var itemsToDesc = {
 	"Hourglass":
 		"Timer is 10% longer.",
 	"Steering Wheel":
-		"Asteroids steer towards the ship more directly. This effect increases with asteroid acceleration.",
+		"Asteroid steering is greatly improved. This effect increases with asteroid acceleration.",
 	"Loose Change":
 		"On Crash: 30% chance to drop +8 [img]res://ART/icons/moneyIcon.png[/img]",
 	"Payday":
