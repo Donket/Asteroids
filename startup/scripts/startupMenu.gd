@@ -30,10 +30,13 @@ func _ready():
 
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://shopScene/scenes/shop.tscn")
-
+	if Global.battleTutorialComplete:
+		get_tree().change_scene_to_file("res://shopScene/scenes/shop.tscn")
+	else:
+		get_tree().change_scene_to_file("res://mainScene/scenes/main.tscn")
 
 func _on_button_2_pressed():
+	
 	$Settings.visible = true
 
 

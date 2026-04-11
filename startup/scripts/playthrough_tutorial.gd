@@ -10,7 +10,7 @@ var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
 var dataShop = [
 	
 	[
-	"Welcome to Asterogue! You are now in the shop. Here, you will buy items with [img width=32 height=32]res://ART/icons/moneyIcon.png[/img]. You can see how much [img width=32 height=32]res://ART/icons/moneyIcon.png[/img] you have in the bottom left.", 
+	"You are now in the shop. Here, you will buy items with [img width=32 height=32]res://ART/icons/moneyIcon.png[/img]. You can see how much [img width=32 height=32]res://ART/icons/moneyIcon.png[/img] you have in the bottom left.", 
 	Vector2(0,0),
 	["", "", "", "", ""],
 	["", ""],
@@ -24,7 +24,7 @@ var dataShop = [
 	], 
 	
 	[
-	"This is an Asteroid. You can see a description of it by hovering over it, and its price below. This asteroid has one bounce ([img width=32 height=32]res://ART/icons/bounceIcon.png[/img]), meaning when it hits the wall it bounces back instead of being destroyed. Click on it to buy it.", 
+	"This is an Asteroid launcher for sale. You can see a description of it by hovering over it, and its price below. Click on it to buy it.", 
 	Vector2(0,-50),
 	["", "", "Iron Husk", "", ""],
 	["", ""],
@@ -38,22 +38,7 @@ var dataShop = [
 	],
 	
 	[
-	"In battle, your owned asteroids will fire every three seconds at an enemy ship, which you must destroy within a time limit. You damage the ship by hitting it with your asteroids, according to their damage.", 
-	Vector2(0,-50),
-	["", "", "", "", ""],
-	["", ""],
-	false, 
-	false, 
-	false, 
-	false, 
-	false, 
-	false, 
-	false, 
-	false
-	],
-
-	[
-	"You can also damage the ship (and do many other things as well) through abilities. Each asteroid type has its own ability, which you can see when hovering. For example, this Gilded Husk drops [img width=32 height=32]res://ART/icons/moneyIcon.png[/img] whenever it hits the ship.", 
+	"A large way to deal damage is through abilities. Each asteroid type has its own ability, which you can see when hovering. For example, this Gilded Husk drops [img width=32 height=32]res://ART/icons/moneyIcon.png[/img] whenever it hits the ship.", 
 	Vector2(0,-50),
 	["", "", "Gilded Husk", "", ""],
 	["", ""],
@@ -96,7 +81,7 @@ var dataShop = [
 	],
 
 	[
-	"This is a star, the other type of item. Stars provide universal abilities, and cannot be leveled up like asteroids. This star makes you have a chance to gain one [img width=32 height=32]res://ART/icons/blockIcon.png[/img] whenever one of your asteroids bounces off the wall. Click it to buy it.", 
+	"This is a star, the other type of item. Stars provide universal abilities, and cannot be leveled up like asteroids. This star makes you gain one [img width=32 height=32]res://ART/icons/blockIcon.png[/img] whenever one of your asteroids bounces off the wall. Click it to buy it.", 
 	Vector2(-340,280),
 	["", "", "", "", ""],
 	["Shield", ""],
@@ -167,7 +152,7 @@ var dataShop = [
 	
 	
 	[
-	"You can preview the ship you will be battling here, in the scouting tab. This will show the next ship's health and any special information about it.", 
+	"You can preview the ship you will be battling here, in the scouting tab. Hovering this box will show the next ship's health and any special information about it.", 
 	Vector2(450,-10),
 	["", "", "", "", ""],
 	["", ""],
@@ -195,7 +180,7 @@ var dataShop = [
 	], 
 	
 	[
-	"Prepare for your first battle by purchasing these stars and asteroids!", 
+	"Prepare for your next battle by purchasing some stars and asteroids!", 
 	Vector2(-737,-37),
 	["Astral Husk", "Astral Husk", "Astral Husk", "Iron Rock", "Gilded Husk"],
 	["Shield", "Steering Wheel"],
@@ -209,7 +194,7 @@ var dataShop = [
 	], 
 	
 	[
-	"To end your turn and begin the battle, click this button. Good luck! Soon enough, you'll need it.", 
+	"To end your turn and begin the battle, click this button.", 
 	Vector2(441,334),
 	["", "", "", "", ""],
 	["", ""],
@@ -228,7 +213,7 @@ var dataShop = [
 
 var battleData = [
 	[
-	"Welcome to your first battle! Soon, the asteroids you purchased will begin attacking the ship, launching from a random location every 3 seconds.",
+	"Welcome to your first battle! Your mission is to destroy this ship at all costs. [ESC] or [BACKSPACE] to skip tutorial.",
 	Vector2(960,540),
 	false,
 	false,
@@ -237,7 +222,25 @@ var battleData = [
 	],
 	
 	[
-	"When the attack begins, you will have only a short time to defeat the ship. This time is displayed here.",
+	"Soon, the asteroid launchers you own will begin attacking the ship by launching their type of asteroid from a random location every 3 seconds. Hover over the icons to look at your owned asteroid launchers.",
+	Vector2(960,540),
+	false,
+	false,
+	false,
+	false
+	],
+	
+	[
+	"Each type of asteroid has a different ability, and different stats, which can be seen by hovering them. For example, the first asteroid you have bounces once off the wall. Certain abilities give stat boosts, such as speed or damage. Some even give permanent stats that persist through rounds.",
+	Vector2(960,540),
+	false,
+	false,
+	false,
+	false
+	],
+	
+	[
+	"Once your attack begins, you will have only a short time to defeat the ship. This time is displayed here.",
 	Vector2(1331,872),
 	true,
 	false,
@@ -246,7 +249,7 @@ var battleData = [
 	],
 	
 	[
-	"When you gain status effects, their icons and quantities will show up here on this left panel, below your [img width=32 height=32]res://ART/icons/moneyIcon.png[/img].",
+	"Some abilities relate to status effects. When you gain status effects, their icons and quantities will show up here on this left panel, below your [img width=32 height=32]res://ART/icons/moneyIcon.png[/img] (Money), which the currency used in the shop and is not important for now.",
 	Vector2(431,272),
 	true,
 	true,
@@ -333,3 +336,10 @@ func _input(event):
 			else:
 				visible = false
 				Global.battleTutorialComplete=true
+	
+	if Input.is_action_just_pressed("back") and !isShop and index == 0:
+		visible = false
+		Global.battleTutorialComplete=true
+		Global.shopTutorialComplete=true
+		get_parent().get_parent().tutorialForce(true, true, true, true)
+		

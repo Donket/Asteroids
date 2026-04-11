@@ -141,9 +141,12 @@ func _on_area_2d_body_entered(body):
 	else:
 		if attributes.has_method("onShot"):
 			attributes.onShot()
-		#if body.name != "saw":
-			#body.queue_free()
+		if attributes.has_method("onCrash"):
+			attributes.onCrash()
+		if body.name != "saw":
+			body.queue_free()
 		get_parent().onShot($".")
+		get_parent().onCrash($".")
 		if Global.hit():
 			die()
 

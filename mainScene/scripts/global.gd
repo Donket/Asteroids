@@ -2,11 +2,11 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Cursed Relic", "Cursed Relic", "Cursed Relic", "Cursed Relic", "Cursed Relic", "Cursed Relic"]
+var asteroidsDeck = ["Iron Husk", "Iron Husk", "Iron Husk", "Iron Rock", "Iron Rock", null]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = ["Boot", "Blind Stick", "Binky", "Binky", "Binky", "Wagon Wheel"]
+var starsDeck = []
 var itemGrabbed = null
 var overSell = false
 var savedItems = ["", "", "", "", "", "", ""]
@@ -17,10 +17,10 @@ var wins = 0
 var maxWins = 10
 var health = 10
 
-var turn = 100
+var turn = 0
 var timeScale = 1
-var shopTutorialComplete = true
-var battleTutorialComplete = true
+var shopTutorialComplete = false
+var battleTutorialComplete = false
 
 var logData = {
 	

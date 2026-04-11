@@ -71,9 +71,9 @@ func _input(event):
 		grabbed = true
 		Global.itemGrabbed = $"."
 		if type == Type.ASTEROID:
-			get_parent().get_parent().get_parent().get_node("SellButton").get_child(1).text = "[center]Sell (" + str(Global.itemsToData[item][0]/2) + ")"
+			get_parent().get_parent().get_parent().get_node("SellButton").get_child(1).text = "[center]Sell (" + str(Global.itemsToData[item][0]/2 * (exp+1)) + ")"
 		else:
-			get_parent().get_parent().get_parent().get_node("SellButton").get_child(1).text = "[center]Sell (" + str(Global.starsToData[item][0]/2) + ")"
+			get_parent().get_parent().get_parent().get_node("SellButton").get_child(1).text = "[center]Sell (" + str(Global.starsToData[item][0]/2 * (exp+1)) + ")"
 		$AnimationPlayer.play("close")
 		open = false
 	
@@ -88,7 +88,7 @@ func _input(event):
 		if Global.overSell:
 			invUi.sellSfx.playing = true
 			if type == Type.ASTEROID:
-				invUi.get_parent().money += Global.itemsToData[item][0]/2
+				invUi.get_parent().money += Global.itemsToData[item][0]/2 * (exp+1)
 				Global.asteroidPermStats[slotIndex] = [0,0]
 				changeItem(null)
 			else:
@@ -98,13 +98,6 @@ func _input(event):
 		
 		call_deferred("clear_global_grab")
 		
-		var viewport = get_viewport()
-		var globalPos = viewport.get_mouse_position()
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		Input.warp_mouse(Vector2(9999, 9999))
-		await get_tree().process_frame
-		await get_tree().process_frame
-		Input.warp_mouse(globalPos)
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_parent().get_parent().update()
 

@@ -26,5 +26,8 @@ text = "[center]This is the roll button. Click it to refresh the shop, for the p
 Click here to continue"
 fit_content = true
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.94711, 283.824)
+
 [connection signal="mouse_entered" from="message/CenterContainer/RichTextLabel" to="." method="_on_rich_text_label_mouse_entered"]
 [connection signal="mouse_exited" from="message/CenterContainer/RichTextLabel" to="." method="_on_rich_text_label_mouse_exited"]

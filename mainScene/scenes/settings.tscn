@@ -87,7 +87,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(-0.629395, -917.01)
-amount = 50
+amount = 200
 lifetime = 4.0
 preprocess = 3.0
 emission_shape = 3

@@ -47,6 +47,8 @@ func _on_menu_button_pressed():
 	if get_parent().name == "shop":
 		Global.savedItems = get_parent().getItems()
 		Global.savedRollPrice = get_parent().rollPrice
+	if get_parent().get_parent().name == "main":
+		$"../HSlider".value = 1
 	if get_parent().name == "mainMenu":
 		visible = false
 	else:
