@@ -14,13 +14,15 @@ var subtitles = [
 	"Very Original Title Screen!",
 	"Egotistical Developer!",
 	"Thousands of Bugs!",
-	"Minimal Tutorial!",
 	"Idiots Read This!",
 	"A Moose Bit My Sister Once ...",
 	"Mynd you, moose bites Kan be pretti nasti ...",
 	"The Cake is a Lie!",
 	"Its Dangerous to go Alone!",
-	"Birdhouse in Your Soul!"
+	"You wanna know how I got these scars?",
+	"Baseball, huh?",
+	"I HAVE THE HIGH GROUND!",
+	"We're no strangers to love ...",
 ]
 
 func _ready():

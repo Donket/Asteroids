@@ -67,6 +67,7 @@ func changeBossPhase(newBossPhase):
 			bullet.direction = randf_range(0,360)
 			bullet.position = position
 			bullet.permanent = true
+			bullet.isSaw = true
 			bullet.scale *= Vector2(2,2)
 			get_parent().call_deferred("add_child",bullet)
 			permSaws.append(bullet)
@@ -81,6 +82,7 @@ func changeBossPhase(newBossPhase):
 			bullet.direction = randf_range(0,360)
 			bullet.position = position
 			bullet.permanent = true
+			bullet.isSaw = true
 			bullet.scale *= Vector2(2,2)
 			get_parent().call_deferred("add_child",bullet)
 			permSaws.append(bullet)
@@ -201,15 +203,17 @@ func shoot(target):
 		
 	var bullet_speed = 500.0
 	var bullet
+	var isSaw = false
 	if phase == 3 and randf_range(0,1) > 0.7:
 		bullet = load("res://ship/scenes/sawblade.tscn").instantiate()
 		bullet_speed = 150
+		isSaw = true
 	else:
 		bullet = load("res://ship/scenes/bullet.tscn").instantiate()
 	
 	$shoot.playing = true
-	var shooter_pos = position
-	var target_pos = target.position
+	var shooter_pos = global_position
+	var target_pos = target.global_position
 	var target_vel = target.velocity
 	var r = target_pos - shooter_pos
 	var a = target_vel.dot(target_vel) - bullet_speed * bullet_speed
@@ -237,8 +241,9 @@ func shoot(target):
 	direction *= randf_range(0.9,1.1)
 	
 	bullet.velocity = direction * bullet_speed
-	bullet.position = shooter_pos
+	bullet.global_position = shooter_pos
 	bullet.rotation = direction.angle()
+	bullet.isSaw = isSaw
 	if phase == 3:
 		bullet.scale *= Vector2(2,2)
 	get_parent().call_deferred("add_child",bullet)
@@ -254,6 +259,8 @@ func shoot(target):
 		bullet.velocity = spreadDirection * bullet_speed
 		bullet.position = shooter_pos
 		bullet.rotation = spreadDirection.angle()
+		if phase == 3:
+			bullet.scale *= Vector2(2,2)
 		get_parent().call_deferred("add_child", bullet)
 
 

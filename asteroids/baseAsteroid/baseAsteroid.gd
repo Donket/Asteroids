@@ -79,9 +79,9 @@ func edgeCheck():
 	
 	var hit_edge = false
 	
-	if abs(position.x) >= 530:
+	if abs(global_position.x) >= 530:
 		hit_edge = true
-	elif position.y < -420 or position.y > 80:
+	elif global_position.y < -420 or global_position.y > 80:
 		hit_edge = true
 	
 	if hit_edge:
@@ -105,12 +105,12 @@ func edgeCheck():
 			get_parent().onBounce(self)
 			attributes.bounces -= 1
 			
-			if abs(position.x) >= 530:
+			if abs(global_position.x) >= 530:
 				direction = 540 - direction % 360
-				position.x = clamp(position.x, -529, 529)
-			if position.y < -420 or position.y > 80:
+				global_position.x = clamp(global_position.x, -529, 529)
+			if global_position.y < -420 or global_position.y > 80:
 				direction = 360 - direction
-				position.y = clamp(position.y, -419, 79)
+				global_position.y = clamp(global_position.y, -419, 79)
 			
 			$Timer.start(0.05)
 
@@ -143,11 +143,11 @@ func _on_area_2d_body_entered(body):
 			attributes.onShot()
 		if attributes.has_method("onCrash"):
 			attributes.onCrash()
-		if body.name != "saw":
+		if !body.isSaw:
 			body.queue_free()
 		get_parent().onShot($".")
 		get_parent().onCrash($".")
-		if Global.hit():
+		if Global.hit() or body.isSaw:
 			die()
 
 

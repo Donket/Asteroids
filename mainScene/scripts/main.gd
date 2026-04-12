@@ -20,18 +20,15 @@ var pending_updates = 0
 var is_processing = false
 
 
-#Cam shake bs
 
 var shakeTimer = 0.0
 var shakeIntensity = 0.0
-var originalCamPos = Vector2.ZERO
 
 
 
 func camShake(intensity):
 	shakeIntensity = intensity
 	shakeTimer = 0.15
-	originalCamPos = cam.position
 
 
 func changeMoney(newMoney):
@@ -286,10 +283,9 @@ func _process(delta):
 				launchers.get_child(i).time = $timers.get_child(i).time_left
 	if shakeTimer > 0:
 		shakeTimer -= delta
-		var offset = Vector2(randf_range(-shakeIntensity, shakeIntensity), randf_range(-shakeIntensity, shakeIntensity))
-		cam.position = originalCamPos + offset
-	elif cam:
-		cam.position = originalCamPos
+		cam.offset = Vector2(randf_range(-shakeIntensity, shakeIntensity), randf_range(-shakeIntensity, shakeIntensity))
+	else:
+		cam.offset = Vector2.ZERO
 
 
 

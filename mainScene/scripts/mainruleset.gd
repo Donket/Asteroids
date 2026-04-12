@@ -65,13 +65,13 @@ func hurt(newHP):
 
 func _ready():
 	if ship.phase == 3:
-		$"../rulesTimer".start(120*pow(1.1,Global.numOfStars("Hourglass")))
+		$"../rulesTimer".start(120*pow(1.3,Global.numOfStars("Hourglass")))
 	else:
 		$"../rulesTimer".start(round((30+Global.turn*2.4)*pow(1.1,Global.numOfStars("Hourglass"))))
 	initializeStats()
 
 func initializeStats():
-	maxHP *= pow(1.25,Global.turn)
+	maxHP *= pow(1.3,Global.turn)
 	if ship.phase == 3:
 		maxHP *= 8
 		hp *= 8

@@ -7,4 +7,4 @@ func onSpawn(asteroid):
 
 func onBounce(asteroid):
 	if Global.randChance(40):
-		main.rules.breachAmount += 2
+		main.rules.burnoutAmount += 1

@@ -2,22 +2,22 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Iron Husk", "Iron Husk", "Iron Husk", "Iron Rock", "Iron Rock", null]
+var asteroidsDeck = ["Iron Rock", "Iron Rock", "Iron Rock", "Iron Rock", "Iron Rock", "Iron Rock"]
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = ["Shield", "Steering Wheel"]
+var starsDeck = ["Shield", "Blind Stick", "Goop", "Mirror", "Mirror", "Mirror"]
 var itemGrabbed = null
 var overSell = false
 var savedItems = ["", "", "", "", "", "", ""]
 var savedRollPrice = 5
 var money = 300
 
-var wins = 0
+var wins = 9
 var maxWins = 10
 var health = 10
 
-var turn = 0
+var turn = 10
 var timeScale = 1
 var shopTutorialComplete = false
 var battleTutorialComplete = false
@@ -168,7 +168,7 @@ var itemsToDesc = {
 	"Boot":
 		"When you gain a status effect, all asteroids gain +3 acceleration.",
 	"Hourglass":
-		"Timer is 10% longer.",
+		"Timer is 30% longer.",
 	"Steering Wheel":
 		"Asteroid steering is greatly improved. This effect increases with asteroid acceleration.",
 	"Loose Change":
@@ -203,7 +203,7 @@ var itemsToDesc = {
 		"As asteroids accelerate, they gain size.",
 	"Goop":
 		"Asteroids gain +1 [img]res://ART/icons/bounceIcon.png[/img].
-On bounce: 40% chance to apply +2 [img]res://ART/icons/breachIcon.png[/img].",
+On bounce: 40% chance to apply +1 [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Steak":
 		"Each win gives double victories, and each loss takes double lives.",
 	"Radish":
@@ -401,7 +401,7 @@ func updateBlock(newBlock):
 		battleScene.rules.blockAmount = block
 	else:
 		for ast in battleScene.asteroids:
-			if ast != null and is_instance_valid(ast):
+			if ast != null and is_instance_valid(ast) and ast.attributes:
 				ast.attributes.damage += 3*num
 
 func hit():

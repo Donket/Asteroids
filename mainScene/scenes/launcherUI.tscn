@@ -1,9 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://t2jcpwhwgqjh"]
+[gd_scene load_steps=12 format=3 uid="uid://t2jcpwhwgqjh"]
 
 [ext_resource type="Script" path="res://mainScene/scripts/launcherUI.gd" id="1_d6sig"]
 [ext_resource type="Shader" path="res://ART/resources/allBlack.gdshader" id="2_meq77"]
 [ext_resource type="Texture2D" uid="uid://iqnajpomo23a" path="res://ART/uiArts/shopPanel.png" id="3_wtha1"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="4_b2wyn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqq6e"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cio8e"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahq23"]
 shader = ExtResource("2_meq77")
@@ -116,6 +122,8 @@ polygon = PackedVector2Array(-30, -30, 120, -30, 120, 80, -30, 80)
 layout_mode = 0
 offset_right = 150.0
 offset_bottom = 110.0
+theme_override_styles/background = SubResource("StyleBoxFlat_vqq6e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cio8e")
 value = 50.0
 fill_mode = 3
 show_percentage = false

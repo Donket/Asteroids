@@ -130,6 +130,21 @@ var dataShop = [
 	false
 	], 
 	
+	[
+	"If you want a specific item but don't want to buy it yet, you can right click a slot to lock/unlock it. When a slot is locked, the item inside does not change between turns or on rolls.", 
+	Vector2(-400,300),
+	["", "", "", "", ""],
+	["", ""],
+	true, 
+	true, 
+	true, 
+	false, 
+	false, 
+	false, 
+	false, 
+	false
+	], 
+	
 	
 	[
 	"You can preview the ship you will be battling here, in the scouting tab. Hovering this box will show the next ship's health and any special information about it.", 
