@@ -114,6 +114,12 @@ func randomizeItem():
 	updateData()
 
 func updateData():
+	if type == Type.STAR:
+		cost = Global.starsToData[item][0] * pow(pow(0.98,Global.starsDeck.size()),Global.numOfStars("Friendly Customer"))
+	else:
+		cost = Global.itemsToData[item][0]
+	cost = round(cost*pow(0.8, Global.numOfStars("Coupon Book")))
+	
 	$Control/RichTextLabel.text = "[center]" + item
 	if type == Type.ASTEROID:
 		$Control/RichTextLabel2.text = Global.getDesc(item,1)
@@ -129,7 +135,6 @@ func updateData():
 		$Node2D.texture = load("res://ART/starArts/" + item + ".png")
 		$lockSprites.frame = 7
 		$lockSprites.position = Vector2(780,400)
-	
 	initTooltips()
 	var tween = get_tree().create_tween()
 	tween.tween_property($Node2D, "position", Vector2(0,-10), 0.02)
