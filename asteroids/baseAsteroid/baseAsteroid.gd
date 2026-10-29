@@ -66,6 +66,7 @@ func _physics_process(delta):
 		speed = 0
 	velocity = Vector2(speed*2*cos(-deg_to_rad(direction)), speed*2*sin(-deg_to_rad(direction)))
 	speed += acceleration*delta
+	speed = clampf(speed,0,600)
 	edgeCheck()
 	WagonWheel()
 	var numOfSnowballs = Global.numOfStars("Snowball")
@@ -92,9 +93,9 @@ func edgeCheck():
 			
 			get_parent().onCrash(self)
 			var n = Global.numOfStars("Death Rattle")
-			if n > 0:
+			if n > 0 and attributes.has_method("onBounce"):
 				for i in range(n):
-					attributes.onBounce()
+					attributes.onBounce(self)
 			die()
 
 		else:

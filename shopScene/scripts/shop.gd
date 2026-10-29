@@ -29,7 +29,7 @@ func _ready():
 			items[i].item=Global.savedItems[i]
 			items[i].lockFromStart()
 			rollPrice = Global.savedRollPrice
-	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
+	$RollButton/RichTextLabel.text = "[center]Roll (" + str(int(rollPrice)) + ")"
 
 #
 #
@@ -49,7 +49,7 @@ func _on_roll_button_pressed():
 	money -= floor(rollPrice)
 	rollPrice *= 1.3
 	rollPrice = floor(rollPrice)
-	$RollButton/RichTextLabel.text = "[center]Roll (" + str(rollPrice) + ")"
+	$RollButton/RichTextLabel.text = "[center]Roll (" + str(int(rollPrice)) + ")"
 
 
 func _on_end_button_pressed():
@@ -66,7 +66,7 @@ func _on_control_mouse_exited():
 
 func setMoney(newMoney):
 	money = newMoney + Global.numOfStars("Golden Tooth")
-	$RichTextLabel.text = "[center] [img]res://ART/icons/moneyIcon.png[/img]" + str(money)
+	$RichTextLabel.text = "[center] [img]res://ART/icons/moneyIcon.png[/img]" + str(int(money))
 	Global.money = money
 
 

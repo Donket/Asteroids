@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://dq61aqbals68d"]
+[gd_scene format=3 uid="uid://dq61aqbals68d"]
 
-[ext_resource type="Script" path="res://mainScene/scripts/main.gd" id="1_aanir"]
-[ext_resource type="Script" path="res://mainScene/scripts/timers.gd" id="2_t1drb"]
+[ext_resource type="Script" uid="uid://c740v4ij27ix0" path="res://mainScene/scripts/main.gd" id="1_aanir"]
+[ext_resource type="Script" uid="uid://dd3x3jpkysobl" path="res://mainScene/scripts/timers.gd" id="2_t1drb"]
 [ext_resource type="Texture2D" uid="uid://c5k4rpc2vcoph" path="res://ART/uiArts/mainUi.png" id="3_8j5i6"]
 [ext_resource type="Texture2D" uid="uid://s38f1we2tls5" path="res://ART/uiArts/timeScaleIcon.png" id="4_0oit1"]
 [ext_resource type="Texture2D" uid="uid://kac22w78ljk8" path="res://ART/icons/settingsIcon.png" id="4_guw4t"]
@@ -11,13 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://dvgva0u77omk1" path="res://ART/uiArts/sliderBack.png" id="5_qogog"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="6_w4eqt"]
 [ext_resource type="PackedScene" uid="uid://b3llxpelm4eeb" path="res://ship/scenes/ship.tscn" id="7_n35oc"]
-[ext_resource type="Script" path="res://mainScene/scripts/mainruleset.gd" id="8_7gyde"]
-[ext_resource type="AudioStream" uid="uid://b8n863tfw8lpd" path="res://MUSIC/battle_commences_loopable.wav" id="9_6cs4h"]
+[ext_resource type="Script" uid="uid://bft5syj2awu15" path="res://mainScene/scripts/mainruleset.gd" id="8_7gyde"]
 [ext_resource type="PackedScene" uid="uid://dtiyiwul238f3" path="res://star.tscn" id="9_lwju0"]
 [ext_resource type="AudioStream" uid="uid://dkqg28jrsr0i4" path="res://MUSIC/sfx/spawn.wav" id="10_e0qr2"]
-[ext_resource type="AudioStream" uid="uid://1mgfjieipayh" path="res://MUSIC/battle_ceases_loopable.wav" id="10_hshsf"]
 [ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://mainScene/scenes/settings.tscn" id="16_xa6x3"]
 [ext_resource type="PackedScene" uid="uid://cspev8t5agspi" path="res://startup/scenes/tutorial.tscn" id="17_7kjtq"]
+[ext_resource type="AudioStream" uid="uid://b8n863tfw8lpd" path="res://MUSIC/battle_commences_loopable.wav" id="17_akjvj"]
+[ext_resource type="AudioStream" uid="uid://1mgfjieipayh" path="res://MUSIC/battle_ceases_loopable.wav" id="18_60g5w"]
 [ext_resource type="PackedScene" uid="uid://dh7oca2cjbits" path="res://startup/scenes/playthrough_tutorial.tscn" id="18_slyyv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sfo6"]
@@ -25,68 +25,68 @@ texture = ExtResource("5_qogog")
 expand_margin_top = 12.0
 expand_margin_bottom = 12.0
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" unique_id=272633517]
 script = ExtResource("1_aanir")
 
-[node name="Polygon2D5" type="Polygon2D" parent="."]
+[node name="Polygon2D5" type="Polygon2D" parent="." unique_id=1476187667]
 z_index = 4096
 position = Vector2(799, 261)
 scale = Vector2(5, 5)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-283.4, 159.4, -375.2, 556.4, 369, 562, 279.6, 159.4)
 
-[node name="Polygon2D6" type="Polygon2D" parent="."]
+[node name="Polygon2D6" type="Polygon2D" parent="." unique_id=2092673838]
 position = Vector2(4794, 1566)
 scale = Vector2(25, 25)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-600, -370, -600, 370, 630, 370, 630, -370)
 
-[node name="timers" type="Node2D" parent="."]
+[node name="timers" type="Node2D" parent="." unique_id=1162312356]
 script = ExtResource("2_t1drb")
 
-[node name="Timer1" type="Timer" parent="timers"]
+[node name="Timer1" type="Timer" parent="timers" unique_id=261246487]
 wait_time = 3.0
 autostart = true
 
-[node name="Timer2" type="Timer" parent="timers"]
+[node name="Timer2" type="Timer" parent="timers" unique_id=964875700]
 wait_time = 3.0
 autostart = true
 
-[node name="Timer3" type="Timer" parent="timers"]
+[node name="Timer3" type="Timer" parent="timers" unique_id=422188954]
 wait_time = 3.0
 autostart = true
 
-[node name="Timer4" type="Timer" parent="timers"]
+[node name="Timer4" type="Timer" parent="timers" unique_id=1247850840]
 wait_time = 3.0
 autostart = true
 
-[node name="Timer5" type="Timer" parent="timers"]
+[node name="Timer5" type="Timer" parent="timers" unique_id=180567124]
 wait_time = 3.0
 autostart = true
 
-[node name="Timer6" type="Timer" parent="timers"]
+[node name="Timer6" type="Timer" parent="timers" unique_id=1626098713]
 wait_time = 100.0
 autostart = true
 
-[node name="breachTimer" type="Timer" parent="timers"]
+[node name="breachTimer" type="Timer" parent="timers" unique_id=857188000]
 autostart = true
 
-[node name="burnoutTimer" type="Timer" parent="timers"]
+[node name="burnoutTimer" type="Timer" parent="timers" unique_id=618408599]
 wait_time = 5.0
 autostart = true
 
-[node name="parasiteTimer" type="Timer" parent="timers"]
+[node name="parasiteTimer" type="Timer" parent="timers" unique_id=2060783458]
 wait_time = 0.2
 autostart = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1192003879]
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=737636346]
 position = Vector2(960, 537)
 scale = Vector2(5, 5)
 texture = ExtResource("3_8j5i6")
 
-[node name="settingsButton" type="Button" parent="CanvasLayer"]
+[node name="settingsButton" type="Button" parent="CanvasLayer" unique_id=22650661]
 process_mode = 3
 offset_left = 73.0
 offset_top = 737.0
@@ -95,12 +95,12 @@ offset_bottom = 809.0
 focus_mode = 0
 flat = true
 
-[node name="settingsButton" type="Sprite2D" parent="CanvasLayer/settingsButton"]
+[node name="settingsButton" type="Sprite2D" parent="CanvasLayer/settingsButton" unique_id=2015956391]
 position = Vector2(35, 36)
 scale = Vector2(3, 3)
 texture = ExtResource("4_guw4t")
 
-[node name="TutorialButton" type="Button" parent="CanvasLayer"]
+[node name="TutorialButton" type="Button" parent="CanvasLayer" unique_id=165194110]
 process_mode = 3
 offset_left = 218.0
 offset_top = 726.0
@@ -108,12 +108,12 @@ offset_right = 346.0
 offset_bottom = 822.0
 focus_mode = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/TutorialButton"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/TutorialButton" unique_id=909839200]
 position = Vector2(64, 48)
 scale = Vector2(4, 4)
 texture = ExtResource("5_hq4sv")
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer"]
+[node name="HSlider" type="HSlider" parent="CanvasLayer" unique_id=823358353]
 process_mode = 3
 z_index = 1
 offset_left = 13.0
@@ -129,7 +129,7 @@ max_value = 3.0
 step = 0.1
 value = 1.0
 
-[node name="launchers" type="Control" parent="CanvasLayer"]
+[node name="launchers" type="Control" parent="CanvasLayer" unique_id=1061832040]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 960.0
@@ -137,7 +137,7 @@ offset_top = 750.0
 offset_right = 1000.0
 offset_bottom = 790.0
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/launchers"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/launchers" unique_id=731449001]
 process_mode = 3
 z_index = 1
 layout_mode = 0
@@ -148,30 +148,30 @@ offset_bottom = 2.0
 theme_override_constants/h_separation = 180
 columns = 6
 
-[node name="launcher1" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+[node name="launcher1" parent="CanvasLayer/launchers/GridContainer" unique_id=1562844921 instance=ExtResource("4_xd1qb")]
 layout_mode = 2
 
-[node name="launcher2" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+[node name="launcher2" parent="CanvasLayer/launchers/GridContainer" unique_id=347859323 instance=ExtResource("4_xd1qb")]
 layout_mode = 2
 index = 1
 
-[node name="launcher3" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+[node name="launcher3" parent="CanvasLayer/launchers/GridContainer" unique_id=1699491128 instance=ExtResource("4_xd1qb")]
 layout_mode = 2
 index = 2
 
-[node name="launcher4" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+[node name="launcher4" parent="CanvasLayer/launchers/GridContainer" unique_id=1604465697 instance=ExtResource("4_xd1qb")]
 layout_mode = 2
 index = 3
 
-[node name="launcher5" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+[node name="launcher5" parent="CanvasLayer/launchers/GridContainer" unique_id=945636766 instance=ExtResource("4_xd1qb")]
 layout_mode = 2
 index = 4
 
-[node name="launcher6" parent="CanvasLayer/launchers/GridContainer" instance=ExtResource("4_xd1qb")]
+[node name="launcher6" parent="CanvasLayer/launchers/GridContainer" unique_id=556432572 instance=ExtResource("4_xd1qb")]
 layout_mode = 2
 index = 5
 
-[node name="stars" type="Control" parent="CanvasLayer"]
+[node name="stars" type="Control" parent="CanvasLayer" unique_id=1172365944]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 435.0
@@ -179,7 +179,7 @@ offset_top = 952.0
 offset_right = 1485.0
 offset_bottom = 1035.0
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/stars"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/stars" unique_id=368483902]
 z_index = 1
 layout_mode = 0
 offset_top = 5.0
@@ -188,29 +188,29 @@ offset_bottom = 45.0
 theme_override_constants/h_separation = 180
 columns = 6
 
-[node name="star" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+[node name="star" parent="CanvasLayer/stars/GridContainer" unique_id=1426034590 instance=ExtResource("9_lwju0")]
 layout_mode = 2
 
-[node name="star2" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+[node name="star2" parent="CanvasLayer/stars/GridContainer" unique_id=140812327 instance=ExtResource("9_lwju0")]
 layout_mode = 2
 
-[node name="star3" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+[node name="star3" parent="CanvasLayer/stars/GridContainer" unique_id=411365699 instance=ExtResource("9_lwju0")]
 layout_mode = 2
 
-[node name="star4" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+[node name="star4" parent="CanvasLayer/stars/GridContainer" unique_id=1355261638 instance=ExtResource("9_lwju0")]
 layout_mode = 2
 
-[node name="star5" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+[node name="star5" parent="CanvasLayer/stars/GridContainer" unique_id=1016259969 instance=ExtResource("9_lwju0")]
 layout_mode = 2
 
-[node name="star6" parent="CanvasLayer/stars/GridContainer" instance=ExtResource("9_lwju0")]
+[node name="star6" parent="CanvasLayer/stars/GridContainer" unique_id=2010714921 instance=ExtResource("9_lwju0")]
 layout_mode = 2
 
-[node name="log" parent="CanvasLayer" instance=ExtResource("5_bryf5")]
+[node name="log" parent="CanvasLayer" unique_id=691666516 instance=ExtResource("5_bryf5")]
 offset_left = 1920.0
 offset_right = 0.0
 
-[node name="moneyLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="moneyLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=2030880524]
 offset_left = 109.0
 offset_top = 82.0
 offset_right = 377.0
@@ -219,7 +219,7 @@ theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 text = "0"
 
-[node name="timerLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="timerLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=1298601479]
 offset_left = 1597.0
 offset_top = 844.0
 offset_right = 2014.0
@@ -230,7 +230,7 @@ theme_override_font_sizes/normal_font_size = 128
 bbcode_enabled = true
 text = "30.00"
 
-[node name="winsLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="winsLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=303412857]
 offset_left = 1157.0
 offset_top = 73.0
 offset_right = 1490.0
@@ -239,7 +239,7 @@ theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 
-[node name="victoryLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="victoryLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=427161264]
 visible = false
 offset_left = 405.0
 offset_top = 315.0
@@ -251,10 +251,11 @@ bbcode_enabled = true
 text = "[center]Victory
 "
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/victoryLabel"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/victoryLabel" unique_id=791394688]
 layout_mode = 0
 offset_right = 1111.0
 offset_bottom = 356.0
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
@@ -265,7 +266,7 @@ text = "
 [center]Click to continue
 "
 
-[node name="Button" type="Button" parent="CanvasLayer/victoryLabel"]
+[node name="Button" type="Button" parent="CanvasLayer/victoryLabel" unique_id=412624767]
 layout_mode = 0
 offset_left = 321.0
 offset_top = -10.0
@@ -274,7 +275,7 @@ offset_bottom = 180.0
 focus_mode = 0
 flat = true
 
-[node name="defeatLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="defeatLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=326928667]
 visible = false
 offset_left = 405.0
 offset_top = 315.0
@@ -286,7 +287,7 @@ bbcode_enabled = true
 text = "[center]Defeat
 "
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/defeatLabel"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/defeatLabel" unique_id=620177795]
 layout_mode = 0
 offset_right = 1111.0
 offset_bottom = 356.0
@@ -300,7 +301,7 @@ text = "
 [center]Click to continue
 "
 
-[node name="Button" type="Button" parent="CanvasLayer/defeatLabel"]
+[node name="Button" type="Button" parent="CanvasLayer/defeatLabel" unique_id=253833734]
 layout_mode = 0
 offset_left = 321.0
 offset_top = -10.0
@@ -309,14 +310,14 @@ offset_bottom = 180.0
 focus_mode = 0
 flat = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=578182649]
 offset_left = 36.0
 offset_top = 130.0
 offset_right = 369.0
 offset_bottom = 447.0
 theme_override_constants/separation = 4
 
-[node name="blockLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+[node name="blockLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=1509755978]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
@@ -324,7 +325,7 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[img]ART/icons/blockIcon.png[/img] 0"
 
-[node name="breachLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+[node name="breachLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=411474589]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
@@ -332,7 +333,7 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[img]ART/icons/breachIcon.png[/img] 0"
 
-[node name="burnoutLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+[node name="burnoutLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=1622299312]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
@@ -340,7 +341,7 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[img]ART/icons/burnoutIcon.png[/img] 0"
 
-[node name="parasiteLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
+[node name="parasiteLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=1062337354]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_w4eqt")
@@ -348,13 +349,13 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[img]ART/icons/parasiteIcon.png[/img] 0"
 
-[node name="statLabels" type="Control" parent="CanvasLayer"]
+[node name="statLabels" type="Control" parent="CanvasLayer" unique_id=1715475810]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="slot1Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+[node name="slot1Stats" type="RichTextLabel" parent="CanvasLayer/statLabels" unique_id=1499591008]
 layout_mode = 0
 offset_left = 434.0
 offset_top = 846.0
@@ -368,7 +369,7 @@ text = "[center]AVD: 500
 AVS: 300
 Count: 0"
 
-[node name="slot2Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+[node name="slot2Stats" type="RichTextLabel" parent="CanvasLayer/statLabels" unique_id=296771105]
 layout_mode = 0
 offset_left = 614.0
 offset_top = 846.0
@@ -382,7 +383,7 @@ text = "[center]AVD: 500
 AVS: 300
 Count: 0"
 
-[node name="slot3Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+[node name="slot3Stats" type="RichTextLabel" parent="CanvasLayer/statLabels" unique_id=1326991143]
 layout_mode = 0
 offset_left = 794.0
 offset_top = 846.0
@@ -396,7 +397,7 @@ text = "[center]AVD: 500
 AVS: 300
 Count: 0"
 
-[node name="slot4Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+[node name="slot4Stats" type="RichTextLabel" parent="CanvasLayer/statLabels" unique_id=1080927568]
 layout_mode = 0
 offset_left = 974.0
 offset_top = 846.0
@@ -410,7 +411,7 @@ text = "[center]AVD: 500
 AVS: 300
 Count: 0"
 
-[node name="slot5Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+[node name="slot5Stats" type="RichTextLabel" parent="CanvasLayer/statLabels" unique_id=473121106]
 layout_mode = 0
 offset_left = 1154.0
 offset_top = 846.0
@@ -424,7 +425,7 @@ text = "[center]AVD: 500
 AVS: 300
 Count: 0"
 
-[node name="slot6Stats" type="RichTextLabel" parent="CanvasLayer/statLabels"]
+[node name="slot6Stats" type="RichTextLabel" parent="CanvasLayer/statLabels" unique_id=1623749315]
 layout_mode = 0
 offset_left = 1334.0
 offset_top = 846.0
@@ -438,51 +439,53 @@ text = "[center]AVD: 500
 AVS: 300
 Count: 0"
 
-[node name="abilityLabels" type="Control" parent="CanvasLayer"]
+[node name="abilityLabels" type="Control" parent="CanvasLayer" unique_id=1144688008]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="playthroughTutorial" parent="CanvasLayer" instance=ExtResource("18_slyyv")]
+[node name="playthroughTutorial" parent="CanvasLayer" unique_id=805251799 instance=ExtResource("18_slyyv")]
 z_index = 2
 position = Vector2(1179.05, -319.398)
 
-[node name="Settings" parent="CanvasLayer" instance=ExtResource("16_xa6x3")]
+[node name="Settings" parent="CanvasLayer" unique_id=454654181 instance=ExtResource("16_xa6x3")]
+visible = false
+z_index = 10
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[node name="Tutorial" parent="CanvasLayer" unique_id=194634869 instance=ExtResource("17_7kjtq")]
 visible = false
 z_index = 10
 position = Vector2(960, 540)
 
-[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("17_7kjtq")]
-visible = false
-z_index = 10
-position = Vector2(960, 540)
-
-[node name="ship" parent="." instance=ExtResource("7_n35oc")]
+[node name="ship" parent="." unique_id=1701730883 instance=ExtResource("7_n35oc")]
 position = Vector2(-5.00256, -394.947)
 
-[node name="rules" type="Node2D" parent="."]
+[node name="rules" type="Node2D" parent="." unique_id=493488023]
 script = ExtResource("8_7gyde")
 
-[node name="rulesTimer" type="Timer" parent="."]
+[node name="rulesTimer" type="Timer" parent="." unique_id=2133714933]
 one_shot = true
 
-[node name="music1" type="AudioStreamPlayer" parent="."]
+[node name="music1" type="AudioStreamPlayer" parent="." unique_id=1202591236]
 process_mode = 3
-stream = ExtResource("9_6cs4h")
+stream = ExtResource("17_akjvj")
 autoplay = true
 
-[node name="music2" type="AudioStreamPlayer" parent="."]
+[node name="music2" type="AudioStreamPlayer" parent="." unique_id=245512733]
 process_mode = 3
-stream = ExtResource("10_hshsf")
-volume_db = -30.0
+stream = ExtResource("18_60g5w")
 autoplay = true
 
-[node name="spawnPlayer" type="AudioStreamPlayer" parent="."]
+[node name="spawnPlayer" type="AudioStreamPlayer" parent="." unique_id=2101512071]
 stream = ExtResource("10_e0qr2")
 volume_db = -5.0
 
-[node name="cam" type="Camera2D" parent="."]
+[node name="cam" type="Camera2D" parent="." unique_id=332517258]
 
 [connection signal="timeout" from="timers/Timer1" to="timers" method="_on_timer_timeout"]
 [connection signal="timeout" from="timers/Timer2" to="timers" method="_on_timer_2_timeout"]

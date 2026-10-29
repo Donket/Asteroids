@@ -14,4 +14,5 @@ func _process(delta):
 			main.rules.breachAmount = 0
 			main.rules.parasiteAmount = 0
 			for asteroid in main.asteroids:
-				asteroid.damage += 50
+				if is_instance_valid(asteroid):
+					asteroid.damage += 50

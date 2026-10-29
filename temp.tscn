@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://cfc1jda48syu6"]
+
+[ext_resource type="Texture2D" uid="uid://d0dywatwx1cvp" path="res://ART/asteroidArts/Iron Rock.png" id="1_ufh25"]
+[ext_resource type="Texture2D" uid="uid://dlvlwlenm6m4m" path="res://ART/other/ship.png" id="2_k81e3"]
+[ext_resource type="Texture2D" uid="uid://kdsqu4uhiuwx" path="res://logo.png" id="3_k81e3"]
+[ext_resource type="Texture2D" uid="uid://dy3b7aalwrajk" path="res://ART/other/bossShip.png" id="6_1nlwk"]
+[ext_resource type="Texture2D" uid="uid://ba7labpb65ae8" path="res://ART/other/shipHP.png" id="7_1hi8c"]
+[ext_resource type="Texture2D" uid="uid://dmn1m1d1lwwyf" path="res://ART/other/ship3.png" id="7_v4i6i"]
+[ext_resource type="Texture2D" uid="uid://bh7lxx6crwef4" path="res://ART/other/explosionParticles.png" id="8_lmyum"]
+
+[node name="Node2D" type="Node2D" unique_id=1387854818]
+
+[node name="Polygon2D6" type="Polygon2D" parent="." unique_id=119210529]
+position = Vector2(4684, 1519.9999)
+scale = Vector2(25, 25)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-600, -370, -600, 370, 630, 370, 630, -370)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1405798382]
+position = Vector2(-15, -671)
+amount = 200
+lifetime = 4.0
+preprocess = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1)
+gravity = Vector2(0, 200)
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+
+[node name="IronRock" type="Sprite2D" parent="." unique_id=107141150]
+position = Vector2(677, 125.000015)
+rotation = 0.89709926
+scale = Vector2(5, 5)
+texture = ExtResource("1_ufh25")
+
+[node name="IronRock2" type="Sprite2D" parent="." unique_id=1011096708]
+position = Vector2(-675.00006, -95.99997)
+rotation = -0.59864795
+scale = Vector2(5, 5)
+texture = ExtResource("1_ufh25")
+
+[node name="IronRock3" type="Sprite2D" parent="." unique_id=560800223]
+position = Vector2(-791, 108.00006)
+rotation = -0.59864795
+scale = Vector2(5, 5)
+texture = ExtResource("1_ufh25")
+
+[node name="IronRock5" type="Sprite2D" parent="." unique_id=1666161987]
+position = Vector2(-221, -33)
+rotation = -0.59864795
+scale = Vector2(5, 5)
+texture = ExtResource("1_ufh25")
+
+[node name="IronRock6" type="Sprite2D" parent="." unique_id=590549896]
+position = Vector2(328, 37)
+rotation = -0.59864795
+scale = Vector2(5, 5)
+texture = ExtResource("1_ufh25")
+
+[node name="IronRock4" type="Sprite2D" parent="." unique_id=1694790937]
+position = Vector2(482, -222.00003)
+rotation = -0.59864795
+scale = Vector2(5, 5)
+texture = ExtResource("1_ufh25")
+
+[node name="BossShip" type="Sprite2D" parent="." unique_id=1641819059]
+position = Vector2(854, -78)
+rotation = -2.7925267
+scale = Vector2(4, 4)
+texture = ExtResource("6_1nlwk")
+hframes = 4
+
+[node name="BossShip2" type="Sprite2D" parent="." unique_id=1161185494]
+position = Vector2(-582, 137.99998)
+rotation = -1.097812
+scale = Vector2(4, 4)
+texture = ExtResource("7_v4i6i")
+hframes = 4
+
+[node name="BossShip3" type="Sprite2D" parent="." unique_id=680445837]
+position = Vector2(24.000004, -26.000004)
+rotation = 0.099483766
+scale = Vector2(4, 4)
+texture = ExtResource("2_k81e3")
+hframes = 4
+
+[node name="ShipHp" type="Sprite2D" parent="." unique_id=987233079]
+position = Vector2(720.9999, -119.99997)
+rotation = 0.34906584
+scale = Vector2(1, 5)
+texture = ExtResource("7_1hi8c")
+
+[node name="ShipHp2" type="Sprite2D" parent="." unique_id=1811694305]
+position = Vector2(551.9999, -179.99997)
+rotation = 0.34906584
+scale = Vector2(1, 5)
+texture = ExtResource("7_1hi8c")
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=1335035193]
+visible = false
+scale = Vector2(8, 8)
+texture = ExtResource("3_k81e3")
+
+[node name="ExplosionParticles" type="Sprite2D" parent="." unique_id=284735027]
+position = Vector2(529, -209)
+scale = Vector2(3, 3)
+texture = ExtResource("8_lmyum")
+hframes = 5
+frame = 2
+
+[node name="Control" type="Control" parent="." unique_id=540737085]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -494.0
+offset_top = -178.0
+offset_right = -454.0
+offset_bottom = 182.0

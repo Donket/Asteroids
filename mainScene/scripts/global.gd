@@ -2,23 +2,27 @@ extends Camera2D
 
 var battleScene = null
 
-var asteroidsDeck = ["Iron Rock", "Iron Rock", "Iron Rock", "Iron Rock", "Iron Rock", "Iron Rock"]
+
+var asteroidsDeck = ["Iron Husk", "Gilded Husk", "Ancient Husk", null, null, null]  #Empty is null, not "" or missing element
 #stats = [+speed, +damage] where nums are added to base stats 
 var asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 var asteroidExps = [0,0,0,0,0,0]
-var starsDeck = ["Shield", "Blind Stick", "Goop", "Mirror", "Mirror", "Mirror"]
+var starsDeck = ["Steering Wheel", "Payday", "Shield"]  #Empty is missing element, not "" or null
 var itemGrabbed = null
 var overSell = false
 var savedItems = ["", "", "", "", "", "", ""]
 var savedRollPrice = 5
 var money = 300
 
-var wins = 9
+
+
+var wins = 0
 var maxWins = 10
 var health = 10
 
-var turn = 10
+var turn = 0
 var timeScale = 1
+var camShakeOn = true
 var shopTutorialComplete = false
 var battleTutorialComplete = false
 
@@ -215,7 +219,7 @@ On bounce: 40% chance to apply +1 [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Lethal":
 		"If you will die next loss, all asteroid stats +20%",
 	"Sandpaper":
-		"On Bounce: Convert all damage into [img]res://ART/icons/burnoutIcon.png[/img] equal to 1% of damage",
+		"On Bounce: Deal damage equal to 5% of asteroid damage.",
 	"Golden Tooth":
 		"Whenever you gain [img]res://ART/icons/moneyIcon.png[/img], gain +3 extra",
 	"Coupon Book":
@@ -227,7 +231,7 @@ On bounce: 40% chance to apply +1 [img]res://ART/icons/burnoutIcon.png[/img].",
 	"Recursive":
 		"On Crash: If this is the first asteroid of the battle, respawn it. Does not stack.",
 	"Mirror":
-		"On Bounce: Deal 20% of asteroid damage to ship.",
+		"On Spawn: Deal 20% of asteroid damage to ship.",
 	"Spider":
 		"All asteroid stats +20%. - 10 [img]res://ART/icons/moneyIcon.png[/img] when destroyed.",
 	"Snowman":
@@ -289,10 +293,11 @@ func resetGlobalData():
 	asteroidsDeck = [null, null, null, null, null, null]
 	asteroidPermStats = [[0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
 	asteroidExps = [0,0,0,0,0,0]
+	savedItems = ["", "", "", "", "", "", ""]
 	starsDeck = []
 	itemGrabbed = null
 	overSell = false
-	money = 300
+	money = 400
 	wins = 0
 	maxWins = 10
 	health = 10
@@ -395,14 +400,15 @@ var starsToData: Dictionary = {
 var block = 0: set = updateBlock
 
 func updateBlock(newBlock):
-	var num = numOfStars("Glass Cannon")
-	if num == 0:
-		block = newBlock
-		battleScene.rules.blockAmount = block
-	else:
-		for ast in battleScene.asteroids:
-			if ast != null and is_instance_valid(ast) and ast.attributes:
-				ast.attributes.damage += 3*num
+	if battleScene:
+		var num = numOfStars("Glass Cannon")
+		if num == 0:
+			block = newBlock
+			battleScene.rules.blockAmount = block
+		else:
+			for ast in battleScene.asteroids:
+				if ast != null and is_instance_valid(ast) and ast.attributes:
+					ast.attributes.damage += 3*num
 
 func hit():
 	if block > 0:
@@ -441,4 +447,5 @@ func addToLog(source, damage):
 	battleScene.get_node("CanvasLayer/log").update()
 
 func camShake(intensity):
-	battleScene.camShake(intensity)
+	if camShakeOn:
+		battleScene.camShake(intensity)

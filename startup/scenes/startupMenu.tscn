@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnt0p1gvhgfgs"]
+[gd_scene format=3 uid="uid://bnt0p1gvhgfgs"]
 
-[ext_resource type="Script" path="res://startup/scripts/startupMenu.gd" id="1_cejfu"]
+[ext_resource type="Script" uid="uid://ckpf7uka2fkbx" path="res://startup/scripts/startupMenu.gd" id="1_cejfu"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="1_rwvtb"]
 [ext_resource type="AudioStream" uid="uid://csn2qilpk0bfs" path="res://MUSIC/baroque_chips_loopable.wav" id="3_i0o6g"]
 [ext_resource type="PackedScene" uid="uid://bdtmgs3flymov" path="res://mainScene/scenes/settings.tscn" id="4_abi20"]
@@ -45,29 +45,27 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y3484"]
 _data = {
-"RESET": SubResource("Animation_64kcr"),
-"default": SubResource("Animation_rkpk5")
+&"RESET": SubResource("Animation_64kcr"),
+&"default": SubResource("Animation_rkpk5")
 }
 
-[node name="mainMenu" type="Node2D"]
+[node name="mainMenu" type="Node2D" unique_id=1345601758]
 script = ExtResource("1_cejfu")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=690444480]
 offset_left = -1147.0
 offset_top = -604.0
 offset_right = 1137.0
 offset_bottom = 615.0
 texture = SubResource("GradientTexture2D_qbbia")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1328186588]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_y3484")
-}
-autoplay = "default"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=744396477]
+libraries/ = SubResource("AnimationLibrary_y3484")
+autoplay = &"default"
 
-[node name="titleLabel" type="RichTextLabel" parent="."]
+[node name="titleLabel" type="RichTextLabel" parent="." unique_id=188862527]
 offset_left = -400.0
 offset_top = -315.0
 offset_right = 400.0
@@ -80,7 +78,7 @@ bbcode_enabled = true
 text = "[center]
 Astroguelike"
 
-[node name="subtitleLabel" type="RichTextLabel" parent="."]
+[node name="subtitleLabel" type="RichTextLabel" parent="." unique_id=174989590]
 offset_left = -650.0
 offset_top = -40.0
 offset_right = 650.0
@@ -92,7 +90,7 @@ theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center]Demo Out Soon!"
 
-[node name="mainLabel" type="RichTextLabel" parent="."]
+[node name="mainLabel" type="RichTextLabel" parent="." unique_id=1441988151]
 offset_left = -201.0
 offset_top = 92.0
 offset_right = 202.0
@@ -106,7 +104,7 @@ Settings
 
 Exit"
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=676285188]
 position = Vector2(-0.629395, -917.01)
 amount = 200
 lifetime = 4.0
@@ -117,7 +115,7 @@ gravity = Vector2(0, 200)
 scale_amount_min = 5.0
 scale_amount_max = 10.0
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="." unique_id=2004644548]
 offset_left = -97.0
 offset_top = 70.0
 offset_right = 98.0
@@ -125,7 +123,7 @@ offset_bottom = 177.0
 focus_mode = 0
 flat = true
 
-[node name="SettingsButton" type="Button" parent="."]
+[node name="SettingsButton" type="Button" parent="." unique_id=240376421]
 offset_left = -154.0
 offset_top = 191.0
 offset_right = 145.0
@@ -133,7 +131,7 @@ offset_bottom = 298.0
 focus_mode = 0
 flat = true
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="." unique_id=1788254679]
 offset_left = -97.0
 offset_top = 318.0
 offset_right = 98.0
@@ -141,7 +139,7 @@ offset_bottom = 425.0
 focus_mode = 0
 flat = true
 
-[node name="settingsLabel" type="RichTextLabel" parent="."]
+[node name="settingsLabel" type="RichTextLabel" parent="." unique_id=1058138151]
 visible = false
 offset_left = -120.0
 offset_top = 220.0
@@ -151,11 +149,11 @@ theme_override_fonts/normal_font = ExtResource("1_rwvtb")
 theme_override_font_sizes/normal_font_size = 64
 text = "Settings aren't set up at the moment"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=70344676]
 stream = ExtResource("3_i0o6g")
 autoplay = true
 
-[node name="Settings" parent="." instance=ExtResource("4_abi20")]
+[node name="Settings" parent="." unique_id=1666704682 instance=ExtResource("4_abi20")]
 visible = false
 
 [connection signal="mouse_entered" from="PlayButton" to="." method="playHover"]

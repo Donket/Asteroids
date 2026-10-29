@@ -101,7 +101,7 @@ var dataShop = [
 	],
 	
 	[
-	"If you want a new item or star and you already have six, fear not! You can sell your existing asteroids and stars for half value by clicking and dragging them from your inventory to this box, and releasing. Now, try to sell the asteroid you bought earlier.", 
+	"If you want a new item or star and you already have six, fear not! You can sell your existing asteroids and stars for half value by clicking and dragging them from your inventory to this box, and releasing. Now, try to sell one of your asteroids.", 
 	Vector2(430,300),
 	["", "", "", "", ""],
 	["", ""],
@@ -227,7 +227,7 @@ var dataShop = [
 
 var battleData = [
 	[
-	"Welcome to your first battle! Your mission is to destroy this ship at all costs. [ESC] or [BACKSPACE] to skip tutorial.",
+	"Welcome to your first battle! Your mission is to destroy this ship at all costs. [BACKSPACE] to skip tutorial.",
 	Vector2(960,540),
 	false,
 	false,

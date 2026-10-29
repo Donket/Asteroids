@@ -5,7 +5,7 @@ var target_pos = Vector2(0,0)
 var attributes: set = changeAttributes
 var moveSpeed = 120
 var rotationSpeed = 5.0
-var hp = 200: set = hurt
+var hp = 500: set = hurt
 var asteroidsInRange = []
 var readyForShot = false
 var shootingDisabled = false

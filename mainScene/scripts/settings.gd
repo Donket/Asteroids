@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 
 var defaultCursor = preload("res://ART/uiArts/cursor.png")
@@ -7,6 +7,12 @@ var hoverCursor = preload("res://ART/uiArts/cursorSelect.png")
 
 func _ready():
 	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
+	var value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+	if value == 0:
+		$HSlider.value = -100
+	else:
+		$HSlider.value = value+50
+	$CheckButton.button_pressed = Global.camShakeOn
 
 
 func _on_resume_button_mouse_entered():
@@ -61,3 +67,15 @@ func _on_h_slider_value_changed(value):
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -100)
 	else:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value-50)
+
+
+func _on_check_button_mouse_entered():
+	$ssLabel.text = "[center][color=yellow]Screenshake"
+
+
+func _on_check_button_mouse_exited():
+	$ssLabel.text = "[center]Screenshake"
+
+
+func _on_check_button_toggled(toggled_on):
+	Global.camShakeOn = toggled_on

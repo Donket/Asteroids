@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://t5jxjylo1f1q"]
+[gd_scene format=3 uid="uid://t5jxjylo1f1q"]
 
-[ext_resource type="Script" path="res://shopScene/scripts/ship_preview_ui.gd" id="1_m4s1y"]
+[ext_resource type="Script" uid="uid://croe1enp0ma35" path="res://shopScene/scripts/ship_preview_ui.gd" id="1_m4s1y"]
 [ext_resource type="Texture2D" uid="uid://phkqf7fj6k3j" path="res://ART/uiArts/shipPreviewBox.png" id="2_hrf5w"]
 [ext_resource type="FontFile" uid="uid://c2n1lpr34y3ud" path="res://ART/resources/pixelFont.ttf" id="3_jhjjp"]
 [ext_resource type="Texture2D" uid="uid://dy3b7aalwrajk" path="res://ART/other/bossShip.png" id="4_3ktcu"]
@@ -143,7 +143,7 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="shipPreviewUI" type="Control"]
+[node name="shipPreviewUI" type="Control" unique_id=1210638825]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,12 +152,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m4s1y")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=952571849]
 position = Vector2(-159, 0)
 scale = Vector2(5, 5)
 texture = ExtResource("2_hrf5w")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D" unique_id=1943213126]
 offset_left = -25.0
 offset_top = -19.0
 offset_right = 100.0
@@ -168,7 +168,7 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]HP: "
 
-[node name="Sprite2D2" type="AnimatedSprite2D" parent="Sprite2D"]
+[node name="Sprite2D2" type="AnimatedSprite2D" parent="Sprite2D" unique_id=1983778554]
 process_mode = 3
 position = Vector2(1, 5.6)
 scale = Vector2(1.4, 1.4)
@@ -177,18 +177,18 @@ animation = &"ship3"
 autoplay = "ship1"
 frame_progress = 0.228653
 
-[node name="CenterContainer" type="CenterContainer" parent="Sprite2D"]
+[node name="CenterContainer" type="CenterContainer" parent="Sprite2D" unique_id=719149278]
 visible = false
 offset_left = -53.0
 offset_right = -53.0
 scale = Vector2(0.4, 0.4)
 use_top_left = true
 
-[node name="ShipPreviewBox" type="Sprite2D" parent="Sprite2D/CenterContainer"]
+[node name="ShipPreviewBox" type="Sprite2D" parent="Sprite2D/CenterContainer" unique_id=915593583]
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_hrf5w")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D/CenterContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D/CenterContainer" unique_id=592100433]
 custom_minimum_size = Vector2(110, 20)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("3_jhjjp")

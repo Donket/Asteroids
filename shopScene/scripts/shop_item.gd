@@ -238,4 +238,3 @@ func initTooltips():
 			scene.type = tt
 			container.add_child(scene)
 	container.position.y -= 90*(container.get_child_count()-1)
-

@@ -4,8 +4,8 @@ extends Node2D
 #can buy new rulesets, altering the objective and changing what gains money/the win and lose
 #conditions. I've brainstormed and prototyped this but haven't had time to add it yet 
 
-var hp = 500: set = hurt
-var maxHP = 500
+var hp = 1000: set = hurt
+var maxHP = 1000
 var breachAmount = 0: set = changeBreach
 var blockAmount = 0: set = changeBlock
 var burnoutAmount = 0: set = changeBurnout
@@ -53,7 +53,7 @@ func cursedEssence():
 
 func hurt(newHP):
 	if ship.phase == 2:
-		hp = max(round(newHP),hp-50)
+		hp = max(round(newHP),hp-150)
 	else:
 		hp = round(newHP)
 	ship.get_node("hp").get_node("hpbar").max_value = maxHP

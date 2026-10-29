@@ -9,15 +9,15 @@ func _ready():
 	getPhase()
 	turn = Global.turn+1
 	maxHP *= pow(1.15,turn)
-	$Sprite2D/RichTextLabel.text += str(round(maxHP))
+	$Sprite2D/RichTextLabel.text += str(int(round(maxHP)))
 	var count = max(0,floor((turn+1)/2)-1)
-	if count > 1:
+	if count > 1 and phase != 3:
 		$Sprite2D/CenterContainer/RichTextLabel2.text += "Shoots " + str(count) + " bullets at once."
 	if phase == 1:
-		$Sprite2D/CenterContainer/RichTextLabel2.text += "Fires at all asteroids every 5 secs."
+		$Sprite2D/CenterContainer/RichTextLabel2.text += "\nFires at all asteroids every 5 secs."
 		$Sprite2D/Sprite2D2.animation = "ship2"
 	if phase == 2:
-		$Sprite2D/CenterContainer/RichTextLabel2.text += "Cannot take more than 50 damage at once. Moves slowly."
+		$Sprite2D/CenterContainer/RichTextLabel2.text += "\nCan take max 150 damage at once."
 		$Sprite2D/Sprite2D2.animation = "ship3"
 	if phase == 3:
 		$Sprite2D/CenterContainer/RichTextLabel2.text += "???"

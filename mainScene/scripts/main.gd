@@ -34,7 +34,7 @@ func camShake(intensity):
 func changeMoney(newMoney):
 	Global.money = newMoney
 	money = newMoney + Global.numOfStars("Golden Tooth") * 3
-	$CanvasLayer/moneyLabel.text = str(money)
+	$CanvasLayer/moneyLabel.text = str(int(money))
 	pending_updates += 1
 	if is_processing:
 		return
@@ -58,6 +58,8 @@ func debtCollecter():
 
 
 func onBounce(asteroid):
+	if !is_instance_valid(asteroid):
+		return
 	var iter = -1
 	for child in rules.get_children():
 		iter+=1
@@ -69,6 +71,8 @@ func onBounce(asteroid):
 
 
 func onCrash(asteroid):
+	if !is_instance_valid(asteroid):
+		return
 	var n = Global.numOfStars("Death Rattle")
 	var iter = -1
 	for child in rules.get_children():
@@ -78,7 +82,7 @@ func onCrash(asteroid):
 			$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 		if child.has_method("onBounce") and n > 0:
 			for i in range(n):
-				child.onBounce()
+				child.onBounce(asteroid)
 				$CanvasLayer/stars/GridContainer.get_child(iter).bounce()
 	if rules.has_method("onCrash"):
 		rules.onCrash(asteroid)
@@ -87,6 +91,8 @@ func onCrash(asteroid):
 				rules.onCrash()
 
 func onSpawn(asteroid):
+	if !is_instance_valid(asteroid):
+		return
 	$spawnPlayer.playing = true
 	var iter = -1
 	for child in rules.get_children():
@@ -99,6 +105,8 @@ func onSpawn(asteroid):
 	
 
 func onHit(asteroid):
+	if !is_instance_valid(asteroid):
+		return
 	var iter = -1
 	for child in rules.get_children():
 		iter+=1
@@ -109,6 +117,8 @@ func onHit(asteroid):
 		rules.onHit(asteroid)
 
 func onShot(asteroid):
+	if !is_instance_valid(asteroid):
+		return
 	var iter = -1
 	for child in rules.get_children():
 		iter+=1
@@ -163,6 +173,7 @@ func snowman():
 func _ready():
 	if Global.wins + 1*pow(2,Global.numOfStars("Steak")) >= Global.maxWins:
 		$music1.stream = load("res://MUSIC/leading_the_charge_loopable.wav")
+		$music2.stream = null
 		$music1.playing = true
 	Global.battleScene = self
 	var permStatIndices = []
@@ -237,7 +248,7 @@ func defeat():
 		$CanvasLayer/defeatLabel.visible = true
 		Global.health -= 2 * pow(2,Global.numOfStars("Steak"))
 		money += round(120 * pow(1.1,Global.turn))
-		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
+		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(int(Global.wins))+"/"+str(int(Global.maxWins))+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(int(Global.health))+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		if ship.phase == 3:
 			return
@@ -262,7 +273,7 @@ func victory():
 		$CanvasLayer/victoryLabel.visible = true
 		Global.wins += 1 * pow(2,Global.numOfStars("Steak"))
 		money += round(120 * pow(1.1,Global.turn))
-		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(Global.wins)+"/"+str(Global.maxWins)+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(Global.health)+"/10"
+		$CanvasLayer/winsLabel.text = "[right][img]res://ART/icons/winsIcon.png[/img]"+str(int(Global.wins))+"/"+str(int(Global.maxWins))+"[right][img]res://ART/icons/healthIcon.png[/img]"+str(int(Global.health))+"/10"
 		$CanvasLayer/winsLabel.visible = true
 		if ship.phase == 3:
 			return
@@ -384,6 +395,7 @@ func _on_button_mouse_entered():
 
 [center][color=yellow]Click to continue"
 	$CanvasLayer/victoryLabel.text = "[center][color=yellow]Victory"
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 
@@ -394,6 +406,7 @@ func _on_button_mouse_exited():
 
 [center][color=white]Click to continue"
 	$CanvasLayer/victoryLabel.text = "[center][color=white]Victory"
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 
@@ -428,6 +441,7 @@ func _on_defeat_button_mouse_entered():
 
 [center][color=yellow]Click to continue"
 	$CanvasLayer/defeatLabel.text = "[center][color=yellow]Defeat"
+	Input.set_custom_mouse_cursor(hoverCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_defeat_button_mouse_exited():
@@ -437,11 +451,13 @@ func _on_defeat_button_mouse_exited():
 
 [center][color=yellow]Click to continue"
 	$CanvasLayer/defeatLabel.text = "[center][color=yellow]Defeat"
+	Input.set_custom_mouse_cursor(defaultCursor, Input.CURSOR_ARROW, Vector2(24, 21))
 
 
 func _on_h_slider_value_changed(value):
 	if value <= 0:
 		get_tree().paused = true
+		Engine.time_scale = 1
 	else:
 		get_tree().paused = false
 		Engine.time_scale = value
@@ -513,13 +529,15 @@ func _on_rules_status_effect_changed():
 
 
 func _on_settings_button_pressed():
-	$CanvasLayer/HSlider.value = 0
+	if !ended:
+		$CanvasLayer/HSlider.value = 0
 	$CanvasLayer/Settings.visible = true
 
 
 
 func _on_tutorial_button_pressed():
-	$CanvasLayer/HSlider.value = 0
+	if !ended:
+		$CanvasLayer/HSlider.value = 0
 	$CanvasLayer/Tutorial.visible = true
 
 
